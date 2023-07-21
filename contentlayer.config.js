@@ -1,7 +1,9 @@
-import { makeSource } from "contentlayer/source-files";
+import { makeSource } from "contentlayer/source-files"
+
+import { Blog } from './content/definitions/blog'
 
 export default makeSource({
-  contentDirPath: "content",
+  contentDirPath: "content/posts",
   documentTypes: [Blog],
   mdx: {
     esbuildOptions(options) {
