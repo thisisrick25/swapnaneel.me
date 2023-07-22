@@ -22,6 +22,8 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./app/*"],
+      "@/content/*": ["./content/*"],
+      "@/lib/*": ["./lib/*"],
       "contentlayer/generated": ["./.contentlayer/generated"]
     }
   },
