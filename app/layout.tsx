@@ -21,7 +21,7 @@ export default function RootLayout({
   return (
     // suppressHydrationWarning
     <html lang="en" className={roboto.className} suppressHydrationWarning>
-      <body className='bg-white text-black dark:bg-black dark:text-white' suppressHydrationWarning>
+      <body className='bg-white text-black dark:bg-black dark:text-white text-xs sm:text-xs md:text-sm lg:text-base xl:text-lg 2xl:text-xl selection:bg-yellow-500 selection:text-white dark:selection:text-black' suppressHydrationWarning>
         <ThemeProvider>
           <Header />
           {children}
