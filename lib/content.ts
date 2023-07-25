@@ -1,23 +1,23 @@
 import { allBlogs } from "contentlayer/generated";
 import { compareDesc } from "date-fns";
 
-export function getAllPosts() {
-  const posts = allBlogs.sort((a, b) => {
+export function getAllBlogs() {
+  const blogs = allBlogs.sort((a, b) => {
     return compareDesc(new Date(a.publishedAt), new Date(b.publishedAt));
   });
   if (process.env.NODE_ENV === "development") {
-    return posts;
+    return blogs;
   } else {
-    return posts.filter((p) => p.status === "published");
+    return blogs.filter((p) => p.status === "published");
   }
 }
 
-export function getPost(slug: string) {
-  const post = allBlogs.find((post) => post.slug === slug);
-  if (post != null) {
-    return post;
+export function getBlog(slug: string) {
+  const blog = allBlogs.find((blog) => blog.slug === slug);
+  if (blog != null) {
+    return blog;
   } else {
-    throw Error("Unable to Retrieve Post");
+    throw Error("Unable to Retrieve blog");
   }
 }
 
