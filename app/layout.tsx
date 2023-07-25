@@ -2,6 +2,7 @@ import Header from './components/header'
 import { ThemeProvider } from './theme-provider'
 import './globals.css'
 import { Roboto } from 'next/font/google'
+import { Analytics } from '@vercel/analytics/react';
 
 const roboto = Roboto({
   weight: '400',
@@ -25,6 +26,7 @@ export default function RootLayout({
         <ThemeProvider>
           <Header />
           {children}
+          <Analytics />
         </ThemeProvider>
       </body>
     </html>
