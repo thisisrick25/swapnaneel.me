@@ -1,7 +1,16 @@
 import { allBlogs } from 'contentlayer/generated'
+import { compareDesc } from "date-fns"
 import Link from 'next/link';
+import { formatDate } from '@/lib/formatDate';
 
-export default function BlogPage() {
+// @ts-ignore
+export default function BlogPage({ params }) {
+  const blogs = allBlogs
+    .filter((blog) => blog.status === "published")
+    .sort((a, b) => {
+      return compareDesc(new Date(a.publishedAt), new Date(b.publishedAt));
+    });
+
   return (
     <div className=''>
       <div className='py-8 space-y-3'>
@@ -30,14 +39,21 @@ export default function BlogPage() {
                 <div className="text-neutral-900 dark:text-neutral-100 tracking-tight">
                   {blog.title}
                 </div>
-                <div className='w-fit grid grid-cols-3 '>
-                  <div>date</div>
-                  <div className='justify-self-center '>-</div>
+                <div className='w-fit grid grid-flow-col  '>
+                  {/* <div>{blog.publishedAtFormatted}</div> */}
+                  <div>{formatDate(blog?.publishedAt)}</div>
+                  <div className="">&middot;</div>
                   <div>views</div>
                 </div>
+                {/* <ViewCounter
+                allViews={allViews}
+                slug={post.slug}
+                trackView={false}
+              /> */}
               </div>
             </Link>
           ))}
+
       </div>
     </div>
   )

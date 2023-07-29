@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { allBlogs } from 'contentlayer/generated'
 import { getBlog, getAllBlogs, getSeries } from "lib/content";
+import { formatDate } from "@/lib/formatDate";
 
 export async function generateStaticParams() {
   return allBlogs
@@ -32,12 +33,14 @@ export async function generateMetadata({ params }) {
 
 // @ts-ignore
 export default function Page({ params }) {
-  const blog = allBlogs.find((post) => post.slug === params.slug);
+  const blog = allBlogs.find((blog) => blog.slug === params.slug);
 
   return (
     <>
       <div>{blog?.title}</div>
       <div>{blog?.description}</div>
+      <div>{formatDate(blog?.publishedAt)}</div>
+      {/* <div>{blog?.publishedAtFormatted}</div> */}
     </>
   )
 }

@@ -3,12 +3,19 @@ import githubSlugger from 'github-slugger'
 
 import { Tag } from "./tag"
 import { Series } from "./series"
+import { formatDate } from "../../lib/formatDate";
 
 /** @type {import('contentlayer/source-files').ComputedFields} */
 const computedFields = defineComputedFields<"Blog">({
   slug: {
     type: "string",
     resolve: (blog) => blog._raw.sourceFileName.replace(/\.mdx$/, ""),
+  },
+  publishedAtFormatted: {
+    type: "string",
+    resolve: (doc) => {
+      return formatDate(doc.publishedAt)
+    },
   },
   headings: {
     type: "json",
