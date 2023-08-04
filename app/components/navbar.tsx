@@ -8,7 +8,7 @@ export default function Navbar() {
   // const pathname = usePathname()
 
   return (
-    <nav className="grid grid-cols-5 px-8 justify-items-center ">
+    <nav className="grid grid-cols-5 justify-items-center">
       {
         HEADER_LINKS.map((link) => (
           <Link
