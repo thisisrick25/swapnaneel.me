@@ -39,10 +39,10 @@ export default function BlogPage({ params }) {
                 <div className="text-neutral-900 dark:text-neutral-100 tracking-tight">
                   {blog.title}
                 </div>
-                <div className='w-fit grid grid-flow-col  '>
+                <div className='w-fit grid grid-flow-col'>
                   {/* <div>{blog.publishedAtFormatted}</div> */}
                   <div>{formatDate(blog?.publishedAt)}</div>
-                  <div className="">&middot;</div>
+                  <div className="text-2xl font-bold px-1">&middot;</div>
                   <div>views</div>
                 </div>
                 {/* <ViewCounter

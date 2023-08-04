@@ -7,7 +7,7 @@ export default function Home() {
         <div className='text-xl font-bold'>
           hello, im Swapnaneel
         </div>
-        <div className='text-lg'>
+        <div className=''>
           software engineer
         </div>
       </div>

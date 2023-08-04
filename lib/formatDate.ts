@@ -28,5 +28,5 @@ export function formatDate(date) {
 
   // return `${fullDate} (${formattedDate})`;
 
-  return (isThisYear(targetDate) ? format(targetDate, "MMM d") : format(targetDate, "MMM d, y")) + `(${formattedDate})`;
+  return (isThisYear(targetDate) ? format(targetDate, "MMM d") : format(targetDate, "MMM d, y")) + ` (${formattedDate})`;
 }
