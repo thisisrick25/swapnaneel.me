@@ -37,7 +37,7 @@ export default function Page({ params }) {
 
   return (
     <>
-      <div>{blog?.title}</div>
+      <div className='text-2xl font-bold'>{blog?.title}</div>
       <div>{blog?.description}</div>
       <div>{formatDate(blog?.publishedAt)}</div>
       {/* <div>{blog?.publishedAtFormatted}</div> */}

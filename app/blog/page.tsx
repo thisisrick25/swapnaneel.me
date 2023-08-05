@@ -13,8 +13,8 @@ export default function BlogPage({ params }) {
 
   return (
     <div className=''>
-      <div className='py-8 space-y-3'>
-        <div className='text-4xl font-bold'>
+      <div className='mb-8 space-y-3'>
+        <div className='text-2xl font-bold'>
           all blogs
         </div>
         <div className='relative max-w-sm'>
@@ -32,18 +32,18 @@ export default function BlogPage({ params }) {
           .map((blog) => (
             <Link
               key={blog.slug}
-              className="grid grid-cols-1 space-y-1 mb-4"
+              className="grid grid-cols-1 mb-4"
               href={`/blog/${blog.slug}`}
             >
-              <div className="w-full grid grid-cols-1">
-                <div className="text-neutral-900 dark:text-neutral-100 tracking-tight">
+              <div className="w-full">
+                <div>
                   {blog.title}
                 </div>
-                <div className='w-fit grid grid-flow-col'>
+                <div className=' grid grid-cols-2 text-base text-neutral-600 dark:text-neutral-400'>
                   {/* <div>{blog.publishedAtFormatted}</div> */}
                   <div>{formatDate(blog?.publishedAt)}</div>
-                  <div className="text-2xl font-bold px-1">&middot;</div>
-                  <div>views</div>
+                  {/* <div className="font-bold px-1">&middot;</div> */}
+                  <div className=''>views</div>
                 </div>
                 {/* <ViewCounter
                 allViews={allViews}
@@ -53,7 +53,6 @@ export default function BlogPage({ params }) {
               </div>
             </Link>
           ))}
-
       </div>
     </div>
   )
