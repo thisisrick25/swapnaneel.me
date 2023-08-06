@@ -1,4 +1,4 @@
-import Header from './components/header'
+import Header from '@/components/header'
 import { ThemeProvider } from './theme-provider'
 import './globals.css'
 import { Roboto } from 'next/font/google'
