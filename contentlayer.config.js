@@ -4,6 +4,8 @@ import rehypePrettyCode from 'rehype-pretty-code';
 import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 
+// esbuild doesn't support module aliases 
+// https://github.com/contentlayerdev/contentlayer/issues/238
 import { Blog } from './content/definitions/blog'
 
 export default makeSource({
