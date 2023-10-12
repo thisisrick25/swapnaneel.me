@@ -2,10 +2,12 @@ import type { Metadata } from 'next'
 import { allBlogs } from 'contentlayer/generated'
 import { getBlog, getAllBlogs, getSeries } from "lib/content";
 import { formatDate } from "@/lib/formatDate";
+import MDXContent from "@/components/mdxContent";
+import { notFound } from 'next/navigation';
 
 export async function generateStaticParams() {
   return allBlogs
-    .filter((p) => p.status != "draft")
+    .filter((p) => p.isPublished != false)
     .map((p) => {
       slug: p.slug;
     });
@@ -22,7 +24,7 @@ export async function generateMetadata({ params }) {
       name: "Swapnaneel Patra",
       url: "https://swapnaneel.me",
     },
-    keywords: blog.tags?.map((tag) => tag.title),
+    // keywords: blog.tags?.map((tag) => tag.title),
     creator: "Swapnaneel Patra",
     twitter: {
       card: "summary_large_image",
@@ -35,12 +37,20 @@ export async function generateMetadata({ params }) {
 export default function Page({ params }) {
   const blog = allBlogs.find((blog) => blog.slug === params.slug);
 
+  if (!blog) {
+    notFound();
+  }
+
   return (
-    <>
-      <div className='text-2xl font-bold'>{blog?.title}</div>
-      <div>{blog?.description}</div>
-      <div>{formatDate(blog?.publishedAt)}</div>
-      {/* <div>{blog?.publishedAtFormatted}</div> */}
-    </>
+    <article>
+      <div>
+        <p className='text-2xl font-bold'>{blog?.title}</p>
+        <div className=' grid grid-cols-2 text-lg text-neutral-600 dark:text-neutral-400'>
+          <p>{formatDate(blog?.publishedAt)}</p>
+          <p className='justify-self-end'>views</p>
+        </div>
+        <MDXContent code={blog?.body.code}/>
+      </div>
+    </article>
   )
 }

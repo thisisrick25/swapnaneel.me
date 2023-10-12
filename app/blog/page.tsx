@@ -5,8 +5,9 @@ import { formatDate } from '@/lib/formatDate';
 
 // @ts-ignore
 export default function BlogPage({ params }) {
+  console.log(allBlogs)
   const blogs = allBlogs
-    .filter((blog) => blog.status === "published")
+    .filter((blog) => blog.isPublished === true)
     .sort((a, b) => {
       return compareDesc(new Date(a.publishedAt), new Date(b.publishedAt));
     });
@@ -40,7 +41,6 @@ export default function BlogPage({ params }) {
                   {blog.title}
                 </div>
                 <div className=' grid grid-cols-2 text-base text-neutral-600 dark:text-neutral-400'>
-                  {/* <div>{blog.publishedAtFormatted}</div> */}
                   <div>{formatDate(blog?.publishedAt)}</div>
                   {/* <div className="font-bold px-1">&middot;</div> */}
                   <div className=''>views</div>
