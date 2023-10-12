@@ -1,5 +1,4 @@
 import { allBlogs } from 'contentlayer/generated'
-import { compareDesc } from "date-fns"
 import Link from 'next/link';
 import { formatDate } from '@/lib/formatDate';
 
@@ -9,8 +8,10 @@ export default function BlogPage({ params }) {
   const blogs = allBlogs
     .filter((blog) => blog.isPublished === true)
     .sort((a, b) => {
-      return compareDesc(new Date(a.publishedAt), new Date(b.publishedAt));
-    });
+      if (new Date(a.publishedAt) > new Date(b.publishedAt))
+        return -1;
+      return 1;
+    })
 
   return (
     <div className=''>
@@ -23,13 +24,7 @@ export default function BlogPage({ params }) {
         </div>
       </div>
       <div>
-        {allBlogs
-          .sort((a, b) => {
-            if (new Date(a.publishedAt) > new Date(b.publishedAt)) {
-              return -1;
-            }
-            return 1;
-          })
+        {blogs
           .map((blog) => (
             <Link
               key={blog.slug}
