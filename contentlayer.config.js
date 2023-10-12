@@ -3,13 +3,78 @@ import remarkGfm from "remark-gfm";
 import rehypePrettyCode from 'rehype-pretty-code';
 import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
+// import { Tag } from "./tag"
+// import { Series } from "./series"
+import { defineDocumentType } from "contentlayer/source-files"
+import githubSlugger from "github-slugger";
+import { rehypePrettyCodeOptions, rehypeAutolinkHeadingsOptions } from './lib/rehypeOptions'
 
-// esbuild doesn't support module aliases 
-// https://github.com/contentlayerdev/contentlayer/issues/238
-import { Blog } from './content/definitions/blog'
+/** @type {import('contentlayer/source-files').ComputedFields} */
+const computedFields = {
+  slug: {
+    type: "string",
+    resolve: (blog) => blog._raw.flattenedPath,
+    // resolve: (blog) => blog._raw.sourceFileName.replace(/\.mdx$/, "")
+  },
+  headings: {
+    type: "json",
+    resolve: async (doc) => {
+      // use same package as rehypeSlug so toc and sluggified headings match https://github.com/rehypejs/rehype-slug/blob/main/package.json#L36
+      const slugger = new githubSlugger();
+
+      // https://stackoverflow.com/a/70802303
+      const regXHeader = /\n\n(?<flag>#{1,6})\s+(?<content>.+)/g;
+
+      const headings = Array.from(doc.body.raw.matchAll(regXHeader)).map(
+        // @ts-ignore
+        ({ groups }) => {
+          const flag = groups?.flag;
+          const content = groups?.content;
+          return {
+            heading: flag?.length,
+            text: content,
+            slug: content ? slugger.slug(content) : undefined,
+          };
+        }
+      );
+      return headings;
+    },
+  },
+};
+
+const Blog = defineDocumentType(() => ({
+  name: 'Blog',
+  filePathPattern: '**/*.mdx',
+  contentType: "mdx",
+  fields: {
+    title: {
+      type: 'string',
+      required: true,
+    },
+    description: {
+      type: 'string',
+      required: true,
+    },
+    publishedAt: {
+      type: 'string',
+      required: true,
+    },
+    updatedAt: { type: 'string', },
+    image: { type: 'string', },
+    isPublished: {
+      type: 'boolean',
+      required: true,
+    },
+    tags: {
+      type: "list",
+      of: { type: "string" },
+    },
+  },
+  computedFields,
+}))
 
 export default makeSource({
-  contentDirPath: "content",
+  contentDirPath: "content/posts",
   documentTypes: [Blog],
   mdx: {
     esbuildOptions(options) {
@@ -17,34 +82,10 @@ export default makeSource({
       return options;
     },
     remarkPlugins: [remarkGfm],
-    rehypePlugins: [[rehypeSlug],
-    [
-      rehypeAutolinkHeadings,
-      {
-        properties: {
-          className: ["anchor"],
-        },
-      },
-    ],
-    [
-      rehypePrettyCode,
-      {
-        theme: 'one-dark-pro',
-        onVisitLine(node) {
-          // Prevent lines from collapsing in `display: grid` mode, and allow empty
-          // lines to be copy/pasted
-          if (node.children.length === 0) {
-            node.children = [{ type: 'text', value: ' ' }];
-          }
-        },
-        onVisitHighlightedLine(node) {
-          node.properties.className.push('line--highlighted');
-        },
-        onVisitHighlightedWord(node) {
-          node.properties.className = ['word--highlighted'];
-        },
-      },
-    ],
+    rehypePlugins: [
+      [rehypeSlug],
+      [rehypeAutolinkHeadings, rehypeAutolinkHeadingsOptions],
+      [rehypePrettyCode, rehypePrettyCodeOptions],
     ],
   },
 });
