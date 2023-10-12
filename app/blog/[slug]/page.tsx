@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { allBlogs } from 'contentlayer/generated'
-import { getBlog, getAllBlogs, getSeries } from "lib/content";
+import { getBlog, getAllBlogs } from "lib/content";
 import { formatDate } from "@/lib/formatDate";
 import MDXContent from "@/components/mdxContent";
 import { notFound } from 'next/navigation';
