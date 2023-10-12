@@ -8,7 +8,7 @@ export function getAllBlogs() {
   if (process.env.NODE_ENV === "development") {
     return blogs;
   } else {
-    return blogs.filter((p) => p.status === "published");
+    return blogs.filter((p) => p.isPublished === true);
   }
 }
 
@@ -21,22 +21,22 @@ export function getBlog(slug: string) {
   }
 }
 
-export function getSeries(title: string, current: string) {
-  return {
-    title: title,
-    posts: allBlogs
-      .filter((p) => p.series?.title === title)
-      .sort(
-        (a, b) =>
-          Number(new Date(a.series!.order)) - Number(new Date(b.series!.order))
-      )
-      .map((p) => {
-        return {
-          title: p.title,
-          slug: p.slug,
-          status: p.status,
-          isCurrent: p.slug === current,
-        };
-      }),
-  };
-}
+// export function getSeries(title: string, current: string) {
+//   return {
+//     title: title,
+//     posts: allBlogs
+//       .filter((p) => p.series?.title === title)
+//       .sort(
+//         (a, b) =>
+//           Number(new Date(a.series!.order)) - Number(new Date(b.series!.order))
+//       )
+//       .map((p) => {
+//         return {
+//           title: p.title,
+//           slug: p.slug,
+//           status: p.status,
+//           isCurrent: p.slug === current,
+//         };
+//       }),
+//   };
+// }
