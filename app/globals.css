@@ -1,3 +1,114 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.anchor {
+  @apply absolute invisible no-underline;
+  margin-left: -1em;
+  padding-right: 0.5em;
+  width: 80%;
+  max-width: 700px;
+  cursor: pointer;
+}
+
+.anchor:before {
+  @apply text-neutral-300 dark:text-neutral-700;
+  content: "#";
+}
+
+*:hover > .anchor {
+  @apply visible;
+}
+
+.prose > :first-child {
+  /* Override removing top margin, causing layout shift */
+  margin-top: 1.25em !important;
+  margin-bottom: 1.25em !important;
+}
+
+/* Remove Safari input shadow on mobile */
+input[type="text"],
+input[type="email"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+table {
+  display: block;
+  max-width: fit-content;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+code {
+  counter-reset: line;
+}
+
+/* code > [data-line]::before {
+  counter-increment: line;
+  content: counter(line);
+  display: inline-block;
+  width: 1rem;
+  margin-right: 1rem;
+  text-align: right;
+  color: gray;
+} */
+
+code[data-line-numbers] > [data-line]::before {
+  counter-increment: line;
+  content: counter(line);
+  display: inline-block;
+  width: 1rem;
+  margin-right: 1rem;
+  text-align: right;
+  color: gray;
+}
+
+[data-highlighted-line] {
+  @apply bg-[#ffffff1a] !important;
+  @apply pl-0 pr-1 p-0.5 rounded-sm border-l-2 border-l-[#7B00D3] border-solid;
+  /* padding: 2px;
+  padding-left: 0;
+  padding-right: 4px;
+  border-radius: 2px;
+  border-left: 2px solid #7B00D3; */
+}
+
+[data-highlighted-chars] {
+  @apply bg-[#ffffff1a] !important;
+  @apply p-0.5 rounded-sm;
+  /* padding: 2px;
+  border-radius: 2px; */
+}
+
+[data-rehype-pretty-code-title] {
+  @apply px-4 py-3 font-mono text-xs font-medium border rounded-t-lg text-neutral-200 border-[#333333] bg-[#1c1c1c];
+  /* padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+  border-width: 1px;
+  font-family: Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 500;
+  border-color: #333333;
+  background: #1c1c1c; */
+}
+
+[data-rehype-pretty-code-title] + pre {
+  @apply my-0 rounded-t-none border-t-0;
+  /* margin-top: 0;
+  margin-bottom: 0;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0; */
+}
+
+[data-rehype-pretty-code-caption]{
+  @apply text-center text-[#747474];
+  /* text-align: center;
+  color: #747474; */
+}
