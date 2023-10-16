@@ -31,7 +31,8 @@ const computedFields = {
           const flag = groups?.flag;
           const content = groups?.content;
           return {
-            heading: flag?.length,
+            // heading: flag?.length,
+            heading: flag?.length == 1 ? "one" : flag?.length == 2 ? "two" : "three",
             text: content,
             slug: content ? slugger.slug(content) : undefined,
           };
@@ -56,10 +57,10 @@ const Blog = defineDocumentType(() => ({
       required: true,
     },
     publishedAt: {
-      type: 'string',
+      type: 'date',
       required: true,
     },
-    updatedAt: { type: 'string', },
+    updatedAt: { type: 'date', },
     image: { type: 'string', },
     isPublished: {
       type: 'boolean',
