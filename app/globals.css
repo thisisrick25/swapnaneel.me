@@ -26,6 +26,10 @@
   margin-bottom: 1.25em !important;
 }
 
+.prose > :last-child {
+  margin-bottom: 2em !important;
+}
+
 /* Remove Safari input shadow on mobile */
 input[type="text"],
 input[type="email"] {
@@ -41,8 +45,13 @@ table {
   white-space: nowrap;
 }
 
+pre {
+  @apply border border-neutral-800;
+}
+
 code {
   counter-reset: line;
+  @apply text-neutral-800 dark:text-neutral-200 px-1 py-0.5 border border-neutral-100 dark:border-neutral-800 rounded-lg ;
 }
 
 /* code > [data-line]::before {
