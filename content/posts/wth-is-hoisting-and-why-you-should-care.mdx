@@ -1,0 +1,84 @@
+---
+title: wth is hoisting and why you should care?
+description: Brief explanation of hoisting in JavaScript
+publishedAt: 2023-10-15
+isPublished: true
+tags:
+  - javaScript
+---
+
+Hoisting is a JavaScript behaviour that moves all variable and function declarations to the top of their scope before executing the code. This means that we can use variables and functions before we declare them, as long as they're declared in the same scope.
+
+Hoisting can be a bit confusing at first, but it's an important part of understanding how JavaScript works.
+
+## Scope
+
+Scope is the region of code where a variable or function can be accessed. There are two types of scope in JavaScript: global and local.
+- Global scope is the scope of the entire program. Any variable or function declared in the global scope can be accessed from anywhere in the program.
+- Local scope is the scope of a function. Any variable or function declared in a local scope can only be accessed from within that function.
+
+## Understanding hoisting
+
+The first thing to understand about hoisting is that it only applies to declarations, not assignments. This means that the following code will not work:
+
+``` js
+console.log(a); // undefined
+var a = 10;
+```
+
+This is because the variable `a` is not declared until the second line of code. By the time the first line of code is executed, the variable `a` does not exist.
+However, the following code will work:
+
+``` js
+var a; // hoisted to the top of the scope
+console.log(a); // undefined
+a = 10;
+```
+
+This is because the variable `a` is declared before it is used. When the first line of code is executed, the variable `a` is hoisted to the top of the scope and initialized to undefined. This means the variable `a` exists, even though it has not been assigned a value yet.
+
+## Hoisting functions
+
+Hoisting also applies to function declarations. This means that functions can be called before they are declared, as long as they are declared in the same scope.
+
+For example, the following code will work:
+
+``` js
+greet(); // works!
+function greet() {
+console.log("Hello!");
+}
+```
+
+This is because the function `greet()` is hoisted to the top of the scope before the code is executed. This means the function `greet()` exists, even though it has not been declared yet.
+
+## Using hoisting effectively
+
+Hoisting can be a useful tool for writing JavaScript code. However, it is important to use it carefully, as it can lead to unexpected behavior if not used correctly.
+One way to avoid problems with hoisting is to always declare your variables and functions at the top of their scope. This will help to prevent any accidental reassignments or function calls.
+
+``` js
+// Function hoisting
+function greet(name) {
+console.log(`Hello, ${name}`);
+}
+// Variable hoisting
+var name = 'World';
+greet(name); // Logs 'Hello, World'
+```
+
+> In the above example, we can call the function greet() before it is declared because it is hoisted to the top of the scope.
+
+Another way to avoid problems with hoisting is to use the `let` and `const` keywords instead of the `var` keywords. The let and const keywords do not allow hoisting, which can help to prevent unexpected behavior.
+
+## TL;DR
+
+While hoisting can be useful, it is important to use it carefully. Hoisting can lead to unexpected behavior if you are not aware of how it works.
+Here are some best practices for using hoisting:
+- Always declare variables before you use them. This will help to prevent errors and make your code more readable.
+- Avoid using hoisting to reassign values to variables. This can lead to unexpected behavior.
+- If you are using hoisting to declare functions, make sure that you call the functions after they are declared.
+
+## Conclusion
+
+Hoisting is a powerful JavaScript mechanism that can be used to write more concise and efficient code. However, it is important to use it carefully to avoid unexpected behavior.
