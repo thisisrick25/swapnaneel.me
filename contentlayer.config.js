@@ -23,7 +23,7 @@ const computedFields = {
       const slugger = new githubSlugger();
 
       // https://stackoverflow.com/a/70802303
-      const regXHeader = /\n\n(?<flag>#{1,6})\s+(?<content>.+)/g;
+      const regXHeader = /\n(?<flag>#{1,6})\s+(?<content>.+)/g;
 
       const headings = Array.from(doc.body.raw.matchAll(regXHeader)).map(
         // @ts-ignore
