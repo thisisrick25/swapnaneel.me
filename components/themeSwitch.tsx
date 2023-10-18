@@ -27,9 +27,7 @@ export default function ThemeSwitch() {
       // checked={enabled}
       checked={isDark}
       onChange={handleThemeChange}
-      // className={`${enabled ? "bg-gray-700" : "bg-gray-300"
-      className={`${isDark ? "bg-neutral-700" : "bg-gray-300"
-        } relative inline-flex shrink-0 h-6 w-12 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75`}
+      className="bg-gray-300 dark:bg-neutral-700 relative inline-flex shrink-0 h-6 w-12 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
     >
       <span className="sr-only">Dark Mode</span>
       <svg
@@ -37,9 +35,7 @@ export default function ThemeSwitch() {
         viewBox="0 0 20 20"
         fill="currentColor"
         // className={`${enabled ? "translate-x-6" : "translate-x-0"
-        className={`${isDark ? "translate-x-6" : "translate-x-0"
-          } border-2 border-transparent absolute h-6 w-6 text-gray-900 dark:text-gray-100 transition ease-in-out duration-200`}
-      >
+        className="translate-x-0 dark:translate-x-6 border-2 border-transparent absolute h-6 w-6 text-gray-900 dark:text-gray-100 transition ease-in-out duration-200">
         {/* {enabled ? ( */}
         {isDark ? (
           <path
@@ -54,9 +50,7 @@ export default function ThemeSwitch() {
       <span
         aria-hidden="true"
         // className={`${enabled ? "translate-x-0 " : "translate-x-6"
-        className={`${isDark ? "translate-x-0 " : "translate-x-6"
-          } bg-gray-100 pointer-events-none inline-block h-6 w-6 rounded-full shadow-lg transform ring-0 transition ease-in-out duration-200  `}
-      ></span>
+        className="translate-x-6 dark:translate-x-0 bg-gray-100 pointer-events-none inline-block h-6 w-6 rounded-full shadow-lg transform ring-0 transition ease-in-out duration-200"></span>
     </Switch>
   )
 }
