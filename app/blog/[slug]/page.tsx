@@ -4,6 +4,7 @@ import { getBlog, getAllBlogs } from "lib/content";
 import { formatDate } from "@/lib/formatDate";
 import MDXContent from "@/components/mdxContent";
 import { notFound } from 'next/navigation';
+import TableOfContents from '@/components/tableOfContents';
 
 export async function generateStaticParams() {
   return allBlogs
@@ -45,10 +46,11 @@ export default function Page({ params }) {
     <article>
       <div>
         <p className='text-2xl font-bold'>{blog?.title}</p>
-        <div className=' grid grid-cols-2 text-lg text-neutral-600 dark:text-neutral-400'>
+        <div className='pb-2 mb-2 grid grid-cols-2 text-lg text-neutral-600 dark:text-neutral-400'>
           <p>{formatDate(blog?.publishedAt)}</p>
           <p className='justify-self-end'>views</p>
         </div>
+        <TableOfContents blog={blog} />
         <MDXContent code={blog?.body.code}/>
       </div>
     </article>
