@@ -25,6 +25,7 @@
       "@/components/*": ["components/*"],
       "@/content/*": ["content/*"],
       "@/lib/*": ["lib/*"],
+      "@/utils/*": ["utils/*"],
       "contentlayer/generated": ["./.contentlayer/generated"]
     }
   },
