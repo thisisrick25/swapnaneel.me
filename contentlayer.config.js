@@ -31,8 +31,7 @@ const computedFields = {
           const flag = groups?.flag;
           const content = groups?.content;
           return {
-            // heading: flag?.length,
-            heading: flag?.length == 1 ? "one" : flag?.length == 2 ? "two" : "three",
+            level: flag?.length,
             text: content,
             slug: content ? slugger.slug(content) : undefined,
           };
