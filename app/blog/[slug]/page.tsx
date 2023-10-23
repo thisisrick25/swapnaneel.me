@@ -19,7 +19,7 @@ export async function generateMetadata({ params }) {
   const blog = await getBlog(params.slug);
 
   return {
-    title: `${blog.title} | Swapnaneel`,
+    title: `${blog.title}`,
     description: blog.description,
     authors: {
       name: "Swapnaneel Patra",
