@@ -1,4 +1,5 @@
 import { Metadata } from 'next'
+import Script from 'next/script'
 import { Roboto } from 'next/font/google'
 import './globals.css'
 import { ThemeProvider } from './theme-provider'
@@ -55,6 +56,15 @@ export default function RootLayout({
   return (
     // suppressHydrationWarning
     <html lang="en" className={roboto.className} suppressHydrationWarning>
+      {/* <!-- Google tag (gtag.js) --> */}
+      <Script async src="https://www.googletagmanager.com/gtag/js?id=G-HVS1V1YG5Z"></Script>
+      <Script id="google-analytics" strategy="afterInteractive">
+        {`window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-HVS1V1YG5Z');`}
+      </Script>
       <body className='bg-white text-black dark:bg-black dark:text-white text-xs sm:text-xs md:text-sm lg:text-base xl:text-lg 2xl:text-xl selection:bg-yellow-500 selection:text-white dark:selection:text-black sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl 2xl:max-w-3xl mx-auto px-4 sm:px-6 xl:px-0 gap-10 sm:gap-14' suppressHydrationWarning>
         <ThemeProvider>
           <Header />
