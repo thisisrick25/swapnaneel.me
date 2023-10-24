@@ -1,6 +1,6 @@
 // please update required information
 export const siteMetadata = {
-  title: 'Swapnaneel',
+  title: 'Swapnaneel Patra',
   author: 'Swapnaneel Patra',
   headerTitle: 'Developer Extraordinaire',
   description: 'Software developer and engineer. Creative thinker and a Technical expert',
