@@ -2,6 +2,13 @@ import { allBlogs } from 'contentlayer/generated'
 import Link from 'next/link';
 import { formatDate } from '@/lib/formatDate';
 
+export async function generateMetadata() {
+  return {
+    title: 'Blog',
+    description: 'Read my blogs about software development, programming, and more',
+  };
+}
+
 // @ts-ignore
 export default function BlogPage({ params }) {
   console.log(allBlogs)
