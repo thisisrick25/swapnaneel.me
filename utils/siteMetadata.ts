@@ -1,7 +1,9 @@
 // please update required information
 export const siteMetadata = {
+  generator: 'Next.js',
   title: 'Swapnaneel Patra',
   author: 'Swapnaneel Patra',
+  creator: 'Swapnaneel Patra',
   headerTitle: 'Developer Extraordinaire',
   description: 'Software developer and engineer. Creative thinker and a Technical expert',
   language: 'en-us',
