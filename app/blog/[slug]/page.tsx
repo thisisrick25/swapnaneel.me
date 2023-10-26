@@ -1,6 +1,4 @@
-import type { Metadata } from 'next'
 import { allBlogs } from 'contentlayer/generated'
-import { getBlog, getAllBlogs } from "lib/content";
 import { formatDate } from "@/lib/formatDate";
 import MDXContent from "@/components/mdxContent";
 import { notFound } from 'next/navigation';
@@ -16,21 +14,14 @@ export async function generateStaticParams() {
 
 // @ts-ignore
 export async function generateMetadata({ params }) {
-  const blog = await getBlog(params.slug);
+  const blog = allBlogs.find((blog) => blog.slug === params.slug)
+  if (!blog) {
+    return;
+  }
 
   return {
-    title: `${blog.title}`,
+    title: blog.title,
     description: blog.description,
-    authors: {
-      name: "Swapnaneel Patra",
-      url: "https://swapnaneel.me",
-    },
-    // keywords: blog.tags?.map((tag) => tag.title),
-    creator: "Swapnaneel Patra",
-    twitter: {
-      card: "summary_large_image",
-      creator: "@thisisrick25",
-    },
   };
 }
 
