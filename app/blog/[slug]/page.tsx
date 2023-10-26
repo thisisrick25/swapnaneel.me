@@ -7,9 +7,9 @@ import TableOfContents from '@/components/tableOfContents';
 export async function generateStaticParams() {
   return allBlogs
     .filter((p) => p.isPublished != false)
-    .map((p) => {
-      slug: p.slug;
-    });
+    .map((p) => ({
+      slug: p.slug,
+    }));
 }
 
 // @ts-ignore
