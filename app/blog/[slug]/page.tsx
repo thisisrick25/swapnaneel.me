@@ -3,6 +3,7 @@ import { formatDate } from "@/lib/formatDate";
 import MDXContent from "@/components/mdxContent";
 import { notFound } from 'next/navigation';
 import TableOfContents from '@/components/tableOfContents';
+import Tag from '@/components/tag';
 
 export async function generateStaticParams() {
   return allBlogs
@@ -41,6 +42,7 @@ export default function Page({ params }) {
           <p>{formatDate(blog?.publishedAt)}</p>
           <p className='justify-self-end'>views</p>
         </div>
+        <Tag blog={blog} />
         <TableOfContents blog={blog} />
         <MDXContent code={blog?.body.code}/>
       </div>
