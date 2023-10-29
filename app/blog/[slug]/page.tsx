@@ -37,7 +37,7 @@ export default function Page({ params }) {
     <article>
       <div>
         <p className='text-2xl font-bold'>{blog?.title}</p>
-        <div className='pb-2 mb-2 grid grid-cols-2 text-lg text-neutral-600 dark:text-neutral-400'>
+        <div className='mb-4 grid grid-cols-2 text-lg text-neutral-600 dark:text-neutral-400'>
           <p>{formatDate(blog?.publishedAt)}</p>
           <p className='justify-self-end'>views</p>
         </div>
