@@ -4,7 +4,7 @@ import { formatDate } from '@/lib/formatDate';
 
 export async function generateMetadata() {
   return {
-    title: 'Blog',
+    title: 'Blogs',
     description: 'Read my blogs about software development, programming, and more',
   };
 }
