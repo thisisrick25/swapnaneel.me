@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  overflow-y: scroll;
+}
+
 .anchor {
   @apply absolute invisible no-underline;
   margin-left: -1em;
