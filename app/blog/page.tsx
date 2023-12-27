@@ -26,9 +26,9 @@ export default function BlogPage({ params }) {
         <div className='text-2xl font-bold'>
           all blogs
         </div>
-        <div className='relative max-w-sm'>
+        {/* <div className='relative max-w-sm'>
           <input type="text" placeholder='search...' className='block w-full p-1 text-black dark:text-white bg-gray-300 dark:bg-neutral-700 border rounded-md border-gray-300 dark:border-neutral-700 focus:outline-none focus:border-yellow-500 focus:ring focus:ring-yellow-500' />
-        </div>
+        </div> */}
       </div>
       <div>
         {blogs
