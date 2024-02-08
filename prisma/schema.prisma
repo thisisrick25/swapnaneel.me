@@ -6,14 +6,12 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
-  url = env("DATABASE_URL")
-  relationMode = "prisma"
+  provider = "postgresql"
+  url = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
 
 model View {
-  slug  String @id @db.VarChar(128)
-  count BigInt @default(0)
-
-  // @@map(name: "views")
+  slug  String @id @db.VarChar(225)
+  count Int    @default(0)
 }
