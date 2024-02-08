@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev && contentlayer dev --verbose",
-    "prebuild": "npx prisma generate && npx prisma migrate deploy && contentlayer build",
+    "prebuild": "contentlayer build",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -13,7 +13,8 @@
     "db:push": "npx dotenv -e .env.local -- prisma db push",
     "db:seed": "npx dotenv -e .env.local -- prisma db seed",
     "prisma:generate": "npx dotenv -e .env.local -- prisma generate",
-    "prisma:studio": "npx dotenv -e .env.local -- prisma studio"
+    "prisma:studio": "npx dotenv -e .env.local -- prisma studio",
+    "vercel-build": "prisma generate && prisma migrate deploy && next build"
   },
   "overrides": {
     "@opentelemetry/api": "1.4.1",
