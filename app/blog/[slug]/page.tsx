@@ -4,6 +4,7 @@ import MDXContent from "@/components/mdxContent";
 import { notFound } from 'next/navigation';
 import TableOfContents from '@/components/tableOfContents';
 import Tag from '@/components/tag';
+import ViewCounter from '@/components/viewCounter';
 
 export async function generateStaticParams() {
   return allBlogs
@@ -40,7 +41,7 @@ export default function Page({ params }) {
         <p className='text-2xl font-bold'>{blog?.title}</p>
         <div className='mb-4 grid grid-cols-2 text-lg text-neutral-600 dark:text-neutral-400'>
           <p>{formatDate(blog?.publishedAt)}</p>
-          <p className='justify-self-end'>views</p>
+          <ViewCounter slug={blog?.slug} />
         </div>
         <Tag blog={blog} />
         <TableOfContents blog={blog} />
