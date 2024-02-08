@@ -30,11 +30,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.4.0",
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@headlessui/react": "^1.7.15",
-<<<<<<< HEAD
     "@prisma/client": "^5.9.0",
-=======
-    "@prisma/client": "^5.4.2",
->>>>>>> a2304a7a4e1cf53f40ceb28d0c47a21505740dbb
     "@types/node": "20.4.5",
     "@types/react": "18.2.15",
     "@types/react-dom": "18.2.7",
