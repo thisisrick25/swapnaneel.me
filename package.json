@@ -15,15 +15,6 @@
     "prisma:generate": "npx dotenv -e .env.local -- prisma generate",
     "prisma:studio": "npx dotenv -e .env.local -- prisma studio"
   },
-  "overrides": {
-    "@opentelemetry/api": "1.4.1",
-    "@opentelemetry/core": "1.13.0",
-    "@opentelemetry/exporter-trace-otlp-grpc": "0.39.1",
-    "@opentelemetry/resources": "1.13.0",
-    "@opentelemetry/sdk-trace-base": "1.13.0",
-    "@opentelemetry/sdk-trace-node": "1.13.0",
-    "@opentelemetry/semantic-conventions": "1.13.0"
-  },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.4.0",
     "@fortawesome/free-regular-svg-icons": "^6.4.0",
@@ -36,6 +27,7 @@
     "@types/react-dom": "18.2.7",
     "@vercel/analytics": "^1.0.1",
     "@vercel/postgres": "^0.5.1",
+    "@vercel/speed-insights": "^1.0.10",
     "autoprefixer": "10.4.14",
     "contentlayer": "^0.3.4",
     "date-fns": "^2.30.0",
