@@ -6,6 +6,7 @@ import { ThemeProvider } from './theme-provider'
 import Header from '@/components/header'
 import { Analytics } from '@vercel/analytics/react';
 import { siteMetadata } from '@/utils/siteMetadata'
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 const roboto = Roboto({
   weight: '400',
@@ -69,6 +70,7 @@ export default function RootLayout({
         <ThemeProvider>
           <Header />
           {children}
+          <SpeedInsights />
           <Analytics />
         </ThemeProvider>
       </body>
