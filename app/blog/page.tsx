@@ -1,6 +1,7 @@
 import { allBlogs } from 'contentlayer/generated'
 import Link from 'next/link';
 import { formatDate } from '@/lib/formatDate';
+import ViewCounter from '@/components/viewCounter';
 
 export async function generateMetadata() {
   return {
@@ -45,13 +46,8 @@ export default function BlogPage({ params }) {
                 <div className=' grid grid-cols-2 text-base text-neutral-600 dark:text-neutral-400'>
                   <div>{formatDate(blog?.publishedAt)}</div>
                   {/* <div className="font-bold px-1">&middot;</div> */}
-                  <div className=''>views</div>
+                  <ViewCounter slug={blog?.slug} />
                 </div>
-                {/* <ViewCounter
-                allViews={allViews}
-                slug={post.slug}
-                trackView={false}
-              /> */}
               </div>
             </Link>
           ))}
