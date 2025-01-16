@@ -4,38 +4,35 @@ import { notFound } from 'next/navigation';
 import TableOfContents from '@/components/tableOfContents';
 import Tag from '@/components/tag';
 import ViewCounter from '@/components/viewCounter';
-import { extractHeadings } from '@/lib/utils/extractHeadings';
+import { extractHeadings } from '@/utils/extractHeadings';
+import { getBlogBySlug } from '@/utils/getBlogBySlug';
 
-export async function generateStaticParams() {
+export function generateStaticParams() {
   return allBlogs
-    .filter((p) => p.isPublished != false)
+    .filter((p) => p.isPublished)
     .map((p) => ({
       slug: p.slug,
-    }));
+    }))
 }
 
 export async function generateMetadata({ params }: { params: { slug: string } }) {
-  const { slug } = await params;
-  const blog = allBlogs.find((blog) => blog.slug === slug);
-  if (!blog) {
-    return;
-  }
+  const { slug } = await params
+  const blog = getBlogBySlug(allBlogs, slug)
+  if (!blog) notFound()
 
   return {
     title: blog.title,
     description: blog.description,
-  };
+  }
 }
 
 export default async function BlogPage({ params }: { params: { slug: string } }) {
-  const { slug } = await params;
-  const blog = allBlogs.find((blog) => blog.slug === slug);
-  if (!blog) {
-    notFound();
-  }
-
-  const headings = extractHeadings(blog.content);
-
+  const { slug } = await params
+  const blog = getBlogBySlug(allBlogs, slug)
+  if (!blog) notFound()
+  
+  const headings = extractHeadings(blog.content)
+  
   return (
     <article>
       <div>
