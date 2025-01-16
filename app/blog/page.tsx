@@ -1,17 +1,16 @@
-import { allBlogs } from 'contentlayer/generated'
+import { allBlogs } from 'content-collections'
 import Link from 'next/link';
 import { formatDate } from '@/lib/formatDate';
 import ViewCounter from '@/components/viewCounter';
 
-export async function generateMetadata() {
+export function generateMetadata() {
   return {
     title: 'Blogs',
     description: 'My Blogs',
   };
 }
 
-// @ts-ignore
-export default function BlogPage({ params }) {
+export default function BlogPage() {
   console.log(allBlogs)
   const blogs = allBlogs
     .filter((blog) => blog.isPublished === true)
