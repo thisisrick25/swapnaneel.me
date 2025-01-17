@@ -1,5 +1,5 @@
 import { formatDate } from "@/lib/formatDate";
-import { allBlogs } from "contentlayer/generated";
+import { allBlogs } from "content-collections";
 import { slug } from "github-slugger"
 import Link from "next/link";
 
