@@ -5,8 +5,12 @@ import TableOfContents from '@/components/tableOfContents';
 import Tag from '@/components/tag';
 import ViewCounter from '@/components/viewCounter';
 import { extractHeadings } from '@/utils/extractHeadings';
-import { getBlogBySlug } from '@/utils/getBlogBySlug';
+import { getBlogBySlug } from '@/utils/getBlogs';
 import { Metadata } from 'next'
+
+interface PageProps {
+  params: Promise<{ slug: string }>
+}
 
 export function generateStaticParams() {
   return allBlogs
@@ -16,7 +20,7 @@ export function generateStaticParams() {
     }))
 }
 
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params
   const blog = getBlogBySlug(allBlogs, slug)
   if (!blog) notFound()
@@ -27,7 +31,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   }
 }
 
-export default async function BlogPage({ params }: { params: { slug: string } }) {
+export default async function BlogPage({ params }: PageProps) {
   const { slug } = await params
   const blog = getBlogBySlug(allBlogs, slug)
   if (!blog) notFound()
