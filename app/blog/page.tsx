@@ -2,8 +2,9 @@ import { allBlogs } from 'content-collections'
 import Link from 'next/link';
 import { formatDate } from '@/lib/formatDate';
 import ViewCounter from '@/components/viewCounter';
+import { Metadata } from 'next'
 
-export function generateMetadata() {
+export function generateMetadata(): Metadata {
   return {
     title: 'Blogs',
     description: 'My Blogs',
