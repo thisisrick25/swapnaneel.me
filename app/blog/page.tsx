@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { formatDate } from '@/lib/formatDate';
 import ViewCounter from '@/components/viewCounter';
 import { Metadata } from 'next'
+import { getBlogs } from '@/utils/getBlogs';
 
 export function generateMetadata(): Metadata {
   return {
@@ -13,13 +14,7 @@ export function generateMetadata(): Metadata {
 
 export default function BlogPage() {
   console.log(allBlogs)
-  const blogs = allBlogs
-    .filter((blog) => blog.isPublished === true)
-    .sort((a, b) => {
-      if (new Date(a.publishedAt) > new Date(b.publishedAt))
-        return -1;
-      return 1;
-    })
+  const blogs = getBlogs()
 
   return (
     <div className=''>
