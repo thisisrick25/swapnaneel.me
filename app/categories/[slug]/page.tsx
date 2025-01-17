@@ -2,32 +2,32 @@ import { formatDate } from "@/lib/formatDate";
 import { allBlogs } from "content-collections";
 import { slug } from "github-slugger"
 import Link from "next/link";
+import { Metadata } from 'next'
+import { getAllTags, getBlogsByTag } from '@/utils/getBlogs'
+
+interface PageProps {
+  params: Promise<{ slug: string }>
+}
 
 export function generateStaticParams() {
-  const allTags: string[] = [];
-  allBlogs.forEach((blog) => {
-    if (blog.isPublished) {
-      blog.tags?.forEach((tag) => {
-        let slugified = slug(tag);
-        if (!allTags.includes(slugified)) {
-          allTags.push(slugified);
-        }
-      });
-    }
-  })
-  return allTags.map((tag) => ({
+  const tags = getAllTags();
+  return tags.map((tag) => ({
     slug: tag,
   }));
 }
 
-export default async function Page({ params }: { params: { slug: string } }) {
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug: categorySlug } = await params;
-  const blogs = allBlogs.filter((blog) => {
-    return blog.tags?.some((tag) => {
-      let slugified = slug(tag);
-      return slugified === categorySlug;
-    });
-  });
+  
+  return {
+    title: `#${categorySlug}`,
+    description: `Posts tagged with ${categorySlug}`,
+  }
+}
+
+export default async function Page({ params }: PageProps) {
+  const { slug: categorySlug } = await params;
+  const blogs = getBlogsByTag(categorySlug);
 
   return (
     <>
