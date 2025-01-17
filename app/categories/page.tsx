@@ -29,18 +29,16 @@ export default function Page() {
         all tags
       </div>
       <div>
-        {
-          allTags.map((tag, index) => {
-            return (
-              <>
-                <Link href={`/categories/${tag}`}>
-                  <span className="hover:underline">{`#${tag}`}</span>
-                </Link>
-                {index !== allTags.length - 1 && ", "} {/* Add a comma after each tag except the last one */}
-              </>
-            )
-          })
-        }
+        {allTags.map((tag, index) => (
+          <Link 
+            key={`${tag}-${index}`}
+            href={`/categories/${tag}`}
+            className="hover:underline"
+          >
+            {`#${tag}`}
+            {index !== allTags.length - 1 && ", "}
+          </Link>
+        ))}
       </div>
     </div>
   )
