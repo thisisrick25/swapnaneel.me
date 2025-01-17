@@ -11,13 +11,13 @@ export function generateMetadata(): Metadata {
 }
 
 export default function Page() {
-  const allTags: string[] = [];
+  const allCategories: string[] = [];
   allBlogs.forEach((blog) => {
     if (blog.isPublished) {
       blog.tags?.forEach((tag) => {
         let slugified = slug(tag);
-        if (!allTags.includes(slugified)) {
-          allTags.push(slugified);
+        if (!allCategories.includes(slugified)) {
+          allCategories.push(slugified);
         }
       });
     }
@@ -26,17 +26,17 @@ export default function Page() {
   return (
     <div>
       <div className='mb-8 space-y-3 text-2xl font-bold'>
-        all tags
+        all categories
       </div>
       <div>
-        {allTags.map((tag, index) => (
+        {allCategories.map((category, index) => (
           <Link 
-            key={`${tag}-${index}`}
-            href={`/categories/${tag}`}
+            key={`${category}-${index}`}
+            href={`/categories/${category}`}
             className="hover:underline"
           >
-            {`#${tag}`}
-            {index !== allTags.length - 1 && ", "}
+            {`#${category}`}
+            {index !== allCategories.length - 1 && ", "}
           </Link>
         ))}
       </div>
