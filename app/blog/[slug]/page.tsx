@@ -6,6 +6,7 @@ import Tag from '@/components/tag';
 import ViewCounter from '@/components/viewCounter';
 import { extractHeadings } from '@/utils/extractHeadings';
 import { getBlogBySlug } from '@/utils/getBlogBySlug';
+import { Metadata } from 'next'
 
 export function generateStaticParams() {
   return allBlogs
@@ -15,7 +16,7 @@ export function generateStaticParams() {
     }))
 }
 
-export async function generateMetadata({ params }: { params: { slug: string } }) {
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
   const { slug } = await params
   const blog = getBlogBySlug(allBlogs, slug)
   if (!blog) notFound()
