@@ -5,7 +5,7 @@ import TableOfContents from '@/components/tableOfContents';
 import Tag from '@/components/tag';
 import ViewCounter from '@/components/viewCounter';
 import { extractHeadings } from '@/utils/extractHeadings';
-import { getBlogBySlug } from '@/utils/getBlogs';
+import { getBlogs, getBlogBySlug } from '@/utils/getBlogs';
 import { Metadata } from 'next'
 
 interface PageProps {
@@ -13,11 +13,9 @@ interface PageProps {
 }
 
 export function generateStaticParams() {
-  return allBlogs
-    .filter((p) => p.isPublished)
-    .map((p) => ({
-      slug: p.slug,
-    }))
+  return getBlogs().map((blog) => ({
+    slug: blog.slug,
+  }))
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
