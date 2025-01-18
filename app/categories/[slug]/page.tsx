@@ -1,6 +1,4 @@
 import { formatDate } from "@/lib/formatDate";
-import { allBlogs } from "content-collections";
-import { slug } from "github-slugger"
 import Link from "next/link";
 import { Metadata } from 'next'
 import { getAllTags, getBlogsByTag } from '@/utils/getBlogs'
