@@ -1,5 +1,6 @@
 import { formatDate } from "@/lib/formatDate";
-import Link from "next/link";
+// import Link from "next/link";
+import { Link } from 'next-view-transitions'
 import { Metadata } from 'next'
 import { getAllTags, getBlogsByTag } from '@/utils/getBlogs'
 
