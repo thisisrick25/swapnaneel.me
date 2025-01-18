@@ -2,6 +2,7 @@ import { formatDate } from "@/lib/formatDate";
 // import Link from "next/link";
 import { Link } from 'next-view-transitions'
 import { Metadata } from 'next'
+import ViewCounter from '@/components/viewCounter';
 import { getAllTags, getBlogsByTag } from '@/utils/getBlogs'
 
 interface PageProps {
@@ -46,7 +47,7 @@ export default async function Page({ params }: PageProps) {
               </div>
               <div className='grid grid-cols-2 text-base text-neutral-600 dark:text-neutral-400'>
                 <div>{formatDate(blog.publishedAt)}</div>
-                <div className=''>views</div>
+                <ViewCounter slug={blog?.slug} />
               </div>
             </div>
           </Link>
