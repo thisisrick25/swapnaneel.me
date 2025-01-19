@@ -1,11 +1,5 @@
 import { defineCollection, defineConfig } from "@content-collections/core";
-// import remarkGfm from "remark-gfm";
-// import rehypePrettyCode from 'rehype-pretty-code';
-// import rehypeSlug from 'rehype-slug';
-// import rehypeAutolinkHeadings from 'rehype-autolink-headings';
-import githubSlugger from "github-slugger";
-// import { rehypePrettyCodeOptions, rehypeAutolinkHeadingsOptions } from './lib/rehypeOptions'
-// import { is } from "date-fns/locale";
+import {slug} from "github-slugger";
 
 const Blog = defineCollection({
   name: "Blog",
@@ -20,26 +14,13 @@ const Blog = defineCollection({
     tags: z.array(z.string()),
   }),
   transform: (blog) => {
-    const slugger = new githubSlugger();
     return {
       ...blog,
-      slug: slugger.slug(blog.title),
+      slug: slug(blog.title),
     };
   },
 });
  
 export default defineConfig({
   collections: [Blog],
-  // mdx: {
-  //   esbuildOptions(options) {
-  //     options.target = "esnext";
-  //     return options;
-  //   },
-  //   remarkPlugins: [remarkGfm],
-  //   rehypePlugins: [
-  //     [rehypeSlug],
-  //     [rehypeAutolinkHeadings, rehypeAutolinkHeadingsOptions],
-  //     [rehypePrettyCode, rehypePrettyCodeOptions],
-  //   ],
-  // },
 });
