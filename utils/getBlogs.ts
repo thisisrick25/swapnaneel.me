@@ -22,9 +22,8 @@ export function getBlogsByTag(tag: string): Blog[] {
 }
 
 // Get a single blog by slug
-export function getBlogBySlug(blogs: Blog[], slug: string): Blog | undefined {
-  const blog = blogs.find((blog) => blog.slug === slug)
-  return blog
+export function getBlogBySlug(slug: string): Blog | undefined {
+  return getBlogs().find((blog) => blog.slug === slug)
 }
 
 // Get all unique tags from published blogs
