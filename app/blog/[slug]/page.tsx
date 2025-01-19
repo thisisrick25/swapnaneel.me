@@ -1,4 +1,3 @@
-import { allBlogs } from 'content-collections'
 import { formatDate } from "@/lib/formatDate";
 import { notFound } from 'next/navigation';
 import TableOfContents from '@/components/tableOfContents';
@@ -20,7 +19,7 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params
-  const blog = getBlogBySlug(allBlogs, slug)
+  const blog = getBlogBySlug(slug)
   if (!blog) notFound()
 
   return {
@@ -31,7 +30,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function BlogPage({ params }: PageProps) {
   const { slug } = await params
-  const blog = getBlogBySlug(allBlogs, slug)
+  const blog = getBlogBySlug(slug)
   if (!blog) notFound()
   
   const headings = extractHeadings(blog.content)
