@@ -1,5 +1,6 @@
-import { defineCollection, defineConfig } from "@content-collections/core";
-import {slug} from "github-slugger";
+import { createDefaultImport, defineCollection, defineConfig, } from "@content-collections/core";
+import { MDXContent } from "mdx/types";
+import { compileMDX } from "@content-collections/mdx";
 
 const Blog = defineCollection({
   name: "Blog",
@@ -13,14 +14,20 @@ const Blog = defineCollection({
     isPublished: z.boolean(),
     tags: z.array(z.string()),
   }),
-  transform: (blog) => {
+  transform: async (doc, blog) => {
+    // const mdxContent = createDefaultImport<MDXContent>(`@/content/posts/${_meta.filePath}`);
+    const mdx = await compileMDX(blog, doc);
     return {
-      ...blog,
-      slug: slug(blog.title),
+      // ...blog,
+      // mdxContent,
+      // content,
+      slug: doc._meta.path,
+      ...doc,
+      mdx,
     };
   },
 });
- 
+
 export default defineConfig({
   collections: [Blog],
 });
