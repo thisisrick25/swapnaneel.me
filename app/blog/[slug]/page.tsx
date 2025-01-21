@@ -6,6 +6,7 @@ import ViewCounter from '@/components/viewCounter';
 import { extractHeadings } from '@/utils/extractHeadings';
 import { getBlogs, getBlogBySlug } from '@/utils/getBlogs';
 import { Metadata } from 'next'
+import { MDXContent } from "@content-collections/mdx/react";
 
 interface PageProps {
   params: Promise<{ slug: string }>
@@ -34,6 +35,7 @@ export default async function BlogPage({ params }: PageProps) {
   if (!blog) notFound()
   
   const headings = extractHeadings(blog.content)
+  const mdx = blog.mdx;
   
   return (
     <article>
@@ -46,7 +48,7 @@ export default async function BlogPage({ params }: PageProps) {
         <Tag blog={blog} />
         <TableOfContents headings={headings} />
         <div className="max-w-max prose prose-neutral dark:prose-invert">
-          {blog.content}
+          <MDXContent code={mdx} />
         </div>
       </div>
     </article>
