@@ -36,6 +36,7 @@ export default async function BlogPage({ params }: PageProps) {
   
   const headings = extractHeadings(blog.content)
   const mdx = blog.mdx;
+  // const MDXContent = blog.mdxContent
   
   return (
     <article>
@@ -47,8 +48,9 @@ export default async function BlogPage({ params }: PageProps) {
         </div>
         <Tag blog={blog} />
         <TableOfContents headings={headings} />
-        <div className="max-w-max prose prose-neutral dark:prose-invert">
+        <div className="max-w-max prose dark:prose-invert">
           <MDXContent code={mdx} />
+          {/* <MDXContent /> */}
         </div>
       </div>
     </article>
