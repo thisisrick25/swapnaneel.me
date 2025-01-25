@@ -2,6 +2,7 @@ export const rehypeAutolinkHeadingsOptions = {
   properties: {
     className: ["anchor"],
   },
+  behavior: 'prepend', 
 }
 
 export const rehypePrettyCodeOptions = {
