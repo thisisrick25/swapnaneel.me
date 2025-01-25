@@ -108,6 +108,4 @@ code[data-line-numbers] > [data-line]::before {
 
 [data-rehype-pretty-code-caption]{
   @apply text-center text-[#747474];
-  /* text-align: center;
-  color: #747474; */
 }
