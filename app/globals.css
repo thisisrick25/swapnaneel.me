@@ -84,11 +84,6 @@ code[data-line-numbers] > [data-line]::before {
 [data-highlighted-line] {
   @apply bg-[#ffffff1a] !important;
   @apply pl-0 pr-1 p-0.5 rounded-sm border-l-2 border-l-[#7B00D3] border-solid;
-  /* padding: 2px;
-  padding-left: 0;
-  padding-right: 4px;
-  border-radius: 2px;
-  border-left: 2px solid #7B00D3; */
 }
 
 [data-highlighted-chars] {
