@@ -99,7 +99,7 @@ code[data-line-numbers] > [data-line]::before {
 }
 
 [data-rehype-pretty-code-title] {
-  @apply px-4 py-3 font-mono text-xs font-medium border rounded-t-lg text-neutral-200 border-[#333333] bg-[#1c1c1c];
+  @apply px-4 py-3 font-mono text-xs font-medium border border-neutral-100 dark:border-neutral-800 rounded-t-lg text-neutral-200 bg-[#1c1c1c];
   /* padding-top: 0.75rem;
   padding-bottom: 0.75rem;
   padding-left: 1rem;
