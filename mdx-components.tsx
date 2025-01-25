@@ -99,9 +99,9 @@ const defaultComponents = {
   ),
 };
 
-declare global {
-  type MDXProvidedComponents = typeof defaultComponents;
-}
+// declare global {
+//   type MDXProvidedComponents = typeof defaultComponents;
+// }
 
 // export function useMDXComponents(): MDXProvidedComponents {
 //   return components;
@@ -109,7 +109,7 @@ declare global {
  
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
-    ...defaultComponents,
-    ...components,
+    // ...defaultComponents,
+    // ...components,
   }
 }
