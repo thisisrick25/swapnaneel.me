@@ -104,10 +104,6 @@ code[data-line-numbers] > [data-line]::before {
 
 [data-rehype-pretty-code-title] + pre {
   @apply my-0 rounded-t-none border-t-0;
-  /* margin-top: 0;
-  margin-bottom: 0;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0; */
 }
 
 [data-rehype-pretty-code-caption]{
