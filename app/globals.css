@@ -89,8 +89,6 @@ code[data-line-numbers] > [data-line]::before {
 [data-highlighted-chars] {
   @apply bg-[#ffffff1a] !important;
   @apply p-0.5 rounded-sm;
-  /* padding: 2px;
-  border-radius: 2px; */
 }
 
 [data-rehype-pretty-code-title] {
