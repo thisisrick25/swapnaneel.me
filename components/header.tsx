@@ -4,7 +4,7 @@ import ThemeSwitch from "./themeSwitch"
 
 export default function Header() {
   return (
-    <header className='w-1/4 h-full fixed z-20 right-0 top-0 flex flex-col justify-center py-3'>
+    <header className='w-1/4 h-full fixed z-20 right-0 top-0 flex flex-col justify-center '>
 
         <nav className="flex flex-col space-y-4">
           {
