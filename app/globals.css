@@ -63,6 +63,11 @@ code {
   @apply text-white! px-1 py-0.5;
 }
 
+code[data-line-numbers] {
+  counter-reset: line;
+  @apply text-white! px-1 py-0.5;
+}
+
 code > [data-line]::before {
   counter-increment: line;
   content: counter(line);
