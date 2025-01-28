@@ -8,7 +8,7 @@ export default function Navbar() {
   // const pathname = usePathname()
 
   return (
-    <nav className="grid grid-cols-5 justify-items-center">
+    <nav className="flex flex-col space-y-4">
       {
         HEADER_LINKS.map((link) => (
           <Link
