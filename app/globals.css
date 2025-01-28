@@ -1,6 +1,26 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+@plugin '@tailwindcss/typography';
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+}
 
 html {
   overflow-y: scroll;
@@ -49,7 +69,7 @@ table {
 }
 
 pre, code {
-  @apply !bg-neutral-800 border border-neutral-100 dark:border-neutral-800 rounded-lg;
+  @apply bg-neutral-800! border border-neutral-100 dark:border-neutral-800 rounded-lg;
 }
 
 pre {
@@ -58,7 +78,7 @@ pre {
 
 code {
   counter-reset: line;
-  @apply !text-white px-1 py-0.5;
+  @apply text-white! px-1 py-0.5;
 }
 
 code > [data-line]::before {
@@ -82,13 +102,13 @@ code[data-line-numbers] > [data-line]::before {
 }
 
 [data-highlighted-line] {
-  @apply bg-[#ffffff1a] !important;
-  @apply pl-0 pr-1 p-0.5 rounded-sm border-l-2 border-l-[#7B00D3] border-solid;
+  @apply bg-[#ffffff1a]!;
+  @apply pl-0 pr-1 p-0.5 rounded-xs border-l-2 border-l-[#7B00D3] border-solid;
 }
 
 [data-highlighted-chars] {
-  @apply bg-[#ffffff1a] !important;
-  @apply p-0.5 rounded-sm;
+  @apply bg-[#ffffff1a]!;
+  @apply p-0.5 rounded-xs;
 }
 
 [data-rehype-pretty-code-title] {

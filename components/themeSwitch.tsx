@@ -27,7 +27,7 @@ export default function ThemeSwitch() {
       // checked={enabled}
       checked={isDark}
       onChange={handleThemeChange}
-      className="bg-gray-300 dark:bg-neutral-700 relative inline-flex shrink-0 h-6 w-12 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
+      className="bg-gray-300 dark:bg-neutral-700 relative inline-flex shrink-0 h-6 w-12 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
     >
       <span className="sr-only">Dark Mode</span>
       <svg
