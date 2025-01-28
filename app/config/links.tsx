@@ -4,20 +4,11 @@ type HeaderLinks = {
 }[]
 
 export const HEADER_LINKS: HeaderLinks = [
-  {
-    href: '/blog',
-    text: 'Blog',
-  },
-  {
-    href: '/projects',
-    text: 'Projects',
-  },
-  {
-    href: '/about',
-    text: 'About',
-  },
-  {
-    href: '/demo',
-    text: 'Demo',
-  },
+  { href: '/blog', text: 'Blog' },
+  { href: '/projects', text: 'Projects' },
+  { href: '/commonplace-book', text: 'Commonplace Book' },
+  { href: '/reading-list', text: 'Reading List' },
+  { href: '/ideas', text: 'Ideas' },
+  { href: '/bucket-list', text: 'Bucket List' },
+  { href: '/courses', text: 'Courses' },
 ]
