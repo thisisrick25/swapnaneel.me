@@ -2,7 +2,7 @@ import type { MDXComponents } from 'mdx/types'
 
 import React, { ComponentPropsWithoutRef } from 'react';
 import { Link } from 'next-view-transitions';
-import { highlight } from 'sugar-high';
+// import { highlight } from 'sugar-high';
 
 type HeadingProps = ComponentPropsWithoutRef<'h1'>;
 type ParagraphProps = ComponentPropsWithoutRef<'p'>;
@@ -67,10 +67,10 @@ const defaultComponents = {
       </a>
     );
   },
-  code: ({ children, ...props }: ComponentPropsWithoutRef<'code'>) => {
-    const codeHTML = highlight(children as string);
-    return <code dangerouslySetInnerHTML={{ __html: codeHTML }} {...props} />;
-  },
+  // code: ({ children, ...props }: ComponentPropsWithoutRef<'code'>) => {
+  //   const codeHTML = highlight(children as string);
+  //   return <code dangerouslySetInnerHTML={{ __html: codeHTML }} {...props} />;
+  // },
   Table: ({ data }: { data: { headers: string[]; rows: string[][] } }) => (
     <table>
       <thead>
