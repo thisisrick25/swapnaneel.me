@@ -1,4 +1,5 @@
-import Link from "next/link"
+// import Link from "next/link"
+import { Link } from "next-view-transitions"
 import { HEADER_LINKS } from '@/config/links'
 import ThemeSwitch from "./themeSwitch"
 
