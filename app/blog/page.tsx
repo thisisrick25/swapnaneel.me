@@ -19,8 +19,8 @@ export default function BlogPage() {
 
   return (
     <div className=''>
-      <div className='mb-8 space-y-3'>
-        <div className='text-2xl font-bold'>
+      <div className='mb-4 space-y-3'>
+        <div className='text-xl font-bold'>
           all blogs
         </div>
         {/* <div className='relative max-w-sm'>
