@@ -71,7 +71,9 @@ export default function RootLayout({
       <body className='bg-white text-black dark:bg-black dark:text-white text-xs sm:text-xs md:text-sm lg:text-base xl:text-lg 2xl:text-xl selection:bg-yellow-500 selection:text-white dark:selection:text-black sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl mx-auto px-4 sm:px-6 xl:px-0 gap-10 sm:gap-14' suppressHydrationWarning>
         <ThemeProvider>
           <Header />
-          {children}
+            <div className='pt-30'>
+              {children}
+            </div>
           <SpeedInsights />
           <Analytics />
         </ThemeProvider>
