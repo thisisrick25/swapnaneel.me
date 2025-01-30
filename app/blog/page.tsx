@@ -20,8 +20,8 @@ export default function BlogPage() {
   return (
     <div className=''>
       <div className='mb-4 space-y-3'>
-        <div className='text-xl font-bold'>
-          all blogs
+        <div className='font-bold'>
+          writings
         </div>
         {/* <div className='relative max-w-sm'>
           <input type="text" placeholder='search...' className='block w-full p-1 text-black dark:text-white bg-gray-300 dark:bg-neutral-700 border rounded-md border-gray-300 dark:border-neutral-700 focus:outline-hidden focus:border-yellow-500 focus:ring-3 focus:ring-yellow-500' />
