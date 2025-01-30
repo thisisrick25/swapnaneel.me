@@ -38,7 +38,7 @@ export default function BlogPage() {
                 </div>
                 <div className=' grid grid-cols-2 text-base text-neutral-600 dark:text-neutral-400'>
                   <div>{formatDate(blog?.publishedAt)}</div>
-                  <ViewCounter slug={blog?.slug} />
+                  <ViewCounter slug={blog?.slug} trackView={false}/>
                 </div>
               </div>
             </Link>
