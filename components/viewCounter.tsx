@@ -1,5 +1,5 @@
-import { increment } from 'db/actions';
-import { getViewsCount } from 'db/queries';
+import { increment } from '@/db/actions';
+import { getViewsCount } from '@/db/queries';
 import { cache } from 'react';
 
 interface ViewCounterProps {
