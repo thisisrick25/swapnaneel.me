@@ -21,7 +21,7 @@ export default function BlogPage() {
     <div className=''>
       <div className='mb-4 space-y-3'>
         <div className='font-bold'>
-          writings
+          Blogs
         </div>
       </div>
       <div>
