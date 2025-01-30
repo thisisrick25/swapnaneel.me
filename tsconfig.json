@@ -26,6 +26,7 @@
       "@/content/*": ["content/*"],
       "@/lib/*": ["lib/*"],
       "@/utils/*": ["utils/*"],
+      "@/db/*": ["db/*"],
       "content-collections": ["./.content-collections/generated"],
     }
   },
