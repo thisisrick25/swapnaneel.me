@@ -23,9 +23,6 @@ export default function BlogPage() {
         <div className='font-bold'>
           writings
         </div>
-        {/* <div className='relative max-w-sm'>
-          <input type="text" placeholder='search...' className='block w-full p-1 text-black dark:text-white bg-gray-300 dark:bg-neutral-700 border rounded-md border-gray-300 dark:border-neutral-700 focus:outline-hidden focus:border-yellow-500 focus:ring-3 focus:ring-yellow-500' />
-        </div> */}
       </div>
       <div>
         {blogs
@@ -41,7 +38,6 @@ export default function BlogPage() {
                 </div>
                 <div className=' grid grid-cols-2 text-base text-neutral-600 dark:text-neutral-400'>
                   <div>{formatDate(blog?.publishedAt)}</div>
-                  {/* <div className="font-bold px-1">&middot;</div> */}
                   <ViewCounter slug={blog?.slug} />
                 </div>
               </div>
