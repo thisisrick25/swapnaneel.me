@@ -1,4 +1,4 @@
-import { prisma } from 'lib/prisma';
+import { prisma } from '@/lib/prisma';
 import { unstable_noStore as noStore } from 'next/cache';
 
 export async function increment(slug: string) {
