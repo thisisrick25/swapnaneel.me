@@ -1,6 +1,5 @@
 import { allBlogs } from 'content-collections'
 import { compareDesc } from 'date-fns'
-import type { Blog } from 'content-collections'
 import { slug as slugify } from 'github-slugger'
 
 export interface BlogData {
