@@ -40,16 +40,15 @@ export default async function BlogPage({ params }: PageProps) {
   return (
     <article>
       <div>
-        <p className='text-2xl font-bold'>{blog.title}</p>
+        <p className='text-2xl font-bold'>{blog.data.title}</p>
         <div className='grid grid-cols-2 mb-4 text-lg text-neutral-600 dark:text-neutral-400'>
-          <p>{formatDate(blog.publishedAt)}</p>
+          <p>{formatDate(blog.data.publishedAt)}</p>
           <ViewCounter slug={blog.slug} />
         </div>
-        <Tag blog={blog} />
+        <Tag blog={blog.data} />
         <TableOfContents headings={headings} />
         <div className="max-w-max prose dark:prose-invert">
-          <MDXContent code={mdx} />
-          {/* <MDXContent /> */}
+          <MDXContent />
         </div>
       </div>
     </article>
