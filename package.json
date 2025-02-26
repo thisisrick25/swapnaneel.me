@@ -48,10 +48,6 @@
     "typescript": "5.7.3"
   },
   "devDependencies": {
-    "@content-collections/cli": "^0.1.6",
-    "@content-collections/core": "^0.8.0",
-    "@content-collections/mdx": "^0.2.0",
-    "@content-collections/next": "^0.2.4",
     "@tailwindcss/typography": "^0.5.16",
     "dotenv-cli": "^8.0.0",
     "prisma": "^6.3.0"
