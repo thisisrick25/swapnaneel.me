@@ -35,8 +35,7 @@ export default async function BlogPage({ params }: PageProps) {
   if (!blog) notFound()
   
   const headings = extractHeadings(blog.content)
-  const mdx = blog.mdx;
-  // const MDXContent = blog.mdxContent
+  const { default: MDXContent } = await import(`@/content/posts/${slug}.mdx`)
   
   return (
     <article>
