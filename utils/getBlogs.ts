@@ -64,10 +64,11 @@ export function getBlogBySlug(slug: string): Blog | undefined {
 
 // Get all unique tags from published blogs
 export function getAllTags(): string[] {
+  const allBlogs = getBlogs()
   const tags: string[] = []
   allBlogs.forEach((blog) => {
-    if (blog.isPublished) {
-      blog.tags?.forEach((tag) => {
+    if (blog.data.isPublished) {
+      blog.data.tags?.forEach((tag) => {
         const slugified = slugify(tag)
         if (!tags.includes(slugified)) {
           tags.push(slugified)
