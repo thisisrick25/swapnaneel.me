@@ -1,4 +1,3 @@
-import { withContentCollections } from "@content-collections/next";
 import createMDX from "@next/mdx";
 import remarkFrontmatter from 'remark-frontmatter'
 import remarkMdxFrontmatter from 'remark-mdx-frontmatter'
@@ -17,5 +16,4 @@ const withMDX = createMDX({
 });
 
 
-// withContentCollections must be the outermost plugin
-export default withContentCollections(withMDX(nextConfig));
+export default withMDX(nextConfig);
