@@ -53,7 +53,7 @@ export function getBlogs(): Blog[] {
 // Get blogs by tag/category
 export function getBlogsByTag(tag: string): Blog[] {
   return getBlogs().filter((blog) => 
-    blog.tags?.some((t) => slugify(t) === tag)
+    blog.data.tags?.some((t) => slugify(t) === tag)
   )
 }
 
