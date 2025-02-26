@@ -6,7 +6,6 @@ import ViewCounter from '@/components/viewCounter';
 import { extractHeadings } from '@/utils/extractHeadings';
 import { getBlogs, getBlogBySlug } from '@/utils/getBlogs';
 import { Metadata } from 'next'
-import { MDXContent } from "@content-collections/mdx/react";
 
 interface PageProps {
   params: Promise<{ slug: string }>
