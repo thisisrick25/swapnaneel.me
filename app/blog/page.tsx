@@ -1,4 +1,3 @@
-import { allBlogs } from 'content-collections'
 // import Link from 'next/link';
 import { Link } from 'next-view-transitions'
 import { formatDate } from '@/lib/formatDate';
