@@ -1,4 +1,5 @@
 import createMDX from "@next/mdx";
+import type { NextConfig } from 'next'
 import remarkFrontmatter from 'remark-frontmatter'
 import remarkMdxFrontmatter from 'remark-mdx-frontmatter'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
@@ -6,8 +7,7 @@ import remarkGfm from 'remark-gfm'
 import rehypeSlug from 'rehype-slug'
 import { rehypeAutolinkHeadingsOptions, rehypePrettyCodeOptions } from '@/lib/rehypeOptions'
 
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+const nextConfig: NextConfig = {
   reactStrictMode: true,
   pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
 }
