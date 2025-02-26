@@ -1,4 +1,3 @@
-import { allBlogs } from 'content-collections'
 import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
@@ -41,13 +40,14 @@ function getAllBlogs(): Blog[] {
 
 // Get all blogs, showing drafts only in development
 export function getBlogs(): Blog[] {
-  const blogs = allBlogs.sort((a, b) => 
-    compareDesc(new Date(a.publishedAt), new Date(b.publishedAt))
+  const allBlogs = getAllBlogs()
+    const blogs = allBlogs.sort((a, b) => 
+    compareDesc(new Date(a.data.publishedAt), new Date(b.data.publishedAt))
   )
   if (process.env.NODE_ENV === "development") {
     return blogs  // Show all blogs, including drafts
   }
-  return blogs.filter((blog) => blog.isPublished)  // Only published blogs in production
+  return blogs.filter((blog) => blog.data.isPublished)  // Only published blogs in production
 }
 
 // Get blogs by tag/category
