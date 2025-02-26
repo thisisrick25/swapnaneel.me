@@ -3,6 +3,21 @@ import { compareDesc } from 'date-fns'
 import type { Blog } from 'content-collections'
 import { slug as slugify } from 'github-slugger'
 
+export interface BlogData {
+  title: string
+  description: string
+  publishedAt: string
+  updatedAt?: string
+  isPublished: boolean
+  tags: string[]
+}
+
+export interface Blog {
+  data: BlogData
+  slug: string
+  content: string
+}
+
 // Get all blogs, showing drafts only in development
 export function getBlogs(): Blog[] {
   const blogs = allBlogs.sort((a, b) => 
