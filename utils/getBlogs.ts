@@ -1,4 +1,7 @@
 import { allBlogs } from 'content-collections'
+import fs from 'fs'
+import path from 'path'
+import matter from 'gray-matter'
 import { compareDesc } from 'date-fns'
 import { slug as slugify } from 'github-slugger'
 
@@ -15,6 +18,25 @@ export interface Blog {
   data: BlogData
   slug: string
   content: string
+}
+
+const postsDirectory = path.join(process.cwd(), 'content/posts')
+
+// Function to read and parse all blog files
+function getAllBlogs(): Blog[] {
+  const fileNames = fs.readdirSync(postsDirectory)
+  return fileNames.map((fileName) => {
+    const filePath = path.join(postsDirectory, fileName)
+    const fileContents = fs.readFileSync(filePath, 'utf8')
+    const { data, content } = matter(fileContents)
+    const slug = slugify(data.title)
+
+    return {
+      data,
+      slug,
+      content,
+    } as Blog
+  })
 }
 
 // Get all blogs, showing drafts only in development
