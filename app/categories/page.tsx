@@ -13,9 +13,10 @@ export function generateMetadata(): Metadata {
 
 export default function Page() {
   const allCategories: string[] = [];
+  const allBlogs = getBlogs()
   allBlogs.forEach((blog) => {
-    if (blog.isPublished) {
-      blog.tags?.forEach((tag) => {
+    if (blog.data.isPublished) {
+      blog.data.tags?.forEach((tag) => {
         let slugified = slug(tag);
         if (!allCategories.includes(slugified)) {
           allCategories.push(slugified);
