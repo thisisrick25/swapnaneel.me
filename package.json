@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "concurrently \"content-collections watch\" \"next dev\"",
+    "dev": "next dev",
     "build": "content-collections build && npx prisma generate && next build",
     "start": "next start",
     "lint": "next lint",
@@ -55,7 +55,6 @@
     "@content-collections/mdx": "^0.2.0",
     "@content-collections/next": "^0.2.4",
     "@tailwindcss/typography": "^0.5.16",
-    "concurrently": "^9.1.2",
     "dotenv-cli": "^8.0.0",
     "prisma": "^6.3.0"
   }
