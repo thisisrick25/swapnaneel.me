@@ -4,7 +4,6 @@ import remarkMdxFrontmatter from 'remark-mdx-frontmatter'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 import remarkGfm from 'remark-gfm'
 import rehypeSlug from 'rehype-slug'
-import rehypePrettyCode from "rehype-pretty-code";
 import { rehypeAutolinkHeadingsOptions, rehypePrettyCodeOptions } from '@/lib/rehypeOptions'
 
 /** @type {import('next').NextConfig} */
