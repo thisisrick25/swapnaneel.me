@@ -43,10 +43,10 @@ export default async function Page({ params }: PageProps) {
           >
             <div className="w-full">
               <div>
-                {blog.title}
+                {blog.data.title}
               </div>
               <div className='grid grid-cols-2 text-base text-neutral-600 dark:text-neutral-400'>
-                <div>{formatDate(blog.publishedAt)}</div>
+                <div>{formatDate(blog.data.publishedAt)}</div>
                 <ViewCounter slug={blog?.slug} />
               </div>
             </div>

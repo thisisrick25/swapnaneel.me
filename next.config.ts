@@ -1,21 +1,23 @@
-import { withContentCollections } from "@content-collections/next";
 import createMDX from "@next/mdx";
+import type { NextConfig } from 'next'
 import remarkFrontmatter from 'remark-frontmatter'
 import remarkMdxFrontmatter from 'remark-mdx-frontmatter'
+import rehypeAutolinkHeadings from 'rehype-autolink-headings'
+import remarkGfm from 'remark-gfm'
+import rehypeSlug from 'rehype-slug'
+import { rehypeAutolinkHeadingsOptions, rehypePrettyCodeOptions } from '@/lib/rehypeOptions'
 
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+const nextConfig: NextConfig = {
   reactStrictMode: true,
   pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
 }
 
 const withMDX = createMDX({
   options: {
-    // remarkPlugins: [remarkFrontmatter,remarkMdxFrontmatter],
-    rehypePlugins: [],
+    remarkPlugins: [remarkGfm, remarkFrontmatter, remarkMdxFrontmatter],
+    rehypePlugins: [rehypeSlug, [rehypeAutolinkHeadings, rehypeAutolinkHeadingsOptions]],
   },
 });
 
 
-// withContentCollections must be the outermost plugin
-export default withContentCollections(withMDX(nextConfig));
+export default withMDX(nextConfig);

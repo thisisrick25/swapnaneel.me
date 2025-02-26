@@ -6,7 +6,6 @@ import ViewCounter from '@/components/viewCounter';
 import { extractHeadings } from '@/utils/extractHeadings';
 import { getBlogs, getBlogBySlug } from '@/utils/getBlogs';
 import { Metadata } from 'next'
-import { MDXContent } from "@content-collections/mdx/react";
 
 interface PageProps {
   params: Promise<{ slug: string }>
@@ -24,8 +23,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   if (!blog) notFound()
 
   return {
-    title: blog.title,
-    description: blog.description,
+    title: blog.data.title,
+    description: blog.data.description,
   }
 }
 
@@ -35,22 +34,20 @@ export default async function BlogPage({ params }: PageProps) {
   if (!blog) notFound()
   
   const headings = extractHeadings(blog.content)
-  const mdx = blog.mdx;
-  // const MDXContent = blog.mdxContent
+  const { default: MDXContent } = await import(`@/content/posts/${slug}.mdx`)
   
   return (
     <article>
       <div>
-        <p className='text-2xl font-bold'>{blog.title}</p>
+        <p className='text-2xl font-bold'>{blog.data.title}</p>
         <div className='grid grid-cols-2 mb-4 text-lg text-neutral-600 dark:text-neutral-400'>
-          <p>{formatDate(blog.publishedAt)}</p>
+          <p>{formatDate(blog.data.publishedAt)}</p>
           <ViewCounter slug={blog.slug} />
         </div>
-        <Tag blog={blog} />
+        <Tag blog={blog.data} />
         <TableOfContents headings={headings} />
         <div className="max-w-max prose dark:prose-invert">
-          <MDXContent code={mdx} />
-          {/* <MDXContent /> */}
+          <MDXContent />
         </div>
       </div>
     </article>

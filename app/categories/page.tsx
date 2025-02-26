@@ -1,8 +1,8 @@
-import { allBlogs } from "content-collections";
-import { slug } from "github-slugger"
 // import Link from "next/link";
+import { slug } from "github-slugger"
 import { Link } from 'next-view-transitions'
 import { Metadata } from 'next'
+import { getBlogs } from '@/utils/getBlogs';
 
 export function generateMetadata(): Metadata {
   return {
@@ -13,9 +13,10 @@ export function generateMetadata(): Metadata {
 
 export default function Page() {
   const allCategories: string[] = [];
+  const allBlogs = getBlogs()
   allBlogs.forEach((blog) => {
-    if (blog.isPublished) {
-      blog.tags?.forEach((tag) => {
+    if (blog.data.isPublished) {
+      blog.data.tags?.forEach((tag) => {
         let slugified = slug(tag);
         if (!allCategories.includes(slugified)) {
           allCategories.push(slugified);

@@ -1,4 +1,3 @@
-import { allBlogs } from 'content-collections'
 // import Link from 'next/link';
 import { Link } from 'next-view-transitions'
 import { formatDate } from '@/lib/formatDate';
@@ -14,8 +13,8 @@ export function generateMetadata(): Metadata {
 }
 
 export default function BlogPage() {
-  console.log(allBlogs)
   const blogs = getBlogs()
+  console.log(blogs)
 
   return (
     <div className=''>
@@ -34,10 +33,10 @@ export default function BlogPage() {
             >
               <div className="w-full">
                 <div>
-                  {blog.title}
+                  {blog.data.title}
                 </div>
                 <div className=' grid grid-cols-2 text-base text-neutral-600 dark:text-neutral-400'>
-                  <div>{formatDate(blog?.publishedAt)}</div>
+                  <div>{formatDate(blog?.data.publishedAt)}</div>
                   <ViewCounter slug={blog?.slug} trackView={false}/>
                 </div>
               </div>
