@@ -26,7 +26,9 @@ export default function Header() {
           return link.children ? (
             <div
               key={link.href}
-              className={`relative group px-4 py-2 rounded-md text-sm lg:text-base no-underline duration-300 ease-in ${isActive ? "text-zinc-100" : "text-zinc-400"}`}
+              className={`relative group px-2 py-2 rounded-md text-sm lg:text-base no-underline duration-300 ease-in ${
+                isActive ? "text-zinc-100 bg-stone-800" : "text-zinc-400"
+              } hover:text-zinc-100 hover:bg-stone-800`}
             >
               <span className="cursor-pointer">{link.text}</span>
               <div className="absolute left-0 mt-5 w-48 bg-stone-900 border border-stone-800 rounded shadow-lg z-50 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-opacity">
@@ -44,7 +46,9 @@ export default function Header() {
           ) : (
             <Link
               key={link.href}
-              className={`px-4 py-2 rounded-md text-sm lg:text-base relative no-underline duration-300 ease-in ${isActive ? "text-zinc-100" : "text-zinc-400"}`}
+              className={`px-2 py-2 rounded-md text-sm lg:text-base relative no-underline duration-300 ease-in ${
+                isActive ? "text-zinc-100" : "text-zinc-400"
+              } hover:text-zinc-100 hover:bg-stone-800`}
               href={link.href}
             >
               <span>{link.text}</span>
