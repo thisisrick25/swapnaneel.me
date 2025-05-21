@@ -7,7 +7,6 @@ import Header from '@/components/header'
 import { Analytics } from '@vercel/analytics/react';
 import { siteMetadata } from '@/utils/siteMetadata'
 import { SpeedInsights } from '@vercel/speed-insights/next';
-import { ViewTransitions } from 'next-view-transitions';
 
 const roboto = Roboto({
   weight: '400',
@@ -56,8 +55,6 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <ViewTransitions>
-    {/* suppressHydrationWarning */}
     <html lang="en" className={roboto.className} suppressHydrationWarning> 
       {/* <!-- Google tag (gtag.js) --> */}
       <Script async src="https://www.googletagmanager.com/gtag/js?id=G-HVS1V1YG5Z"></Script>
@@ -79,6 +76,5 @@ export default function RootLayout({
         </ThemeProvider>
       </body>
     </html>
-    </ViewTransitions>
   )
 }
