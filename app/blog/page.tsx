@@ -1,5 +1,4 @@
-// import Link from 'next/link';
-import { Link } from 'next-view-transitions'
+import Link from 'next/link';
 import { formatDate } from '@/lib/formatDate';
 import ViewCounter from '@/components/viewCounter';
 import { Metadata } from 'next'
