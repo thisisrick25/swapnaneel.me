@@ -28,7 +28,7 @@ export default function BlogPage() {
             <Link
               key={blog.slug}
               className="grid grid-cols-1 mb-4"
-              href={`/blog/${blog.slug}`}
+              href={`/posts/${blog.slug}`}
             >
               <div className="w-full">
                 <div>

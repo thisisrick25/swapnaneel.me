@@ -5,7 +5,7 @@ type HeaderLink = {
 }
 
 export const HEADER_LINKS: HeaderLink[] = [
-  { href: '/blog', text: 'Posts' },
+  { href: '/posts', text: 'Posts' },
   { href: '/projects', text: 'Projects' },
   { href: '/more', text: 'Stuffs',
     children: [
