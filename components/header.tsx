@@ -10,6 +10,11 @@ export default function Header() {
 
   return (
     <div className="border border-stone-800/90 p-[0.4rem] rounded-lg mb-12 sticky top-4 z-[100] bg-stone-900/80 backdrop-blur-md mx-auto flex justify-between items-center gap-4">
+      <Link href="/" className="flex items-center" aria-label="Home">
+        <span className="w-8 h-8 flex items-center justify-center aspect-square rounded-full bg-stone-800 text-zinc-100 font-bold text-xl leading-none select-none">
+          S
+        </span>
+      </Link>
       <nav className="flex gap-2 relative justify-start w-full z-[100] rounded-lg">
         {HEADER_LINKS.map((link) => {
           const normalize = (path: string) => path.replace(/\/+$/, "");
