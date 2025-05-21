@@ -12,26 +12,39 @@ export default function Header() {
     <div className="border border-stone-800/90 p-[0.4rem] rounded-lg mb-12 sticky top-4 z-[100] bg-stone-900/80 backdrop-blur-md mx-auto flex justify-between items-center gap-4">
       <nav className="flex gap-2 relative justify-start w-full z-[100] rounded-lg">
         {HEADER_LINKS.map((link) => {
-          // Remove trailing slash for comparison
           const normalize = (path: string) => path.replace(/\/+$/, "");
           const current = normalize(pathname);
           const href = normalize(link.href);
-
-          // Active if exact match or current path starts with href + "/"
           const isActive =
             current === href || current.startsWith(href + "/");
 
-          return (
+          return link.children ? (
+            <div
+              key={link.href}
+              className={`relative group px-4 py-2 rounded-md text-sm lg:text-base no-underline duration-300 ease-in ${isActive ? "text-zinc-100" : "text-zinc-400"}`}
+            >
+              <span className="cursor-pointer">{link.text}</span>
+              <div className="absolute left-0 mt-5 w-48 bg-stone-900 border border-stone-800 rounded shadow-lg z-50 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-opacity">
+                {link.children.map((child) => (
+                  <Link
+                    key={child.href}
+                    href={child.href}
+                    className="block px-4 py-2 text-zinc-400 hover:text-zinc-100 hover:bg-stone-800 rounded"
+                  >
+                    {child.text}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          ) : (
             <Link
               key={link.href}
-              className={`px-4 py-2 rounded-md text-sm lg:text-base relative no-underline duration-300 ease-in ${
-                isActive ? "text-zinc-100" : "text-zinc-400"
-              }`}
+              className={`px-4 py-2 rounded-md text-sm lg:text-base relative no-underline duration-300 ease-in ${isActive ? "text-zinc-100" : "text-zinc-400"}`}
               href={link.href}
             >
               <span>{link.text}</span>
             </Link>
-          );
+          )
         })}
       </nav>
       <ThemeSwitch />
