@@ -68,7 +68,7 @@ export default function RootLayout({
       <body className='bg-white text-black dark:bg-black dark:text-white text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl selection:bg-yellow-500 selection:text-white dark:selection:text-black sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl mx-auto px-4 sm:px-6 xl:px-0 gap-10 sm:gap-14' suppressHydrationWarning>
         <ThemeProvider>
           <Header />
-            <div className='pt-30'>
+            <div>
               {children}
             </div>
           <SpeedInsights />
