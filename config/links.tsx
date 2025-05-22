@@ -1,14 +1,19 @@
-type HeaderLinks = {
+type HeaderLink = {
   href: string
   text: string
-}[]
+  children?: HeaderLink[]
+}
 
-export const HEADER_LINKS: HeaderLinks = [
-  { href: '/blog', text: 'Blog' },
-  { href: '/projects', text: 'Projects' },
-  { href: '/commonplace-book', text: 'Commonplace Book' },
-  { href: '/reading-list', text: 'Reading List' },
-  { href: '/ideas', text: 'Ideas' },
-  { href: '/bucket-list', text: 'Bucket List' },
-  { href: '/courses', text: 'Courses' },
+export const HEADER_LINKS: HeaderLink[] = [
+  { href: '/posts', text: 'Posts' },
+  // { href: '/projects', text: 'Projects' },
+  // { href: '/more', text: 'Stuffs',
+  //   children: [
+  //     { href: '/more/commonplace-book', text: 'Commonplace Book' },
+  //     { href: '/more/reading-list', text: 'Reading List' },
+  //     { href: '/more/ideas', text: 'Ideas' },
+  //     { href: '/more/bucket-list', text: 'Bucket List' },
+  //     { href: '/more/courses', text: 'Courses' },
+  //   ]
+  // }
 ]

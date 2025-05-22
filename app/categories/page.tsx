@@ -1,6 +1,5 @@
-// import Link from "next/link";
+import Link from "next/link";
 import { slug } from "github-slugger"
-import { Link } from 'next-view-transitions'
 import { Metadata } from 'next'
 import { getBlogs } from '@/utils/getBlogs';
 

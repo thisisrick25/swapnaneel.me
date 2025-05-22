@@ -1,5 +1,4 @@
-// import Link from 'next/link';
-import { Link } from 'next-view-transitions'
+import Link from 'next/link';
 import { formatDate } from '@/lib/formatDate';
 import ViewCounter from '@/components/viewCounter';
 import { Metadata } from 'next'
@@ -29,7 +28,7 @@ export default function BlogPage() {
             <Link
               key={blog.slug}
               className="grid grid-cols-1 mb-4"
-              href={`/blog/${blog.slug}`}
+              href={`/posts/${blog.slug}`}
             >
               <div className="w-full">
                 <div>
