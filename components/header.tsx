@@ -28,10 +28,10 @@ export default function Header() {
               key={link.href}
               className={`relative group px-2 py-2 rounded-md text-sm lg:text-base no-underline duration-300 ease-in ${
                 isActive ? "text-zinc-100 bg-stone-800" : "text-zinc-400"
-              } hover:text-zinc-100 hover:bg-stone-800`}
+              } hover:text-zinc-100 hover:bg-stone-800 cursor-pointer`}
             >
-              <span className="cursor-pointer">{link.text}</span>
-              <div className="absolute left-0 mt-5 w-48 bg-stone-900 border border-stone-800 rounded shadow-lg z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 group-hover:delay-0 delay-200">
+              <span>{link.text}</span>
+              <div className="absolute left-0 mt-5 w-48 bg-stone-900 border border-stone-800 rounded shadow-lg z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 ease-in group-hover:delay-0 delay-200">
                 {link.children.map((child) => (
                   <Link
                     key={child.href}
