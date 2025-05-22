@@ -26,7 +26,7 @@ export default function Page() {
 
   return (
     <div>
-      <div className='mb-8 space-y-3 text-2xl font-bold'>
+      <div className='mb-8 space-y-3'>
         all categories
       </div>
       <div>
