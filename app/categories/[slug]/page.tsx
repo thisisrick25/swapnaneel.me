@@ -30,7 +30,7 @@ export default async function Page({ params }: PageProps) {
 
   return (
     <>
-      <div className='mb-8 space-y-3 text-2xl font-bold'>
+      <div className='mb-8 space-y-3'>
         {`#${categorySlug}`}
       </div>
       <div>
