@@ -39,8 +39,8 @@ export default async function BlogPage({ params }: PageProps) {
   return (
     <article>
       <div>
-        <p className='text-2xl font-bold'>{blog.data.title}</p>
-        <div className='grid grid-cols-2 mb-4 text-lg text-neutral-600 dark:text-neutral-400'>
+        <p className=''>{blog.data.title}</p>
+        <div className='grid grid-cols-2 mb-4 text-neutral-600 dark:text-neutral-400'>
           <p>{formatDate(blog.data.publishedAt)}</p>
           <ViewCounter slug={blog.slug} />
         </div>
