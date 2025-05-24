@@ -4,6 +4,7 @@ import { Roboto } from 'next/font/google'
 import './globals.css'
 import { ThemeProvider } from './theme-provider'
 import Header from '@/components/header'
+import Footer from '@/components/footer'
 import { Analytics } from '@vercel/analytics/react';
 import { siteMetadata } from '@/utils/siteMetadata'
 import { SpeedInsights } from '@vercel/speed-insights/next';
@@ -55,7 +56,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={roboto.className} suppressHydrationWarning> 
+    <html lang="en" className={roboto.className} suppressHydrationWarning>
       {/* <!-- Google tag (gtag.js) --> */}
       <Script async src="https://www.googletagmanager.com/gtag/js?id=G-HVS1V1YG5Z"></Script>
       <Script id="google-analytics" strategy="afterInteractive">
@@ -67,10 +68,11 @@ export default function RootLayout({
       </Script>
       <body className='bg-white text-black dark:bg-black dark:text-white  selection:bg-yellow-500 selection:text-white dark:selection:text-black sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl mx-auto px-4 sm:px-6 xl:px-0 gap-10 sm:gap-14' suppressHydrationWarning>
         <ThemeProvider>
-          <Header />
-            <div>
-              {children}
-            </div>
+          <div className="max-w-2xl mx-auto px-4">
+            <Header />
+            <main>{children}</main>
+            <Footer />
+          </div>
           <SpeedInsights />
           <Analytics />
         </ThemeProvider>
