@@ -9,7 +9,7 @@ export default function Footer() {
           href={siteMetadata.linkedin}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-sm text-neutral-600 transition hover:text-neutral-400"
+          className="text-sm text-neutral-600 hover:text-neutral-400 transition-colors duration-300"
         >
           linkedin
         </Link>
@@ -17,7 +17,7 @@ export default function Footer() {
           href={siteMetadata.github}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-sm text-neutral-600 transition hover:text-neutral-400"
+          className="text-sm text-neutral-600 hover:text-neutral-400 transition-colors duration-300"
         >
           github
         </Link>
