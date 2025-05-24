@@ -9,7 +9,7 @@ export default function Header() {
   const pathname = usePathname()
 
   return (
-    <div className="border border-stone-800/90 p-[0.4rem] rounded-lg mb-16 sticky top-4 z-[100] bg-stone-900/80 backdrop-blur-md mx-auto flex justify-between items-center gap-4">
+    <div className="border border-stone-800/90 p-[0.4rem] rounded-lg mb-16 sticky top-4 z-[100] bg-stone-900/80 backdrop-blur-md w-full flex justify-between items-center gap-4">
       <Link href="/" className="flex items-center" aria-label="Home">
         <span className="w-8 h-8 flex items-center justify-center aspect-square rounded-full bg-stone-800 text-zinc-100 font-bold text-xl leading-none select-none">
           S
