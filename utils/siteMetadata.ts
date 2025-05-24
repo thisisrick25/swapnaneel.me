@@ -12,11 +12,11 @@ export const siteMetadata = {
   siteLogo: '',
   socialBanner: '', // add social banner in the public folder
   email: '',
-  github: '',
+  github: 'https://github.com/thisisrick25',
   twitter: '',
   facebook: '',
   youtube: '',
-  linkedin: '',
+  linkedin: 'https://www.linkedin.com/in/swapnaneelpatra/',
   dribbble: '',
   locale: 'en-US',
 }
