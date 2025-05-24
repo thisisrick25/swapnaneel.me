@@ -6,8 +6,8 @@ import { getBlogs } from '@/utils/getBlogs';
 
 export function generateMetadata(): Metadata {
   return {
-    title: 'Blogs',
-    description: 'My Blogs',
+    title: 'Posts',
+    description: 'My Posts',
   };
 }
 
@@ -19,7 +19,7 @@ export default function BlogPage() {
     <div className=''>
       <div className='mb-4 space-y-3'>
         <div className=''>
-          Blogs
+          Posts
         </div>
       </div>
       <div>
