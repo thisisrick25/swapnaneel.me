@@ -66,11 +66,11 @@ export default function RootLayout({
 
         gtag('config', 'G-HVS1V1YG5Z');`}
       </Script>
-      <body className='antialiased tracking-tight bg-white text-black dark:bg-black dark:text-white  selection:bg-yellow-500 selection:text-white dark:selection:text-black sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl mx-auto px-4 sm:px-6 xl:px-0 gap-10 sm:gap-14'>
+      <body className='antialiased tracking-tight bg-neutral-100 dark:bg-neutral-900 text-black dark:text-white  selection:bg-yellow-500 selection:text-white dark:selection:text-black sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl mx-auto px-4 sm:px-6 xl:px-0 gap-10 sm:gap-14'>
         <ThemeProvider>
           <div className="min-h-screen flex flex-col max-w-2xl mx-auto px-4">
             <Header />
-            <main className='flex-grow'>{children}</main>
+            <main className='mx-16 flex-grow'>{children}</main>
             <Footer />
           </div>
           <SpeedInsights />
