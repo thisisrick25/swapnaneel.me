@@ -2,12 +2,10 @@
 
 import { useState, useEffect } from "react"
 import { useTheme } from "next-themes"
-import { Switch } from '@headlessui/react'
 
 export default function ThemeSwitch() {
   const [mounted, setMounted] = useState(false)
   const { theme, setTheme } = useTheme()
-  // const [enabled, setEnabled] = useState(false)
 
   useEffect(() => setMounted(true), [])
   if (!mounted) return null
@@ -15,42 +13,30 @@ export default function ThemeSwitch() {
   const isDark = mounted && (theme === "dark" || theme === "system")
 
   const handleThemeChange = () => {
-    // const newTheme = theme === 'dark' ? 'light' : 'dark'
-    const newTheme = isDark ? 'light' : 'dark'
-    setTheme(newTheme)
-    // setEnabled(!enabled)
+    setTheme(isDark ? "light" : "dark")
   }
 
   return (
-    <Switch
+    <button
+      type="button"
       title="Day 'n' Nite"
-      // checked={enabled}
-      checked={isDark}
-      onChange={handleThemeChange}
-      className="bg-gray-300 dark:bg-neutral-700 relative inline-flex shrink-0 h-6 w-12 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
+      aria-label="Toggle dark mode"
+      onClick={handleThemeChange}
+      className="px-2 py-2 text-black dark:text-white inline-flex items-center justify-center h-9 w-9 rounded-md hover:bg-neutral-400 dark:hover:bg-neutral-600 duration-300 ease-in transition-colors"
     >
-      <span className="sr-only">Dark Mode</span>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 20 20"
-        fill="currentColor"
-        // className={`${enabled ? "translate-x-6" : "translate-x-0"
-        className="translate-x-0 dark:translate-x-6 border-2 border-transparent absolute h-6 w-6 text-gray-900 dark:text-gray-100 transition ease-in-out duration-200">
-        {/* {enabled ? ( */}
+      <span className="sr-only">Toggle theme</span>
+      <svg className="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         {isDark ? (
-          <path
-            fillRule="evenodd"
-            d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
-            clipRule="evenodd"
-          />
+          // Sun icon
+          <>
+            <circle cx="12" cy="12" r="4" />
+            <path d="M12 2v2" /><path d="M12 20v2" /><path d="m4.93 4.93 1.41 1.41" /><path d="m17.66 17.66 1.41 1.41" /><path d="M2 12h2" /><path d="M20 12h2" /><path d="m6.34 17.66-1.41 1.41" /><path d="m19.07 4.93-1.41 1.41" />
+          </>
         ) : (
-          <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
+          // Moon icon
+          <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
         )}
       </svg>
-      <span
-        aria-hidden="true"
-        // className={`${enabled ? "translate-x-0 " : "translate-x-6"
-        className="translate-x-6 dark:translate-x-0 bg-gray-100 pointer-events-none inline-block h-6 w-6 rounded-full shadow-lg transform ring-0 transition ease-in-out duration-200"></span>
-    </Switch>
+    </button>
   )
 }
