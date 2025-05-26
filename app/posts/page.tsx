@@ -18,9 +18,7 @@ export default function BlogPage() {
   return (
     <div className=''>
       <div className='mb-4 space-y-3'>
-        <div className=''>
-          Posts
-        </div>
+        Posts
       </div>
       <div>
         {blogs
@@ -34,9 +32,11 @@ export default function BlogPage() {
                 <div>
                   {blog.data.title}
                 </div>
-                <div className=' grid grid-cols-2 text-neutral-600 dark:text-neutral-400'>
-                  <div>{formatDate(blog?.data.publishedAt)}</div>
-                  <ViewCounter slug={blog?.slug} trackView={false}/>
+                <div className='grid grid-cols-2 text-sm text-neutral-600 dark:text-neutral-400'>
+                  <time dateTime={blog.data.publishedAt}>
+                    {formatDate(blog?.data.publishedAt)}
+                  </time>
+                  <ViewCounter slug={blog?.slug} trackView={false} />
                 </div>
               </div>
             </Link>
