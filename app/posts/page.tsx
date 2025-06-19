@@ -11,8 +11,8 @@ export function generateMetadata(): Metadata {
   };
 }
 
-export default function BlogPage() {
-  const blogs = getBlogs()
+export default async function BlogPage() {
+  const blogs = await getBlogs()
   console.log(blogs)
 
   return (
