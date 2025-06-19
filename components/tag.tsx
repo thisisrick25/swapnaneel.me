@@ -1,5 +1,6 @@
 import Link from "next/link"
 import githubSlugger from "github-slugger"
+import { poppins } from "@/fonts"
 
 interface BlogType {
   tags: string[]
@@ -9,7 +10,7 @@ export default function Tag({ blog }: { blog: BlogType }) {
   const slugger = new githubSlugger()
 
   return (
-    <div className="text-neutral-600 dark:text-neutral-400 text-base rounded-lg mb-4 overflow-hidden overflow-y-auto">
+    <div className={`${poppins.className} text-neutral-600 dark:text-neutral-400 text-sm rounded-lg mb-4 overflow-hidden overflow-y-auto`}>
       {blog.tags.map((tag, index) => (
         <Link 
           key={`${tag}-${index}`}
