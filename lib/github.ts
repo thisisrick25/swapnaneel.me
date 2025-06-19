@@ -1,4 +1,4 @@
-import { Octokit } from "octokit";
+import { Octokit } from "@octokit/core";
 
 // Configure your GitHub Repository details
 export const GITHUB_REPO_OWNER = 'thisisrick25'
