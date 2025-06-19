@@ -7,7 +7,8 @@ import { extractHeadings } from '@/utils/extractHeadings';
 import { getBlogs, getBlogBySlug } from '@/utils/getBlogs';
 import { Metadata } from 'next'
 import { MDXRemote } from "next-mdx-remote-client/rsc";
-import { montserrat, poppins } from "@/fonts";
+import { poppins } from "@/fonts";
+import { roboto_mono, montserrat } from '@/fonts'
 
 interface PageProps {
   params: Promise<{ slug: string }>
@@ -48,7 +49,7 @@ export default async function BlogPage({ params }: PageProps) {
         </div>
         <Tag blog={blog.data} />
         <TableOfContents headings={headings} />
-        <div className="max-w-max prose dark:prose-invert">
+        <div className={`${roboto_mono.variable} ${montserrat.variable} max-w-max prose dark:prose-invert`}>
           <MDXRemote source={blog.content} />
         </div>
       </div>

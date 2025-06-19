@@ -7,7 +7,6 @@ import Footer from '@/components/footer'
 import { Analytics } from '@vercel/analytics/react';
 import { siteMetadata } from '@/utils/siteMetadata'
 import { SpeedInsights } from '@vercel/speed-insights/next';
-import { roboto_mono, montserrat } from '@/fonts'
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteMetadata.siteUrl),
@@ -61,7 +60,7 @@ export default function RootLayout({
 
         gtag('config', 'G-HVS1V1YG5Z');`}
       </Script>
-      <body className={`${roboto_mono.variable} ${montserrat.variable} antialiased tracking-tight bg-neutral-100 dark:bg-neutral-900 text-black dark:text-white  selection:bg-yellow-500 selection:text-white dark:selection:text-black sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl mx-auto px-4 sm:px-6 xl:px-0 gap-10 sm:gap-14`}>
+      <body className="antialiased tracking-tight bg-neutral-100 dark:bg-neutral-900 text-black dark:text-white  selection:bg-yellow-500 selection:text-white dark:selection:text-black sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl mx-auto px-4 sm:px-6 xl:px-0 gap-10 sm:gap-14">
         <ThemeProvider>
           <div className="min-h-screen flex flex-col max-w-2xl mx-auto px-4">
             <Header />
