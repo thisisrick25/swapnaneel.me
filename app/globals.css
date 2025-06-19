@@ -43,6 +43,10 @@ input[type="email"] {
   appearance: none;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-montserrat), sans-serif;
+}
+
 table {
   display: block;
   max-width: fit-content;
@@ -61,6 +65,7 @@ pre {
 code {
   counter-reset: line;
   @apply text-white! px-1 py-0.5;
+  font-family: var(--font-roboto-mono), monospace;
 }
 
 code[data-line-numbers] {
