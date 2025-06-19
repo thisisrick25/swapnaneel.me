@@ -1,12 +1,6 @@
 import { Roboto_Mono, Raleway, Montserrat, Inter, IBM_Plex_Mono, Poppins, Space_Grotesk } from 'next/font/google'
 
-const roboto_mono = Roboto_Mono({
-  weight: '400',
-  subsets: ['latin'],
-  style: ['italic', 'normal'],
-  variable: '--font-roboto-mono',
-})
-
+// Headline fonts
 const raleway = Raleway({
   weight: ['400', '500', '600', '700'],
   subsets: ['latin'],
@@ -21,18 +15,12 @@ const montserrat = Montserrat({
   variable: '--font-montserrat',
 })
 
+// Body fonts
 const inter = Inter({
   weight: '400',
   subsets: ['latin'],
   style: ['italic', 'normal'],
   variable: '--font-inter',
-})
-
-const ibm_plex_mono = IBM_Plex_Mono({
-  weight: ['400', '500', '600', '700'],
-  subsets: ['latin'],
-  style: ['italic', 'normal'],
-  variable: '--font-ibm-plex-mono',
 })
 
 const poppins = Poppins({
@@ -42,6 +30,22 @@ const poppins = Poppins({
   variable: '--font-poppins',
 })
 
+// Code fonts
+const roboto_mono = Roboto_Mono({
+  weight: '400',
+  subsets: ['latin'],
+  style: ['italic', 'normal'],
+  variable: '--font-roboto-mono',
+})
+
+const ibm_plex_mono = IBM_Plex_Mono({
+  weight: ['400', '500', '600', '700'],
+  subsets: ['latin'],
+  style: ['italic', 'normal'],
+  variable: '--font-ibm-plex-mono',
+})
+
+// Accent fonts
 const space_grotesk = Space_Grotesk({
   weight: ['400', '500', '600', '700'],
   subsets: ['latin'],
