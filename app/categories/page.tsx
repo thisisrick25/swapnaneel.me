@@ -10,9 +10,9 @@ export function generateMetadata(): Metadata {
   };
 }
 
-export default function Page() {
+export default async function Page() {
   const allCategories: string[] = [];
-  const allBlogs = getBlogs()
+  const allBlogs = await getBlogs();
   allBlogs.forEach((blog) => {
     if (blog.data.isPublished) {
       blog.data.tags?.forEach((tag) => {

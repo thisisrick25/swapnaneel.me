@@ -8,8 +8,8 @@ interface PageProps {
   params: Promise<{ slug: string }>
 }
 
-export function generateStaticParams() {
-  const tags = getAllTags();
+export async function generateStaticParams() {
+  const tags = await getAllTags();
   return tags.map((tag) => ({
     slug: tag,
   }));
@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function Page({ params }: PageProps) {
   const { slug: categorySlug } = await params;
-  const blogs = getBlogsByTag(categorySlug);
+  const blogs = await getBlogsByTag(categorySlug);
 
   return (
     <>

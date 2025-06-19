@@ -6,20 +6,22 @@ import ViewCounter from '@/components/viewCounter';
 import { extractHeadings } from '@/utils/extractHeadings';
 import { getBlogs, getBlogBySlug } from '@/utils/getBlogs';
 import { Metadata } from 'next'
+import { MDXRemote } from "next-mdx-remote-client/rsc";
 
 interface PageProps {
   params: Promise<{ slug: string }>
 }
 
-export function generateStaticParams() {
-  return getBlogs().map((blog) => ({
+export async function generateStaticParams() {
+  const blogs = await getBlogs();
+  return blogs.map((blog) => ({
     slug: blog.slug,
   }))
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params
-  const blog = getBlogBySlug(slug)
+  const blog = await getBlogBySlug(slug)
   if (!blog) notFound()
 
   return {
@@ -30,11 +32,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function BlogPage({ params }: PageProps) {
   const { slug } = await params
-  const blog = getBlogBySlug(slug)
+  const blog = await getBlogBySlug(slug)
   if (!blog) notFound()
   
   const headings = extractHeadings(blog.content)
-  const { default: MDXContent } = await import(`@/content/posts/${slug}.mdx`)
   
   return (
     <article>
@@ -47,7 +48,7 @@ export default async function BlogPage({ params }: PageProps) {
         <Tag blog={blog.data} />
         <TableOfContents headings={headings} />
         <div className="max-w-max prose dark:prose-invert">
-          <MDXContent />
+          <MDXRemote source={blog.content} />
         </div>
       </div>
     </article>
