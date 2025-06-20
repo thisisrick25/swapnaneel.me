@@ -14,7 +14,7 @@ export default function Tag({ blog }: { blog: BlogType }) {
       {blog.tags.map((tag, index) => (
         <Link 
           key={`${tag}-${index}`}
-          href={`/categories/${slugger.slug(tag)}`}
+          href={`/tags/${slugger.slug(tag)}`}
           className="hover:underline"
         >
           {`#${tag}`}
