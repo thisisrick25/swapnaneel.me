@@ -16,22 +16,22 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { slug: categorySlug } = await params;
+  const { slug: tagSlug } = await params;
   
   return {
-    title: `#${categorySlug}`,
-    description: `Posts tagged with ${categorySlug}`,
+    title: `#${tagSlug}`,
+    description: `Posts tagged with ${tagSlug}`,
   }
 }
 
 export default async function Page({ params }: PageProps) {
-  const { slug: categorySlug } = await params;
-  const blogs = await getBlogsByTag(categorySlug);
+  const { slug: tagSlug } = await params;
+  const blogs = await getBlogsByTag(tagSlug);
 
   return (
     <>
       <div className='mb-8 space-y-3'>
-        {`#${categorySlug}`}
+        {`#${tagSlug}`}
       </div>
       <div>
         {blogs.map((blog) => (
