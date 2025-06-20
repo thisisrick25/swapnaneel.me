@@ -44,7 +44,7 @@ input[type="email"] {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-montserrat), sans-serif;
+  font-family: var(--font-outfit), sans-serif;
 }
 
 p {
@@ -52,7 +52,7 @@ p {
 }
 
 blockquote p {
-  font-family: var(--font-space-grotesk), sans-serif;
+  font-family: var(--font-raleway), sans-serif;
 }
 
 table {
@@ -73,7 +73,7 @@ pre {
 code {
   counter-reset: line;
   @apply text-white! px-1 py-0.5;
-  font-family: var(--font-roboto-mono), monospace;
+  font-family: var(--font-ibm-plex-mono), monospace;
 }
 
 code[data-line-numbers] {
