@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import Image from 'next/image'
 import { usePathname } from "next/navigation"
 import { HEADER_LINKS } from 'config/links'
 import ThemeSwitch from "./themeSwitch"
@@ -11,9 +12,12 @@ export default function Header() {
   return (
     <div className="bg-neutral-200/80 dark:bg-neutral-800/80 backdrop-blur-sm border border-neutral-200 dark:border-neutral-800 rounded-lg p-[0.4rem] mb-16 sticky top-4 z-[100] w-full flex justify-between items-center gap-4">
       <Link href="/" className="flex items-center" aria-label="Home">
-        <span className="w-8 h-8 flex items-center justify-center aspect-square rounded-full bg-stone-800 text-zinc-100 font-bold text-xl leading-none select-none">
-          S
-        </span>
+        <Image className="flex items-center justify-center aspect-square rounded-full select-none"
+          src="https://github.com/thisisrick25.png"
+          alt="Picture of the author"
+          width={38}
+          height={38}
+        />
       </Link>
       <nav className="flex gap-2 relative justify-start w-full z-[100] rounded-lg">
         {HEADER_LINKS.map((link) => {

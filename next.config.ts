@@ -10,6 +10,18 @@ import { rehypeAutolinkHeadingsOptions, rehypePrettyCodeOptions } from '@/lib/re
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'github.com',
+        port: '',
+        pathname: '/thisisrick25.png',
+        search: '',
+      },
+    ],
+  },
+
 }
 
 const withMDX = createMDX({
