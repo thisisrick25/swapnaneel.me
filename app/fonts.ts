@@ -2,14 +2,14 @@ import { Roboto_Mono, Raleway, Montserrat, Inter, IBM_Plex_Mono, Poppins, Space_
 
 // Headline fonts
 const raleway = Raleway({
-  weight: ['400', '500', '600', '700'],
+  weight: ['300', '400', '500', '600', '700'],
   subsets: ['latin'],
   style: ['italic', 'normal'],
   variable: '--font-raleway',
 })
 
 const montserrat = Montserrat({
-  weight: '500',
+  weight: ['300', '400', '500', '600', '700'],
   subsets: ['latin'],
   style: ['italic', 'normal'],
   variable: '--font-montserrat',
@@ -17,14 +17,14 @@ const montserrat = Montserrat({
 
 // Body fonts
 const inter = Inter({
-  weight: '400',
+  weight: ['300', '400', '500', '600', '700'],
   subsets: ['latin'],
   style: ['italic', 'normal'],
   variable: '--font-inter',
 })
 
 const poppins = Poppins({
-  weight: ['300'],
+  weight: ['300', '400', '500', '600', '700'],
   subsets: ['latin'],
   style: ['italic', 'normal'],
   variable: '--font-poppins',
@@ -32,14 +32,14 @@ const poppins = Poppins({
 
 // Code fonts
 const roboto_mono = Roboto_Mono({
-  weight: '400',
+  weight: ['300', '400', '500', '600', '700'],
   subsets: ['latin'],
   style: ['italic', 'normal'],
   variable: '--font-roboto-mono',
 })
 
 const ibm_plex_mono = IBM_Plex_Mono({
-  weight: ['400', '500', '600', '700'],
+  weight: ['300', '400', '500', '600', '700'],
   subsets: ['latin'],
   style: ['italic', 'normal'],
   variable: '--font-ibm-plex-mono',
@@ -47,7 +47,7 @@ const ibm_plex_mono = IBM_Plex_Mono({
 
 // Accent fonts
 const space_grotesk = Space_Grotesk({
-  weight: ['400', '500', '600', '700'],
+  weight: ['300', '400', '500', '600', '700'],
   subsets: ['latin'],
   style: ['normal'],
   variable: '--font-space-grotesk',
