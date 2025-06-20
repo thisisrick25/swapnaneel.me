@@ -30,10 +30,10 @@ export default async function BlogPage() {
               href={`/posts/${blog.slug}`}
             >
               <div className="w-full">
-                <div className={`${montserrat.className}`}>
+                <div className={`${montserrat.className}`} style={{ fontWeight: '500' }}>
                   {blog.data.title}
                 </div>
-                <div className={`grid grid-cols-2 text-sm text-neutral-600 dark:text-neutral-400 ${poppins.className}`}>
+                <div className={`${poppins.className} grid grid-cols-2 text-sm text-neutral-600 dark:text-neutral-400`} style={{ fontWeight: '300' }}>
                   <time dateTime={blog.data.publishedAt}>
                     {formatDate(blog?.data.publishedAt)}
                   </time>

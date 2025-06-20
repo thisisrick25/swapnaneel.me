@@ -41,8 +41,8 @@ export default async function BlogPage({ params }: PageProps) {
   return (
     <article>
       <div>
-        <p className={`${montserrat.className}`}>{blog.data.title}</p>
-        <div className={`${poppins.className} grid grid-cols-2 text-sm mb-2 text-neutral-600 dark:text-neutral-400`}>
+        <p className={`${montserrat.className}`} style={{ fontWeight: '500' }}>{blog.data.title}</p>
+        <div className={`${poppins.className} grid grid-cols-2 text-sm mb-2 text-neutral-600 dark:text-neutral-400`} style={{ fontWeight: '300' }}>
           <p>{formatDate(blog.data.publishedAt)}</p>
           <ViewCounter slug={blog.slug} />
         </div>
