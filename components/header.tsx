@@ -11,12 +11,12 @@ export default function Header() {
 
   return (
     <div className="bg-neutral-200/80 dark:bg-neutral-800/80 backdrop-blur-sm border border-neutral-200 dark:border-neutral-800 rounded-lg p-[0.4rem] mb-16 sticky top-4 z-[100] w-full flex justify-between items-center gap-4">
-      <Link href="/" className="flex items-center" aria-label="Home">
+      <Link href="/" className="pl-2" aria-label="Home">
         <Image className="rounded-full select-none"
           src="https://github.com/thisisrick25.png"
           alt="Picture of the author"
-          width={38}
-          height={38}
+          width={48}
+          height={48}
         />
       </Link>
       <nav className="flex gap-2 relative justify-start w-full z-[100] rounded-lg">
