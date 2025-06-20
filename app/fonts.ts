@@ -1,4 +1,4 @@
-import { Roboto_Mono, Raleway, Montserrat, Inter, IBM_Plex_Mono, Poppins, Space_Grotesk } from 'next/font/google'
+import { Roboto_Mono, Raleway, Montserrat, Inter, IBM_Plex_Mono, Poppins, Space_Grotesk, Outfit } from 'next/font/google'
 
 // Headline fonts
 const raleway = Raleway({
@@ -13,6 +13,13 @@ const montserrat = Montserrat({
   subsets: ['latin'],
   style: ['italic', 'normal'],
   variable: '--font-montserrat',
+})
+
+const outfit = Outfit({
+  weight: ['300', '400', '500', '600', '700'],
+  subsets: ['latin'],
+  style: ['normal'],
+  variable: '--font-outfit',
 })
 
 // Body fonts
@@ -60,5 +67,6 @@ export {
   inter,
   ibm_plex_mono,
   poppins,
-  space_grotesk
+  space_grotesk,
+  outfit,
 }
