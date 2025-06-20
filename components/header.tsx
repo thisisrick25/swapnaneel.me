@@ -12,7 +12,7 @@ export default function Header() {
   return (
     <div className="bg-neutral-200/80 dark:bg-neutral-800/80 backdrop-blur-sm border border-neutral-200 dark:border-neutral-800 rounded-lg p-[0.4rem] mb-16 sticky top-4 z-[100] w-full flex justify-between items-center gap-4">
       <Link href="/" className="flex items-center" aria-label="Home">
-        <Image className="flex items-center justify-center aspect-square rounded-full select-none"
+        <Image className="rounded-full select-none"
           src="https://github.com/thisisrick25.png"
           alt="Picture of the author"
           width={38}
