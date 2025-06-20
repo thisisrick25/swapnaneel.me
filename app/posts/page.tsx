@@ -12,13 +12,13 @@ export function generateMetadata(): Metadata {
   };
 }
 
-export default async function BlogPage() {
+export default async function Page() {
   const blogs = await getBlogs()
   console.log(blogs)
 
   return (
     <div className=''>
-      <div className='mb-4 space-y-3'>
+      <div className={`mb-4 space-y-3 ${montserrat.className}`} style={{ fontWeight: '700' }}>
         Posts
       </div>
       <div>
