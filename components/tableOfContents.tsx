@@ -1,3 +1,5 @@
+import { raleway } from '@/fonts';
+
 type Heading = {
   text: string;
   level: number;
@@ -10,8 +12,8 @@ export default function TableOfContents({ headings }: { headings: Heading[] }) {
   }
 
   return (
-    <details className="group rounded-md border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950 px-4 py-2 shadow-sm [&_summary::-webkit-details-marker]:hidden">
-      <summary className="flex cursor-pointer items-center justify-between text-sm font-medium text-neutral-900 dark:text-neutral-100 select-none">
+    <details className={`${raleway.className} group rounded-md border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950 px-4 py-2 shadow-sm [&_summary::-webkit-details-marker]:hidden`}>
+      <summary className="flex cursor-pointer items-center justify-between font-medium text-neutral-900 dark:text-neutral-100 select-none">
         Table of Contents
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -35,7 +37,7 @@ export default function TableOfContents({ headings }: { headings: Heading[] }) {
             >
               <a
                 href={`#${heading.slug}`}
-                className="flex items-center text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100 transition-colors"
+                className="flex items-center text-sm text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100 transition-colors"
               >
                 {heading.level === 3 && (
                   <span className="mr-2 h-1 w-1 rounded-full bg-neutral-400 dark:bg-neutral-600" />
