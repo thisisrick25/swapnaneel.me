@@ -3,6 +3,7 @@ import { formatDate } from '@/lib/formatDate';
 import ViewCounter from '@/components/viewCounter';
 import { Metadata } from 'next'
 import { getBlogs } from '@/utils/getBlogs';
+import { montserrat, poppins } from '@/fonts';
 
 export function generateMetadata(): Metadata {
   return {
@@ -11,13 +12,13 @@ export function generateMetadata(): Metadata {
   };
 }
 
-export default async function BlogPage() {
+export default async function Page() {
   const blogs = await getBlogs()
   console.log(blogs)
 
   return (
     <div className=''>
-      <div className='mb-4 space-y-3'>
+      <div className={`mb-4 space-y-3 ${montserrat.className}`} style={{ fontWeight: '700' }}>
         Posts
       </div>
       <div>
@@ -29,10 +30,10 @@ export default async function BlogPage() {
               href={`/posts/${blog.slug}`}
             >
               <div className="w-full">
-                <div>
+                <div className={`${montserrat.className}`} style={{ fontWeight: '500' }}>
                   {blog.data.title}
                 </div>
-                <div className='grid grid-cols-2 text-sm text-neutral-600 dark:text-neutral-400'>
+                <div className={`${poppins.className} grid grid-cols-2 text-sm text-neutral-600 dark:text-neutral-400`} style={{ fontWeight: '300' }}>
                   <time dateTime={blog.data.publishedAt}>
                     {formatDate(blog?.data.publishedAt)}
                   </time>

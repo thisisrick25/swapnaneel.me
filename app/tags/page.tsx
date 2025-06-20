@@ -2,23 +2,24 @@ import Link from "next/link";
 import { slug } from "github-slugger"
 import { Metadata } from 'next'
 import { getBlogs } from '@/utils/getBlogs';
+import { montserrat } from '@/fonts';
 
 export function generateMetadata(): Metadata {
   return {
-    title: 'Categories',
-    description: 'Browse posts by category',
+    title: 'Tags',
+    description: 'Browse posts by tag',
   };
 }
 
 export default async function Page() {
-  const allCategories: string[] = [];
+  const allTags: string[] = [];
   const allBlogs = await getBlogs();
   allBlogs.forEach((blog) => {
     if (blog.data.isPublished) {
       blog.data.tags?.forEach((tag) => {
         let slugified = slug(tag);
-        if (!allCategories.includes(slugified)) {
-          allCategories.push(slugified);
+        if (!allTags.includes(slugified)) {
+          allTags.push(slugified);
         }
       });
     }
@@ -26,18 +27,18 @@ export default async function Page() {
 
   return (
     <div>
-      <div className='mb-8 space-y-3'>
-        all categories
+      <div className={`mb-4 space-y-3 ${montserrat.className}`} style={{ fontWeight: '700' }}>
+        Tags
       </div>
       <div>
-        {allCategories.map((category, index) => (
-          <Link 
-            key={`${category}-${index}`}
-            href={`/categories/${category}`}
+        {allTags.map((tag, index) => (
+          <Link
+            key={`${tag}-${index}`}
+            href={`/tags/${tag}`}
             className="hover:underline"
           >
-            {`#${category}`}
-            {index !== allCategories.length - 1 && ", "}
+            {`#${tag}`}
+            {index !== allTags.length - 1 && ", "}
           </Link>
         ))}
       </div>
