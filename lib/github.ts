@@ -27,8 +27,6 @@ export async function getGitHubDirectoryContents(owner: string, repo: string, br
       }
     });
 
-    console.log('GitHub API Response:', response);
-
     // The data is an array of content items (files/directories)
     // Ensure the response data is an array (it can be an object if path points to a file)
     if (Array.isArray(response.data)) {
@@ -62,7 +60,6 @@ export async function getGitHubFileContent(owner: string, repo: string, branch: 
         'Accept': 'application/vnd.github.v3+json',
       }
     });
-    console.log('GitHub API Response for file content:', response);
 
     // GitHub API returns a single object for file content
     if ('content' in response.data && response.data.content && response.data.encoding === 'base64') {

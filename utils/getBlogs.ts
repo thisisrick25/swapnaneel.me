@@ -1,4 +1,5 @@
-import matter from 'gray-matter'
+import { ReactElement, JSXElementConstructor } from 'react'
+import { compileMDX } from "next-mdx-remote/rsc";
 import { compareDesc } from 'date-fns'
 import { slug as slugify } from 'github-slugger'
 import {
@@ -9,6 +10,14 @@ import {
   getGitHubDirectoryContents,
   getGitHubFileContent,
 } from '@/lib/github'
+import {
+  remarkFrontmatter,
+  remarkMdxFrontmatter,
+  rehypeSlug,
+  rehypeAutolinkHeadings, rehypeAutolinkHeadingsOptions,
+  rehypePrettyCode, rehypePrettyCodeOptions,
+  remarkGfm,
+} from '@/lib/mdx';
 
 export interface BlogData {
   title: string
@@ -22,7 +31,8 @@ export interface BlogData {
 export interface Blog {
   data: BlogData
   slug: string
-  content: string
+  content: ReactElement<any, string | JSXElementConstructor<any>>
+  rawContent: string
 }
 
 // Function to read and parse all blog files from GitHub
@@ -49,13 +59,28 @@ async function getAllBlogsFromGitHub(): Promise<Blog[]> {
       GITHUB_BRANCH,
       file.path
     );
-    const { data, content } = matter(rawContent);
-    const slug = slugify(data.title);
+
+    // Use compileMDX to parse content and frontmatter
+    const { content, frontmatter } = await compileMDX<BlogData>({
+      source: rawContent,
+      options: {
+        mdxOptions: {
+          remarkPlugins: [remarkGfm, remarkFrontmatter, remarkMdxFrontmatter],
+          rehypePlugins: [
+            rehypeSlug,
+            [rehypeAutolinkHeadings, rehypeAutolinkHeadingsOptions],
+            [rehypePrettyCode, rehypePrettyCodeOptions],
+          ],
+        },
+        parseFrontmatter: true,
+      },
+    });
 
     return {
-      data,
-      slug,
-      content,
+      data: frontmatter,
+      slug: slugify(frontmatter.title),
+      content: content,
+      rawContent: rawContent,
     } as Blog;
   });
 
