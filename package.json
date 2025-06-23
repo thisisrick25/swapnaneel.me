@@ -23,7 +23,7 @@
     "@types/mdx": "^2.0.13",
     "@types/node": "22.13.14",
     "@types/react": "19.1.0",
-    "@types/react-dom": "19.1.0",
+    "@types/react-dom": "19.1.6",
     "@vercel/analytics": "^1.4.1",
     "@vercel/postgres": "^0.10.0",
     "@vercel/speed-insights": "^1.1.0",
