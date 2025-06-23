@@ -1,4 +1,4 @@
-import { ReactElement, JSXElementConstructor } from 'react'
+import { ReactElement, JSXElementConstructor, cache } from 'react'
 import { compileMDX } from "next-mdx-remote/rsc";
 import { compareDesc } from 'date-fns'
 import { slug as slugify } from 'github-slugger'
@@ -28,8 +28,8 @@ export interface Blog {
   rawContent: string
 }
 
-// Function to read and parse all blog files from GitHub
-async function getAllBlogsFromGitHub(): Promise<Blog[]> {
+// Function Expression to read and parse all blog files from GitHub
+export const getAllBlogsFromGitHub = cache(async (): Promise<Blog[]> => {
   // Get the list of files in the content directory
   const contents = await getGitHubDirectoryContents();
 
@@ -68,7 +68,7 @@ async function getAllBlogsFromGitHub(): Promise<Blog[]> {
   });
 
   return Promise.all(blogPromises);
-}
+});
 
 // Get all blogs, showing drafts only in development
 export async function getBlogs(): Promise<Blog[]> {
