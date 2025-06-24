@@ -4,13 +4,20 @@ import TableOfContents from '@/components/tableOfContents';
 import Tag from '@/components/tag';
 import ViewCounter from '@/components/viewCounter';
 import { extractHeadings } from '@/utils/extractHeadings';
-import { getBlogs, getBlogBySlug } from '@/utils/getBlogs';
+import { getBlogs, getBlogBySlug, Blog } from '@/utils/getBlogs';
 import { Metadata } from 'next'
 import { ibm_plex_mono, montserrat, poppins, inter, outfit, raleway } from '@/fonts'
+import { cache } from "react";
 
 interface PageProps {
   params: Promise<{ slug: string }>
 }
+
+// Cache the function that fetches and processes a single blog post
+const getBlogData = cache(async (slug: string): Promise<Blog | undefined> => {
+  const blog = await getBlogBySlug(slug);
+  return blog;
+});
 
 export async function generateStaticParams() {
   const blogs = await getBlogs();
@@ -21,7 +28,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params
-  const blog = await getBlogBySlug(slug)
+  const blog = await getBlogData(slug)
   if (!blog) notFound()
 
   return {
@@ -32,7 +39,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function Page({ params }: PageProps) {
   const { slug } = await params
-  const blog = await getBlogBySlug(slug)
+  const blog = await getBlogData(slug)
   if (!blog) notFound()
 
   const headings = extractHeadings(blog.rawContent) // Extract headings from the raw mdx content
