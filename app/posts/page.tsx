@@ -14,7 +14,6 @@ export function generateMetadata(): Metadata {
 
 export default async function Page() {
   const blogs = await getBlogs()
-  console.log(blogs)
 
   return (
     <div className=''>

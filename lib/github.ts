@@ -9,7 +9,6 @@ const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 
 // Helper to fetch directory contents from GitHub API using Octokit
 export async function getGitHubDirectoryContents() {
-  console.log('Fetching from GitHub:', CONTENT_PATH);
   const res = await fetch(
     `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${CONTENT_PATH}?ref=${BRANCH}`,
     {
@@ -27,7 +26,6 @@ export async function getGitHubDirectoryContents() {
 
 // Helper to fetch raw file content from GitHub (still using raw.githubusercontent.com for simplicity)
 export async function getGitHubFileContent(filePath: string) {
-  console.log('Fetching from GitHub:', filePath || CONTENT_PATH);
   const res = await fetch(
     `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${filePath}?ref=${BRANCH}`,
     {

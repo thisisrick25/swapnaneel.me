@@ -35,8 +35,6 @@ export default async function Page({ params }: PageProps) {
   const blog = await getBlogBySlug(slug)
   if (!blog) notFound()
 
-  console.log(blog)
-
   const headings = extractHeadings(blog.rawContent) // Extract headings from the raw mdx content
 
   return (
