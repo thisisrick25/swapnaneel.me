@@ -2,6 +2,7 @@ import { ReactElement, JSXElementConstructor, cache } from 'react'
 import { compileMDX } from "next-mdx-remote/rsc";
 import { compareDesc } from 'date-fns'
 import { slug as slugify } from 'github-slugger'
+import matter from 'gray-matter'
 import { getGitHubDirectoryContents, getGitHubFileContent } from '@/lib/github'
 import {
   remarkFrontmatter,
@@ -26,6 +27,63 @@ export interface Blog {
   slug: string
   content: ReactElement<any, string | JSXElementConstructor<any>>
   rawContent: string
+}
+
+export interface BlogMetadata {
+  data: Pick<BlogData, 'title' | 'publishedAt' | 'isPublished' | 'tags'>; // Only necessary data
+  slug: string;
+}
+
+function parseBlogMetadata(rawContent: string): BlogMetadata['data'] {
+  const { data } = matter(rawContent);
+  return {
+    title: data.title,
+    publishedAt: data.publishedAt,
+    isPublished: data.isPublished,
+    tags: data.tags || [],
+  };
+}
+
+// Function to fetch and parse metadata for all blog files from GitHub
+const getAllBlogMetadata = cache(async (): Promise<BlogMetadata[]> => {
+  const contents = await getGitHubDirectoryContents();
+
+  const mdxFiles = contents.filter((item: any) =>
+    item.type === 'file' && (item.name.endsWith('.mdx'))
+  );
+
+  const metadataPromises = mdxFiles.map(async (file: any) => {
+    const rawContent = await getGitHubFileContent(file.path);
+
+    // Use gray-matter to quickly parse only the frontmatter
+    const metadata = parseBlogMetadata(rawContent);
+
+    return {
+      data: metadata,
+      slug: slugify(metadata.title), // Derive slug from title
+    } as BlogMetadata;
+  });
+
+  return Promise.all(metadataPromises);
+});
+
+// Shared function to compile MDX content and extract frontmatter (uses compileMDX)
+async function compileMdxContent(rawContent: string): Promise<{ content: ReactElement<any, string | JSXElementConstructor<any>>, frontmatter: BlogData }> {
+  const { content, frontmatter } = await compileMDX<BlogData>({
+    source: rawContent,
+    options: {
+      mdxOptions: {
+        remarkPlugins: [remarkGfm, remarkFrontmatter, remarkMdxFrontmatter],
+        rehypePlugins: [
+          rehypeSlug,
+          [rehypeAutolinkHeadings, rehypeAutolinkHeadingsOptions],
+          [rehypePrettyCode, rehypePrettyCodeOptions],
+        ],
+      },
+      parseFrontmatter: true,
+    },
+  });
+  return { content, frontmatter };
 }
 
 // Function Expression to read and parse all blog files from GitHub
@@ -70,9 +128,9 @@ export const getAllBlogsFromGitHub = cache(async (): Promise<Blog[]> => {
   return Promise.all(blogPromises);
 });
 
-// Get all blogs, showing drafts only in development
-export async function getBlogs(): Promise<Blog[]> {
-  const allBlogs = await getAllBlogsFromGitHub();
+// Get all blogs metadata (for lists), showing drafts only in development
+export async function getBlogs(): Promise<BlogMetadata[]> {
+  const allBlogs = await getAllBlogMetadata();
   const blogs = allBlogs.sort((a, b) =>
     compareDesc(new Date(a.data.publishedAt), new Date(b.data.publishedAt))
   );
@@ -83,7 +141,7 @@ export async function getBlogs(): Promise<Blog[]> {
 }
 
 // Get blogs by tag/category
-export async function getBlogsByTag(tag: string): Promise<Blog[]> {
+export async function getBlogsByTag(tag: string): Promise<BlogMetadata[]> {
   const allBlogs = await getBlogs(); // Await the async getBlogs
   return allBlogs.filter((blog) =>
     blog.data.tags?.some((t) => slugify(t) === tag)
@@ -92,15 +150,34 @@ export async function getBlogsByTag(tag: string): Promise<Blog[]> {
 
 // Get a single blog by slug
 export async function getBlogBySlug(slug: string): Promise<Blog | undefined> {
-  const allBlogs = await getBlogs(); // Await the async getBlogs
-  return allBlogs.find((blog) => blog.slug === slug);
+  const filePath = `${slug}.mdx`; // Construct the file path
+
+  try {
+    // Fetch ONLY the content for the specific file
+    const rawContent = await getGitHubFileContent(filePath);
+
+    // Use the shared compile function on the specific file's content
+    const { content, frontmatter } = await compileMdxContent(rawContent);
+
+    return {
+      data: frontmatter,
+      slug: slugify(frontmatter.title), // Use frontmatter for slug
+      content: content,
+      rawContent: rawContent, // Include raw content for headings etc.
+    } as Blog;
+
+  } catch (error) {
+    // If the file is not found, return undefined
+    console.error(`Error fetching blog with slug ${slug}:`, error);
+    return undefined;
+  }
 }
 
 // Get all unique tags from published blogs
 export async function getAllTags(): Promise<string[]> {
-  const allBlogs = await getBlogs(); // Await the async getBlogs
+  const allBlogsMetadata = await getBlogs(); // Await the async getBlogs
   const tags: string[] = [];
-  allBlogs.forEach((blog) => {
+  allBlogsMetadata.forEach((blog) => {
     if (blog.data.isPublished) {
       blog.data.tags?.forEach((tag) => {
         const slugified = slugify(tag);
