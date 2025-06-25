@@ -4,6 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "ngrok": "npx dotenv -e .env.local -- node ngrok.js",
+    "dev:ngrok": "concurrently \"next dev\" \"npm run ngrok",
     "build": "npx prisma generate && next build",
     "start": "next start",
     "lint": "next lint",
@@ -52,6 +54,8 @@
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.16",
+    "@ngrok/ngrok": "^1.5.1",
+    "concurrently": "^9.2.0",
     "dotenv-cli": "^8.0.0",
     "prisma": "^6.3.0"
   }
