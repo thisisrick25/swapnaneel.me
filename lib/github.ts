@@ -1,16 +1,16 @@
-// Configure your GitHub Repository details
-const REPO_OWNER = 'thisisrick25'
-const REPO_NAME = 'posts'
-const BRANCH = '' // Default branch, usually 'main' or 'master'
-const CONTENT_PATH = '' // Path to the content directory, e.g., 'content/posts'
+import {
+  GITHUB_REPO_OWNER,
+  GITHUB_REPO_NAME,
+  GITHUB_CONTENT_PATH,
+  GITHUB_BRANCH
+} from '@/lib/constants';
 
-// Initialize Octokit (consider using process.env.GITHUB_TOKEN for private repos or higher rate limits)
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 
 // Helper to fetch directory contents from GitHub API using Octokit
 export async function getGitHubDirectoryContents() {
   const res = await fetch(
-    `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${CONTENT_PATH}?ref=${BRANCH}`,
+    `https://api.github.com/repos/${GITHUB_REPO_OWNER}/${GITHUB_REPO_NAME}/contents/${GITHUB_CONTENT_PATH}?ref=${GITHUB_BRANCH}`,
     {
       headers: {
         Accept: 'application/vnd.github.v3+json',
@@ -27,7 +27,7 @@ export async function getGitHubDirectoryContents() {
 // Helper to fetch raw file content from GitHub (still using raw.githubusercontent.com for simplicity)
 export async function getGitHubFileContent(filePath: string) {
   const res = await fetch(
-    `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${filePath}?ref=${BRANCH}`,
+    `https://api.github.com/repos/${GITHUB_REPO_OWNER}/${GITHUB_REPO_NAME}/contents/${filePath}?ref=${GITHUB_BRANCH}`,
     {
       headers: {
         Accept: 'application/vnd.github.v3+json',
