@@ -38,21 +38,54 @@ export async function POST(request: NextRequest) {
       if (data.ref === `refs/heads/${contentBranch}`) {
         console.log(`Push event on branch ${contentBranch}. Triggering revalidation.`);
 
-        // You can inspect data.commits to find changed files and revalidate specific paths
-        // For simplicity, let's revalidate the main posts list page and all individual post pages
-        revalidatePath('/posts'); // Revalidate the main posts list page
-        revalidatePath('/posts/[slug]', 'page'); // Revalidate all individual post pages
+        // Get all files that were added, modified, or removed in the push
+        const changedFiles = data.commits.flatMap((commit: any) => [...commit.added, ...commit.modified, ...commit.removed]);
 
-        // Or, more granularly, revalidate only changed blog post paths:
-        const changedFiles = data.commits.flatMap((commit: any) => [...commit.added, ...commit.modified]);
-        const blogPostPaths = changedFiles
-          .filter((filePath: string) => filePath.startsWith(GITHUB_CONTENT_PATH) && filePath.endsWith('.mdx'))
-          .map((filePath: string) => `/posts/${filePath.split('/').pop()?.replace('.mdx', '')}`); // Adjust path extraction based on your structure
+        // Filter for relevant blog content files
+        const relevantChanges = changedFiles.filter((filePath: string) =>
+          filePath.startsWith(GITHUB_CONTENT_PATH) && filePath.endsWith('.mdx')
+        );
 
-        blogPostPaths.forEach((path: string) => {
-          console.log(`Revalidating path: ${path}`);
-          revalidatePath(path);
-        });
+        if (relevantChanges.length > 0) {
+          console.log(`Found relevant changes: ${relevantChanges.join(', ')}`);
+
+          // Revalidate the main posts list page as content has changed
+          console.log('Revalidating /posts');
+          revalidatePath('/posts');
+
+          // Revalidate specific blog post paths for added/modified files
+          // We only revalidate paths for files that were added or modified,
+          // not removed, as Next.js will handle 404 for removed paths.
+          const blogPostPathsToRevalidate = relevantChanges
+            .filter((filePath: string) => !data.commits.some((commit: any) => commit.removed.includes(filePath)))
+            .map((filePath: string) => {
+              // Extract the slug from the file path
+              const slug = filePath.replace(GITHUB_CONTENT_PATH + '/', '').replace('.mdx', '');
+              return `/posts/${slug}`;
+            });
+
+          blogPostPathsToRevalidate.forEach((path: string) => {
+            console.log(`Revalidating path: ${path}`);
+            revalidatePath(path);
+          });
+
+        } else {
+          console.log('No relevant blog content changes found.');
+        }
+
+
+        // // You can inspect data.commits to find changed files and revalidate specific paths
+        // // For simplicity, let's revalidate the main posts list page and all individual post pages
+        // revalidatePath('/posts'); // Revalidate the main posts list page
+        // revalidatePath('/posts/[slug]', 'page'); // Revalidate all individual post pages
+
+        // const blogPostPaths = relevantChanges
+        //   .map((filePath: string) => `/posts/${filePath.split('/').pop()?.replace('.mdx', '')}`); // Adjust path extraction based on your structure
+
+        // blogPostPaths.forEach((path: string) => {
+        //   console.log(`Revalidating path: ${path}`);
+        //   revalidatePath(path);
+        // });
 
       } else {
         console.log(`Push event on non-content branch: ${data.ref}. No revalidation triggered.`);
