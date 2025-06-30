@@ -8,7 +8,20 @@ export default function ThemeSwitch() {
   const { theme, setTheme } = useTheme()
 
   useEffect(() => setMounted(true), [])
-  if (!mounted) return null
+  
+  // Render a placeholder button with the correct size when not mounted
+  if (!mounted) {
+    return (
+      <button
+        type="button"
+        disabled // Disable interaction while loading
+        className="p-2 inline-flex items-center justify-center rounded-md w-10 h-10"
+        aria-label="Loading theme switch"
+      >
+        <span className="sr-only">Loading theme switch</span>
+      </button>
+    );
+  }
 
   const isDark = mounted && (theme === "dark" || theme === "system")
 
