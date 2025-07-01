@@ -49,6 +49,7 @@ export default function Header() {
                       : "text-neutral-600 dark:text-neutral-400"
                       } hover:text-neutral-900 dark:hover:text-neutral-100 hover:bg-neutral-400/80 dark:hover:bg-neutral-600/80`}
                     href={child.href}
+                    prefetch={true}
                   >
                     {child.text}
                   </Link>
@@ -63,6 +64,7 @@ export default function Header() {
                 : "text-neutral-600 dark:text-neutral-400"
                 } hover:text-neutral-900 dark:hover:text-neutral-100 hover:bg-neutral-400/80 dark:hover:bg-neutral-600/80`}
               href={link.href}
+              prefetch={true}
             >
               <span>{link.text}</span>
             </Link>
