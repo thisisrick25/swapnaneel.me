@@ -16,7 +16,8 @@ export default function Header() {
           <Image className="rounded-full select-none"
             src="https://github.com/thisisrick25.png"
             alt="Picture of the author"
-            fill={true}
+            fill
+            priority
           />
         </div>
       </Link>
