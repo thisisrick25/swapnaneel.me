@@ -65,7 +65,7 @@ export default function RootLayout({
         <ThemeProvider>
           <div className="min-h-screen flex flex-col max-w-2xl mx-auto px-4">
             <Header />
-            <main className='flex-grow'>{children}</main>
+            <main className='flex-grow px-4 py-8'>{children}</main>
             <Footer />
           </div>
           <SpeedInsights />
