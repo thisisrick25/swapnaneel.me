@@ -27,26 +27,25 @@ export default function Header() {
       </Link>
       <nav className="flex gap-2 relative justify-start w-full z-[100] rounded-lg">
         {HEADER_LINKS.map((link) => {
-          if (!link.children) {
-            const linkHref = normalize(link.href);
-            const isActive = currentPath === linkHref || currentPath.startsWith(linkHref + "/");
+          // Treat all top-level links the same in the header
+          const linkHref = normalize(link.href);
+          // Check if the current path matches the link href or starts with it
+          // This handles cases like /posts/some-post being active for the /posts link
+          const isActive = currentPath === linkHref || currentPath.startsWith(linkHref + "/");
 
-            return (
-              <Link
-                key={link.href}
-                href={link.href}
-                prefetch={true}
-                className={`px-2 py-2 rounded-md text-sm lg:text-base relative no-underline duration-300 ease-in ${isActive
-                  ? "text-neutral-900 dark:text-neutral-100 bg-neutral-400/50 dark:bg-neutral-600/50"
-                  : "text-neutral-600 dark:text-neutral-400"
-                  } hover:text-neutral-900 dark:hover:text-neutral-100 hover:bg-neutral-400/80 dark:hover:bg-neutral-600/80`}
-              >
-                {link.text}
-              </Link>
-            )
-          }
-          // Return null for links with children, so they are not rendered
-          return null;
+          return (
+            <Link
+              key={link.href}
+              href={link.href}
+              prefetch={true}
+              className={`px-2 py-2 rounded-md text-sm lg:text-base relative no-underline duration-300 ease-in ${isActive
+                ? "text-neutral-900 dark:text-neutral-100 bg-neutral-400/50 dark:bg-neutral-600/50"
+                : "text-neutral-600 dark:text-neutral-400"
+                } hover:text-neutral-900 dark:hover:text-neutral-100 hover:bg-neutral-400/80 dark:hover:bg-neutral-600/80`}
+            >
+              {link.text}
+            </Link>
+          )
         })}
       </nav>
       <div style={{ width: '40px', height: '40px' }}>
