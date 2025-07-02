@@ -16,7 +16,7 @@ export default async function Page() {
   const blogs = await getBlogs()
 
   return (
-    <div className="px-4 py-8">
+    <>
       <h1 className={`text-3xl font-bold mb-6 ${montserrat.className}`} style={{ fontWeight: '700' }}>
         Posts
       </h1>
@@ -40,6 +40,6 @@ export default async function Page() {
             </Link>
           ))}
       </div>
-    </div>
+    </>
   )
 }
