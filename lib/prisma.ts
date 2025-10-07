@@ -2,8 +2,6 @@ import { PrismaClient } from '@prisma/client';
 import { PrismaNeon } from '@prisma/adapter-neon';
 import { neonConfig } from '@neondatabase/serverless';
 
-import { WebSocket } from 'ws';
-
 declare global {
   var prisma: PrismaClient | undefined;
 }
@@ -18,8 +16,6 @@ const createPrismaClient = () => {
   // Check if the URL is for a Neon database
   if (connectionString.includes('neon.tech')) {
     console.log('Using Neon database adapter.');
-    // Configure WebSocket for Node.js environment
-    // neonConfig.webSocketConstructor = WebSocket;
     neonConfig.poolQueryViaFetch = true;
     const adapter = new PrismaNeon({ connectionString });
     return new PrismaClient({ adapter });
