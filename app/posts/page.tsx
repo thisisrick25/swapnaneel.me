@@ -7,7 +7,7 @@ import { getViewsCount } from '@/db/queries';
 import { montserrat, poppins } from '@/fonts';
 import { Suspense } from 'react';
 
-export const dynamic = 'force-static';
+export const dynamic = 'force-dynamic';
 
 export function generateMetadata(): Metadata {
   return {
