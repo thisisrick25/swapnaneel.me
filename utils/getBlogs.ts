@@ -1,4 +1,5 @@
 import { ReactElement, JSXElementConstructor, cache } from 'react'
+import { unstable_cache } from 'next/cache'
 import { compileMDX } from "next-mdx-remote/rsc";
 import { compareDesc } from 'date-fns'
 import { slug as slugify } from 'github-slugger'
@@ -129,16 +130,20 @@ export const getAllBlogsFromGitHub = cache(async (): Promise<Blog[]> => {
 });
 
 // Get all blogs metadata (for lists), showing drafts only in development
-export async function getBlogs(): Promise<BlogMetadata[]> {
-  const allBlogs = await getAllBlogMetadata();
-  const blogs = allBlogs.sort((a, b) =>
-    compareDesc(new Date(a.data.publishedAt), new Date(b.data.publishedAt))
-  );
-  if (process.env.NODE_ENV === "development") {
-    return blogs; // Show all blogs, including drafts
-  }
-  return blogs.filter((blog) => blog.data.isPublished); // Only published blogs in production
-}
+export const getBlogs = unstable_cache(
+  async (): Promise<BlogMetadata[]> => {
+    const allBlogs = await getAllBlogMetadata();
+    const blogs = allBlogs.sort((a, b) =>
+      compareDesc(new Date(a.data.publishedAt), new Date(b.data.publishedAt))
+    );
+    if (process.env.NODE_ENV === "development") {
+      return blogs; // Show all blogs, including drafts
+    }
+    return blogs.filter((blog) => blog.data.isPublished); // Only published blogs in production
+  },
+  ['blogs'],
+  { revalidate: 1800 }
+);
 
 // Get blogs by tag/category
 export async function getBlogsByTag(tag: string): Promise<BlogMetadata[]> {
