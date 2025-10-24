@@ -13,74 +13,74 @@ export default function ViewCounter({ slug, trackView = true, count }: ViewCount
   const hasFetchedRef = useRef(false);
 
   useEffect(() => {
-    // If count was provided, use it directly
-    if (count !== undefined) {
-      setViews(count);
-      return;
-    }
-
     // Prevent double fetching
     if (hasFetchedRef.current) return;
     hasFetchedRef.current = true;
 
-    // Otherwise, fetch from API
-    const fetchViews = async () => {
-      try {
-        const response = await fetch(`/api/views?slug=${encodeURIComponent(slug)}`);
-        if (response.ok) {
-          const data = await response.json();
-          setViews(data.count);
-        } else {
-          console.error('Failed to fetch views');
+    const setInitialViews = async (): Promise<number> => {
+      if (count !== undefined) {
+        setViews(count);
+        return count;
+      } else {
+        try {
+          const response = await fetch(`/api/views?slug=${encodeURIComponent(slug)}`);
+          if (response.ok) {
+            const data = await response.json();
+            setViews(data.count);
+            return data.count;
+          } else {
+            console.error('Failed to fetch views');
+            setViews(0);
+            return 0;
+          }
+        } catch (error) {
+          console.error('Error fetching views:', error);
           setViews(0);
+          return 0;
         }
-      } catch (error) {
-        console.error('Error fetching views:', error);
-        setViews(0);
       }
     };
 
-    fetchViews();
+    setInitialViews().then((initialCount) => {
+      if (trackView) {
+        const viewedKey = `viewed_${slug}`;
+        const stored = localStorage.getItem(viewedKey);
+        const now = Date.now();
+        const ONE_HOUR = 60 * 60 * 1000; // 1 hour in milliseconds
 
-    // Track view if not already viewed within the last hour
-    if (trackView) {
-      const viewedKey = `viewed_${slug}`;
-      const stored = localStorage.getItem(viewedKey);
-      const now = Date.now();
-      const ONE_HOUR = 60 * 60 * 1000; // 1 hour in milliseconds
+        let shouldIncrement = true;
 
-      let shouldIncrement = true;
+        if (stored) {
+          const viewedTime = parseInt(stored);
+          if (now - viewedTime < ONE_HOUR) {
+            shouldIncrement = false; // Still within 1 hour, don't increment
+          }
+        }
 
-      if (stored) {
-        const viewedTime = parseInt(stored);
-        if (now - viewedTime < ONE_HOUR) {
-          shouldIncrement = false; // Still within 1 hour, don't increment
+        if (shouldIncrement) {
+          setViews(initialCount + 1);
+          
+          // Increment view on server in background
+          const incrementView = async () => {
+            try {
+              await fetch('/api/views', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ slug }),
+              });
+            } catch (error) {
+              console.error('Error incrementing views:', error);
+              // Revert optimistic update on error
+              setViews(initialCount);
+            }
+          };
+          incrementView();
+          localStorage.setItem(viewedKey, now.toString());
         }
       }
-
-      if (shouldIncrement) {
-        // Increment view and mark as viewed with current timestamp
-        const incrementView = async () => {
-          try {
-            await fetch('/api/views', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify({ slug }),
-            });
-            // Refresh the count after incrementing
-            setTimeout(() => {
-              fetchViews();
-            }, 100);
-          } catch (error) {
-            console.error('Error incrementing views:', error);
-          }
-        };
-        incrementView();
-        localStorage.setItem(viewedKey, now.toString());
-      }
-    }
+    });
   }, [slug, trackView, count]);
 
   if (views === null) {
