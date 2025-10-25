@@ -1,6 +1,5 @@
 import Link from 'next/link';
-import DateDisplay from '@/components/dateDisplay';
-import ViewCounter from '@/components/viewCounter';
+import PostItem from '@/components/postItem';
 import { Metadata } from 'next'
 import { getBlogs } from '@/utils/getBlogs';
 import { getViewsCount } from '@/db/queries';
@@ -29,19 +28,13 @@ export default async function Page() {
           .map((blog) => {
             const viewCount = allViews.find((v) => v.slug === blog.slug)?.count || 0;
             return (
-              <Link
+              <PostItem
                 key={blog.slug}
-                className="grid grid-cols-1 w-full my-4"
-                href={`/posts/${blog.slug}`}
-              >
-                <div className={`${poppins.className}`} style={{ fontWeight: '500' }}>
-                  {blog.data.title}
-                </div>
-                <div className={`${inter.className} flex justify-between text-sm text-gray-600 dark:text-gray-400`} style={{ fontWeight: '300' }}>
-                  <DateDisplay date={blog?.data.publishedAt} />
-                  <ViewCounter slug={blog?.slug} trackView={false} count={viewCount} />
-                </div>
-              </Link>
+                title={blog.data.title}
+                date={blog.data.publishedAt}
+                viewCount={viewCount}
+                slug={blog.slug}
+              />
             );
           })}
       </div>

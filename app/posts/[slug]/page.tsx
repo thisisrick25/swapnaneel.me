@@ -1,8 +1,7 @@
 import { notFound } from 'next/navigation';
 import TableOfContents from '@/components/tableOfContents';
 import Tag from '@/components/tag';
-import DateDisplay from '@/components/dateDisplay';
-import ViewCounter from '@/components/viewCounter';
+import PostItem from '@/components/postItem';
 import { extractHeadings } from '@/utils/extractHeadings';
 import { getBlogs, getBlogBySlug, Blog } from '@/utils/getBlogs';
 import { Metadata } from 'next'
@@ -51,11 +50,13 @@ export default async function Page({ params }: PageProps) {
   return (
     <article>
       <div>
-        <p className={`${poppins.className}`} style={{ fontWeight: '500' }}>{blog.data.title}</p>
-        <div className={`${inter.className} flex justify-between text-sm mb-2 text-gray-600 dark:text-gray-400`} style={{ fontWeight: '300' }}>
-          <DateDisplay date={blog.data.publishedAt} />
-          <ViewCounter slug={slug} count={viewCount} />
-        </div>
+        <PostItem
+          title={blog.data.title}
+          date={blog.data.publishedAt}
+          viewCount={viewCount}
+          slug={slug}
+          showLink={false}
+        />
         <Tag tags={blog.data.tags} />
         <TableOfContents headings={headings} />
         <div className={`${poppins.variable} ${inter.variable} ${jetbrains_mono.variable} max-w-max prose dark:prose-invert`}>
