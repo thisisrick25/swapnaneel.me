@@ -2,7 +2,7 @@ import Link from "next/link";
 import { slug } from "github-slugger"
 import { Metadata } from 'next'
 import { getBlogs } from '@/utils/getBlogs';
-import { montserrat } from '@/fonts';
+import { poppins } from '@/fonts';
 
 export function generateMetadata(): Metadata {
   return {
@@ -27,7 +27,7 @@ export default async function Page() {
 
   return (
     <div>
-      <div className={`mb-4 space-y-3 ${montserrat.className}`} style={{ fontWeight: '700' }}>
+      <div className={`mb-4 space-y-3 ${poppins.className}`} style={{ fontWeight: '700' }}>
         Tags
       </div>
       <div>
