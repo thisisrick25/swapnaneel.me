@@ -1,9 +1,8 @@
-import Link from 'next/link';
 import PostItem from '@/components/postItem';
 import { Metadata } from 'next'
 import { getBlogs } from '@/utils/getBlogs';
 import { getViewsCount } from '@/db/queries';
-import { poppins, inter } from '@/fonts';
+import { poppins } from '@/fonts';
 
 export const dynamic = 'force-dynamic';
 
@@ -20,7 +19,7 @@ export default async function Page() {
 
   return (
     <>
-      <h1 className={`text-3xl font-bold mb-6 ${poppins.className}`} style={{ fontWeight: '700' }}>
+      <h1 className={`text-2xl font-bold mb-6 ${poppins.className}`} style={{ fontWeight: '700' }}>
         Posts
       </h1>
       <div>
