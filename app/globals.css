@@ -58,6 +58,7 @@ p {
 
 blockquote p {
   font-family: var(--font-inter), sans-serif;
+  font-size: 0.875rem; /* text-sm */
 }
 
 table {
