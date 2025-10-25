@@ -37,7 +37,7 @@ export default async function Page() {
                 <div className={`${poppins.className}`} style={{ fontWeight: '500' }}>
                   {blog.data.title}
                 </div>
-                <div className={`${inter.className} grid grid-cols-2 text-sm text-gray-600 dark:text-gray-400`} style={{ fontWeight: '300' }}>
+                <div className={`${inter.className} flex justify-between text-sm text-gray-600 dark:text-gray-400`} style={{ fontWeight: '300' }}>
                   <DateDisplay date={blog?.data.publishedAt} />
                   <ViewCounter slug={blog?.slug} trackView={false} count={viewCount} />
                 </div>
