@@ -13,7 +13,7 @@ export default function Header() {
   const currentPath = normalize(pathname);
 
   return (
-    <div className="bg-neutral-200/80 dark:bg-neutral-800/80 backdrop-blur-sm border border-neutral-200 dark:border-neutral-800 rounded-lg p-[0.4rem] mb-16 sticky top-4 z-[100] w-full flex justify-between items-center gap-4">
+    <div className="bg-neutral-50/50 dark:bg-neutral-900/50 backdrop-blur-sm border border-gray-200/50 dark:border-gray-800/50 rounded-lg p-[0.4rem] mb-16 sticky top-4 z-[100] w-full flex justify-between items-center gap-4 shadow-sm">
       <Link href="/" className="pl-2" aria-label="Home">
         <div className="relative" style={{ width: '40px', height: '40px' }}>
           <Image className="rounded-full select-none"
@@ -39,9 +39,9 @@ export default function Header() {
               href={link.href}
               prefetch={true}
               className={`px-2 py-2 rounded-md text-sm lg:text-base relative no-underline duration-300 ease-in ${isActive
-                ? "text-neutral-900 dark:text-neutral-100 bg-neutral-400/50 dark:bg-neutral-600/50"
-                : "text-neutral-600 dark:text-neutral-400"
-                } hover:text-neutral-900 dark:hover:text-neutral-100 hover:bg-neutral-400/80 dark:hover:bg-neutral-600/80`}
+                ? "text-gray-900 dark:text-gray-100 bg-neutral-200 dark:bg-neutral-800"
+                : "text-gray-600 dark:text-gray-400"
+                } hover:text-gray-900 dark:hover:text-gray-100 hover:bg-neutral-200 dark:hover:bg-neutral-800`}
             >
               {link.text}
             </Link>
