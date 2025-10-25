@@ -1,4 +1,4 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
 @plugin '@tailwindcss/typography';
 
@@ -43,8 +43,13 @@ input[type="email"] {
   appearance: none;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-outfit), sans-serif;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-poppins), sans-serif;
 }
 
 p {
@@ -52,7 +57,7 @@ p {
 }
 
 blockquote p {
-  font-family: var(--font-raleway), sans-serif;
+  font-family: var(--font-inter), sans-serif;
 }
 
 table {
@@ -62,18 +67,18 @@ table {
   white-space: nowrap;
 }
 
-pre, code {
+pre,
+code {
   @apply bg-neutral-800! rounded-lg;
 }
 
 pre {
-  
 }
 
 code {
   counter-reset: line;
   @apply text-white! px-1 py-0.5;
-  font-family: var(--font-ibm-plex-mono), monospace;
+  font-family: var(--font-jetbrains-mono), monospace;
 }
 
 code[data-line-numbers] {
@@ -119,6 +124,6 @@ code[data-line-numbers] > [data-line]::before {
   @apply my-0 rounded-t-none border-t-0;
 }
 
-[data-rehype-pretty-code-caption]{
+[data-rehype-pretty-code-caption] {
   @apply text-center text-[#747474];
 }
