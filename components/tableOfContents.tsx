@@ -1,4 +1,4 @@
-import { inter } from '@/fonts';
+import { poppins } from '@/fonts';
 
 type Heading = {
   text: string;
@@ -14,8 +14,8 @@ export default function TableOfContents({ headings }: { headings: Heading[] }) {
   const hasBullet = (text: string) => text.startsWith('- ') || text.startsWith('* ') || /^\d+\.\s/.test(text);
 
   return (
-    <details className={`${inter.className} group rounded-lg border border-neutral-200 dark:border-neutral-800 bg-neutral-100/50 dark:bg-neutral-800/50 px-4 py-3 shadow-sm [&_summary::-webkit-details-marker]:hidden`}>
-      <summary className="flex cursor-pointer items-center justify-between font-medium text-gray-900 dark:text-gray-100 select-none">
+    <details className={`${poppins.className} group rounded-lg border border-neutral-200 dark:border-neutral-800 bg-neutral-100/50 dark:bg-neutral-800/50 p-3 shadow-sm [&_summary::-webkit-details-marker]:hidden`}>
+      <summary className="flex cursor-pointer items-center justify-between text-sm text-gray-900 dark:text-gray-100 select-none">
         Table of Contents
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -39,7 +39,7 @@ export default function TableOfContents({ headings }: { headings: Heading[] }) {
             >
               <a
                 href={`#${heading.slug}`}
-                className="flex items-center text-sm text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100 transition-colors"
+                className="flex items-center text-sm text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100 duration-300 ease-in transition-colors"
               >
                 {!hasBullet(heading.text) && (
                   <span className="mr-2">•</span>

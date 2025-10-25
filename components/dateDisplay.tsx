@@ -48,13 +48,13 @@ export default function DateDisplay({ date }: DateDisplayProps) {
       style={{ minWidth: '120px' }}
     >
       <span
-        className={`absolute left-0 transition-transform duration-500 ease-in-out ${showFullDate ? '-translate-y-full opacity-0' : 'translate-y-0 opacity-100'
+        className={`absolute left-0 transition-transform duration-300 ease-in-out ${showFullDate ? '-translate-y-full opacity-0' : 'translate-y-0 opacity-100'
           }`}
       >
         {relativeDate}
       </span>
       <span
-        className={`absolute left-0 transition-transform duration-500 ease-in-out ${showFullDate ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'
+        className={`absolute left-0 transition-transform duration-300 ease-in-out ${showFullDate ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'
           }`}
       >
         {fullDate}
