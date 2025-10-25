@@ -41,10 +41,11 @@ export default function DateDisplay({ date }: DateDisplayProps) {
 
   return (
     <span
-      className={`${inter.className} relative inline-block cursor-pointer overflow-hidden`}
+      className={`${inter.className} relative block cursor-pointer overflow-hidden`}
       onMouseEnter={() => setShowFullDate(true)}
       onMouseLeave={() => setShowFullDate(false)}
       title={fullDate}
+      style={{ minWidth: '120px' }}
     >
       <span
         className={`absolute left-0 transition-transform duration-500 ease-in-out ${showFullDate ? '-translate-y-full opacity-0' : 'translate-y-0 opacity-100'
