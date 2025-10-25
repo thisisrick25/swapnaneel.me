@@ -38,7 +38,7 @@ export default async function Page() {
                 <div className={`${montserrat.className}`} style={{ fontWeight: '500' }}>
                   {blog.data.title}
                 </div>
-                <div className={`${poppins.className} grid grid-cols-2 text-sm text-neutral-600 dark:text-neutral-400`} style={{ fontWeight: '300' }}>
+                <div className={`${poppins.className} grid grid-cols-2 text-sm text-gray-600 dark:text-gray-400`} style={{ fontWeight: '300' }}>
                   <time dateTime={blog.data.publishedAt}>
                     {formatDate(blog?.data.publishedAt)}
                   </time>
