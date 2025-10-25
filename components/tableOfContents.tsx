@@ -11,6 +11,8 @@ export default function TableOfContents({ headings }: { headings: Heading[] }) {
     return null;
   }
 
+  const hasBullet = (text: string) => text.startsWith('- ') || text.startsWith('* ') || /^\d+\.\s/.test(text);
+
   return (
     <details className={`${inter.className} group rounded-lg border border-neutral-200 dark:border-neutral-800 bg-neutral-100/50 dark:bg-neutral-800/50 px-4 py-3 shadow-sm [&_summary::-webkit-details-marker]:hidden`}>
       <summary className="flex cursor-pointer items-center justify-between font-medium text-gray-900 dark:text-gray-100 select-none">
@@ -39,8 +41,8 @@ export default function TableOfContents({ headings }: { headings: Heading[] }) {
                 href={`#${heading.slug}`}
                 className="flex items-center text-sm text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100 transition-colors"
               >
-                {heading.level === 3 && (
-                  <span className="mr-2 h-1 w-1 rounded-full bg-neutral-400 dark:bg-neutral-600" />
+                {!hasBullet(heading.text) && (
+                  <span className="mr-2">•</span>
                 )}
                 <span>
                   {heading.text}
