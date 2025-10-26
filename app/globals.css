@@ -56,6 +56,16 @@ p {
   font-family: var(--font-inter), sans-serif;
 }
 
+html:not(.dark) {
+  .prose {
+    --tw-prose-bullets: #b5b5b5;
+    --tw-prose-counters: #b5b5b5;
+    blockquote {
+      --tw-prose-quote-borders: #b5b5b5;
+    }
+  }
+}
+
 blockquote p {
   font-family: var(--font-inter), sans-serif;
   font-size: 0.875rem; /* text-sm */
