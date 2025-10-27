@@ -38,7 +38,7 @@ export default function Header() {
               key={link.href}
               href={link.href}
               prefetch={true}
-              className={`px-2 py-2 rounded-md text-sm lg:text-base relative no-underline duration-300 ease-in ${isActive
+              className={`px-2 py-2 rounded-md text-xs md:text-sm lg:text-base relative no-underline duration-300 ease-in ${isActive
                 ? "text-gray-900 dark:text-gray-100 bg-neutral-300 dark:bg-neutral-800"
                 : "text-gray-600 dark:text-gray-400"
                 } hover:text-gray-900 dark:hover:text-gray-100 hover:bg-neutral-300 dark:hover:bg-neutral-800`}

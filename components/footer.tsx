@@ -9,7 +9,7 @@ export default function Footer() {
           href={siteMetadata.linkedin}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors duration-300"
+          className="text-xs md:text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors duration-300"
         >
           linkedin
         </Link>
@@ -17,7 +17,7 @@ export default function Footer() {
           href={siteMetadata.github}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors duration-300"
+          className="text-xs md:text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors duration-300"
         >
           github
         </Link>
