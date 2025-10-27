@@ -27,7 +27,7 @@ export default async function Page() {
 
   return (
     <div>
-      <h1 className={`text-xl font-bold mb-6 ${poppins.className}`} style={{ fontWeight: '700' }}>
+      <h1 className={`text-lg font-bold mb-6 ${poppins.className}`} style={{ fontWeight: '700' }}>
         Tags
       </h1>
       <div>
