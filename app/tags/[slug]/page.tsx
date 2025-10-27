@@ -30,9 +30,9 @@ export default async function Page({ params }: PageProps) {
 
   return (
     <>
-      <div className={`mb-4 space-y-3 ${poppins.className}`} style={{ fontWeight: '700' }}>
+      <h1 className={`text-lg font-bold mb-6 ${poppins.className}`} style={{ fontWeight: '700' }}>
         {`#${tagSlug}`}
-      </div>
+      </h1>
       <div>
         {blogs.map((blog) => (
           <PostItem
