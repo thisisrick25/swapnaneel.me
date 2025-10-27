@@ -14,7 +14,7 @@ interface PostItemProps {
 export default function PostItem({ title, date, viewCount, slug, showLink = true }: PostItemProps) {
   const content = (
     <>
-      <div className={`text-lg ${poppins.className}`} style={{ fontWeight: '500' }}>
+      <div className={`${poppins.className}`} style={{ fontWeight: '500' }}>
         {title}
       </div>
       <div className={`${inter.className} flex justify-between text-sm text-gray-600 dark:text-gray-400`} style={{ fontWeight: '300' }}>
