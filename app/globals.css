@@ -46,7 +46,7 @@ html:not(.dark) {
 }
 
 .prose {
-  @apply text-sm;
+  @apply text-xs md:text-sm;
 
   > :first-child {
     /* Override removing top margin, causing layout shift */
@@ -60,7 +60,7 @@ html:not(.dark) {
   h1,
   h2 {
     font-family: var(--font-poppins), sans-serif;
-    @apply text-lg font-medium;
+    @apply text-sm md:text-base lg:text-lg font-medium;
   }
 
   h3,
@@ -68,11 +68,12 @@ html:not(.dark) {
   h5,
   h6 {
     font-family: var(--font-poppins), sans-serif;
-    @apply text-base font-medium;
+    @apply text-xs md:text-sm lg:text-base font-medium;
   }
 
   p {
     font-family: var(--font-inter), sans-serif;
+    @apply text-xs md:text-sm lg:text-base font-medium;
   }
 
   blockquote {
@@ -142,6 +143,6 @@ html:not(.dark) {
   }
 
   [data-rehype-pretty-code-caption] {
-    @apply text-center text-[#747474];
+    @apply text-xs text-center text-[#747474];
   }
 }
