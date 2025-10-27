@@ -10,7 +10,7 @@ export default function Tag({ tags }: Tag) {
   const slugger = new githubSlugger()
 
   return (
-    <div className={`${inter.className} text-gray-600 dark:text-gray-400 text-sm rounded-lg mb-4 overflow-hidden overflow-y-auto`} style={{ fontWeight: '300' }}>
+    <div className={`${inter.className} text-gray-600 dark:text-gray-400 text-xs md:text-sm rounded-lg mb-4 overflow-hidden overflow-y-auto`} style={{ fontWeight: '300' }}>
       {tags.map((tag, index) => (
         <Link
           key={`${tag}-${index}`}

@@ -17,7 +17,7 @@ export default function PostItem({ title, date, viewCount, slug, showLink = true
       <div className={`${poppins.className}`} style={{ fontWeight: '500' }}>
         {title}
       </div>
-      <div className={`${inter.className} flex justify-between text-sm text-gray-600 dark:text-gray-400`} style={{ fontWeight: '300' }}>
+      <div className={`${inter.className} flex justify-between text-xs md:text-sm text-gray-600 dark:text-gray-400`} style={{ fontWeight: '300' }}>
         <DateDisplay date={date} />
         <ViewCounter slug={slug} trackView={false} count={viewCount} />
       </div>
