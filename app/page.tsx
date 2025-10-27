@@ -3,9 +3,9 @@ import { poppins, inter } from '@/fonts'
 export default function Home() {
   return (
     <div>
-      <div className={`text-xl font-bold mb-4 ${poppins.className}`}>
+      <h1 className={`text-xl font-bold mb-4 ${poppins.className}`}>
         Swapnaneel
-      </div>
+      </h1>
       <div className={`${inter.className}`}>
         engineer, idealist and always learning
       </div>
