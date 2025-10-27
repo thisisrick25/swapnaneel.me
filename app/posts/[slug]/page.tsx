@@ -48,21 +48,19 @@ export default async function Page({ params }: PageProps) {
   const viewCount = await getViewsCountBySlug(slug)
 
   return (
-    <article>
-      <div>
-        <PostItem
-          title={blog.data.title}
-          date={blog.data.publishedAt}
-          viewCount={viewCount}
-          slug={slug}
-          showLink={false}
-        />
-        <Tag tags={blog.data.tags} />
-        <TableOfContents headings={headings} />
-        <div className={`${poppins.variable} ${inter.variable} ${jetbrains_mono.variable} max-w-max prose dark:prose-invert`}>
-          {blog.content}
-        </div>
+    <div>
+      <PostItem
+        title={blog.data.title}
+        date={blog.data.publishedAt}
+        viewCount={viewCount}
+        slug={slug}
+        showLink={false}
+      />
+      <Tag tags={blog.data.tags} />
+      <TableOfContents headings={headings} />
+      <div className={`${poppins.variable} ${inter.variable} ${jetbrains_mono.variable} max-w-max prose dark:prose-invert`}>
+        {blog.content}
       </div>
-    </article>
+    </div>
   )
 }

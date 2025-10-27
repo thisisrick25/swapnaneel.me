@@ -36,7 +36,7 @@ export default function PostItem({ title, date, viewCount, slug, showLink = true
   }
 
   return (
-    <div className="grid grid-cols-1 w-full my-4">
+    <div className="grid grid-cols-1 w-full mb-4">
       {content}
     </div>
   );
