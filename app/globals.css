@@ -15,24 +15,48 @@ html {
   width: 80%;
   max-width: 700px;
   cursor: pointer;
-}
 
-.anchor:before {
-  @apply text-neutral-300 dark:text-neutral-700;
-  content: "#";
+  &:before {
+    @apply text-neutral-600 dark:text-neutral-400;
+    content: "#";
+  }
 }
 
 *:hover > .anchor {
   @apply visible;
 }
 
-.prose > :first-child {
-  /* Override removing top margin, causing layout shift */
-  margin-top: 1.25em !important;
-}
+.prose {
+  @apply text-sm;
 
-.prose > :last-child {
-  margin-bottom: 2em !important;
+  > :first-child {
+    /* Override removing top margin, causing layout shift */
+    margin-top: 1.25em !important;
+  }
+
+  > :last-child {
+    margin-bottom: 1.25em !important;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-poppins), sans-serif;
+    @apply text-lg font-medium;
+  }
+
+  p {
+    font-family: var(--font-inter), sans-serif;
+  }
+
+  blockquote {
+    p {
+      @apply text-xs;
+    }
+  }
 }
 
 /* Remove Safari input shadow on mobile */
@@ -43,32 +67,15 @@ input[type="email"] {
   appearance: none;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: var(--font-poppins), sans-serif;
-}
-
-p {
-  font-family: var(--font-inter), sans-serif;
-}
-
 html:not(.dark) {
   .prose {
     --tw-prose-bullets: #b5b5b5;
     --tw-prose-counters: #b5b5b5;
+
     blockquote {
       --tw-prose-quote-borders: #b5b5b5;
     }
   }
-}
-
-blockquote p {
-  font-family: var(--font-inter), sans-serif;
-  font-size: 0.875rem; /* text-sm */
 }
 
 table {
@@ -90,31 +97,31 @@ code {
   counter-reset: line;
   @apply text-white! px-1 py-0.5;
   font-family: var(--font-jetbrains-mono), monospace;
-}
 
-code[data-line-numbers] {
-  counter-reset: line;
-  @apply text-white! px-1 py-0.5;
-}
+  &[data-line-numbers] {
+    counter-reset: line;
+    @apply text-white! px-1 py-0.5;
+  }
 
-code > [data-line]::before {
-  counter-increment: line;
-  content: counter(line);
-  display: inline-block;
-  width: 1rem;
-  margin-right: 1rem;
-  text-align: right;
-  color: gray;
-}
+  > [data-line]::before {
+    counter-increment: line;
+    content: counter(line);
+    display: inline-block;
+    width: 1rem;
+    margin-right: 1rem;
+    text-align: right;
+    color: gray;
+  }
 
-code[data-line-numbers] > [data-line]::before {
-  counter-increment: line;
-  content: counter(line);
-  display: inline-block;
-  width: 1rem;
-  margin-right: 1rem;
-  text-align: right;
-  color: gray;
+  &[data-line-numbers] > [data-line]::before {
+    counter-increment: line;
+    content: counter(line);
+    display: inline-block;
+    width: 1rem;
+    margin-right: 1rem;
+    text-align: right;
+    color: gray;
+  }
 }
 
 [data-highlighted-line] {
@@ -129,10 +136,10 @@ code[data-line-numbers] > [data-line]::before {
 
 [data-rehype-pretty-code-title] {
   @apply px-4 py-3 font-mono text-xs font-medium border border-neutral-100 dark:border-neutral-800 rounded-t-lg text-neutral-200 bg-[#1c1c1c];
-}
 
-[data-rehype-pretty-code-title] + pre {
-  @apply my-0 rounded-t-none border-t-0;
+  & + pre {
+    @apply my-0 rounded-t-none border-t-0;
+  }
 }
 
 [data-rehype-pretty-code-caption] {
