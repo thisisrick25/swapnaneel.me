@@ -46,6 +46,12 @@ function parseBlogMetadata(rawContent: string): BlogMetadata['data'] {
   };
 }
 
+// Helper: return true when a raw MDX file should be visible (published or running in development)
+function isPublishedOrDev(rawContent: string): boolean {
+  const metadata = parseBlogMetadata(rawContent);
+  return Boolean(metadata.isPublished) || process.env.NODE_ENV === 'development';
+}
+
 // Function to fetch and parse metadata for all blog files from GitHub
 const getAllBlogMetadata = cache(async (): Promise<BlogMetadata[]> => {
   const contents = await getGitHubDirectoryContents();
@@ -98,12 +104,18 @@ export const getAllBlogsFromGitHub = cache(async (): Promise<Blog[]> => {
     item.type === 'file' && (item.name.endsWith('.mdx'))
   );
 
-  // Fetch content for each file concurrently
+  // Fetch content for each file concurrently. Parse frontmatter first and skip drafts in production.
   const blogPromises = mdxFiles.map(async (file: any) => {
     // file.path is the full path from the root of the repo (e.g., 'content/posts/my-post.mdx')
     const rawContent = await getGitHubFileContent(file.path);
 
-    // Use compileMDX to parse content and frontmatter
+    // Quickly parse frontmatter to decide whether to compile the MDX
+    if (!isPublishedOrDev(rawContent)) {
+      // Skip unpublished/draft posts in production
+      return null;
+    }
+
+    // Use compileMDX to parse content and full frontmatter
     const { content, frontmatter } = await compileMDX<BlogData>({
       source: rawContent,
       options: {
@@ -127,7 +139,9 @@ export const getAllBlogsFromGitHub = cache(async (): Promise<Blog[]> => {
     } as Blog;
   });
 
-  return Promise.all(blogPromises);
+  // Resolve all promises and filter out skipped (null) entries
+  const resolved = await Promise.all(blogPromises);
+  return resolved.filter((b): b is Blog => b !== null);
 });
 
 // Get all blogs metadata (for lists), showing drafts only in development
@@ -161,6 +175,12 @@ export async function getBlogBySlug(slug: string): Promise<Blog | undefined> {
   try {
     // Fetch ONLY the content for the specific file
     const rawContent = await getGitHubFileContent(filePath);
+
+    // Parse frontmatter metadata quickly and skip compiling if unpublished in production
+    if (!isPublishedOrDev(rawContent)) {
+      // Don't expose draft/unpublished posts in production
+      return undefined;
+    }
 
     // Use the shared compile function on the specific file's content
     const { content, frontmatter } = await compileMdxContent(rawContent);
