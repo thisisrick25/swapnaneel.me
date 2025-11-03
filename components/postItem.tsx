@@ -22,13 +22,13 @@ export default function PostItem({ title, date, viewCount, slug, showLink = true
         {showLink ? (
           <div className="flex justify-between">
             <DateDisplay date={date} />
-            <ViewCounter slug={slug} trackView={false} count={viewCount} />
+            <ViewCounter slug={slug} trackView={!showLink} count={viewCount} />
           </div>
         ) : (
           <>
             <div className="flex justify-between">
               <DateDisplay date={date} />
-              <ViewCounter slug={slug} trackView={false} count={viewCount} />
+              <ViewCounter slug={slug} trackView={!showLink} count={viewCount} />
             </div>
             {updatedAt && updatedAt !== date && (
               <div className="mt-1 text-gray-500 inline-flex gap-1 italic">
