@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState, useRef } from 'react';
+import { jetbrains_mono } from '@/fonts';
 
 interface ViewCounterProps {
   slug: string;
@@ -59,17 +60,26 @@ export default function ViewCounter({ slug, trackView = true, count }: ViewCount
 
         if (shouldIncrement) {
           setViews(initialCount + 1);
-          
+
           // Increment view on server in background
           const incrementView = async () => {
             try {
-              await fetch('/api/views', {
+              const res = await fetch('/api/views', {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({ slug }),
               });
+              if (res.ok) {
+                const data = await res.json();
+                if (typeof data.count === 'number') {
+                  setViews(data.count);
+                }
+              } else {
+                // Revert optimistic update if server returns error
+                setViews(initialCount);
+              }
             } catch (error) {
               console.error('Error incrementing views:', error);
               // Revert optimistic update on error
@@ -88,8 +98,8 @@ export default function ViewCounter({ slug, trackView = true, count }: ViewCount
   }
 
   return (
-    <p>
-      {views.toLocaleString()} views
+    <p className={jetbrains_mono.className}>
+      {views} views
     </p>
   );
 }

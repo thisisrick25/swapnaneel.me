@@ -36,8 +36,8 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Slug is required' }, { status: 400 });
     }
 
-    await increment(slug);
-    return NextResponse.json({ success: true });
+    const newCount = await increment(slug);
+    return NextResponse.json({ success: true, count: newCount });
   } catch (error) {
     console.error('Error incrementing views:', error);
     return NextResponse.json({ error: 'Failed to increment views' }, { status: 500 });

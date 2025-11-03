@@ -31,7 +31,7 @@ export interface Blog {
 }
 
 export interface BlogMetadata {
-  data: Pick<BlogData, 'title' | 'publishedAt' | 'isPublished' | 'tags'>; // Only necessary data
+  data: Pick<BlogData, 'title' | 'publishedAt' | 'updatedAt' | 'isPublished' | 'tags'>; // Only necessary data
   slug: string;
 }
 
@@ -40,6 +40,7 @@ function parseBlogMetadata(rawContent: string): BlogMetadata['data'] {
   return {
     title: data.title,
     publishedAt: data.publishedAt,
+    updatedAt: data.updatedAt,
     isPublished: data.isPublished,
     tags: data.tags || [],
   };
