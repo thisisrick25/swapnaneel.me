@@ -41,7 +41,7 @@ export default function DateDisplay({ date }: DateDisplayProps) {
 
   return (
     <span
-      className={`${inter.className} relative block cursor-pointer overflow-hidden`}
+      className={`${inter.className} relative cursor-pointer overflow-hidden`}
       onMouseEnter={() => setShowFullDate(true)}
       onMouseLeave={() => setShowFullDate(false)}
       title={fullDate}

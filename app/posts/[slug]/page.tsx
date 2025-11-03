@@ -52,6 +52,7 @@ export default async function Page({ params }: PageProps) {
       <PostItem
         title={blog.data.title}
         date={blog.data.publishedAt}
+        updatedAt={blog.data.updatedAt}
         viewCount={viewCount}
         slug={slug}
         showLink={false}
