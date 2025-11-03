@@ -8,6 +8,10 @@ export default function Loading() {
             <div className="h-4 bg-gray-300 dark:bg-gray-700 rounded w-1/4"></div>
             <div className="h-4 bg-gray-300 dark:bg-gray-700 rounded w-1/6"></div>
           </div>
+          {/* <div className="mt-1 flex items-center gap-2 italic" aria-hidden="true">
+            <div className="h-3 bg-gray-300 dark:bg-gray-700 rounded w-12"></div>
+            <div className="h-3 bg-gray-300 dark:bg-gray-700 rounded w-1/6"></div>
+          </div> */}
         </div>
         <div className="h-4 bg-gray-300 dark:bg-gray-700 rounded mb-4"></div>
         <div className="h-16 bg-gray-300 dark:bg-gray-700 rounded mb-4"></div>
