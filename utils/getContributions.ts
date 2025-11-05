@@ -11,60 +11,66 @@ export type Contribution = {
   merged_at?: string | null;
   type: 'pr' | 'issue';
   state: string;
-  labels: string[];
+  relatedIssues?: { number: number; url: string }[];
 };
 
-async function fetchJson(url: string) {
-  const res = await fetch(url, {
+// Minimal GraphQL fetch helper
+async function fetchGraphQL(query: string) {
+  if (!GITHUB_TOKEN) throw new Error('GITHUB_TOKEN is required for GraphQL requests');
+
+  const res = await fetch('https://api.github.com/graphql', {
+    method: 'POST',
     headers: {
-      Accept: 'application/vnd.github.v3+json',
-      ...(GITHUB_TOKEN && { Authorization: `Bearer ${GITHUB_TOKEN}` }),
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${GITHUB_TOKEN}`,
     },
+    body: JSON.stringify({ query }),
     cache: 'no-store',
   });
 
+  const json = await res.json();
   if (!res.ok) {
-    const txt = await res.text();
-    throw new Error(`GitHub API error: ${res.status} ${txt}`);
+    throw new Error(`GitHub GraphQL error: ${res.status} ${JSON.stringify(json)}`);
+  }
+  if (json.errors) {
+    // don't fail hard for individual errors, but surface them
+    console.warn('GitHub GraphQL returned errors', json.errors);
   }
 
-  return res.json();
+  return json.data || {};
 }
 
-// Fetch merged PRs authored by the user but NOT in user's own repos/orgs
-async function fetchExternalMergedPRs(): Promise<Contribution[]> {
-  // Query: is:pr is:merged author:${username} -user:${username}
-  const q = `is:pr is:merged author:${GITHUB_REPO_OWNER} -user:${GITHUB_REPO_OWNER}`;
-  const url = `https://api.github.com/search/issues?q=${encodeURIComponent(q)}&per_page=100`;
-  const data = await fetchJson(url);
-  const items = data.items || [];
+// NOTE: We rely on GraphQL `closingIssuesReferences` for related issues.
 
-  // Fetch PR details to get merged_at when available
-  const contributions = await Promise.all(items.map(async (item: any) => {
-    let merged_at: string | null = null;
-    // If this search result points to a pull_request, fetch its details
-    if (item.pull_request && item.pull_request.url) {
-      try {
-        const prDetails = await fetchJson(item.pull_request.url);
-        merged_at = prDetails?.merged_at || null;
-      } catch (e) {
-        // ignore errors and fall back
-        merged_at = null;
-      }
-    }
+// Fetch merged PRs authored by the user but NOT in user's own repos/orgs using GraphQL
+async function fetchExternalMergedPRs(): Promise<Contribution[]> {
+  if (!GITHUB_TOKEN) {
+    throw new Error('GITHUB_TOKEN is required for GraphQL search to fetch contributions');
+  }
+
+  const q = `is:pr is:merged author:${GITHUB_REPO_OWNER} -user:${GITHUB_REPO_OWNER}`;
+
+  const graphQuery = `query {\n    search(query: \"${q.replace(/\\/g, '\\\\').replace(/\"/g, '\\\"')}\", type: ISSUE, first: 100) {\n      nodes {\n        ... on PullRequest {\n          id\n          number\n          title\n          body\n          bodyText\n          url\n          mergedAt\n          state\n          repository { nameWithOwner }\n          labels(first: 10) { nodes { name } }\n          closingIssuesReferences(first: 10) { nodes { number url } }\n        }\n      }\n    }\n  }`;
+
+  const data = await fetchGraphQL(graphQuery);
+  const nodes = (data?.search?.nodes) || [];
+
+  const contributions: Contribution[] = nodes.map((n: any) => {
+    const repo = n.repository?.nameWithOwner || '';
+    const relatedIssues = (n.closingIssuesReferences?.nodes || []).map((r: any) => ({ number: r.number, url: r.url })) || [];
 
     return {
-      id: item.id,
-      title: item.title,
-      repo: (item.repository_url || '').split('/').slice(-2).join('/'),
-      html_url: item.html_url,
-      body: item.body || null,
-      merged_at,
+      id: n.id,
+      title: n.title,
+      repo,
+      html_url: n.url,
+      body: n.body || n.bodyText || null,
+      merged_at: n.mergedAt || null,
       type: 'pr',
-      state: item.state,
-      labels: (item.labels || []).map((l: any) => l.name || l),
+      state: n.state || 'merged',
+      relatedIssues,
     } as Contribution;
-  }));
+  });
 
   return contributions;
 }
@@ -80,6 +86,10 @@ export async function getExternalMergedContributions(): Promise<Contribution[]> 
     });
     return prs;
   } catch (error) {
+    // If the error is about a missing GITHUB_TOKEN, rethrow so callers notice
+    if (error instanceof Error && /GITHUB_TOKEN/.test(error.message)) {
+      throw error;
+    }
     console.error('Failed to fetch external merged contributions', error);
     return [];
   }
