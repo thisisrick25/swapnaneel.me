@@ -2,8 +2,12 @@ import { GITHUB_REPO_OWNER } from '@/lib/constants'
 
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 
+// List of PRs to ignore from contributions, format: "owner/repo#number"
+const ignoredPRs = ["open-minds/awesome-openminds-team#106", "shrutikapoor08/devjoke#610"]; // e.g., ["owner/repo#123", "other/repo#456"]
+
 export type Contribution = {
-  id: number;
+  id: number; // PR or issue number
+  graphqlId?: string; // GraphQL global ID, if needed
   title: string;
   repo: string; // owner/repo
   html_url: string;
@@ -60,7 +64,8 @@ async function fetchExternalMergedPRs(): Promise<Contribution[]> {
     const relatedIssues = (n.closingIssuesReferences?.nodes || []).map((r: any) => ({ number: r.number, url: r.url })) || [];
 
     return {
-      id: n.id,
+      id: n.number,
+      graphqlId: n.id,
       title: n.title,
       repo,
       html_url: n.url,
@@ -84,7 +89,8 @@ export async function getExternalMergedContributions(): Promise<Contribution[]> 
       const db = b.merged_at ? new Date(b.merged_at).getTime() : 0;
       return db - da;
     });
-    return prs;
+    // Filter out ignored PRs
+    return prs.filter(pr => !ignoredPRs.includes(`${pr.repo}#${pr.id}`));
   } catch (error) {
     // If the error is about a missing GITHUB_TOKEN, rethrow so callers notice
     if (error instanceof Error && /GITHUB_TOKEN/.test(error.message)) {
