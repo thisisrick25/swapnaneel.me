@@ -24,7 +24,6 @@ export default async function Page() {
             title={c.title}
             repo={c.repo}
             link={c.html_url}
-            type={c.type}
             mergedAt={c.merged_at}
             body={c.body}
             relatedIssues={c.relatedIssues}
