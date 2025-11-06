@@ -28,7 +28,6 @@ export default async function Page() {
             body={c.body}
             relatedIssues={c.relatedIssues}
             source={c.source}
-            type={c.type}
           />
         ))}
       </div>

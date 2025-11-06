@@ -10,13 +10,11 @@ type Props = {
   body?: string | null
   relatedIssues?: { number: number; url: string }[]
   source: 'github' | 'gitlab'
-  type: 'pr' | 'mr'
 }
 
-export default function ContributionItem({ title, repo, link, mergedAt, body, relatedIssues, source, type }: Props) {
+export default function ContributionItem({ title, repo, link, mergedAt, body, relatedIssues, source }: Props) {
   const excerpt = body ? body.replace(/\n+/g, ' ').slice(0, 240) : ''
   const repoUrl = source === 'github' ? `https://github.com/${repo}` : `https://gitlab.com/${repo}`
-  const typeLabel = type === 'pr' ? 'PR' : 'MR'
 
   return (
     <article className="bg-white/60 dark:bg-neutral-900/50 border border-neutral-200 dark:border-neutral-800 p-4 rounded-lg mb-4 shadow-sm hover:shadow-md transition-shadow">
@@ -43,7 +41,7 @@ export default function ContributionItem({ title, repo, link, mergedAt, body, re
           </div>
 
           <div className="text-xs text-neutral-500 dark:text-neutral-400 italic">
-            <span className="ml-1 inline-flex gap-1">Merged {typeLabel} <DateDisplay date={mergedAt || ''} /></span>
+            <span className="ml-1 inline-flex gap-1">Merged <DateDisplay date={mergedAt || ''} /></span>
           </div>
         </div>
       </div>
