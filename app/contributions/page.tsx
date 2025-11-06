@@ -1,5 +1,5 @@
 import { Metadata } from 'next'
-import { getExternalMergedContributions } from '@/utils/getContributions'
+import { getMergedContributions } from '@/utils/getContributions'
 import ContributionItem from '@/components/contributionItem'
 
 export const dynamic = 'force-dynamic'
@@ -12,21 +12,23 @@ export function generateMetadata(): Metadata {
 }
 
 export default async function Page() {
-  const externalMerged = await getExternalMergedContributions()
+  const pr = await getMergedContributions()
 
   return (
     <div>
       <h1 className="text-lg font-bold mb-6">Contributions</h1>
       <div>
-        {externalMerged.map((c) => (
+        {pr.map((c) => (
           <ContributionItem
-            key={`ext-${c.id}`}
+            key={`ext-${c.source}-${c.id}`}
             title={c.title}
             repo={c.repo}
             link={c.html_url}
             mergedAt={c.merged_at}
             body={c.body}
             relatedIssues={c.relatedIssues}
+            source={c.source}
+            type={c.type}
           />
         ))}
       </div>

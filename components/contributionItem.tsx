@@ -9,10 +9,14 @@ type Props = {
   mergedAt?: string | null
   body?: string | null
   relatedIssues?: { number: number; url: string }[]
+  source: 'github' | 'gitlab'
+  type: 'pr' | 'mr'
 }
 
-export default function ContributionItem({ title, repo, link, mergedAt, body, relatedIssues }: Props) {
+export default function ContributionItem({ title, repo, link, mergedAt, body, relatedIssues, source, type }: Props) {
   const excerpt = body ? body.replace(/\n+/g, ' ').slice(0, 240) : ''
+  const repoUrl = source === 'github' ? `https://github.com/${repo}` : `https://gitlab.com/${repo}`
+  const typeLabel = type === 'pr' ? 'PR' : 'MR'
 
   return (
     <article className="bg-white/60 dark:bg-neutral-900/50 border border-neutral-200 dark:border-neutral-800 p-4 rounded-lg mb-4 shadow-sm hover:shadow-md transition-shadow">
@@ -29,12 +33,17 @@ export default function ContributionItem({ title, repo, link, mergedAt, body, re
         </div>
 
         <div className="flex-shrink-0 text-right">
-          <Link href={`https://github.com/${repo}`} target="_blank" rel="noopener noreferrer" className="inline-block text-xs font-medium px-2 py-1 rounded-full bg-neutral-100 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-200 hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors">
-            {repo}
-          </Link>
+          <div className="flex items-center gap-2 mb-2">
+            <Link href={repoUrl} target="_blank" rel="noopener noreferrer" className="inline-block text-xs font-medium px-2 py-1 rounded-full bg-neutral-100 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-200 hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors">
+              {repo}
+            </Link>
+            <span className={`inline-block text-xs font-medium px-2 py-1 rounded-full ${source === 'github' ? 'bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200' : 'bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-200'}`}>
+              {source === 'github' ? 'GitHub' : 'GitLab'}
+            </span>
+          </div>
 
-          <div className="mt-2 text-xs text-neutral-500 dark:text-neutral-400 italic">
-            <span className="ml-1 inline-flex gap-1">Merged <DateDisplay date={mergedAt || ''} /></span>
+          <div className="text-xs text-neutral-500 dark:text-neutral-400 italic">
+            <span className="ml-1 inline-flex gap-1">Merged {typeLabel} <DateDisplay date={mergedAt || ''} /></span>
           </div>
         </div>
       </div>
