@@ -1,7 +1,45 @@
-import { GITHUB_REPO_OWNER } from '@/lib/constants'
+import { GIT_USERNAME } from '@/lib/constants'
 
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 const GITLAB_TOKEN = process.env.GITLAB_TOKEN;
+
+// GraphQL Queries
+const GITHUB_GRAPHQL_QUERY = `query {
+  search(query: "is:pr is:merged author:${GIT_USERNAME} -user:${GIT_USERNAME}", type: ISSUE, first: 100) {
+    nodes {
+      ... on PullRequest {
+        id
+        number
+        title
+        body
+        bodyText
+        url
+        mergedAt
+        state
+        repository { nameWithOwner }
+        labels(first: 10) { nodes { name } }
+        closingIssuesReferences(first: 10) { nodes { number url } }
+      }
+    }
+  }
+}`;
+
+const GITLAB_GRAPHQL_QUERY = `query {
+  user(username: "${GIT_USERNAME}") {
+    authoredMergeRequests(state: merged, first: 100) {
+      nodes {
+        iid
+        title
+        description
+        webUrl
+        mergedAt
+        state
+        project { id fullPath }
+        labels { nodes { title } }
+      }
+    }
+  }
+}`;
 
 // List of PRs/MRs to ignore from contributions, format: "owner/repo#number"
 const ignoredPRs = ["open-minds/awesome-openminds-team#106", "shrutikapoor08/devjoke#610"]; // e.g., ["owner/repo#123", "other/repo#456"]
@@ -77,11 +115,7 @@ async function fetchGithubPRs(): Promise<Contribution[]> {
     throw new Error('GITHUB_TOKEN is required for GraphQL search to fetch contributions');
   }
 
-  const q = `is:pr is:merged author:${GITHUB_REPO_OWNER} -user:${GITHUB_REPO_OWNER}`;
-
-  const graphQuery = `query {\n    search(query: \"${q.replace(/\\/g, '\\\\').replace(/\"/g, '\\\"')}\", type: ISSUE, first: 100) {\n      nodes {\n        ... on PullRequest {\n          id\n          number\n          title\n          body\n          bodyText\n          url\n          mergedAt\n          state\n          repository { nameWithOwner }\n          labels(first: 10) { nodes { name } }\n          closingIssuesReferences(first: 10) { nodes { number url } }\n        }\n      }\n    }\n  }`;
-
-  const data = await fetchGraphQLGithub(graphQuery);
+  const data = await fetchGraphQLGithub(GITHUB_GRAPHQL_QUERY);
   const nodes = (data?.search?.nodes) || [];
 
   const contributions: Contribution[] = nodes.map((n: any) => {
@@ -110,9 +144,7 @@ async function fetchGitLabMRs(): Promise<Contribution[]> {
     throw new Error('GITLAB_TOKEN is required for GitLab GraphQL search to fetch contributions');
   }
 
-  const graphQuery = `query {\n    user(username: \"${GITHUB_REPO_OWNER}\") {\n      authoredMergeRequests(state: merged, first: 100) {\n        nodes {\n          iid\n          title\n          description\n          webUrl\n          mergedAt\n          state\n          project { fullPath }\n          labels { nodes { title } }\n        }\n      }\n    }\n  }`;
-
-  const data = await fetchGraphQLGitLab(graphQuery);
+  const data = await fetchGraphQLGitLab(GITLAB_GRAPHQL_QUERY);
   const nodes = (data?.user?.authoredMergeRequests?.nodes) || [];
 
   // Fetch related issues for each MR using REST API
