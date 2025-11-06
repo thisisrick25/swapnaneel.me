@@ -3,6 +3,9 @@ import { GIT_USERNAME } from '@/lib/constants'
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 const GITLAB_TOKEN = process.env.GITLAB_TOKEN;
 
+if (!GITHUB_TOKEN) throw new Error('GITHUB_TOKEN is required for GitHub GraphQL requests');
+if (!GITLAB_TOKEN) throw new Error('GITLAB_TOKEN is required for GitLab GraphQL requests');
+
 // GraphQL Queries
 const GITHUB_GRAPHQL_QUERY = `query {
   search(query: "is:pr is:merged author:${GIT_USERNAME} -user:${GIT_USERNAME}", type: ISSUE, first: 100) {
@@ -58,8 +61,6 @@ export type Contribution = {
 
 // GitHub GraphQL fetch helper
 async function fetchGraphQLGithub(query: string) {
-  if (!GITHUB_TOKEN) throw new Error('GITHUB_TOKEN is required for GraphQL requests');
-
   const res = await fetch('https://api.github.com/graphql', {
     method: 'POST',
     headers: {
@@ -84,8 +85,6 @@ async function fetchGraphQLGithub(query: string) {
 
 // GitLab GraphQL fetch helper
 async function fetchGraphQLGitLab(query: string) {
-  if (!GITLAB_TOKEN) throw new Error('GITLAB_TOKEN is required for GitLab GraphQL requests');
-
   const res = await fetch('https://gitlab.com/api/graphql', {
     method: 'POST',
     headers: {
@@ -111,10 +110,6 @@ async function fetchGraphQLGitLab(query: string) {
 
 // Fetch merged MRs authored by the user but NOT in user's own repos/orgs using GraphQL
 async function fetchGithubPRs(): Promise<Contribution[]> {
-  if (!GITHUB_TOKEN) {
-    throw new Error('GITHUB_TOKEN is required for GraphQL search to fetch contributions');
-  }
-
   const data = await fetchGraphQLGithub(GITHUB_GRAPHQL_QUERY);
   const nodes = (data?.search?.nodes) || [];
 
@@ -140,10 +135,6 @@ async function fetchGithubPRs(): Promise<Contribution[]> {
 
 // Fetch merged MRs from GitLab authored by the user
 async function fetchGitLabMRs(): Promise<Contribution[]> {
-  if (!GITLAB_TOKEN) {
-    throw new Error('GITLAB_TOKEN is required for GitLab GraphQL search to fetch contributions');
-  }
-
   const data = await fetchGraphQLGitLab(GITLAB_GRAPHQL_QUERY);
   const nodes = (data?.user?.authoredMergeRequests?.nodes) || [];
 
