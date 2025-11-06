@@ -4,6 +4,7 @@ import { poppins } from '@/fonts'
 import { GIT_USERNAME } from '@/lib/constants'
 
 type Props = {
+  id: number
   title: string
   repo: string
   link: string
@@ -12,15 +13,21 @@ type Props = {
   source: 'github' | 'gitlab'
 }
 
-export default function ContributionItem({ title, repo, link, mergedAt, relatedIssues, source }: Props) {
+export default function ContributionItem({ title, repo, link, mergedAt, relatedIssues, source, id }: Props) {
   const repoUrl = source === 'github' ? `https://github.com/${repo}` : `https://gitlab.com/${repo}`
+
+  const repoSlug = repo.replace("/", "-");
+  const dateStr = mergedAt
+    ? mergedAt.slice(0, 10).replace(/-/g, "")
+    : "00000000";
+  const slug = `${dateStr}-${repoSlug}-${id}`;
 
   return (
     <article className="bg-white/60 dark:bg-neutral-900/50 border border-neutral-200 dark:border-neutral-800 p-4 rounded-lg mb-4 shadow-sm hover:shadow-md transition-shadow">
       <div className="flex items-start justify-between gap-4">
         <div className="min-w-0">
           <h2 className={`${poppins.className} text-base md:text-lg font-semibold leading-tight`}>
-            <Link href={link} target="_blank" rel="noopener noreferrer" className="hover:underline text-slate-900 dark:text-slate-100">
+            <Link href={`/contributions/${slug}`} className="hover:underline text-slate-900 dark:text-slate-100">
               {title}
             </Link>
           </h2>

@@ -27,6 +27,7 @@ export default async function Page() {
             mergedAt={c.merged_at}
             relatedIssues={c.relatedIssues}
             source={c.source}
+            id={c.id}
           />
         ))}
       </div>
