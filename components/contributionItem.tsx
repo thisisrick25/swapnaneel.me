@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import DateDisplay from '@/components/dateDisplay'
 import { poppins } from '@/fonts'
+import { GIT_USERNAME } from '@/lib/constants'
 
 type Props = {
   title: string
@@ -30,7 +31,7 @@ export default function ContributionItem({ title, repo, link, mergedAt, relatedI
             <Link href={repoUrl} target="_blank" rel="noopener noreferrer" className="inline-block text-xs font-medium px-2 py-1 rounded-full bg-neutral-100 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-200 hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors">
               {repo}
             </Link>
-            <Link href={source === 'github' ? 'https://github.com/thisisrick25' : 'https://gitlab.com/thisisrick25'} target="_blank" rel="noopener noreferrer" className={`inline-block text-xs font-medium px-2 py-1 rounded-full ${source === 'github' ? 'bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700' : 'bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-200 hover:bg-orange-200 dark:hover:bg-orange-800'} transition-colors`}>
+            <Link href={source === 'github' ? `https://github.com/${GIT_USERNAME}` : `https://gitlab.com/${GIT_USERNAME}`} target="_blank" rel="noopener noreferrer" className={`inline-block text-xs font-medium px-2 py-1 rounded-full ${source === 'github' ? 'bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700' : 'bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-200 hover:bg-orange-200 dark:hover:bg-orange-800'} transition-colors`}>
               {source === 'github' ? 'GitHub' : 'GitLab'}
             </Link>
           </div>
