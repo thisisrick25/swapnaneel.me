@@ -1,4 +1,15 @@
+import { ReactElement, JSXElementConstructor } from 'react'
 import { GIT_USERNAME } from '@/lib/constants'
+import { getGitHubFileContent } from '@/lib/github'
+import { compileMDX } from "next-mdx-remote/rsc";
+import {
+  remarkFrontmatter,
+  remarkMdxFrontmatter,
+  rehypeSlug,
+  rehypeAutolinkHeadings, rehypeAutolinkHeadingsOptions,
+  rehypePrettyCode, rehypePrettyCodeOptions,
+  remarkGfm,
+} from '@/lib/mdx';
 
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 const GITLAB_TOKEN = process.env.GITLAB_TOKEN;
@@ -58,6 +69,23 @@ export type Contribution = {
   source: 'github' | 'gitlab';
   relatedIssues?: { number: number; url: string }[];
 };
+
+export interface ContributionData {
+  id: number;
+  repo: string;
+  title: string;
+  url: string;
+  mergedAt: string;
+  relatedIssues?: string[];
+  summary: string;
+}
+
+export interface ContributionBlog {
+  data: ContributionData;
+  slug: string;
+  content: ReactElement<any, string | JSXElementConstructor<any>>;
+  rawContent: string;
+}
 
 // GitHub GraphQL fetch helper
 async function fetchGraphQLGithub(query: string) {
@@ -216,4 +244,42 @@ export async function getMergedContributions(): Promise<Contribution[]> {
   });
   // Filter out ignored PRs/MRs
   return allContributions.filter(pr => !ignoredPRs.includes(`${pr.repo}#${pr.id}`));
+}
+
+async function compileMdxContent(rawContent: string): Promise<{ content: ReactElement<any, string | JSXElementConstructor<any>>, frontmatter: ContributionData }> {
+  const { content, frontmatter } = await compileMDX<ContributionData>({
+    source: rawContent,
+    options: {
+      mdxOptions: {
+        remarkPlugins: [remarkGfm, remarkFrontmatter, remarkMdxFrontmatter],
+        rehypePlugins: [
+          rehypeSlug,
+          [rehypeAutolinkHeadings, rehypeAutolinkHeadingsOptions],
+          [rehypePrettyCode, rehypePrettyCodeOptions],
+        ],
+      },
+      parseFrontmatter: true,
+    },
+  });
+  return { content, frontmatter };
+}
+
+// Get a single contribution by slug
+export async function getContributionBySlug(slug: string): Promise<ContributionBlog | undefined> {
+  const filePath = `contributions/${slug}.mdx`; //file path
+
+  try {
+    const rawContent = await getGitHubFileContent(filePath);
+    const { content, frontmatter } = await compileMdxContent(rawContent);
+
+    return {
+      data: frontmatter,
+      slug: slug,
+      content: content,
+      rawContent: rawContent,
+    } as ContributionBlog;
+  } catch (error) {
+    console.error(`Error fetching contribution with slug ${filePath}:`, error);
+    return undefined;
+  }
 }
