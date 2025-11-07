@@ -1,4 +1,5 @@
 import { ReactElement, JSXElementConstructor } from 'react'
+import { cache } from 'react';
 import { GIT_USERNAME } from '@/lib/constants'
 import { getGitHubFileContent } from '@/lib/github'
 import { compileMDX } from "next-mdx-remote/rsc";
@@ -206,7 +207,7 @@ async function fetchGitLabMRs(): Promise<Contribution[]> {
   return contributions;
 }
 
-export async function getMergedContributions(): Promise<Contribution[]> {
+export const getMergedContributions = cache(async (): Promise<Contribution[]> => {
   const allContributions: Contribution[] = [];
 
   // Fetch GitHub PRs
@@ -241,7 +242,7 @@ export async function getMergedContributions(): Promise<Contribution[]> {
   });
   // Filter out ignored PRs/MRs
   return allContributions.filter(pr => !ignoredPRs.includes(`${pr.repo}#${pr.id}`));
-}
+});
 
 async function compileMdxContent(rawContent: string): Promise<{ content: ReactElement<any, string | JSXElementConstructor<any>>, frontmatter: ContributionData }> {
   const { content, frontmatter } = await compileMDX<ContributionData>({
