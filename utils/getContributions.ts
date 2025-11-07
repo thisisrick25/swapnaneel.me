@@ -1,5 +1,4 @@
 import { ReactElement, JSXElementConstructor } from 'react'
-import { cache } from 'react';
 import { unstable_cache } from 'next/cache';
 import { GIT_USERNAME, REVALIDATE_SECONDS } from '@/lib/constants'
 import { getGitHubFileContent } from '@/lib/github'
