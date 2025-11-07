@@ -194,7 +194,7 @@ export async function getBlogBySlug(slug: string): Promise<Blog | undefined> {
 
   } catch (error) {
     // If the file is not found, return undefined
-    console.error(`Error fetching blog with slug ${slug}:`, error);
+    console.error(`Error fetching blog with slug ${filePath}:`, error);
     return undefined;
   }
 }
