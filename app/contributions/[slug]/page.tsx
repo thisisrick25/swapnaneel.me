@@ -16,9 +16,12 @@ const getContributionData = async (slug: string): Promise<ContributionBlog | und
 
 export async function generateStaticParams() {
   const contributions = await getMergedContributions();
-  return contributions.map((contribution) => ({
-    slug: `${contribution.source}-${contribution.id}`,
-  }));
+  return contributions.map((contribution) => {
+    const repoSlug = contribution.repo.replace("/", "-");
+    const dateStr = contribution.merged_at ? contribution.merged_at.slice(0, 10).replace(/-/g, "") : "00000000";
+    const slug = `${dateStr}-${repoSlug}-${contribution.id}`;
+    return { slug };
+  });
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
@@ -28,7 +31,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   return {
     title: contribution.data.title,
-    description: `Contribution: ${contribution.data.summary}`,
+    description: contribution.data.summary,
   };
 }
 
@@ -38,10 +41,6 @@ export default async function Page({ params }: PageProps) {
   if (!contribution) notFound();
 
   const source = contribution.data.url.includes('github.com') ? 'github' : 'gitlab';
-  const relatedIssues = (contribution.data.relatedIssues ?? []).map(url => {
-    const match = url.match(/\/issues\/(\d+)$/);
-    return { number: match ? parseInt(match[1]) : 0, url };
-  });
 
   return (
     <div>
@@ -51,7 +50,7 @@ export default async function Page({ params }: PageProps) {
         repo={contribution.data.repo}
         link={contribution.data.url}
         mergedAt={contribution.data.mergedAt}
-        relatedIssues={relatedIssues}
+        relatedIssues={contribution.data.relatedIssues}
         source={source}
         showLink={false}
       />

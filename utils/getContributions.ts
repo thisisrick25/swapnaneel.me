@@ -67,7 +67,7 @@ export type Contribution = {
   body: string | null;
   merged_at?: string | null;
   source: 'github' | 'gitlab';
-  relatedIssues?: { number: number; url: string }[];
+  relatedIssues?: string[];
 };
 
 export interface ContributionData {
@@ -143,7 +143,7 @@ async function fetchGithubPRs(): Promise<Contribution[]> {
 
   const contributions: Contribution[] = nodes.map((n: any) => {
     const repo = n.repository?.nameWithOwner || '';
-    const relatedIssues = (n.closingIssuesReferences?.nodes || []).map((r: any) => ({ number: r.number, url: r.url })) || [];
+    const relatedIssues = (n.closingIssuesReferences?.nodes || []).map((r: any) => r.url) || [];
 
     return {
       id: n.number,
@@ -172,7 +172,7 @@ async function fetchGitLabMRs(): Promise<Contribution[]> {
     const projectId = encodeURIComponent(repo);
     const mrIid = n.iid;
 
-    let relatedIssues: { number: number; url: string }[] = [];
+    let relatedIssues: string[] = [];
     try {
       const closesIssuesUrl = `https://gitlab.com/api/v4/projects/${projectId}/merge_requests/${mrIid}/closes_issues`;
       const res = await fetch(closesIssuesUrl, {
@@ -182,10 +182,7 @@ async function fetchGitLabMRs(): Promise<Contribution[]> {
       });
       if (res.ok) {
         const issues = await res.json();
-        relatedIssues = issues.map((issue: any) => ({
-          number: issue.iid,
-          url: issue.web_url,
-        }));
+        relatedIssues = issues.map((issue: any) => issue.web_url);
       } else {
         console.warn(`Failed to fetch closes_issues for ${repo}#${mrIid}: ${res.status}`);
       }

@@ -9,7 +9,7 @@ type Props = {
   repo: string
   link: string
   mergedAt?: string | null
-  relatedIssues?: { number: number; url: string }[]
+  relatedIssues?: string[]
   source: 'github' | 'gitlab'
   showLink?: boolean
 }
@@ -18,10 +18,13 @@ export default function ContributionItem({ title, repo, link, mergedAt, relatedI
   const repoUrl = source === 'github' ? `https://github.com/${repo}` : `https://gitlab.com/${repo}`
 
   const repoSlug = repo.replace("/", "-");
-  const dateStr = mergedAt
-    ? mergedAt.slice(0, 10).replace(/-/g, "")
-    : "00000000";
+  const dateStr = mergedAt ? mergedAt.slice(0, 10).replace(/-/g, "") : "00000000";
   const slug = `${dateStr}-${repoSlug}-${id}`;
+
+  const extractIssueNumber = (url: string): string => {
+    const parts = url.split('/');
+    return parts[parts.length - 1];
+  };
 
   return (
     <article className="bg-white/60 dark:bg-neutral-900/50 border border-neutral-200 dark:border-neutral-800 p-4 rounded-lg mb-4 shadow-sm hover:shadow-md transition-shadow">
@@ -36,7 +39,7 @@ export default function ContributionItem({ title, repo, link, mergedAt, relatedI
           ) : (
             <h2 className={`${poppins.className} text-base md:text-lg font-semibold leading-tight text-slate-900 dark:text-slate-100`}>
               <Link href={link} target="_blank" rel="noopener noreferrer" className="hover:underline">
-              {title}
+                {title}
               </Link>
             </h2>
           )}
@@ -62,9 +65,9 @@ export default function ContributionItem({ title, repo, link, mergedAt, relatedI
         {relatedIssues && relatedIssues.length > 0 && (
           <div className="flex items-center gap-2">
             <span className="text-neutral-500 text-xs mr-1">Related:</span>
-            {relatedIssues.map((issue) => (
-              <Link key={issue.number} href={issue.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center text-xs font-medium mr-2 px-2 py-1 bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-200 rounded-md hover:bg-blue-100 dark:hover:bg-blue-800 transition-colors">
-                #{issue.number}
+            {relatedIssues?.filter(i => i).map((issueUrl) => (
+              <Link key={issueUrl} href={issueUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center text-xs font-medium mr-2 px-2 py-1 bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-200 rounded-md hover:bg-blue-100 dark:hover:bg-blue-800 transition-colors">
+                #{extractIssueNumber(issueUrl)}
               </Link>
             ))}
           </div>
