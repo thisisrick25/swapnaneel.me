@@ -1,6 +1,7 @@
 import { ReactElement, JSXElementConstructor } from 'react'
 import { cache } from 'react';
-import { GIT_USERNAME } from '@/lib/constants'
+import { unstable_cache } from 'next/cache';
+import { GIT_USERNAME, REVALIDATE_SECONDS } from '@/lib/constants'
 import { getGitHubFileContent } from '@/lib/github'
 import { compileMDX } from "next-mdx-remote/rsc";
 import {
@@ -97,7 +98,8 @@ async function fetchGraphQLGithub(query: string) {
       Authorization: `Bearer ${GITHUB_TOKEN}`,
     },
     body: JSON.stringify({ query }),
-    cache: 'no-store',
+    cache: 'force-cache',
+    next: { revalidate: REVALIDATE_SECONDS },
   });
 
   const json = await res.json();
@@ -121,7 +123,8 @@ async function fetchGraphQLGitLab(query: string) {
       Authorization: `Bearer ${GITLAB_TOKEN}`,
     },
     body: JSON.stringify({ query }),
-    cache: 'no-store',
+    cache: 'force-cache',
+    next: { revalidate: REVALIDATE_SECONDS },
   });
 
   const json = await res.json();
@@ -180,6 +183,8 @@ async function fetchGitLabMRs(): Promise<Contribution[]> {
         headers: {
           'Authorization': `Bearer ${GITLAB_TOKEN}`,
         },
+        cache: 'force-cache',
+        next: { revalidate: REVALIDATE_SECONDS },
       });
       if (res.ok) {
         const issues = await res.json();
@@ -207,42 +212,46 @@ async function fetchGitLabMRs(): Promise<Contribution[]> {
   return contributions;
 }
 
-export const getMergedContributions = cache(async (): Promise<Contribution[]> => {
-  const allContributions: Contribution[] = [];
+export const getMergedContributions = unstable_cache(
+  async (): Promise<Contribution[]> => {
+    const allContributions: Contribution[] = [];
 
-  // Fetch GitHub PRs
-  try {
-    const prs = await fetchGithubPRs();
-    allContributions.push(...prs);
-  } catch (error) {
-    if (error instanceof Error && /GITHUB_TOKEN/.test(error.message)) {
-      console.warn('Skipping GitHub contributions: GITHUB_TOKEN not provided');
-    } else {
-      console.error('Failed to fetch GitLab contributions', error);
+    // Fetch GitHub PRs
+    try {
+      const prs = await fetchGithubPRs();
+      allContributions.push(...prs);
+    } catch (error) {
+      if (error instanceof Error && /GITHUB_TOKEN/.test(error.message)) {
+        console.warn('Skipping GitHub contributions: GITHUB_TOKEN not provided');
+      } else {
+        console.error('Failed to fetch GitLab contributions', error);
+      }
     }
-  }
 
-  // Fetch GitLab MRs
-  try {
-    const mrs = await fetchGitLabMRs();
-    allContributions.push(...mrs);
-  } catch (error) {
-    if (error instanceof Error && /GITLAB_TOKEN/.test(error.message)) {
-      console.warn('Skipping GitLab contributions: GITLAB_TOKEN not provided');
-    } else {
-      console.error('Failed to fetch GitLab contributions', error);
+    // Fetch GitLab MRs
+    try {
+      const mrs = await fetchGitLabMRs();
+      allContributions.push(...mrs);
+    } catch (error) {
+      if (error instanceof Error && /GITLAB_TOKEN/.test(error.message)) {
+        console.warn('Skipping GitLab contributions: GITLAB_TOKEN not provided');
+      } else {
+        console.error('Failed to fetch GitLab contributions', error);
+      }
     }
-  }
 
-  // sort by merged_at (most recent first). If merged_at is missing, treat as very old.
-  allContributions.sort((a, b) => {
-    const da = a.merged_at ? new Date(a.merged_at).getTime() : 0;
-    const db = b.merged_at ? new Date(b.merged_at).getTime() : 0;
-    return db - da;
-  });
-  // Filter out ignored PRs/MRs
-  return allContributions.filter(pr => !ignoredPRs.includes(`${pr.repo}#${pr.id}`));
-});
+    // sort by merged_at (most recent first). If merged_at is missing, treat as very old.
+    allContributions.sort((a, b) => {
+      const da = a.merged_at ? new Date(a.merged_at).getTime() : 0;
+      const db = b.merged_at ? new Date(b.merged_at).getTime() : 0;
+      return db - da;
+    });
+    // Filter out ignored PRs/MRs
+    return allContributions.filter(pr => !ignoredPRs.includes(`${pr.repo}#${pr.id}`));
+  },
+  ['contributions'],
+  { revalidate: REVALIDATE_SECONDS }
+);
 
 async function compileMdxContent(rawContent: string): Promise<{ content: ReactElement<any, string | JSXElementConstructor<any>>, frontmatter: ContributionData }> {
   const { content, frontmatter } = await compileMDX<ContributionData>({
