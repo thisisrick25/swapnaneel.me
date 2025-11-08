@@ -13,27 +13,27 @@ interface PostItemProps {
 }
 
 export default function PostItem({ title, date, viewCount, slug, showLink = true, updatedAt }: PostItemProps) {
+  const dateAndViews = (
+    <div className="flex justify-between">
+      <DateDisplay date={date} />
+      <ViewCounter slug={slug} trackView={!showLink} count={viewCount} />
+    </div>
+  );
+
   const content = (
     <>
       <div className={`${poppins.className}`} style={{ fontWeight: '500' }}>
         {title}
       </div>
-      <div className={`${inter.className} text-xs md:text-sm text-gray-600 dark:text-gray-400`} style={{ fontWeight: '300' }}>
+      <div className="text-xs md:text-sm text-gray-600 dark:text-gray-400">
         {showLink ? (
-          <div className="flex justify-between">
-            <DateDisplay date={date} />
-            <ViewCounter slug={slug} trackView={!showLink} count={viewCount} />
-          </div>
+          dateAndViews
         ) : (
           <>
-            <div className="flex justify-between">
-              <DateDisplay date={date} />
-              <ViewCounter slug={slug} trackView={!showLink} count={viewCount} />
-            </div>
+            {dateAndViews}
             {updatedAt && updatedAt !== date && (
-              <div className="mt-1 text-gray-500 inline-flex gap-1 italic">
-                <span>Updated</span>
-                <DateDisplay date={updatedAt} />
+              <div className="mt-1 text-gray-500 italic">
+                <span className={`${inter.className} inline-flex gap-1`} style={{ fontWeight: '300' }}>Updated <DateDisplay date={updatedAt} /></span>
               </div>
             )}
           </>
