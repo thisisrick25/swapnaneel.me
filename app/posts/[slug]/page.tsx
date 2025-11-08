@@ -6,9 +6,8 @@ import { extractHeadings } from '@/utils/extractHeadings';
 import { getBlogs, getBlogBySlug, Blog } from '@/utils/getBlogs';
 import { Metadata } from 'next'
 import { poppins, inter, jetbrains_mono } from '@/fonts'
-import { unstable_cache } from 'next/cache';
+import { cache } from 'react';
 import { getViewsCountBySlug } from '@/db/queries';
-import { REVALIDATE_SECONDS } from '@/lib/constants';
 
 export const dynamic = 'force-static';
 
@@ -16,15 +15,11 @@ interface PageProps {
   params: Promise<{ slug: string }>
 }
 
-// Cache the function that fetches and processes a single blog post
-const getBlogData = unstable_cache(
-  async (slug: string): Promise<Blog | undefined> => {
-    const blog = await getBlogBySlug(slug);
-    return blog;
-  },
-  ['blog'],
-  { revalidate: REVALIDATE_SECONDS }
-);
+// Cache the function that fetches and processes a single blog post (per-request cache)
+const getBlogData = cache(async (slug: string): Promise<Blog | undefined> => {
+  const blog = await getBlogBySlug(slug);
+  return blog;
+});
 
 export async function generateStaticParams() {
   const blogs = await getBlogs();

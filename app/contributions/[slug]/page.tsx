@@ -1,24 +1,19 @@
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next'
-import { unstable_cache } from 'next/cache';
+import { cache } from 'react';
 import { poppins, inter, jetbrains_mono } from '@/fonts';
 import ContributionItem from '@/components/contributionItem'
 import { getContributionBySlug, ContributionBlog, getMergedContributions } from '@/utils/getContributions';
-import { REVALIDATE_SECONDS } from '@/lib/constants';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
-// Cache the function that fetches and processes a single contribution
-const getContributionData = unstable_cache(
-  async (slug: string): Promise<ContributionBlog | undefined> => {
-    const contribution = await getContributionBySlug(slug);
-    return contribution;
-  },
-  ['contribution'],
-  { revalidate: REVALIDATE_SECONDS }
-);
+// Cache the function that fetches and processes a single contribution (per-request cache)
+const getContributionData = cache(async (slug: string): Promise<ContributionBlog | undefined> => {
+  const contribution = await getContributionBySlug(slug);
+  return contribution;
+});
 
 export async function generateStaticParams() {
   const contributions = await getMergedContributions();
@@ -46,7 +41,7 @@ export default async function Page({ params }: PageProps) {
   const contribution = await getContributionData(slug);
   if (!contribution) notFound();
 
-  const source = contribution.data.url.includes('github.com') ? 'github' : 'gitlab';
+  const source = contribution.data.url?.includes('github.com') ? 'github' : 'gitlab';
 
   return (
     <div>

@@ -17,7 +17,7 @@ type Props = {
 export default function ContributionItem({ title, repo, link, mergedAt, relatedIssues, source, id, showLink = true }: Props) {
   const repoUrl = source === 'github' ? `https://github.com/${repo}` : `https://gitlab.com/${repo}`
 
-  const repoSlug = repo.replace("/", "-");
+  const repoSlug = repo?.replace("/", "-") || "unknown";
   const dateStr = mergedAt ? mergedAt.slice(0, 10).replace(/-/g, "") : "00000000";
   const slug = `${dateStr}-${repoSlug}-${id}`;
 
@@ -38,9 +38,13 @@ export default function ContributionItem({ title, repo, link, mergedAt, relatedI
             </h2>
           ) : (
             <h2 className={`${poppins.className} text-base md:text-lg font-semibold leading-tight text-slate-900 dark:text-slate-100`}>
-              <Link href={link} target="_blank" rel="noopener noreferrer" className="hover:underline">
-                {title}
-              </Link>
+              {link ? (
+                <Link href={link} target="_blank" rel="noopener noreferrer" className="hover:underline">
+                  {title}
+                </Link>
+              ) : (
+                <span>{title}</span>
+              )}
             </h2>
           )}
         </div>
