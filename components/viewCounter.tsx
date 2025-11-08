@@ -98,8 +98,8 @@ export default function ViewCounter({ slug, trackView = true, count }: ViewCount
   }
 
   return (
-    <p className={jetbrains_mono.className} style={{ fontWeight: '300' }}>
+    <span className={jetbrains_mono.className} style={{ fontWeight: '300' }}>
       {views} views
-    </p>
+    </span>
   );
 }
