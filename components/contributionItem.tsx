@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import DateDisplay from '@/components/dateDisplay'
-import { poppins } from '@/fonts'
+import { poppins, inter, jetbrains_mono } from '@/fonts'
 import { GIT_USERNAME } from '@/lib/constants'
 
 type Props = {
@@ -27,29 +27,29 @@ export default function ContributionItem({ title, repo, link, mergedAt, relatedI
   };
 
   return (
-    <article className="bg-white/60 dark:bg-neutral-900/50 border border-neutral-200 dark:border-neutral-800 p-4 rounded-lg mb-4 shadow-sm hover:shadow-md transition-shadow">
-      <div className="flex items-start justify-between gap-4">
-        <div className="min-w-0">
+    <article className="bg-white/60 dark:bg-neutral-900/50 border border-neutral-200 dark:border-neutral-800 p-4 rounded-lg mb-4">
+      <div className="flex justify-between gap-2">
+        <span className={`${poppins.className} hover:underline`} style={{ fontWeight: '500' }}>
           {showLink ? (
-            <h2 className={`${poppins.className} text-base md:text-lg font-semibold leading-tight`}>
-              <Link href={`/contributions/${slug}`} className="hover:underline text-slate-900 dark:text-slate-100">
+            <>
+              <Link href={`/contributions/${slug}`}>
                 {title}
               </Link>
-            </h2>
+            </>
           ) : (
-            <h2 className={`${poppins.className} text-base md:text-lg font-semibold leading-tight text-slate-900 dark:text-slate-100`}>
+            <>
               {link ? (
-                <Link href={link} target="_blank" rel="noopener noreferrer" className="hover:underline">
+                <Link href={link} target="_blank" rel="noopener noreferrer">
                   {title}
                 </Link>
               ) : (
                 <span>{title}</span>
               )}
-            </h2>
+            </>
           )}
-        </div>
+        </span>
 
-        <div className="flex-shrink-0 text-xs font-medium">
+        <div className={`${inter.className} flex-shrink-0 text-xs font-medium`}>
           <div className="flex justify-end gap-1 mb-2">
             <Link href={repoUrl} target="_blank" rel="noopener noreferrer" className="inline-block px-2 py-1 rounded-full bg-neutral-100 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-200 hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors">
               {repo}
@@ -58,23 +58,21 @@ export default function ContributionItem({ title, repo, link, mergedAt, relatedI
               {source === 'github' ? 'GitHub' : 'GitLab'}
             </Link>
           </div>
-
-          <div className="text-xs text-neutral-500 dark:text-neutral-400 italic flex justify-end">
-            <span className="ml-1 inline-flex gap-1">Merged <DateDisplay date={mergedAt || ''} /></span>
-          </div>
         </div>
       </div>
 
-      <div className="mt-3 flex flex-wrap items-center gap-2">
+      <div className="mt-3 flex justify-between text-xs md:text-sm text-gray-600 dark:text-gray-400">
+        <div className="flex items-center">
+          <span className={`${inter.className} inline-flex gap-1`} style={{ fontWeight: '300' }}>Merged <DateDisplay date={mergedAt || ''} /></span>
+        </div>
         {relatedIssues && relatedIssues.length > 0 && (
-          <div className="flex items-center gap-2">
-            <span className="text-neutral-500 text-xs mr-1">Related:</span>
+          <span className={`${jetbrains_mono.className} flex items-center gap-1`} style={{ fontWeight: '300' }}>Related
             {relatedIssues?.filter(i => i).map((issueUrl) => (
-              <Link key={issueUrl} href={issueUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center text-xs font-medium mr-2 px-2 py-1 bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-200 rounded-md hover:bg-blue-100 dark:hover:bg-blue-800 transition-colors">
+              <Link key={issueUrl} href={issueUrl} target="_blank" rel="noopener noreferrer" className=" px-2 py-1 bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-200 rounded-md hover:bg-blue-100 dark:hover:bg-blue-800 transition-colors">
                 #{extractIssueNumber(issueUrl)}
               </Link>
             ))}
-          </div>
+          </span>
         )}
       </div>
     </article>
