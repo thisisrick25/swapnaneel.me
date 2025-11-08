@@ -85,6 +85,7 @@ export interface ContributionBlog {
   data: ContributionData;
   slug: string;
   content: ReactElement<any, string | JSXElementConstructor<any>>;
+  summaryContent: ReactElement<any, string | JSXElementConstructor<any>>;
   rawContent: string;
 }
 
@@ -278,10 +279,27 @@ export async function getContributionBySlug(slug: string): Promise<ContributionB
     const rawContent = await getGitHubFileContent(filePath);
     const { content, frontmatter } = await compileMdxContent(rawContent);
 
+    // Compile the summary as MDX
+    const { content: summaryContent } = await compileMDX({
+      source: frontmatter.summary || '',
+      options: {
+        mdxOptions: {
+          remarkPlugins: [remarkGfm],
+          rehypePlugins: [
+            rehypeSlug,
+            [rehypeAutolinkHeadings, rehypeAutolinkHeadingsOptions],
+            [rehypePrettyCode, rehypePrettyCodeOptions],
+          ],
+        },
+        parseFrontmatter: false, // No frontmatter for summary
+      },
+    });
+
     return {
       data: frontmatter,
       slug: slug,
       content: content,
+      summaryContent: summaryContent,
       rawContent: rawContent,
     } as ContributionBlog;
   } catch (error) {

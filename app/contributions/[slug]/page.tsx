@@ -55,7 +55,8 @@ export default async function Page({ params }: PageProps) {
         source={source}
         showLink={false}
       />
-      <div className={`${poppins.variable} ${inter.variable} ${jetbrains_mono.variable} max-w-max prose dark:prose-invert mt-6`}>
+      <div className={`${poppins.variable} ${inter.variable} ${jetbrains_mono.variable} max-w-max prose dark:prose-invert`}>
+        {contribution.summaryContent}
         {contribution.content}
       </div>
     </div>
