@@ -28,7 +28,7 @@ export default function ContributionItem({ title, repo, link, mergedAt, relatedI
 
   const repoAndSource = (
     <div className={`${inter.className} flex-shrink-0 text-xs font-medium`}>
-      <div className="flex justify-end gap-1 mb-2">
+      <div className="flex justify-end gap-1">
         <Link href={repoUrl} target="_blank" rel="noopener noreferrer" className="inline-block px-2 py-1 rounded-full bg-stone-300 dark:bg-stone-800 hover:bg-stone-400 dark:hover:bg-stone-700 text-stone-700 dark:text-stone-200 transition-colors">
           {repo}
         </Link>
@@ -40,14 +40,14 @@ export default function ContributionItem({ title, repo, link, mergedAt, relatedI
   )
 
   const relatedIssuesAndMergedAt = (
-    <div className="mt-3 flex justify-between text-xs md:text-sm text-gray-600 dark:text-gray-400">
+    <div className="flex justify-between text-xs md:text-sm text-gray-600 dark:text-gray-400">
       <div className="flex items-center">
         <span className={`${inter.className} inline-flex gap-1`} style={{ fontWeight: '300' }}>Merged <DateDisplay date={mergedAt || ''} /></span>
       </div>
       {relatedIssues && relatedIssues.length > 0 && (
         <span className={`${jetbrains_mono.className} flex items-center gap-1`} style={{ fontWeight: '300' }}>Related
           {relatedIssues?.filter(i => i).map((issueUrl) => (
-            <Link key={issueUrl} href={issueUrl} target="_blank" rel="noopener noreferrer" className=" px-2 py-1 bg-blue-100 dark:bg-blue-900/30 hover:bg-blue-200 dark:hover:bg-blue-700 text-blue-700 dark:text-blue-200 rounded-md transition-colors">
+            <Link key={issueUrl} href={issueUrl} target="_blank" rel="noopener noreferrer" className="px-2 py-1 bg-blue-100 dark:bg-blue-900/30 hover:bg-blue-200 dark:hover:bg-blue-700 text-blue-700 dark:text-blue-200 rounded-md transition-colors">
               #{extractIssueNumber(issueUrl)}
             </Link>
           ))}
@@ -58,9 +58,9 @@ export default function ContributionItem({ title, repo, link, mergedAt, relatedI
 
   if (showLink) {
     return (
-      <div className="bg-neutral-100/60 dark:bg-neutral-900/60 p-4 rounded-lg my-4 shadow-xs">
-        <div className="flex justify-between gap-2">
-          <Link href={`/contributions/${slug}`} className={`${poppins.className} hover:underline`} style={{ fontWeight: '500' }}>
+      <div className="bg-neutral-100/60 dark:bg-neutral-900/60 p-3 rounded-lg my-4 shadow-xs">
+        <div className="flex justify-between gap-2 mb-2">
+          <Link href={`/contributions/${slug}`} className={`${poppins.className}`} style={{ fontWeight: '500' }}>
             {title}
           </Link>
           {repoAndSource}
@@ -71,10 +71,10 @@ export default function ContributionItem({ title, repo, link, mergedAt, relatedI
   }
 
   return (
-    <div className="bg-neutral-100/60 dark:bg-neutral-900/60 p-4 rounded-lg mb-4 shadow-xs">
-      <div className="flex justify-between gap-2">
+    <div className="bg-neutral-100/60 dark:bg-neutral-900/60 p-3 rounded-lg mb-4 shadow-xs">
+      <div className="flex justify-between gap-2 mb-2">
         {link ? (
-          <Link href={link} target="_blank" rel="noopener noreferrer" className={`${poppins.className} hover:underline`} style={{ fontWeight: '500' }}>
+          <Link href={link} target="_blank" rel="noopener noreferrer" className={`${poppins.className}`} style={{ fontWeight: '500' }}>
             {title}
           </Link>
         ) : (
