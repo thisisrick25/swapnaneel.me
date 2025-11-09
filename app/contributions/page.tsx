@@ -1,4 +1,5 @@
 import { Metadata } from 'next'
+import { poppins } from '@/fonts';
 import { getMergedContributions } from '@/utils/getContributions'
 import ContributionItem from '@/components/contributionItem'
 
@@ -15,8 +16,8 @@ export default async function Page() {
   const pr = await getMergedContributions()
 
   return (
-    <div>
-      <h1 className="text-lg font-bold mb-6">Contributions</h1>
+    <>
+      <div className={`text-lg font-bold mb-6 ${poppins.className}`} style={{ fontWeight: '700' }}>Contributions</div>
       <div>
         {pr.map((c) => (
           <ContributionItem
@@ -31,6 +32,6 @@ export default async function Page() {
           />
         ))}
       </div>
-    </div>
+    </>
   )
 }
