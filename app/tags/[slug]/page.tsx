@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Metadata } from 'next'
 import PostItem from '@/components/postItem';
 import { getAllTags, getBlogsByTag } from '@/utils/getBlogs'
+import { getViewsCount } from '@/db/queries';
 import { poppins } from "@/fonts";
 
 interface PageProps {
@@ -27,21 +28,27 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export default async function Page({ params }: PageProps) {
   const { slug: tagSlug } = await params;
   const blogs = await getBlogsByTag(tagSlug);
+  const allViews = await getViewsCount();
 
   return (
     <>
-      <h1 className={`text-lg font-bold mb-6 ${poppins.className}`} style={{ fontWeight: '700' }}>
+      <div className={`text-lg font-bold mb-6 ${poppins.className}`} style={{ fontWeight: '700' }}>
         {`#${tagSlug}`}
-      </h1>
+      </div>
       <div>
-        {blogs.map((blog) => (
-          <PostItem
-            key={blog.slug}
-            title={blog.data.title}
-            date={blog.data.publishedAt}
-            slug={blog.slug}
-          />
-        ))}
+        {blogs
+          .map((blog) => {
+            const viewCount = allViews.find((v) => v.slug === blog.slug)?.count || 0;
+            return (
+              <PostItem
+                key={blog.slug}
+                title={blog.data.title}
+                date={blog.data.publishedAt}
+                viewCount={viewCount}
+                slug={blog.slug}
+              />
+            );
+          })}
       </div>
     </>
   );
