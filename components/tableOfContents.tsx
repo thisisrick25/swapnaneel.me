@@ -14,7 +14,7 @@ export default function TableOfContents({ headings }: { headings: Heading[] }) {
   const hasBullet = (text: string) => text.startsWith('- ') || text.startsWith('* ') || /^\d+\.\s/.test(text);
 
   return (
-    <details className={`${poppins.className} group rounded-lg border border-neutral-200 dark:border-neutral-800 bg-neutral-100/50 dark:bg-neutral-800/50 p-3 shadow-sm [&_summary::-webkit-details-marker]:hidden`}>
+    <details className={`${poppins.className} group bg-neutral-100/60 dark:bg-neutral-900/60 p-4 rounded-lg shadow-xs [&_summary::-webkit-details-marker]:hidden`}>
       <summary className="flex cursor-pointer items-center justify-between text-xs md:text-sm lg:text-base text-gray-900 dark:text-gray-100 select-none">
         Table of Contents
         <svg

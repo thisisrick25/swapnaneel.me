@@ -21,7 +21,7 @@ export default function PostItem({ title, date, viewCount, slug, showLink = true
   );
 
   const content = (
-    <>
+    <div className="bg-neutral-100/60 dark:bg-neutral-900/60 p-4 rounded-lg shadow-xs">
       <div className={`${poppins.className}`} style={{ fontWeight: '500' }}>
         {title}
       </div>
@@ -39,7 +39,7 @@ export default function PostItem({ title, date, viewCount, slug, showLink = true
           </>
         )}
       </div>
-    </>
+    </div>
   );
 
   if (showLink) {
