@@ -1,9 +1,9 @@
-import { formatDate } from "@/lib/formatDate";
 import Link from "next/link";
 import { Metadata } from 'next'
-import ViewCounter from '@/components/viewCounter';
+import PostItem from '@/components/postItem';
 import { getAllTags, getBlogsByTag } from '@/utils/getBlogs'
-import { montserrat, poppins } from "@/fonts";
+import { getViewsCount } from '@/db/queries';
+import { poppins } from "@/fonts";
 
 interface PageProps {
   params: Promise<{ slug: string }>
@@ -18,7 +18,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug: tagSlug } = await params;
-  
+
   return {
     title: `#${tagSlug}`,
     description: `Posts tagged with ${tagSlug}`,
@@ -28,30 +28,27 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export default async function Page({ params }: PageProps) {
   const { slug: tagSlug } = await params;
   const blogs = await getBlogsByTag(tagSlug);
+  const allViews = await getViewsCount();
 
   return (
     <>
-      <div className={`mb-4 space-y-3 ${montserrat.className}`} style={{ fontWeight: '700' }}>
+      <div className={`text-lg font-bold mb-6 ${poppins.className}`} style={{ fontWeight: '700' }}>
         {`#${tagSlug}`}
       </div>
       <div>
-        {blogs.map((blog) => (
-          <Link
-            key={blog.slug}
-            className="grid grid-cols-1 mb-4"
-            href={`/blog/${blog.slug}`}
-          >
-            <div className="w-full">
-              <div className={`${montserrat.className}`} style={{ fontWeight: '500' }}>
-                {blog.data.title}
-              </div>
-              <div className={`${poppins.className} grid grid-cols-2 text-sm text-neutral-600 dark:text-neutral-400`} style={{ fontWeight: '300' }}>
-                <div>{formatDate(blog.data.publishedAt)}</div>
-                <ViewCounter slug={blog?.slug} />
-              </div>
-            </div>
-          </Link>
-        ))}
+        {blogs
+          .map((blog) => {
+            const viewCount = allViews.find((v) => v.slug === blog.slug)?.count || 0;
+            return (
+              <PostItem
+                key={blog.slug}
+                title={blog.data.title}
+                date={blog.data.publishedAt}
+                viewCount={viewCount}
+                slug={blog.slug}
+              />
+            );
+          })}
       </div>
     </>
   );

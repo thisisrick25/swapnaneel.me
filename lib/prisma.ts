@@ -1,19 +1,34 @@
-import { PrismaClient } from '@prisma/client'
-
-const prismaClientSingleton = () => { return new PrismaClient() }
+import { PrismaClient } from '@prisma/client';
+import { PrismaNeon } from '@prisma/adapter-neon';
+import { neonConfig } from '@neondatabase/serverless';
 
 declare global {
-  var prisma: undefined | ReturnType<typeof prismaClientSingleton>
+  var prisma: PrismaClient | undefined;
 }
 
-export const prisma = globalThis.prisma ?? prismaClientSingleton()
+const connectionString = process.env.DATABASE_URL;
+if (!connectionString) {
+  throw new Error('DATABASE_URL environment variable is not defined.');
+}
 
-if (process.env.NODE_ENV !== 'production') globalThis.prisma = prisma
+// Function to create a Prisma client instance
+const createPrismaClient = () => {
+  // Check if the URL is for a Neon database
+  if (connectionString.includes('neon.tech')) {
+    console.log('Using Neon database adapter.');
+    neonConfig.poolQueryViaFetch = true;
+    const adapter = new PrismaNeon({ connectionString });
+    return new PrismaClient({ adapter });
+  } else {
+    console.log('Using local database connection.');
+    // Use the default Prisma client for standard connections (e.g., localhost)
+    return new PrismaClient();
+  }
+};
 
-// import { PrismaClient } from '@prisma/client'
+// Use a global instance to prevent creating too many connections during development hot-reloads.
+export const prisma = global.prisma ?? createPrismaClient();
 
-// const globalForPrisma = globalThis as unknown as { prisma: PrismaClient }
-
-// export const prisma = globalForPrisma.prisma || new PrismaClient()
-
-// if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma
+if (process.env.NODE_ENV === 'development') {
+  global.prisma = prisma;
+}

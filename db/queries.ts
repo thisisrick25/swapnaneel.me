@@ -16,31 +16,29 @@ export async function getViewsCount(): Promise<{ slug: string; count: number }[]
     // Handle any errors
     console.error('Error fetching views count:', error);
     return [];
-  } 
+  }
   // finally {
   //   // Close the Prisma client connection
   //   await prisma.$disconnect();
   // }
 }
 
-export async function getBlogViews() {
+export async function getViewsCountBySlug(slug: string): Promise<number> {
   noStore();
   try {
-    const views = await prisma.view.aggregate({
-      _sum: {
+    const view = await prisma.view.findUnique({
+      where: {
+        slug: slug,
+      },
+      select: {
         count: true,
       },
     });
 
-    return views._sum.count || 0;
+    return view?.count || 0;
   } catch (error) {
-    // Handle any errors
-    console.error('Error fetching blog views:', error);
+    console.error('Error fetching views count for slug:', error);
     return 0;
   }
-  // finally {
-  //   // Close the Prisma client connection
-  //   await prisma.$disconnect();
-  // }
 }
 

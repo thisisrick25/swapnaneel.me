@@ -2,7 +2,8 @@ import {
   GITHUB_REPO_OWNER,
   GITHUB_REPO_NAME,
   GITHUB_CONTENT_PATH,
-  GITHUB_BRANCH
+  GITHUB_BRANCH,
+  REVALIDATE_SECONDS
 } from '@/lib/constants';
 
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
@@ -17,7 +18,7 @@ export async function getGitHubDirectoryContents() {
         ...(GITHUB_TOKEN && { Authorization: `Bearer ${GITHUB_TOKEN}` }),
       },
       cache: 'force-cache',
-      next: { revalidate: 3600 },
+      next: { revalidate: REVALIDATE_SECONDS },
     }
   );
   if (!res.ok) throw new Error('Failed to fetch directory contents');
@@ -26,20 +27,14 @@ export async function getGitHubDirectoryContents() {
 
 // Helper to fetch raw file content from GitHub (still using raw.githubusercontent.com for simplicity)
 export async function getGitHubFileContent(filePath: string) {
+  const branch = GITHUB_BRANCH || 'main'; // Ensure a default branch
   const res = await fetch(
-    `https://api.github.com/repos/${GITHUB_REPO_OWNER}/${GITHUB_REPO_NAME}/contents/${filePath}?ref=${GITHUB_BRANCH}`,
+    `https://raw.githubusercontent.com/${GITHUB_REPO_OWNER}/${GITHUB_REPO_NAME}/${branch}/${filePath}`,
     {
-      headers: {
-        Accept: 'application/vnd.github.v3+json',
-        ...(GITHUB_TOKEN && { Authorization: `Bearer ${GITHUB_TOKEN}` }),
-      },
       cache: 'force-cache',
-      next: { revalidate: 3600 },
+      next: { revalidate: REVALIDATE_SECONDS },
     }
   );
   if (!res.ok) throw new Error('Failed to fetch file content');
-  const data = await res.json();
-  // Decode base64 content
-  if (!data.content) throw new Error('No content found in GitHub API response');
-  return Buffer.from(data.content, 'base64').toString('utf-8');
+  return res.text(); // Direct text, no decoding
 }

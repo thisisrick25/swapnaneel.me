@@ -61,11 +61,13 @@ export default function RootLayout({
 
         gtag('config', 'G-HVS1V1YG5Z');`}
       </Script>
-      <body className={`${inter.className} antialiased tracking-tight bg-neutral-100 dark:bg-neutral-900 text-black dark:text-white  selection:bg-yellow-500 selection:text-white dark:selection:text-black sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl mx-auto px-4 sm:px-6 xl:px-0 gap-10 sm:gap-14`}>
+      <body className={`${inter.className} antialiased tracking-tight bg-neutral-200 dark:bg-neutral-950 text-gray-900 dark:text-gray-50 selection:bg-neutral-400 selection:text-black dark:selection:bg-neutral-600 dark:selection:text-white sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl 2xl:max-w-3xl mx-auto px-4 sm:px-6 xl:px-0 gap-10 sm:gap-14`}>
         <ThemeProvider>
           <div className="min-h-screen flex flex-col max-w-2xl mx-auto px-4">
             <Header />
-            <main className='flex-grow px-4 py-8'>{children}</main>
+            <main className='flex-grow px-4 py-8 bg-neutral-100/50 dark:bg-neutral-900/50 rounded-lg border border-neutral-200/50 dark:border-neutral-800/50 shadow-sm'>
+              {children}
+            </main>
             <Footer />
           </div>
           <SpeedInsights />
