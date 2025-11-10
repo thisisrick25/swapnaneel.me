@@ -2,7 +2,8 @@ import {
   GITHUB_REPO_OWNER,
   GITHUB_REPO_NAME,
   GITHUB_CONTENT_PATH,
-  GITHUB_BRANCH
+  GITHUB_BRANCH,
+  REVALIDATE_SECONDS
 } from '@/lib/constants';
 
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
@@ -17,7 +18,7 @@ export async function getGitHubDirectoryContents() {
         ...(GITHUB_TOKEN && { Authorization: `Bearer ${GITHUB_TOKEN}` }),
       },
       cache: 'force-cache',
-      next: { revalidate: 1800 },
+      next: { revalidate: REVALIDATE_SECONDS },
     }
   );
   if (!res.ok) throw new Error('Failed to fetch directory contents');
@@ -31,7 +32,7 @@ export async function getGitHubFileContent(filePath: string) {
     `https://raw.githubusercontent.com/${GITHUB_REPO_OWNER}/${GITHUB_REPO_NAME}/${branch}/${filePath}`,
     {
       cache: 'force-cache',
-      next: { revalidate: 1800 },
+      next: { revalidate: REVALIDATE_SECONDS },
     }
   );
   if (!res.ok) throw new Error('Failed to fetch file content');

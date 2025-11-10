@@ -1,39 +1,8 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
 @plugin '@tailwindcss/typography';
 
 @custom-variant dark (&:is(.dark *));
-
-html {
-  overflow-y: scroll;
-}
-
-.anchor {
-  @apply absolute invisible no-underline;
-  margin-left: -1em;
-  padding-right: 0.5em;
-  width: 80%;
-  max-width: 700px;
-  cursor: pointer;
-}
-
-.anchor:before {
-  @apply text-neutral-300 dark:text-neutral-700;
-  content: "#";
-}
-
-*:hover > .anchor {
-  @apply visible;
-}
-
-.prose > :first-child {
-  /* Override removing top margin, causing layout shift */
-  margin-top: 1.25em !important;
-}
-
-.prose > :last-child {
-  margin-bottom: 2em !important;
-}
 
 /* Remove Safari input shadow on mobile */
 input[type="text"],
@@ -43,82 +12,137 @@ input[type="email"] {
   appearance: none;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-outfit), sans-serif;
+html {
+  overflow-y: scroll;
 }
 
-p {
-  font-family: var(--font-inter), sans-serif;
+html:not(.dark) {
+  .prose {
+    --tw-prose-bullets: #b5b5b5;
+    --tw-prose-counters: #b5b5b5;
+
+    blockquote {
+      --tw-prose-quote-borders: #b5b5b5;
+    }
+  }
 }
 
-blockquote p {
-  font-family: var(--font-raleway), sans-serif;
+.anchor {
+  @apply absolute invisible no-underline;
+  margin-left: -1em;
+  padding-right: 0.5em;
+  width: 80%;
+  max-width: 700px;
+  cursor: pointer;
+
+  &:before {
+    @apply text-neutral-600 dark:text-neutral-400;
+    content: "#";
+  }
 }
 
-table {
-  display: block;
-  max-width: fit-content;
-  overflow-x: auto;
-  white-space: nowrap;
+*:hover > .anchor {
+  @apply visible;
 }
 
-pre, code {
-  @apply bg-neutral-800! rounded-lg;
-}
+.prose {
+  @apply text-xs md:text-sm;
 
-pre {
-  
-}
+  > :first-child {
+    /* Override removing top margin, causing layout shift */
+    margin-top: 1.25em !important;
+  }
 
-code {
-  counter-reset: line;
-  @apply text-white! px-1 py-0.5;
-  font-family: var(--font-ibm-plex-mono), monospace;
-}
+  > :last-child {
+    margin-bottom: 1.25em !important;
+  }
 
-code[data-line-numbers] {
-  counter-reset: line;
-  @apply text-white! px-1 py-0.5;
-}
+  h1,
+  h2 {
+    font-family: var(--font-poppins), sans-serif;
+    @apply text-sm md:text-base lg:text-lg font-medium;
+  }
 
-code > [data-line]::before {
-  counter-increment: line;
-  content: counter(line);
-  display: inline-block;
-  width: 1rem;
-  margin-right: 1rem;
-  text-align: right;
-  color: gray;
-}
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-poppins), sans-serif;
+    @apply text-xs md:text-sm lg:text-base font-medium;
+  }
 
-code[data-line-numbers] > [data-line]::before {
-  counter-increment: line;
-  content: counter(line);
-  display: inline-block;
-  width: 1rem;
-  margin-right: 1rem;
-  text-align: right;
-  color: gray;
-}
+  p {
+    font-family: var(--font-inter), sans-serif;
+    @apply text-xs md:text-sm lg:text-base font-medium;
+  }
 
-[data-highlighted-line] {
-  @apply bg-[#ffffff1a]!;
-  @apply pl-0 pr-1 p-0.5 rounded-xs border-l-2 border-l-[#7B00D3] border-solid;
-}
+  blockquote {
+    p {
+      @apply text-xs;
+    }
+  }
 
-[data-highlighted-chars] {
-  @apply bg-[#ffffff1a]!;
-  @apply p-0.5 rounded-xs;
-}
+  pre,
+  code {
+    @apply bg-neutral-700! dark:bg-neutral-800!;
+  }
 
-[data-rehype-pretty-code-title] {
-  @apply px-4 py-3 font-mono text-xs font-medium border border-neutral-100 dark:border-neutral-800 rounded-t-lg text-neutral-200 bg-[#1c1c1c];
-}
+  code {
+    @apply rounded-lg text-white! px-1 py-0.5;
+    font-family: var(--font-jetbrains-mono), monospace;
+    counter-reset: line;
 
-[data-rehype-pretty-code-title] + pre {
-  @apply my-0 rounded-t-none border-t-0;
-}
+    &::before {
+      content: "";
+    }
 
-[data-rehype-pretty-code-caption]{
-  @apply text-center text-[#747474];
+    &::after {
+      content: "";
+    }
+
+    /* &[data-line-numbers] {
+    counter-reset: line;
+    @apply text-white! px-1 py-0.5;
+    } */
+
+    > [data-line]::before {
+      counter-increment: line;
+      content: counter(line);
+      display: inline-block;
+      width: 1rem;
+      margin-right: 1rem;
+      text-align: right;
+      color: gray;
+    }
+
+    /* &[data-line-numbers] > [data-line]::before {
+    counter-increment: line;
+    content: counter(line);
+    display: inline-block;
+    width: 1rem;
+    margin-right: 1rem;
+    text-align: right;
+    color: gray;
+    } */
+  }
+
+  [data-highlighted-line] {
+    @apply bg-[#ffffff1a]! pl-0 pr-1 p-0.5 rounded-xs border-l-2 border-l-[#7B00D3] border-solid;
+  }
+
+  [data-highlighted-chars] {
+    @apply bg-[#ffffff1a]! p-0.5 rounded-xs;
+  }
+
+  [data-rehype-pretty-code-title] {
+    @apply px-4 py-3 font-mono text-xs font-medium border border-neutral-800 rounded-t-lg text-neutral-200 bg-[#1c1c1c];
+
+    & + pre {
+      @apply my-0 rounded-t-none border-t-0;
+    }
+  }
+
+  [data-rehype-pretty-code-caption] {
+    @apply text-xs text-center text-[#747474];
+  }
 }

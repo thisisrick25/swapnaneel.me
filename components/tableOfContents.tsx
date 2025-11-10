@@ -1,4 +1,4 @@
-import { raleway } from '@/fonts';
+import { poppins } from '@/fonts';
 
 type Heading = {
   text: string;
@@ -11,9 +11,11 @@ export default function TableOfContents({ headings }: { headings: Heading[] }) {
     return null;
   }
 
+  const hasBullet = (text: string) => text.startsWith('- ') || text.startsWith('* ') || /^\d+\.\s/.test(text);
+
   return (
-    <details className={`${raleway.className} group rounded-md border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950 px-4 py-2 shadow-sm [&_summary::-webkit-details-marker]:hidden`}>
-      <summary className="flex cursor-pointer items-center justify-between font-medium text-neutral-900 dark:text-neutral-100 select-none">
+    <details className={`${poppins.className} group bg-neutral-100/60 dark:bg-neutral-900/60 p-3 rounded-lg shadow-xs [&_summary::-webkit-details-marker]:hidden`}>
+      <summary className="flex cursor-pointer items-center justify-between text-xs lg:text-sm text-gray-900 dark:text-gray-100 select-none">
         Table of Contents
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -28,7 +30,7 @@ export default function TableOfContents({ headings }: { headings: Heading[] }) {
           />
         </svg>
       </summary>
-      <ul className="mt-2">
+      <ul className="mt-3 ml-3 space-y-1">
         {headings.map((heading) => {
           return (
             <li
@@ -37,10 +39,10 @@ export default function TableOfContents({ headings }: { headings: Heading[] }) {
             >
               <a
                 href={`#${heading.slug}`}
-                className="flex items-center text-sm text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100 transition-colors"
+                className="flex items-center text-xs md:text-sm text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100 duration-300 ease-in transition-colors"
               >
-                {heading.level === 3 && (
-                  <span className="mr-2 h-1 w-1 rounded-full bg-neutral-400 dark:bg-neutral-600" />
+                {!hasBullet(heading.text) && (
+                  <span className="mr-2">•</span>
                 )}
                 <span>
                   {heading.text}
