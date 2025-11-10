@@ -12,3 +12,5 @@ export const GITHUB_EVENT_HEADER = 'x-github-event';
 
 // Revalidation
 export const REVALIDATE_SECONDS = 3600; // Cache revalidation time in seconds
+
+export const GIT_USERNAME = 'thisisrick25';

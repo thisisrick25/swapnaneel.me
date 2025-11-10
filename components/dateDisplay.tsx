@@ -45,7 +45,7 @@ export default function DateDisplay({ date }: DateDisplayProps) {
       onMouseEnter={() => setShowFullDate(true)}
       onMouseLeave={() => setShowFullDate(false)}
       title={fullDate}
-      style={{ minWidth: '120px' }}
+      style={{ fontWeight: '300', minWidth: '120px' }}
     >
       <span
         className={`absolute left-0 transition-transform duration-300 ease-in-out ${showFullDate ? '-translate-y-full opacity-0' : 'translate-y-0 opacity-100'

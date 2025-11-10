@@ -6,7 +6,7 @@ import { extractHeadings } from '@/utils/extractHeadings';
 import { getBlogs, getBlogBySlug, Blog } from '@/utils/getBlogs';
 import { Metadata } from 'next'
 import { poppins, inter, jetbrains_mono } from '@/fonts'
-import { cache } from "react";
+import { cache } from 'react';
 import { getViewsCountBySlug } from '@/db/queries';
 
 export const dynamic = 'force-static';
@@ -15,7 +15,7 @@ interface PageProps {
   params: Promise<{ slug: string }>
 }
 
-// Cache the function that fetches and processes a single blog post
+// Cache the function that fetches and processes a single blog post (per-request cache)
 const getBlogData = cache(async (slug: string): Promise<Blog | undefined> => {
   const blog = await getBlogBySlug(slug);
   return blog;
@@ -57,7 +57,9 @@ export default async function Page({ params }: PageProps) {
         slug={slug}
         showLink={false}
       />
-      <Tag tags={blog.data.tags} />
+      <div className="px-3">
+        <Tag tags={blog.data.tags} />
+      </div>
       <TableOfContents headings={headings} />
       <div className={`${poppins.variable} ${inter.variable} ${jetbrains_mono.variable} max-w-max prose dark:prose-invert`}>
         {blog.content}

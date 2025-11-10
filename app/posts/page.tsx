@@ -19,9 +19,7 @@ export default async function Page() {
 
   return (
     <>
-      <h1 className={`text-lg font-bold mb-6 ${poppins.className}`} style={{ fontWeight: '700' }}>
-        Posts
-      </h1>
+      <div className={`text-lg font-bold mb-6 ${poppins.className}`} style={{ fontWeight: '700' }}>Posts</div>
       <div>
         {blogs
           .map((blog) => {
