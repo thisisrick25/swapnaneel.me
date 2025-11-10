@@ -20,7 +20,7 @@
     "@mdx-js/loader": "^3.1.0",
     "@mdx-js/react": "^3.1.0",
     "@neondatabase/serverless": "^1.0.2",
-    "@next/mdx": "^15.3.4",
+    "@next/mdx": "^16.0.1",
     "@prisma/adapter-neon": "^6.16.3",
     "@prisma/client": "^6.16.3",
     "@tailwindcss/postcss": "^4.1.10",
