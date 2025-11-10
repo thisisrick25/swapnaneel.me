@@ -57,7 +57,9 @@ export default async function Page({ params }: PageProps) {
         slug={slug}
         showLink={false}
       />
-      <Tag tags={blog.data.tags} />
+      <div className="px-3">
+        <Tag tags={blog.data.tags} />
+      </div>
       <TableOfContents headings={headings} />
       <div className={`${poppins.variable} ${inter.variable} ${jetbrains_mono.variable} max-w-max prose dark:prose-invert`}>
         {blog.content}
