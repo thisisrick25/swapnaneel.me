@@ -41,9 +41,6 @@
       "@/db/*": [
         "./db/*"
       ],
-      "content-collections": [
-        "./.content-collections/generated"
-      ]
     }
   },
   "include": [
@@ -51,7 +48,6 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    ".contentlayer/generated",
     ".next/dev/types/**/*.ts"
   ],
   "exclude": [
