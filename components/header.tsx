@@ -3,7 +3,7 @@
 import Link from "next/link"
 import Image from 'next/image'
 import { usePathname } from "next/navigation"
-import { HEADER_LINKS } from 'config/links'
+import { HEADER_LINKS } from '../config/links'
 import ThemeSwitch from "./themeSwitch"
 
 export default function Header() {
