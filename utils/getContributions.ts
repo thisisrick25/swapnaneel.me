@@ -172,8 +172,10 @@ async function fetchGitLabMRs(): Promise<Contribution[]> {
     throw new Error('GITLAB_TOKEN is required for GitLab GraphQL requests');
   }
 
+  console.log('[contributions] Fetching GitLab MRs (token present)');
   const data = await fetchGraphQLGitLab(GITLAB_GRAPHQL_QUERY);
   const nodes = (data?.user?.authoredMergeRequests?.nodes) || [];
+  console.log(`[contributions] GitLab GraphQL returned ${nodes.length} nodes`);
 
   // Fetch related issues for each MR using REST API
   const contributions: Contribution[] = await Promise.all(nodes.map(async (n: any) => {
@@ -213,6 +215,8 @@ async function fetchGitLabMRs(): Promise<Contribution[]> {
       relatedIssues,
     } as Contribution;
   }));
+
+  console.log(`[contributions] GitLab contributions after enrichment: ${contributions.length}`);
 
   return contributions;
 }
