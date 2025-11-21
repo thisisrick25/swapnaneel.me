@@ -40,8 +40,9 @@
       ],
       "@/db/*": [
         "./db/*"
-      ],
-    }
+      ]
+    },
+    "moduleResolution": "bundler"
   },
   "include": [
     "next-env.d.ts",
