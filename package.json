@@ -33,7 +33,7 @@
     "autoprefixer": "^10.4.22",
     "date-fns": "^4.1.0",
     "eslint": "^9.39.1",
-    "eslint-config-next": "^16.0.3",
+    "eslint-config-next": "^16.0.4",
     "github-slugger": "^2.0.0",
     "gray-matter": "^4.0.3",
     "lucide-react": "^0.553.0",
