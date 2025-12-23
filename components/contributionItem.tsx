@@ -4,7 +4,7 @@ import { useRef, useState, MouseEvent } from 'react'
 import Link from 'next/link'
 import DateDisplay from '@/components/dateDisplay'
 import { GIT_USERNAME } from '@/lib/constants'
-import { ArrowUpRight, GitMerge } from 'lucide-react'
+import { LuExternalLink, LuGitMerge } from 'react-icons/lu'
 import { SiGithub, SiGitlab } from 'react-icons/si'
 
 type Props = {
@@ -106,7 +106,7 @@ export default function ContributionItem({ title, repo, link, mergedAt, relatedI
             title="View PR on GitHub/GitLab"
             className="text-gray-400 dark:text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors"
           >
-            <ArrowUpRight className="w-4 h-4" />
+            <LuExternalLink className="w-4 h-4" />
           </a>
         </div>
 
@@ -132,7 +132,7 @@ export default function ContributionItem({ title, repo, link, mergedAt, relatedI
         {/* Merge status + date */}
         <div className="flex items-center gap-2 text-xs">
           <span className="inline-flex items-center gap-1 text-green-600 dark:text-green-400">
-            <GitMerge className="w-3 h-3" />
+            <LuGitMerge className="w-3 h-3" />
             Merged
           </span>
           <span className="text-gray-300 dark:text-gray-600">·</span>
