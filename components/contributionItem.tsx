@@ -1,7 +1,11 @@
+"use client"
+
+import { useRef, useState, MouseEvent } from 'react'
 import Link from 'next/link'
 import DateDisplay from '@/components/dateDisplay'
-import { poppins, inter, jetbrains_mono } from '@/fonts'
 import { GIT_USERNAME } from '@/lib/constants'
+import { ArrowUpRight, GitMerge } from 'lucide-react'
+import { SiGithub, SiGitlab } from 'react-icons/si'
 
 type Props = {
   id: number
@@ -15,7 +19,12 @@ type Props = {
 }
 
 export default function ContributionItem({ title, repo, link, mergedAt, relatedIssues, source, id, showLink = true }: Props) {
+  const cardRef = useRef<HTMLDivElement>(null)
+  const [position, setPosition] = useState({ x: 0, y: 0 })
+  const [opacity, setOpacity] = useState(0)
+
   const repoUrl = source === 'github' ? `https://github.com/${repo}` : `https://gitlab.com/${repo}`
+  const sourceUrl = source === 'github' ? `https://github.com/${GIT_USERNAME}` : `https://gitlab.com/${GIT_USERNAME}`
 
   const repoSlug = repo?.replace("/", "-") || "unknown";
   const dateStr = mergedAt ? mergedAt.slice(0, 10).replace(/-/g, "") : "00000000";
@@ -26,63 +35,134 @@ export default function ContributionItem({ title, repo, link, mergedAt, relatedI
     return parts[parts.length - 1];
   };
 
-  const repoAndSource = (
-    <div className={`${inter.className} flex-shrink-0 text-xs font-medium`}>
-      <div className="flex justify-end gap-1">
-        <Link href={repoUrl} target="_blank" rel="noopener noreferrer" className="inline-block px-2 py-1 rounded-full bg-stone-300 dark:bg-stone-800 hover:bg-stone-400 dark:hover:bg-stone-700 text-stone-700 dark:text-stone-200 transition-colors">
-          {repo}
-        </Link>
-        <Link href={source === 'github' ? `https://github.com/${GIT_USERNAME}` : `https://gitlab.com/${GIT_USERNAME}`} target="_blank" rel="noopener noreferrer" className={`inline-block px-2 py-1 rounded-full ${source === 'github' ? 'bg-gray-300 dark:bg-gray-800 hover:bg-gray-400 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-200' : 'bg-orange-300 dark:bg-orange-800/30 hover:bg-orange-400 dark:hover:bg-orange-700 text-orange-700 dark:text-orange-200'} transition-colors`}>
-          {source === 'github' ? 'GitHub' : 'GitLab'}
-        </Link>
-      </div>
-    </div>
-  )
-
-  const relatedIssuesAndMergedAt = (
-    <div className="flex justify-between text-xs md:text-sm text-gray-600 dark:text-gray-400">
-      <div className="flex items-center">
-        <span className={`${inter.className} inline-flex gap-1`} style={{ fontWeight: '300' }}>Merged <DateDisplay date={mergedAt || ''} /></span>
-      </div>
-      {relatedIssues && relatedIssues.length > 0 && (
-        <span className={`${jetbrains_mono.className} flex items-center gap-1`} style={{ fontWeight: '300' }}>Related
-          {relatedIssues?.filter(i => i).map((issueUrl) => (
-            <Link key={issueUrl} href={issueUrl} target="_blank" rel="noopener noreferrer" className="px-2 py-1 bg-blue-100 dark:bg-blue-900/30 hover:bg-blue-200 dark:hover:bg-blue-700 text-blue-700 dark:text-blue-200 rounded-md transition-colors">
-              #{extractIssueNumber(issueUrl)}
-            </Link>
-          ))}
-        </span>
-      )}
-    </div>
-  )
-
-  if (showLink) {
-    return (
-      <div className="bg-neutral-100/60 dark:bg-neutral-900/60 p-3 rounded-lg my-4 shadow-xs">
-        <div className="flex justify-between gap-2 mb-2">
-          <Link href={`/contributions/${slug}`} className={`${poppins.className}`} style={{ fontWeight: '500' }}>
-            {title}
-          </Link>
-          {repoAndSource}
-        </div>
-        {relatedIssuesAndMergedAt}
-      </div>
-    );
+  const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current) return
+    const rect = cardRef.current.getBoundingClientRect()
+    setPosition({
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top,
+    })
   }
 
-  return (
-    <div className="bg-neutral-100/60 dark:bg-neutral-900/60 p-3 rounded-lg mb-4 shadow-xs">
-      <div className="flex justify-between gap-2 mb-2">
-        {link ? (
-          <Link href={link} target="_blank" rel="noopener noreferrer" className={`${poppins.className}`} style={{ fontWeight: '500' }}>
+  const handleMouseEnter = () => setOpacity(1)
+  const handleMouseLeave = () => setOpacity(0)
+
+  const SourceIcon = source === 'github' ? SiGithub : SiGitlab
+  const sourceColor = source === 'github'
+    ? 'text-gray-600 dark:text-gray-400'
+    : 'text-orange-600 dark:text-orange-400'
+
+  const cardContent = (
+    <div
+      ref={cardRef}
+      onMouseMove={handleMouseMove}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      className="relative overflow-hidden rounded-xl h-full"
+    >
+      {/* Shine effect */}
+      <div
+        className="pointer-events-none absolute -inset-px opacity-0 transition-opacity duration-300"
+        style={{
+          opacity,
+          background: `radial-gradient(600px circle at ${position.x}px ${position.y}px, rgba(255,255,255,0.06), transparent 40%)`,
+        }}
+      />
+      <div
+        className="pointer-events-none absolute -inset-px rounded-xl opacity-0 transition-opacity duration-300"
+        style={{
+          opacity,
+          background: `radial-gradient(400px circle at ${position.x}px ${position.y}px, rgba(255,255,255,0.1), transparent 40%)`,
+        }}
+      />
+
+      {/* Card content */}
+      <div className="work-card group relative h-full flex flex-col">
+        {/* Header: repo tag + source icon + arrow */}
+        <div className="flex items-start justify-between gap-2 mb-2">
+          <div className="flex items-center gap-2">
+            <a
+              href={repoUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="tag hover:bg-gray-200 dark:hover:bg-zinc-600 transition-colors"
+            >
+              {repo}
+            </a>
+            <a
+              href={sourceUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`${sourceColor} hover:opacity-70 transition-opacity`}
+              title={source === 'github' ? 'GitHub' : 'GitLab'}
+            >
+              <SourceIcon className="w-4 h-4" />
+            </a>
+          </div>
+          <a
+            href={link}
+            target="_blank"
+            rel="noopener noreferrer"
+            title="View PR on GitHub/GitLab"
+            className="text-gray-400 dark:text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors"
+          >
+            <ArrowUpRight className="w-4 h-4" />
+          </a>
+        </div>
+
+        {/* Title - reserves 2 lines of space, links to writeup */}
+        {showLink ? (
+          <Link
+            href={`/contributions/${slug}`}
+            className="text-sm font-semibold line-clamp-2 min-h-10 mb-3 hover:text-blue-600 dark:hover:text-blue-400 transition-colors block"
+          >
             {title}
           </Link>
         ) : (
-          <span>{title}</span>
+          <a
+            href={link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-sm font-semibold line-clamp-2 min-h-10 mb-3 hover:text-blue-600 dark:hover:text-blue-400 transition-colors block"
+          >
+            {title}
+          </a>
         )}
-        {repoAndSource}
+
+        {/* Merge status + date */}
+        <div className="flex items-center gap-2 text-xs">
+          <span className="inline-flex items-center gap-1 text-green-600 dark:text-green-400">
+            <GitMerge className="w-3 h-3" />
+            Merged
+          </span>
+          <span className="text-gray-300 dark:text-gray-600">·</span>
+          <span>
+            <DateDisplay date={mergedAt || ''} />
+          </span>
+        </div>
+
+        {/* Related issues */}
+        {relatedIssues && relatedIssues.length > 0 && (
+          <div className="mt-2 text-xs text-gray-400 dark:text-gray-500">
+            Fixes: {relatedIssues.filter(Boolean).map((issueUrl, idx) => (
+              <span key={issueUrl}>
+                {idx > 0 && ', '}
+                <a
+                  href={issueUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-600 dark:text-blue-400 hover:underline"
+                >
+                  #{extractIssueNumber(issueUrl)}
+                </a>
+              </span>
+            ))}
+          </div>
+        )}
       </div>
-      {relatedIssuesAndMergedAt}
     </div>
-  );
+  )
+
+  return cardContent
 }
+

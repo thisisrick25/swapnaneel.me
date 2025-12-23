@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
-import { poppins } from '@/fonts';
 import { getMergedContributions } from '@/utils/getContributions'
+import { poppins } from '@/fonts'
 import ContributionItem from '@/components/contributionItem'
 
 export const dynamic = 'force-dynamic'
@@ -8,30 +8,46 @@ export const dynamic = 'force-dynamic'
 export function generateMetadata(): Metadata {
   return {
     title: 'Contributions',
-    description: 'Open-source PRs and issues I have worked on',
+    description: 'Open-source contributions and merged pull requests.',
   }
 }
 
 export default async function Page() {
-  const pr = await getMergedContributions()
+  const contributions = await getMergedContributions()
 
   return (
-    <>
-      <div className={`text-lg font-bold mb-6 ${poppins.className}`} style={{ fontWeight: '700' }}>Contributions</div>
-      <div>
-        {pr.map((c) => (
-          <ContributionItem
-            key={`ext-${c.source}-${c.id}`}
-            title={c.title}
-            repo={c.repo}
-            link={c.html_url}
-            mergedAt={c.merged_at}
-            relatedIssues={c.relatedIssues}
-            source={c.source}
-            id={c.id}
-          />
-        ))}
+    <div className="py-16 sm:py-24">
+      {/* Header */}
+      <section className="mb-12">
+        <h1 className={`text-3xl sm:text-4xl font-bold tracking-tight mb-2 ${poppins.className}`}>Open Source</h1>
+        <p className="text-base text-gray-600 dark:text-gray-300">
+          Merged pull requests and contributions to open-source projects.
+        </p>
+      </section>
+
+      {/* Contributions Grid */}
+      <div className="grid gap-3 sm:grid-cols-2">
+        {contributions.length > 0 ? (
+          contributions.map((contribution) => (
+            <ContributionItem
+              key={`${contribution.source}-${contribution.id}`}
+              id={contribution.id}
+              title={contribution.title}
+              repo={contribution.repo}
+              link={contribution.html_url}
+              mergedAt={contribution.merged_at}
+              relatedIssues={contribution.relatedIssues}
+              source={contribution.source}
+              showLink={true}
+            />
+          ))
+        ) : (
+          <p className="text-sm">No contributions yet.</p>
+        )}
       </div>
-    </>
+
+      {/* Footer space for floating nav */}
+      <div className="h-24" />
+    </div>
   )
 }
