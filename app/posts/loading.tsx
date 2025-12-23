@@ -1,22 +1,22 @@
 export default function Loading() {
-  const content = (<>
-    {Array.from({ length: 4 }).map((_, i) => (
-      <div key={i} className="grid grid-cols-1 w-full my-4">
-        <div className="bg-neutral-100/60 dark:bg-neutral-900/60 p-3 rounded-lg shadow-xs">
-          <div className="h-6 bg-gray-300 dark:bg-gray-700 rounded mb-2"></div>
-          <div className="flex justify-between">
-            <div className="h-5 bg-gray-300 dark:bg-gray-700 rounded w-1/4"></div>
-            <div className="h-5 bg-gray-300 dark:bg-gray-700 rounded w-1/6"></div>
-          </div>
+  return (
+    <div className="py-16 sm:py-24">
+      <div className="container animate-pulse">
+        <section className="mb-12">
+          <div className="skeleton h-9 w-24 mb-2" />
+          <div className="skeleton h-5 w-64" />
+        </section>
+
+        <div className="space-y-4">
+          {Array.from({ length: 5 }).map((_, i) => (
+            <div key={i} className="p-4 rounded-xl">
+              <div className="skeleton h-5 w-3/4 mb-2" />
+              <div className="skeleton h-4 w-1/2 mb-2" />
+              <div className="skeleton h-3 w-32" />
+            </div>
+          ))}
         </div>
       </div>
-    ))}
-  </>);
-
-  return (
-    <div className="animate-pulse">
-      <div className="h-7 bg-gray-300 dark:bg-gray-700 rounded mb-6"></div>
-      {content}
     </div>
-  );
+  )
 }
