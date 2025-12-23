@@ -1,67 +1,73 @@
 "use client"
 
-import { useState } from 'react'
+import { useState, ReactNode } from 'react'
 import { poppins } from '@/fonts'
 import {
-  Sparkles, Brain, Package, Globe, Cloud,
-  Database, Code
-} from 'lucide-react'
+  LuSparkles, LuBrain, LuPackage, LuGlobe, LuCloud,
+  LuDatabase, LuCode
+} from 'react-icons/lu'
+import {
+  SiPytorch, SiTensorflow, SiScikitlearn, SiHuggingface, SiLangchain,
+  SiFastapi, SiFlask, SiPandas, SiNumpy, SiSelenium,
+  SiReact, SiNextdotjs, SiNodedotjs, SiExpress, SiTailwindcss, SiHtml5,
+  SiAmazonwebservices, SiDocker, SiKubernetes, SiVercel,
+  SiPostgresql, SiMongodb, SiRedis, SiMysql, SiSupabase,
+  SiPython, SiTypescript, SiJavascript, SiCplusplus
+} from 'react-icons/si'
 
 const skillCategories = [
-  { key: 'all', label: 'All Skills', icon: Sparkles },
-  { key: 'ai_ml', label: 'AI/ML/DL', icon: Brain },
-  { key: 'python_libs', label: 'Python Libs', icon: Package },
-  { key: 'web', label: 'Web', icon: Globe },
-  { key: 'cloud', label: 'Cloud', icon: Cloud },
-  { key: 'databases', label: 'Databases', icon: Database },
-  { key: 'languages', label: 'Languages', icon: Code },
+  { key: 'all', label: 'All', icon: <LuSparkles className="w-3.5 h-3.5" /> },
+  { key: 'ai_ml', label: 'AI/ML', icon: <LuBrain className="w-3.5 h-3.5" /> },
+  { key: 'python_libs', label: 'Python', icon: <LuPackage className="w-3.5 h-3.5" /> },
+  { key: 'web', label: 'Web', icon: <LuGlobe className="w-3.5 h-3.5" /> },
+  { key: 'cloud', label: 'Cloud', icon: <LuCloud className="w-3.5 h-3.5" /> },
+  { key: 'databases', label: 'Data', icon: <LuDatabase className="w-3.5 h-3.5" /> },
+  { key: 'languages', label: 'Lang', icon: <LuCode className="w-3.5 h-3.5" /> },
 ]
 
 type Category = typeof skillCategories[number]['key']
 
-const skills: { name: string; categories: Category[]; icon?: string }[] = [
+const skills: { name: string; categories: Category[]; icon: ReactNode }[] = [
   // AI/ML/DL
-  { name: 'PyTorch', categories: ['ai_ml'], icon: '🔥' },
-  { name: 'TensorFlow', categories: ['ai_ml'], icon: '🧠' },
-  { name: 'Scikit-learn', categories: ['ai_ml'], icon: '📊' },
-  { name: 'Hugging Face', categories: ['ai_ml'], icon: '🤗' },
-  { name: 'LangChain', categories: ['ai_ml'], icon: '🔗' },
+  { name: 'PyTorch', categories: ['ai_ml'], icon: <SiPytorch className="w-3.5 h-3.5 text-orange-500" /> },
+  { name: 'TensorFlow', categories: ['ai_ml'], icon: <SiTensorflow className="w-3.5 h-3.5 text-orange-400" /> },
+  { name: 'Scikit-learn', categories: ['ai_ml'], icon: <SiScikitlearn className="w-3.5 h-3.5 text-blue-500" /> },
+  { name: 'Hugging Face', categories: ['ai_ml'], icon: <SiHuggingface className="w-3.5 h-3.5 text-yellow-500" /> },
+  { name: 'LangChain', categories: ['ai_ml'], icon: <SiLangchain className="w-3.5 h-3.5 text-green-500" /> },
 
   // Python Libs
-  { name: 'FastAPI', categories: ['python_libs'], icon: '⚡' },
-  { name: 'Flask', categories: ['python_libs'], icon: '🌶️' },
-  { name: 'Pandas', categories: ['python_libs'], icon: '🐼' },
-  { name: 'NumPy', categories: ['python_libs'], icon: '🔢' },
-  { name: 'Beautiful Soup', categories: ['python_libs'], icon: '🍜' },
-  { name: 'Selenium', categories: ['python_libs'], icon: '🤖' },
+  { name: 'FastAPI', categories: ['python_libs'], icon: <SiFastapi className="w-3.5 h-3.5 text-teal-500" /> },
+  { name: 'Flask', categories: ['python_libs'], icon: <SiFlask className="w-3.5 h-3.5" /> },
+  { name: 'Pandas', categories: ['python_libs'], icon: <SiPandas className="w-3.5 h-3.5 text-blue-600" /> },
+  { name: 'NumPy', categories: ['python_libs'], icon: <SiNumpy className="w-3.5 h-3.5 text-blue-400" /> },
+  { name: 'Selenium', categories: ['python_libs'], icon: <SiSelenium className="w-3.5 h-3.5 text-green-600" /> },
 
   // Web
-  { name: 'React', categories: ['web'], icon: '⚛️' },
-  { name: 'Next.js', categories: ['web'], icon: '▲' },
-  { name: 'Node.js', categories: ['web'], icon: '💚' },
-  { name: 'Express', categories: ['web'], icon: '🚂' },
-  { name: 'TailwindCSS', categories: ['web'], icon: '🎨' },
-  { name: 'HTML/CSS', categories: ['web'], icon: '🌐' },
+  { name: 'React', categories: ['web'], icon: <SiReact className="w-3.5 h-3.5 text-cyan-400" /> },
+  { name: 'Next.js', categories: ['web'], icon: <SiNextdotjs className="w-3.5 h-3.5" /> },
+  { name: 'Node.js', categories: ['web'], icon: <SiNodedotjs className="w-3.5 h-3.5 text-green-500" /> },
+  { name: 'Express', categories: ['web'], icon: <SiExpress className="w-3.5 h-3.5" /> },
+  { name: 'TailwindCSS', categories: ['web'], icon: <SiTailwindcss className="w-3.5 h-3.5 text-cyan-500" /> },
+  { name: 'HTML/CSS', categories: ['web'], icon: <SiHtml5 className="w-3.5 h-3.5 text-orange-500" /> },
 
   // Cloud
-  { name: 'AWS', categories: ['cloud'], icon: '☁️' },
-  { name: 'Docker', categories: ['cloud'], icon: '🐳' },
-  { name: 'Kubernetes', categories: ['cloud'], icon: '⚙️' },
-  { name: 'Vercel', categories: ['cloud'], icon: '▲' },
+  { name: 'AWS', categories: ['cloud'], icon: <SiAmazonwebservices className="w-3.5 h-3.5 text-orange-400" /> },
+  { name: 'Docker', categories: ['web', 'cloud'], icon: <SiDocker className="w-3.5 h-3.5 text-blue-500" /> },
+  { name: 'Kubernetes', categories: ['cloud'], icon: <SiKubernetes className="w-3.5 h-3.5 text-blue-600" /> },
+  { name: 'Vercel', categories: ['cloud'], icon: <SiVercel className="w-3.5 h-3.5" /> },
 
   // Databases
-  { name: 'PostgreSQL', categories: ['databases'], icon: '🐘' },
-  { name: 'MongoDB', categories: ['databases'], icon: '🍃' },
-  { name: 'Redis', categories: ['databases'], icon: '🔴' },
-  { name: 'MySQL', categories: ['databases'], icon: '🐬' },
-  { name: 'Supabase', categories: ['databases'], icon: '⚡' },
+  { name: 'PostgreSQL', categories: ['databases'], icon: <SiPostgresql className="w-3.5 h-3.5 text-blue-500" /> },
+  { name: 'MongoDB', categories: ['databases'], icon: <SiMongodb className="w-3.5 h-3.5 text-green-500" /> },
+  { name: 'Redis', categories: ['databases'], icon: <SiRedis className="w-3.5 h-3.5 text-red-500" /> },
+  { name: 'MySQL', categories: ['databases'], icon: <SiMysql className="w-3.5 h-3.5 text-blue-600" /> },
+  { name: 'Supabase', categories: ['databases'], icon: <SiSupabase className="w-3.5 h-3.5 text-emerald-500" /> },
 
   // Languages
-  { name: 'Python', categories: ['languages'], icon: '🐍' },
-  { name: 'TypeScript', categories: ['languages'], icon: '💙' },
-  { name: 'JavaScript', categories: ['languages'], icon: '💛' },
-  { name: 'SQL', categories: ['languages'], icon: '📋' },
-  { name: 'C/C++', categories: ['languages'], icon: '⚙️' },
+  { name: 'Python', categories: ['languages'], icon: <SiPython className="w-3.5 h-3.5 text-yellow-500" /> },
+  { name: 'TypeScript', categories: ['languages'], icon: <SiTypescript className="w-3.5 h-3.5 text-blue-500" /> },
+  { name: 'JavaScript', categories: ['languages'], icon: <SiJavascript className="w-3.5 h-3.5 text-yellow-400" /> },
+  { name: 'C/C++', categories: ['languages'], icon: <SiCplusplus className="w-3.5 h-3.5 text-blue-600" /> },
 ]
 
 export default function SkillsSection() {
@@ -71,40 +77,25 @@ export default function SkillsSection() {
     ? skills
     : skills.filter(skill => skill.categories.includes(activeCategory))
 
-  // Get counts for each category
-  const getCategoryCount = (categoryKey: Category) => {
-    if (categoryKey === 'all') return skills.length
-    return skills.filter(skill => skill.categories.includes(categoryKey)).length
-  }
-
   return (
     <section className="mb-16">
       <h2 className={`text-2xl font-bold tracking-tight mb-4 ${poppins.className}`}>Skills</h2>
 
       {/* Category Tabs */}
       <div className="flex flex-wrap gap-2 mb-4">
-        {skillCategories.map((category) => {
-          const Icon = category.icon
-          const count = getCategoryCount(category.key)
-          const isActive = activeCategory === category.key
-
-          return (
-            <button
-              key={category.key}
-              onClick={() => setActiveCategory(category.key)}
-              className={`inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium rounded-full transition-colors ${isActive
-                ? 'bg-zinc-900 text-white dark:bg-white dark:text-zinc-900'
-                : 'text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white border border-gray-200 dark:border-zinc-700 hover:border-gray-300 dark:hover:border-zinc-600 hover:bg-gray-50 dark:hover:bg-zinc-800/50'
-                }`}
-            >
-              <Icon className="w-3.5 h-3.5" />
-              <span>{category.label}</span>
-              <span className={`text-xs ${isActive ? 'opacity-70' : 'text-gray-400 dark:text-gray-500'}`}>
-                {count}
-              </span>
-            </button>
-          )
-        })}
+        {skillCategories.map((category) => (
+          <button
+            key={category.key}
+            onClick={() => setActiveCategory(category.key)}
+            className={`inline-flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-full transition-colors ${activeCategory === category.key
+                ? 'bg-gray-900 dark:bg-white text-white dark:text-gray-900'
+                : 'bg-gray-100 dark:bg-zinc-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-zinc-700'
+              }`}
+          >
+            {category.icon}
+            {category.label}
+          </button>
+        ))}
       </div>
 
       {/* Skills Container */}
@@ -113,9 +104,9 @@ export default function SkillsSection() {
           {filteredSkills.map((skill) => (
             <span
               key={skill.name}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm border border-gray-200 dark:border-zinc-700 rounded-full"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm border border-gray-200 dark:border-zinc-700 rounded-full hover:bg-gray-50 dark:hover:bg-zinc-800/50 transition-colors"
             >
-              {skill.icon && <span className="text-xs">{skill.icon}</span>}
+              {skill.icon}
               {skill.name}
             </span>
           ))}
