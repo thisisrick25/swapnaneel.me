@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import DateDisplay from '@/components/dateDisplay';
 import ViewCounter from '@/components/viewCounter';
-import { poppins, inter } from '@/fonts';
 
 interface PostItemProps {
   title: string;
@@ -10,52 +9,49 @@ interface PostItemProps {
   slug: string;
   showLink?: boolean;
   updatedAt?: string | Date;
+  summary?: string;
 }
 
-export default function PostItem({ title, date, viewCount, slug, showLink = true, updatedAt }: PostItemProps) {
-  const dateAndViews = (
-    <div className="flex justify-between">
-      <DateDisplay date={date} />
-      <ViewCounter slug={slug} trackView={!showLink} count={viewCount} />
-    </div>
-  );
-
+export default function PostItem({ title, date, viewCount, slug, showLink = true, updatedAt, summary }: PostItemProps) {
   const content = (
-    <div className="bg-neutral-100/60 dark:bg-neutral-900/60 p-3 rounded-lg shadow-xs">
-      <div className={`${poppins.className} mb-2`} style={{ fontWeight: '500' }}>
-        {title}
+    <div className="list-item group">
+      <div className="flex items-start justify-between gap-4">
+        <div className="flex-1 min-w-0">
+          <h3 className="font-medium text-gray-900 dark:text-gray-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+            {title}
+          </h3>
+          {summary && (
+            <p className="small-text mt-1 line-clamp-1">
+              {summary}
+            </p>
+          )}
+        </div>
+        <span className="small-text shrink-0">
+          <DateDisplay date={date} />
+        </span>
       </div>
-      <div className="text-xs md:text-sm text-gray-600 dark:text-gray-400">
-        {showLink ? (
-          dateAndViews
-        ) : (
-          <>
-            {dateAndViews}
-            {updatedAt && updatedAt !== date && (
-              <div className="mt-1 text-gray-500 italic">
-                <span className={`${inter.className} inline-flex gap-1`} style={{ fontWeight: '300' }}>Updated <DateDisplay date={updatedAt} /></span>
-              </div>
-            )}
-          </>
-        )}
-      </div>
+
+      {!showLink && updatedAt && updatedAt !== date && (
+        <div className="mt-2 text-xs text-gray-400">
+          Updated <DateDisplay date={updatedAt} />
+        </div>
+      )}
+
+      {showLink && viewCount !== undefined && viewCount > 0 && (
+        <div className="mt-1">
+          <ViewCounter slug={slug} trackView={false} count={viewCount} />
+        </div>
+      )}
     </div>
   );
 
   if (showLink) {
     return (
-      <Link
-        href={`/posts/${slug}`}
-        className="grid grid-cols-1 w-full my-4"
-      >
+      <Link href={`/posts/${slug}`} className="block">
         {content}
       </Link>
     );
   }
 
-  return (
-    <div className="grid grid-cols-1 w-full mb-4">
-      {content}
-    </div>
-  );
+  return content;
 }
