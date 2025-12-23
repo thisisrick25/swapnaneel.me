@@ -1,64 +1,59 @@
 'use client';
 
 import { useState } from 'react';
-import { inter } from '@/fonts';
+import { formatDistanceToNow, format } from 'date-fns';
 
 interface DateDisplayProps {
   date: string | Date;
+  /** Minimum width for the date display */
+  width?: string;
 }
 
-export default function DateDisplay({ date }: DateDisplayProps) {
+export default function DateDisplay({
+  date,
+  width = '180px',
+}: DateDisplayProps) {
   const [showFullDate, setShowFullDate] = useState(false);
 
-  const targetDate = new Date(date);
-  const now = new Date();
-  const diffInMs = now.getTime() - targetDate.getTime();
-  const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
+  const targetDate = typeof date === 'string' ? new Date(date) : date;
 
-  let relativeDate = '';
-  if (diffInDays === 0) {
-    relativeDate = 'Today';
-  } else if (diffInDays === 1) {
-    relativeDate = '1 day ago';
-  } else if (diffInDays < 7) {
-    relativeDate = `${diffInDays} days ago`;
-  } else if (diffInDays < 30) {
-    const weeks = Math.floor(diffInDays / 7);
-    relativeDate = `${weeks} week${weeks > 1 ? 's' : ''} ago`;
-  } else if (diffInDays < 365) {
-    const months = Math.floor(diffInDays / 30);
-    relativeDate = `${months} month${months > 1 ? 's' : ''} ago`;
-  } else {
-    const years = Math.floor(diffInDays / 365);
-    relativeDate = `${years} year${years > 1 ? 's' : ''} ago`;
+  // Handle invalid dates
+  if (isNaN(targetDate.getTime())) {
+    return <span className="text-gray-400 dark:text-gray-500">—</span>;
   }
 
-  const fullDate = targetDate.toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  });
+  // Use date-fns for accurate relative time
+  const relativeDate = formatDistanceToNow(targetDate, { addSuffix: true });
+
+  const fullDate = format(targetDate, 'MMMM d, yyyy');
 
   return (
-    <span
-      className={`${inter.className} relative cursor-pointer overflow-hidden`}
+    <time
+      dateTime={targetDate.toISOString()}
+      className="relative cursor-pointer overflow-hidden whitespace-nowrap"
       onMouseEnter={() => setShowFullDate(true)}
       onMouseLeave={() => setShowFullDate(false)}
       title={fullDate}
-      style={{ fontWeight: '300', minWidth: '180px' }}
+      style={{ fontWeight: '300', minWidth: width, willChange: 'transform, opacity' }}
     >
       <span
-        className={`absolute left-0 transition-transform duration-300 ease-in-out ${showFullDate ? '-translate-y-full opacity-0' : 'translate-y-0 opacity-100'
+        className={`absolute left-0 transition-all duration-300 ease-in-out motion-reduce:transition-none ${showFullDate
+            ? '-translate-y-full opacity-0 blur-[2px] scale-95'
+            : 'translate-y-0 opacity-100 blur-0 scale-100'
           }`}
       >
         {relativeDate}
       </span>
       <span
-        className={`absolute left-0 transition-transform duration-300 ease-in-out ${showFullDate ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'
+        className={`absolute left-0 transition-all duration-300 ease-in-out motion-reduce:transition-none ${showFullDate
+            ? 'translate-y-0 opacity-100 blur-0 scale-100'
+            : 'translate-y-full opacity-0 blur-[2px] scale-95'
           }`}
       >
         {fullDate}
       </span>
-    </span>
+      {/* Invisible placeholder to maintain width */}
+      <span className="invisible">{fullDate}</span>
+    </time>
   );
 }
