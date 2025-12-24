@@ -2,6 +2,7 @@
 
 import { useState, ReactNode } from 'react'
 import { poppins } from '@/fonts'
+import BorderBeam from './borderBeam'
 import {
   LuSparkles, LuBrain, LuPackage, LuGlobe, LuCloud,
   LuDatabase, LuCode
@@ -81,21 +82,36 @@ export default function SkillsSection() {
     <section className="mb-16">
       <h2 className={`text-2xl font-bold tracking-tight mb-4 ${poppins.className}`}>Skills</h2>
 
-      {/* Category Tabs */}
+      {/* Category Tabs with MeteorBeam effect on active */}
       <div className="flex flex-wrap gap-2 mb-4">
-        {skillCategories.map((category) => (
-          <button
-            key={category.key}
-            onClick={() => setActiveCategory(category.key)}
-            className={`inline-flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-full transition-colors ${activeCategory === category.key
-                ? 'bg-gray-900 dark:bg-white text-white dark:text-gray-900'
-                : 'bg-gray-100 dark:bg-zinc-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-zinc-700'
-              }`}
-          >
-            {category.icon}
-            {category.label}
-          </button>
-        ))}
+        {skillCategories.map((category) => {
+          const isActive = activeCategory === category.key
+
+          if (isActive) {
+            return (
+              <BorderBeam key={category.key} active={true}>
+                <button
+                  onClick={() => setActiveCategory(category.key)}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm text-white dark:text-gray-900"
+                >
+                  {category.icon}
+                  {category.label}
+                </button>
+              </BorderBeam>
+            )
+          }
+
+          return (
+            <button
+              key={category.key}
+              onClick={() => setActiveCategory(category.key)}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-full bg-gray-100 dark:bg-zinc-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-zinc-700 transition-colors"
+            >
+              {category.icon}
+              {category.label}
+            </button>
+          )
+        })}
       </div>
 
       {/* Skills Container */}
