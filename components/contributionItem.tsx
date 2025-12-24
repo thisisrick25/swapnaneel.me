@@ -3,6 +3,7 @@
 import { useRef, useState, MouseEvent } from 'react'
 import Link from 'next/link'
 import DateDisplay from '@/components/dateDisplay'
+import BorderBeam from '@/components/borderBeam'
 import { GIT_USERNAME } from '@/lib/constants'
 import { LuExternalLink, LuGitMerge } from 'react-icons/lu'
 import { SiGithub, SiGitlab } from 'react-icons/si'
@@ -22,6 +23,7 @@ export default function ContributionItem({ title, repo, link, mergedAt, relatedI
   const cardRef = useRef<HTMLDivElement>(null)
   const [position, setPosition] = useState({ x: 0, y: 0 })
   const [opacity, setOpacity] = useState(0)
+  const [isHovered, setIsHovered] = useState(false)
 
   const repoUrl = source === 'github' ? `https://github.com/${repo}` : `https://gitlab.com/${repo}`
   const sourceUrl = source === 'github' ? `https://github.com/${GIT_USERNAME}` : `https://gitlab.com/${GIT_USERNAME}`
@@ -44,8 +46,14 @@ export default function ContributionItem({ title, repo, link, mergedAt, relatedI
     })
   }
 
-  const handleMouseEnter = () => setOpacity(1)
-  const handleMouseLeave = () => setOpacity(0)
+  const handleMouseEnter = () => {
+    setOpacity(1)
+    setIsHovered(true)
+  }
+  const handleMouseLeave = () => {
+    setOpacity(0)
+    setIsHovered(false)
+  }
 
   const SourceIcon = source === 'github' ? SiGithub : SiGitlab
   const sourceColor = source === 'github'
@@ -53,23 +61,17 @@ export default function ContributionItem({ title, repo, link, mergedAt, relatedI
     : 'text-orange-600 dark:text-orange-400'
 
   const cardContent = (
-    <div
-      ref={cardRef}
-      onMouseMove={handleMouseMove}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-      className="relative overflow-hidden rounded-xl h-full"
-    >
+    <>
       {/* Shine effect */}
       <div
-        className="pointer-events-none absolute -inset-px opacity-0 transition-opacity duration-300"
+        className="pointer-events-none absolute -inset-px opacity-0 transition-opacity duration-300 rounded-xl z-20"
         style={{
           opacity,
           background: `radial-gradient(600px circle at ${position.x}px ${position.y}px, rgba(255,255,255,0.06), transparent 40%)`,
         }}
       />
       <div
-        className="pointer-events-none absolute -inset-px rounded-xl opacity-0 transition-opacity duration-300"
+        className="pointer-events-none absolute -inset-px rounded-xl opacity-0 transition-opacity duration-300 z-20"
         style={{
           opacity,
           background: `radial-gradient(400px circle at ${position.x}px ${position.y}px, rgba(255,255,255,0.1), transparent 40%)`,
@@ -77,7 +79,7 @@ export default function ContributionItem({ title, repo, link, mergedAt, relatedI
       />
 
       {/* Card content */}
-      <div className="work-card group relative h-full flex flex-col">
+      <div className="relative h-full flex flex-col p-4 bg-gray-50 dark:bg-zinc-800/50 rounded-xl">
         {/* Header: repo tag + source icon + arrow */}
         <div className="flex items-start justify-between gap-2 mb-2">
           <div className="flex items-center gap-2">
@@ -160,9 +162,25 @@ export default function ContributionItem({ title, repo, link, mergedAt, relatedI
           </div>
         )}
       </div>
-    </div>
+    </>
   )
 
-  return cardContent
+  return (
+    <div
+      ref={cardRef}
+      onMouseMove={handleMouseMove}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      className="relative h-full"
+    >
+      <BorderBeam
+        active={isHovered}
+        rounded="rounded-xl"
+        bgClassName="bg-white dark:bg-zinc-900"
+        className="h-full overflow-hidden"
+      >
+        {cardContent}
+      </BorderBeam>
+    </div>
+  )
 }
-
