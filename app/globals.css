@@ -125,7 +125,7 @@ body {
    ======================================== */
 
 .list-item {
-  @apply block p-4 -mx-4 rounded-xl transition-colors;
+  @apply flex items-start justify-between gap-4 p-4 -mx-4 rounded-xl transition-colors;
 }
 
 .list-item:hover {
