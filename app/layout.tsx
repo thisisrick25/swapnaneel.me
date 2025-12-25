@@ -61,7 +61,7 @@ export default function RootLayout({
       </Script>
       <body className={`${inter.className} antialiased`}>
         <ThemeProvider>
-          <main className="min-h-screen w-full max-w-3xl mx-auto">
+          <main className="min-h-screen w-full max-w-4xl mx-auto">
             {children}
           </main>
           <FloatingNav />
