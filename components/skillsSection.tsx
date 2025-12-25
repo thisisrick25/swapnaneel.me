@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, ReactNode } from 'react'
-import { poppins } from '@/fonts'
+import { poppins, ibm_plex_mono } from '@/fonts'
 import BorderBeam from './borderBeam'
 import {
   LuSparkles, LuBrain, LuPackage, LuGlobe, LuCloud,
@@ -120,7 +120,7 @@ export default function SkillsSection() {
           {filteredSkills.map((skill) => (
             <span
               key={skill.name}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm border border-gray-200 dark:border-zinc-700 rounded-full hover:bg-gray-50 dark:hover:bg-zinc-800/50 transition-colors"
+              className={`inline-flex items-center gap-1.5 px-1.5 py-1 text-xs font-medium border border-gray-200 dark:border-zinc-700 rounded-md hover:bg-gray-50 dark:hover:bg-zinc-800/50 transition-colors ${ibm_plex_mono.className}`}
             >
               {skill.icon}
               {skill.name}
