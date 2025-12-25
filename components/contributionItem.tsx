@@ -6,6 +6,7 @@ import ShinyCard from '@/components/shinyCard'
 import { GIT_USERNAME } from '@/lib/constants'
 import { LuExternalLink, LuGitMerge } from 'react-icons/lu'
 import { SiGithub, SiGitlab } from 'react-icons/si'
+import { ibm_plex_mono } from '@/fonts'
 
 type Props = {
   id: number
@@ -38,7 +39,7 @@ export default function ContributionItem({ title, repo, link, mergedAt, relatedI
 
   return (
     <ShinyCard
-      containerClassName="h-full rounded-xl border border-gray-200 dark:border-zinc-700 hover:border-gray-300 dark:hover:border-zinc-600 transition-colors"
+      containerClassName="group h-full rounded-xl border border-gray-200 dark:border-zinc-700 hover:border-gray-300 dark:hover:border-zinc-600 transition-colors"
       className="h-full flex flex-col p-4 bg-gray-50/50 dark:bg-zinc-800/50 rounded-xl"
     >
       {/* Header: repo tag + source icon + arrow */}
@@ -48,7 +49,7 @@ export default function ContributionItem({ title, repo, link, mergedAt, relatedI
             href={repoUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="tag hover:bg-gray-200 dark:hover:bg-zinc-600 transition-colors"
+            className={`px-1.5 py-1 text-xs font-medium border border-gray-200 dark:border-zinc-700 rounded-md bg-gray-100 dark:bg-zinc-800 transition-all hover:shadow-[0_0_4px_rgba(59,130,246,0.3)] dark:hover:shadow-[0_0_4px_rgba(147,197,253,0.3)] ${ibm_plex_mono.className}`}
           >
             {repo}
           </a>
@@ -66,8 +67,8 @@ export default function ContributionItem({ title, repo, link, mergedAt, relatedI
           href={link}
           target="_blank"
           rel="noopener noreferrer"
-          title="View PR on GitHub/GitLab"
-          className="text-gray-400 dark:text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors"
+          title="View PR on github/gitlab"
+          className="text-gray-400 dark:text-gray-500 hover:text-gray-900 dark:hover:text-white group-hover:text-gray-900 dark:group-hover:text-white transition-colors"
         >
           <LuExternalLink className="w-4 h-4" />
         </a>
@@ -92,36 +93,38 @@ export default function ContributionItem({ title, repo, link, mergedAt, relatedI
         </a>
       )}
 
-      {/* Merge status + date */}
+      {/* Merged status + Fixes on same line */}
       <div className="flex items-center gap-2 text-xs">
         <span className="inline-flex items-center gap-1 text-green-600 dark:text-green-400">
           <LuGitMerge className="w-3 h-3" />
           Merged
         </span>
-        <span className="text-gray-300 dark:text-gray-600">·</span>
-        <span>
-          <DateDisplay date={mergedAt || ''} />
-        </span>
+        {relatedIssues && relatedIssues.length > 0 && (
+          <>
+            <span className="text-gray-500 dark:text-gray-400">·</span>
+            <span className="text-gray-500 dark:text-gray-400">
+              Fixes: {relatedIssues.filter(Boolean).map((issueUrl, idx) => (
+                <span key={issueUrl}>
+                  {idx > 0 && ', '}
+                  <a
+                    href={issueUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-600 dark:text-blue-400 hover:underline"
+                  >
+                    #{extractIssueNumber(issueUrl)}
+                  </a>
+                </span>
+              ))}
+            </span>
+          </>
+        )}
       </div>
 
-      {/* Related issues */}
-      {relatedIssues && relatedIssues.length > 0 && (
-        <div className="mt-2 text-xs text-gray-400 dark:text-gray-500">
-          Fixes: {relatedIssues.filter(Boolean).map((issueUrl, idx) => (
-            <span key={issueUrl}>
-              {idx > 0 && ', '}
-              <a
-                href={issueUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue-600 dark:text-blue-400 hover:underline"
-              >
-                #{extractIssueNumber(issueUrl)}
-              </a>
-            </span>
-          ))}
-        </div>
-      )}
+      {/* Date on its own line */}
+      <div className="text-xs text-gray-500 dark:text-gray-400 mt-auto pt-2">
+        <DateDisplay date={mergedAt || ''} />
+      </div>
     </ShinyCard>
   )
 }
