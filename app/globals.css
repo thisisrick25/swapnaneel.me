@@ -254,3 +254,26 @@ input[type="email"] {
 *:hover > .anchor {
   @apply opacity-100;
 }
+
+/* ========================================
+   BORDER BEAM ANIMATION
+   ======================================== */
+
+@keyframes border-beam-spin {
+  from {
+    --border-beam-angle: 0deg;
+  }
+  to {
+    --border-beam-angle: 360deg;
+  }
+}
+
+@property --border-beam-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.animate-border-beam {
+  animation: border-beam-spin 3s linear infinite;
+}
