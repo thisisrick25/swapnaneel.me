@@ -6,7 +6,6 @@ interface ShinyCardProps {
   children: ReactNode
   className?: string
   containerClassName?: string
-  as?: 'div' | 'a' | 'article'
 }
 
 /**
@@ -17,7 +16,6 @@ export default function ShinyCard({
   children,
   className = '',
   containerClassName = '',
-  as: Component = 'div',
 }: ShinyCardProps) {
   const cardRef = useRef<HTMLDivElement>(null)
   const [position, setPosition] = useState({ x: 0, y: 0 })
@@ -25,7 +23,6 @@ export default function ShinyCard({
 
   const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
     if (!cardRef.current) return
-
     const rect = cardRef.current.getBoundingClientRect()
     setPosition({
       x: e.clientX - rect.left,
@@ -33,13 +30,8 @@ export default function ShinyCard({
     })
   }
 
-  const handleMouseEnter = () => {
-    setOpacity(1)
-  }
-
-  const handleMouseLeave = () => {
-    setOpacity(0)
-  }
+  const handleMouseEnter = () => setOpacity(1)
+  const handleMouseLeave = () => setOpacity(0)
 
   return (
     <div
@@ -49,22 +41,21 @@ export default function ShinyCard({
       onMouseLeave={handleMouseLeave}
       className={`relative overflow-hidden ${containerClassName}`}
     >
-      {/* Shine effect layer */}
+      {/* Shine effect - light mode (dark gradient) */}
       <div
-        className="pointer-events-none absolute -inset-px opacity-0 transition-opacity duration-300"
+        className="pointer-events-none absolute -inset-px transition-opacity duration-300 dark:opacity-0"
         style={{
           opacity,
-          background: `radial-gradient(600px circle at ${position.x}px ${position.y}px, rgba(255,255,255,0.06), transparent 40%)`,
+          background: `radial-gradient(300px circle at ${position.x}px ${position.y}px, rgba(0,0,0,0.25), transparent 40%)`,
         }}
       />
-      
-      {/* Border glow effect */}
+      {/* Shine effect - dark mode (light gradient) */}
       <div
-        className="pointer-events-none absolute -inset-px rounded-xl opacity-0 transition-opacity duration-300"
+        className="pointer-events-none absolute -inset-px transition-opacity duration-300 opacity-0 dark:opacity-(--shine-opacity)"
         style={{
-          opacity,
-          background: `radial-gradient(400px circle at ${position.x}px ${position.y}px, rgba(255,255,255,0.1), transparent 40%)`,
-        }}
+          '--shine-opacity': opacity,
+          background: `radial-gradient(300px circle at ${position.x}px ${position.y}px, rgba(255,255,255,0.3), transparent 40%)`,
+        } as React.CSSProperties}
       />
 
       {/* Content */}
