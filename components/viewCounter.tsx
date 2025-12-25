@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState, useRef } from 'react';
-import { jetbrains_mono } from '@/fonts';
+import { ibm_plex_mono } from '@/fonts';
 
 interface ViewCounterProps {
   slug: string;
@@ -98,7 +98,7 @@ export default function ViewCounter({ slug, trackView = true, count }: ViewCount
   }
 
   return (
-    <span className={jetbrains_mono.className} style={{ fontWeight: '300' }}>
+    <span className={ibm_plex_mono.className} style={{ fontWeight: '300' }}>
       {views} views
     </span>
   );
