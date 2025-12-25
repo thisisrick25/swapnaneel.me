@@ -1,26 +1,33 @@
 import Link from "next/link"
 import githubSlugger from "github-slugger"
-import { inter } from "@/fonts"
+import { ibm_plex_mono } from "@/fonts"
 
-interface Tag {
+interface TagProps {
   tags: string[]
+  maxTags?: number
 }
 
-export default function Tag({ tags }: Tag) {
+export default function Tag({ tags, maxTags = 3 }: TagProps) {
   const slugger = new githubSlugger()
+  const displayTags = tags.slice(0, maxTags)
+  const remainingCount = tags.length - maxTags
 
   return (
-    <div className={`${inter.className} text-gray-600 dark:text-gray-400 text-xs md:text-sm rounded-lg mb-4 overflow-hidden overflow-y-auto`} style={{ fontWeight: '300' }}>
-      {tags.map((tag, index) => (
+    <div className="flex flex-wrap gap-1">
+      {displayTags.map((tag) => (
         <Link
-          key={`${tag}-${index}`}
+          key={tag}
           href={`/tags/${slugger.slug(tag)}`}
-          className="hover:underline"
+          className={`px-1.5 py-0.5 text-[10px] font-medium border border-gray-200 dark:border-zinc-700 rounded-md bg-white dark:bg-zinc-800 hover:bg-gray-50 dark:hover:bg-zinc-700 transition-colors ${ibm_plex_mono.className}`}
         >
-          {`#${tag}`}
-          {index !== tags.length - 1 && ", "}
+          {tag}
         </Link>
       ))}
+      {remainingCount > 0 && (
+        <span className="text-[10px] text-gray-400 dark:text-gray-500 self-center">
+          +{remainingCount}
+        </span>
+      )}
     </div>
   )
 }

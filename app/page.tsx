@@ -7,11 +7,10 @@ import { siteMetadata } from '@/utils/siteMetadata'
 import SkillsSection from '@/components/skillsSection'
 import Footer from '@/components/footer'
 import ContributionCard from '@/components/contributionCard'
-import { poppins, ibm_plex_mono } from '@/fonts'
+import { poppins } from '@/fonts'
 import { SiGithub, SiLinkedin } from 'react-icons/si'
 import { LuMail } from 'react-icons/lu'
-import DateDisplay from '@/components/dateDisplay'
-import ShinyCard from '@/components/shinyCard'
+import PostCard from '@/components/postCard'
 
 export const dynamic = 'force-dynamic'
 
@@ -96,33 +95,15 @@ export default async function Home() {
             recentPosts.map((post) => {
               const viewCount = allViews.find((v) => v.slug === post.slug)?.count || 0
               return (
-                <Link key={post.slug} href={`/posts/${post.slug}`}>
-                  <ShinyCard
-                    containerClassName="h-full rounded-xl border border-gray-200 dark:border-zinc-700 hover:border-gray-300 dark:hover:border-zinc-600 transition-colors"
-                    className="h-full flex flex-col p-4 bg-gray-50/50 dark:bg-zinc-800/50 rounded-xl"
-                  >
-                    {/* Top metadata: date left, views right */}
-                    <div className="flex justify-between text-xs text-gray-500 dark:text-gray-400 mb-2">
-                      <DateDisplay date={post.data.publishedAt} />
-                      {viewCount > 0 && (
-                        <span className={`flex items-center gap-1 ${ibm_plex_mono.className}`}>
-                          <span>{viewCount}</span>
-                          <span>views</span>
-                        </span>
-                      )}
-                    </div>
-                    {/* Title */}
-                    <h3 className="text-sm font-semibold mb-1 line-clamp-2">
-                      {post.data.title}
-                    </h3>
-                    {/* Description */}
-                    {post.data.description && (
-                      <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-2">
-                        {post.data.description}
-                      </p>
-                    )}
-                  </ShinyCard>
-                </Link>
+                <PostCard
+                  key={post.slug}
+                  slug={post.slug}
+                  title={post.data.title}
+                  description={post.data.description}
+                  publishedAt={post.data.publishedAt}
+                  viewCount={viewCount}
+                  tags={post.data.tags}
+                />
               )
             })
           ) : (
