@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next'
 import { cache } from 'react';
-import { poppins, inter, jetbrains_mono } from '@/fonts';
+import { poppins, inter, ibm_plex_mono } from '@/fonts';
 import ContributionItem from '@/components/contributionItem'
 import { getContributionBySlug, ContributionBlog, getMergedContributions } from '@/utils/getContributions';
 
@@ -55,7 +55,7 @@ export default async function Page({ params }: PageProps) {
         source={source}
         showLink={false}
       />
-      <div className={`${poppins.variable} ${inter.variable} ${jetbrains_mono.variable} max-w-max prose dark:prose-invert`}>
+      <div className={`${poppins.variable} ${inter.variable} ${ibm_plex_mono.variable} max-w-max prose dark:prose-invert`}>
         {contribution.summaryContent}
         {contribution.content}
       </div>
