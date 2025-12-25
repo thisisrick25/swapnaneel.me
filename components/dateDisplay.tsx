@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { formatDistanceToNow, format } from 'date-fns';
+import { formatDistanceToNowStrict, format } from 'date-fns';
 
 interface DateDisplayProps {
   date: string | Date;
@@ -11,7 +11,7 @@ interface DateDisplayProps {
 
 export default function DateDisplay({
   date,
-  width = '180px',
+  width = '100px',
 }: DateDisplayProps) {
   const [showFullDate, setShowFullDate] = useState(false);
 
@@ -23,7 +23,7 @@ export default function DateDisplay({
   }
 
   // Use date-fns for accurate relative time
-  const relativeDate = formatDistanceToNow(targetDate, { addSuffix: true });
+  const relativeDate = formatDistanceToNowStrict(targetDate, { addSuffix: true });
 
   const fullDate = format(targetDate, 'MMMM d, yyyy');
 
@@ -38,16 +38,16 @@ export default function DateDisplay({
     >
       <span
         className={`absolute left-0 transition-all duration-300 ease-in-out motion-reduce:transition-none ${showFullDate
-            ? '-translate-y-full opacity-0 blur-[2px] scale-95'
-            : 'translate-y-0 opacity-100 blur-0 scale-100'
+          ? '-translate-y-full opacity-0 blur-[2px] scale-95'
+          : 'translate-y-0 opacity-100 blur-0 scale-100'
           }`}
       >
         {relativeDate}
       </span>
       <span
         className={`absolute left-0 transition-all duration-300 ease-in-out motion-reduce:transition-none ${showFullDate
-            ? 'translate-y-0 opacity-100 blur-0 scale-100'
-            : 'translate-y-full opacity-0 blur-[2px] scale-95'
+          ? 'translate-y-0 opacity-100 blur-0 scale-100'
+          : 'translate-y-full opacity-0 blur-[2px] scale-95'
           }`}
       >
         {fullDate}
