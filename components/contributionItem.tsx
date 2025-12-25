@@ -49,7 +49,7 @@ export default function ContributionItem({ title, repo, link, mergedAt, relatedI
             href={repoUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className={`px-1.5 py-1 text-xs font-medium border border-gray-200 dark:border-zinc-700 rounded-md bg-gray-100 dark:bg-zinc-800 transition-all hover:shadow-[0_0_4px_rgba(59,130,246,0.3)] dark:hover:shadow-[0_0_4px_rgba(147,197,253,0.3)] ${ibm_plex_mono.className}`}
+            className={`px-1.5 py-1 text-xs font-medium border border-gray-200 dark:border-zinc-700 rounded-md bg-white dark:bg-zinc-800 transition-all hover:shadow-[0_0_4px_rgba(59,130,246,0.3)] dark:hover:shadow-[0_0_4px_rgba(147,197,253,0.3)] ${ibm_plex_mono.className}`}
           >
             {repo}
           </a>
