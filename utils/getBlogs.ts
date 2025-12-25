@@ -32,7 +32,7 @@ export interface Blog {
 }
 
 export interface BlogMetadata {
-  data: Pick<BlogData, 'title' | 'publishedAt' | 'updatedAt' | 'isPublished' | 'tags'>; // Only necessary data
+  data: Pick<BlogData, 'title' | 'description' | 'publishedAt' | 'updatedAt' | 'isPublished' | 'tags'>; // Only necessary data
   slug: string;
 }
 
@@ -40,6 +40,7 @@ function parseBlogMetadata(rawContent: string): BlogMetadata['data'] {
   const { data } = matter(rawContent);
   return {
     title: data.title,
+    description: data.description,
     publishedAt: data.publishedAt,
     updatedAt: data.updatedAt,
     isPublished: data.isPublished,
