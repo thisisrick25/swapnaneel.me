@@ -2,20 +2,23 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { getBlogs } from '@/utils/getBlogs'
 import { getMergedContributions } from '@/utils/getContributions'
+import { getViewsCount } from '@/db/queries'
 import { siteMetadata } from '@/utils/siteMetadata'
 import SkillsSection from '@/components/skillsSection'
 import Footer from '@/components/footer'
 import ContributionItem from '@/components/contributionItem'
-import { poppins } from '@/fonts'
+import { poppins, ibm_plex_mono } from '@/fonts'
 import { SiGithub, SiLinkedin } from 'react-icons/si'
 import { LuMail } from 'react-icons/lu'
 import DateDisplay from '@/components/dateDisplay'
+import ShinyCard from '@/components/shinyCard'
 
 export const dynamic = 'force-dynamic'
 
 export default async function Home() {
   const blogs = await getBlogs()
   const contributions = await getMergedContributions()
+  const allViews = await getViewsCount()
 
   const recentPosts = blogs.slice(0, 4)
   const recentContributions = contributions.slice(0, 4)
@@ -88,27 +91,40 @@ export default async function Home() {
           </Link>
         </div>
 
-        <div className="space-y-1">
+        <div className="grid gap-3 sm:grid-cols-2">
           {recentPosts.length > 0 ? (
-            recentPosts.map((post) => (
-              <Link
-                key={post.slug}
-                href={`/posts/${post.slug}`}
-                className="list-item flex items-start justify-between gap-4"
-              >
-                <div className="flex-1 min-w-0">
-                  <h3 className="text-lg font-semibold mb-1 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                    {post.data.title}
-                  </h3>
-                  {post.data.summary && (
-                    <p className="text-sm line-clamp-1">
-                      {post.data.summary}
-                    </p>
-                  )}
-                </div>
-                <DateDisplay date={post.data.publishedAt} />
-              </Link>
-            ))
+            recentPosts.map((post) => {
+              const viewCount = allViews.find((v) => v.slug === post.slug)?.count || 0
+              return (
+                <Link key={post.slug} href={`/posts/${post.slug}`}>
+                  <ShinyCard
+                    containerClassName="h-full rounded-xl border border-gray-200 dark:border-zinc-700 hover:border-gray-300 dark:hover:border-zinc-600 transition-colors"
+                    className="h-full flex flex-col p-4 bg-gray-50/50 dark:bg-zinc-800/50 rounded-xl"
+                  >
+                    {/* Top metadata: date left, views right */}
+                    <div className="flex justify-between text-xs text-gray-500 dark:text-gray-400 mb-2">
+                      <DateDisplay date={post.data.publishedAt} />
+                      {viewCount > 0 && (
+                        <span className={`flex items-center gap-1 ${ibm_plex_mono.className}`}>
+                          <span>{viewCount}</span>
+                          <span>views</span>
+                        </span>
+                      )}
+                    </div>
+                    {/* Title */}
+                    <h3 className="text-sm font-semibold mb-1 line-clamp-2">
+                      {post.data.title}
+                    </h3>
+                    {/* Description */}
+                    {post.data.description && (
+                      <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-2">
+                        {post.data.description}
+                      </p>
+                    )}
+                  </ShinyCard>
+                </Link>
+              )
+            })
           ) : (
             <p className="text-sm">No posts yet.</p>
           )}
