@@ -38,19 +38,21 @@ export default async function Page() {
               <Link
                 key={blog.slug}
                 href={`/posts/${blog.slug}`}
-                className="list-item flex items-start justify-between gap-4"
+                className="list-item"
               >
                 <div className="flex-1 min-w-0">
                   <h2 className="text-lg font-semibold mb-1">
                     {blog.data.title}
                   </h2>
-                  {blog.data.summary && (
+                  {blog.data.description && (
                     <p className="text-sm line-clamp-1 mb-2">
-                      {blog.data.summary}
+                      {blog.data.description}
                     </p>
                   )}
                   <div className="flex items-center gap-3 text-xs">
-                    <DateDisplay date={blog.data.publishedAt} />
+                    <span className="text-xs text-gray-500 dark:text-gray-400">
+                      <DateDisplay date={blog.data.publishedAt} />
+                    </span>
                     {viewCount > 0 && (
                       <>
                         <span className="text-gray-300 dark:text-gray-600">·</span>
