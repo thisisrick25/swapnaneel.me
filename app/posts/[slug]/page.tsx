@@ -5,7 +5,7 @@ import PostItem from '@/components/postItem';
 import { extractHeadings } from '@/utils/extractHeadings';
 import { getBlogs, getBlogBySlug, Blog } from '@/utils/getBlogs';
 import { Metadata } from 'next'
-import { poppins, inter, jetbrains_mono } from '@/fonts'
+import { poppins, inter, ibm_plex_mono } from '@/fonts'
 import { cache } from 'react';
 import { getViewsCountBySlug } from '@/db/queries';
 
@@ -61,7 +61,7 @@ export default async function Page({ params }: PageProps) {
         <Tag tags={blog.data.tags} />
       </div>
       <TableOfContents headings={headings} />
-      <div className={`${poppins.variable} ${inter.variable} ${jetbrains_mono.variable} max-w-max prose dark:prose-invert`}>
+      <div className={`${poppins.variable} ${inter.variable} ${ibm_plex_mono.variable} max-w-max prose dark:prose-invert`}>
         {blog.content}
       </div>
     </div>
