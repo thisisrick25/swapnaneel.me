@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 import { getMergedContributions } from '@/utils/getContributions'
 import { poppins } from '@/fonts'
-import ContributionItem from '@/components/contributionItem'
+import ContributionCard from '@/components/contributionCard'
 
 export const dynamic = 'force-dynamic'
 
@@ -29,7 +29,7 @@ export default async function Page() {
       <div className="grid gap-3 sm:grid-cols-2">
         {contributions.length > 0 ? (
           contributions.map((contribution) => (
-            <ContributionItem
+            <ContributionCard
               key={`${contribution.source}-${contribution.id}`}
               id={contribution.id}
               title={contribution.title}

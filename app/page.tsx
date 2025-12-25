@@ -6,7 +6,7 @@ import { getViewsCount } from '@/db/queries'
 import { siteMetadata } from '@/utils/siteMetadata'
 import SkillsSection from '@/components/skillsSection'
 import Footer from '@/components/footer'
-import ContributionItem from '@/components/contributionItem'
+import ContributionCard from '@/components/contributionCard'
 import { poppins, ibm_plex_mono } from '@/fonts'
 import { SiGithub, SiLinkedin } from 'react-icons/si'
 import { LuMail } from 'react-icons/lu'
@@ -143,7 +143,7 @@ export default async function Home() {
         <div className="grid gap-3 sm:grid-cols-2">
           {recentContributions.length > 0 ? (
             recentContributions.map((contribution) => (
-              <ContributionItem
+              <ContributionCard
                 key={`${contribution.source}-${contribution.id}`}
                 id={contribution.id}
                 title={contribution.title}

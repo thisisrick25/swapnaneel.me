@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation';
 import { Metadata } from 'next'
 import { cache } from 'react';
 import { poppins, inter, ibm_plex_mono } from '@/fonts';
-import ContributionItem from '@/components/contributionItem'
+import ContributionCard from '@/components/contributionCard'
 import { getContributionBySlug, ContributionBlog, getMergedContributions } from '@/utils/getContributions';
 
 interface PageProps {
@@ -45,7 +45,7 @@ export default async function Page({ params }: PageProps) {
 
   return (
     <div>
-      <ContributionItem
+      <ContributionCard
         id={contribution.data.id}
         title={contribution.data.title}
         repo={contribution.data.repo}

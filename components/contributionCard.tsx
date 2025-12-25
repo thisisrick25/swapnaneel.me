@@ -19,7 +19,7 @@ type Props = {
   showLink?: boolean
 }
 
-export default function ContributionItem({ title, repo, link, mergedAt, relatedIssues, source, id, showLink = true }: Props) {
+export default function ContributionCard({ title, repo, link, mergedAt, relatedIssues, source, id, showLink = true }: Props) {
   const repoUrl = source === 'github' ? `https://github.com/${repo}` : `https://gitlab.com/${repo}`
   const sourceUrl = source === 'github' ? `https://github.com/${GIT_USERNAME}` : `https://gitlab.com/${GIT_USERNAME}`
 
