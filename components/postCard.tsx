@@ -45,7 +45,7 @@ export default function PostCard({ slug, title, description, publishedAt, viewCo
         {/* Tags */}
         {tags && tags.length > 0 && (
           <div className="mt-auto">
-            <Tag tags={tags} />
+            <Tag tags={tags} asLinks={false} />
           </div>
         )}
       </ShinyCard>
