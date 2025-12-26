@@ -6,16 +6,18 @@ interface ShinyCardProps {
   children: ReactNode
   className?: string
   containerClassName?: string
+  spotlightColor?: string
 }
 
 /**
  * ShinyCard - A card component with cursor-following shine effect
- * Inspired by GitHub card styles and Animata's shiny card effect
+ * Inspired by GitHub card styles and ReactBits spotlight card effect
  */
 export default function ShinyCard({
   children,
   className = '',
   containerClassName = '',
+  spotlightColor = 'rgba(59, 130, 246, 0.6)',
 }: ShinyCardProps) {
   const cardRef = useRef<HTMLDivElement>(null)
   const [position, setPosition] = useState({ x: 0, y: 0 })
@@ -41,21 +43,13 @@ export default function ShinyCard({
       onMouseLeave={handleMouseLeave}
       className={`relative overflow-hidden ${containerClassName}`}
     >
-      {/* Shine effect - light mode (dark gradient) */}
+      {/* Blue spotlight gradient effect */}
       <div
-        className="pointer-events-none absolute -inset-px transition-opacity duration-300 dark:opacity-0"
+        className="pointer-events-none absolute -inset-px transition-opacity duration-300"
         style={{
           opacity,
-          background: `radial-gradient(300px circle at ${position.x}px ${position.y}px, rgba(0,0,0,0.25), transparent 40%)`,
+          background: `radial-gradient(300px circle at ${position.x}px ${position.y}px, ${spotlightColor}, transparent 40%)`,
         }}
-      />
-      {/* Shine effect - dark mode (light gradient) */}
-      <div
-        className="pointer-events-none absolute -inset-px transition-opacity duration-300 opacity-0 dark:opacity-(--shine-opacity)"
-        style={{
-          '--shine-opacity': opacity,
-          background: `radial-gradient(300px circle at ${position.x}px ${position.y}px, rgba(255,255,255,0.3), transparent 40%)`,
-        } as React.CSSProperties}
       />
 
       {/* Content */}
