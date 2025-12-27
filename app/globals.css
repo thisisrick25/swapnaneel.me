@@ -312,61 +312,53 @@ input[type="email"] {
   @apply w-[11px] h-[11px] rounded-xs transition-colors;
 }
 
-/* Light mode contribution levels */
-.contribution-level-0 {
-  @apply bg-gray-100 dark:bg-zinc-800;
+/* Light mode contribution levels - GitHub (green) */
+.github .contribution-level-0,
+.gitlab .contribution-level-0 {
+  @apply bg-gray-200 dark:bg-zinc-800;
 }
 
-.contribution-level-1 {
+.github .contribution-level-1 {
   background-color: #9be9a8;
 }
 
-.contribution-level-2 {
+.github .contribution-level-2 {
   background-color: #40c463;
 }
 
-.contribution-level-3 {
+.github .contribution-level-3 {
   background-color: #30a14e;
 }
 
-.contribution-level-4 {
+.github .contribution-level-4 {
   background-color: #216e39;
 }
 
-/* Dark mode contribution levels */
-:is(.dark *) .contribution-level-1 {
-  background-color: #0e4429;
+/* Light mode contribution levels - GitLab (orange) */
+.gitlab .contribution-level-1 {
+  background-color: #fcd5b5;
 }
 
-:is(.dark *) .contribution-level-2 {
-  background-color: #006d32;
+.gitlab .contribution-level-2 {
+  background-color: #fc9a66;
 }
 
-:is(.dark *) .contribution-level-3 {
-  background-color: #26a641;
+.gitlab .contribution-level-3 {
+  background-color: #e24329;
 }
 
-:is(.dark *) .contribution-level-4 {
-  background-color: #39d353;
+.gitlab .contribution-level-4 {
+  background-color: #b03a14;
 }
 
 /* ========================================
    SOURCE TOGGLE SWITCH
    ======================================== */
 
-.source-toggle {
-  @apply inline-flex items-center gap-0.5 p-0.5;
-  @apply bg-gray-100 dark:bg-zinc-800 rounded-lg;
-}
-
 .toggle-btn {
   @apply p-1.5 rounded-md transition-all;
-  @apply text-gray-400 dark:text-gray-500;
-  @apply hover:text-gray-600 dark:hover:text-gray-300;
 }
 
 .toggle-btn.active {
-  @apply bg-white dark:bg-zinc-700;
-  @apply text-gray-900 dark:text-white;
-  @apply shadow-sm;
+  @apply bg-white dark:bg-zinc-600;
 }
