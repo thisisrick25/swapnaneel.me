@@ -57,7 +57,7 @@ export default function ContributionCalendar({ github, gitlab }: Props) {
         <h2 className={poppins.className}>Activity</h2>
         <div className="flex items-center gap-3">
           {/* Toggle Switch */}
-          <div className="source-toggle">
+          <div className="bg-gray-100 dark:bg-zinc-800 rounded-lg shadow-md inline-flex items-center gap-0.5 p-0.5">
             <button
               onClick={() => setSource('github')}
               className={`toggle-btn ${source === 'github' ? 'active' : ''}`}
@@ -65,7 +65,10 @@ export default function ContributionCalendar({ github, gitlab }: Props) {
               aria-label="Show GitHub contributions"
               disabled={!github}
             >
-              <SiGithub className="w-4 h-4" />
+              <SiGithub className={`w-4 h-4 transition-colors ${source === 'github'
+                ? 'text-zinc-900 dark:text-white'
+                : 'text-gray-400 dark:text-gray-500 hover:text-zinc-600 dark:hover:text-gray-300'
+                }`} />
             </button>
             <button
               onClick={() => setSource('gitlab')}
@@ -74,7 +77,10 @@ export default function ContributionCalendar({ github, gitlab }: Props) {
               aria-label="Show GitLab contributions"
               disabled={!gitlab}
             >
-              <SiGitlab className="w-4 h-4" />
+              <SiGitlab className={`w-4 h-4 transition-colors ${source === 'gitlab'
+                ? 'text-orange-600 dark:text-orange-400'
+                : 'text-gray-400 dark:text-gray-500 hover:text-orange-400 dark:hover:text-orange-300'
+                }`} />
             </button>
           </div>
 
@@ -84,7 +90,10 @@ export default function ContributionCalendar({ github, gitlab }: Props) {
               href={data.profileUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors inline-flex items-center gap-1"
+              className={`text-sm hover:opacity-80 transition-colors inline-flex items-center gap-1 ${source === 'github'
+                ? 'text-gray-600 dark:text-gray-400'
+                : 'text-orange-600 dark:text-orange-400'
+                }`}
             >
               @{GIT_USERNAME}
               <LuExternalLink className="w-3.5 h-3.5" />
@@ -104,7 +113,7 @@ export default function ContributionCalendar({ github, gitlab }: Props) {
       {data && (
         <>
           <div className="contribution-calendar-wrapper">
-            <div className="contribution-calendar">
+            <div className={`contribution-calendar ${source}`}>
               {/* Month labels row */}
               <div className="contribution-months">
                 {monthLabels.map(({ month, colStart }) => (
