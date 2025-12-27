@@ -7,6 +7,8 @@ import { siteMetadata } from '@/utils/siteMetadata'
 import SkillsSection from '@/components/skillSection'
 import Footer from '@/components/footer'
 import ContributionCard from '@/components/contributionCard'
+import ContributionCalendar from '@/components/contributionCalendar'
+import { getBothCalendars } from '@/utils/getContributionCalendar'
 import { poppins } from '@/fonts'
 import { SiGithub, SiLinkedin } from 'react-icons/si'
 import { LuMail } from 'react-icons/lu'
@@ -18,6 +20,7 @@ export default async function Home() {
   const blogs = await getBlogs()
   const contributions = await getMergedContributions()
   const allViews = await getViewsCount()
+  const calendars = await getBothCalendars()
 
   const recentPosts = blogs.slice(0, 4)
   const recentContributions = contributions.slice(0, 4)
@@ -141,6 +144,9 @@ export default async function Home() {
           )}
         </div>
       </section>
+
+      {/* GitHub Activity Calendar */}
+      <ContributionCalendar github={calendars.github} gitlab={calendars.gitlab} />
 
       {/* Skills */}
       <SkillsSection />

@@ -277,3 +277,96 @@ input[type="email"] {
 .animate-border-beam {
   animation: border-beam-spin 3s linear infinite;
 }
+
+/* ========================================
+   GITHUB CONTRIBUTION CALENDAR
+   ======================================== */
+
+.contribution-calendar-wrapper {
+  @apply overflow-x-auto -mx-4 px-4 pb-2;
+  scrollbar-width: thin;
+}
+
+.contribution-calendar {
+  @apply inline-flex flex-col gap-1 min-w-max;
+}
+
+.contribution-months {
+  @apply grid gap-[3px] text-xs text-gray-500 dark:text-gray-400 mb-1;
+  grid-template-columns: repeat(53, 11px);
+}
+
+.contribution-month-label {
+  @apply text-[10px] leading-none;
+}
+
+.contribution-grid {
+  @apply flex gap-[3px];
+}
+
+.contribution-week {
+  @apply flex flex-col gap-[3px];
+}
+
+.contribution-square {
+  @apply w-[11px] h-[11px] rounded-xs transition-colors;
+}
+
+/* Light mode contribution levels */
+.contribution-level-0 {
+  @apply bg-gray-100 dark:bg-zinc-800;
+}
+
+.contribution-level-1 {
+  background-color: #9be9a8;
+}
+
+.contribution-level-2 {
+  background-color: #40c463;
+}
+
+.contribution-level-3 {
+  background-color: #30a14e;
+}
+
+.contribution-level-4 {
+  background-color: #216e39;
+}
+
+/* Dark mode contribution levels */
+:is(.dark *) .contribution-level-1 {
+  background-color: #0e4429;
+}
+
+:is(.dark *) .contribution-level-2 {
+  background-color: #006d32;
+}
+
+:is(.dark *) .contribution-level-3 {
+  background-color: #26a641;
+}
+
+:is(.dark *) .contribution-level-4 {
+  background-color: #39d353;
+}
+
+/* ========================================
+   SOURCE TOGGLE SWITCH
+   ======================================== */
+
+.source-toggle {
+  @apply inline-flex items-center gap-0.5 p-0.5;
+  @apply bg-gray-100 dark:bg-zinc-800 rounded-lg;
+}
+
+.toggle-btn {
+  @apply p-1.5 rounded-md transition-all;
+  @apply text-gray-400 dark:text-gray-500;
+  @apply hover:text-gray-600 dark:hover:text-gray-300;
+}
+
+.toggle-btn.active {
+  @apply bg-white dark:bg-zinc-700;
+  @apply text-gray-900 dark:text-white;
+  @apply shadow-sm;
+}
