@@ -20,9 +20,9 @@ function getLevelClass(level: number): string {
   return `contribution-level-${level}`;
 }
 
-// Get month labels from weeks data
+// Get month labels from weeks data - skip months with less than 3 weeks to prevent overlap
 function getMonthLabels(weeks: { days: { date: string }[] }[]): { month: string; colStart: number }[] {
-  const months: { month: string; colStart: number }[] = [];
+  const rawMonths: { month: string; colStart: number }[] = [];
   let lastMonth = '';
 
   weeks.forEach((week, weekIndex) => {
@@ -32,13 +32,18 @@ function getMonthLabels(weeks: { days: { date: string }[] }[]): { month: string;
       const month = date.toLocaleString('en-US', { month: 'short' });
 
       if (month !== lastMonth) {
-        months.push({ month, colStart: weekIndex });
+        rawMonths.push({ month, colStart: weekIndex });
         lastMonth = month;
       }
     }
   });
 
-  return months;
+  // Filter out months that are too close to the next one (less than 3 columns apart)
+  return rawMonths.filter((m, i) => {
+    if (i === rawMonths.length - 1) return true; // Always show last month
+    const nextMonth = rawMonths[i + 1];
+    return nextMonth.colStart - m.colStart >= 3;
+  });
 }
 
 export default function ContributionCalendar({ github, gitlab }: Props) {
@@ -135,7 +140,7 @@ export default function ContributionCalendar({ github, gitlab }: Props) {
                       <div
                         key={day.date}
                         className={`contribution-square ${getLevelClass(day.level)}`}
-                        title={`${day.count} contribution${day.count !== 1 ? 's' : ''} on ${new Date(day.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}`}
+                        data-tooltip={`${day.count} contribution${day.count !== 1 ? 's' : ''} on ${new Date(day.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}`}
                       />
                     ))}
                   </div>
