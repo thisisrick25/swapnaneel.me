@@ -144,10 +144,28 @@ export default function ContributionCalendar({ github, gitlab }: Props) {
             </div>
           </div>
 
-          {/* Total contributions */}
-          <p className="text-sm text-gray-500 dark:text-gray-400 mt-4">
-            {data.totalContributions.toLocaleString()} contributions in the last year
-          </p>
+          {/* Total contributions and legend */}
+          <div className="flex items-center justify-between mt-4">
+            <p className="text-sm text-gray-500 dark:text-gray-400">
+              {data.totalContributions.toLocaleString()} contributions in the last year on{' '}
+              <Link href={data.profileUrl} target="_blank" rel="noopener noreferrer" className="underline hover:opacity-80">
+                {source === 'github' ? 'GitHub' : 'GitLab'}
+              </Link>
+            </p>
+
+            {/* Less to More legend */}
+            <div className="flex items-center gap-1 text-xs text-gray-500 dark:text-gray-400">
+              <span>Less</span>
+              <div className={`contribution-calendar ${source}`}>
+                <div className="flex gap-[3px]">
+                  {[0, 1, 2, 3, 4].map((level) => (
+                    <div key={level} className={`contribution-square contribution-level-${level}`} />
+                  ))}
+                </div>
+              </div>
+              <span>More</span>
+            </div>
+          </div>
         </>
       )}
     </section>
