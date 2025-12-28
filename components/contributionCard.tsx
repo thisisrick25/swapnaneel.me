@@ -1,6 +1,6 @@
 "use client"
 
-import Link from 'next/link'
+import { Link } from 'next-view-transitions'
 import DateDisplay from '@/components/dateDisplay'
 import ShinyCard from '@/components/shinyCard'
 import { GIT_USERNAME } from '@/lib/constants'
@@ -79,18 +79,17 @@ export default function ContributionCard({ title, repo, link, mergedAt, relatedI
         <Link
           href={`/contributions/${slug}`}
           className="text-sm font-semibold line-clamp-2 min-h-10 mb-3 hover:text-blue-600 dark:hover:text-blue-400 transition-colors block"
+          style={{ viewTransitionName: `contribution-title-${slug}` }}
         >
           {title}
         </Link>
       ) : (
-        <a
-          href={link}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-sm font-semibold line-clamp-2 min-h-10 mb-3 hover:text-blue-600 dark:hover:text-blue-400 transition-colors block"
+        <h1
+          className="text-sm font-semibold line-clamp-2 min-h-10 mb-3 block"
+          style={{ viewTransitionName: `contribution-title-${slug}` }}
         >
           {title}
-        </a>
+        </h1>
       )}
 
       {/* Merged status + Fixes on same line */}
