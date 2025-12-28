@@ -1,6 +1,6 @@
 "use client"
 
-import Link from 'next/link'
+import { Link } from 'next-view-transitions'
 import DateDisplay from '@/components/dateDisplay'
 import ShinyCard from '@/components/shinyCard'
 import Tag from '@/components/tag'
@@ -32,8 +32,11 @@ export default function PostCard({ slug, title, description, publishedAt, viewCo
             </span>
           )}
         </div>
-        {/* Title */}
-        <h3 className="text-sm font-semibold mb-1 line-clamp-2">
+        {/* Title - with view transition name */}
+        <h3
+          className="text-sm font-semibold mb-1 line-clamp-2"
+          style={{ viewTransitionName: `post-title-${slug}` }}
+        >
           {title}
         </h3>
         {/* Description */}
