@@ -4,6 +4,7 @@ import './globals.css'
 import { ThemeProvider } from './theme-provider'
 import FloatingNav from '@/components/floatingNav'
 import Footer from '@/components/footer'
+import BackToTop from '@/components/backToTop'
 import { Analytics } from '@vercel/analytics/react'
 import { siteMetadata } from '@/utils/siteMetadata'
 import { SpeedInsights } from '@vercel/speed-insights/next'
@@ -67,6 +68,7 @@ export default function RootLayout({
           </main>
           <Footer />
           <FloatingNav />
+          <BackToTop />
           <SpeedInsights />
           <Analytics />
         </ThemeProvider>
