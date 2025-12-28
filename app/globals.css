@@ -227,16 +227,34 @@ input[type="email"] {
 }
 
 .prose pre {
-  @apply bg-gray-100 dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 rounded-xl p-4;
-}
-
-.prose code {
-  @apply bg-gray-100 dark:bg-zinc-800 px-1.5 py-0.5 rounded text-sm;
-  font-family: var(--font-jetbrains-mono), monospace;
+  @apply bg-gray-100 dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 rounded-xl overflow-hidden;
+  padding: 0;
 }
 
 .prose pre code {
-  @apply bg-transparent p-0;
+  @apply block p-4 overflow-x-auto;
+  font-family: var(--font-jetbrains-mono), monospace;
+}
+
+/* Title div from rehype-pretty-code */
+.prose [data-rehype-pretty-code-title] {
+  @apply px-4 py-2 text-xs font-medium text-gray-500 dark:text-gray-400 bg-gray-50 dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 border-b-0 rounded-t-xl;
+  font-family: var(--font-jetbrains-mono), monospace;
+}
+
+.prose [data-rehype-pretty-code-title] + pre {
+  @apply rounded-t-none border-t-0;
+}
+
+/* Inline code */
+.prose code {
+  @apply bg-gray-100 dark:bg-zinc-800 px-0.5 py-0.5 rounded-xl;
+  font-family: var(--font-jetbrains-mono), monospace;
+}
+
+/* Remove background from code inside pre */
+.prose pre code {
+  @apply bg-transparent p-4;
 }
 
 .prose blockquote {
