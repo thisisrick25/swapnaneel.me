@@ -1,8 +1,10 @@
 import { prisma } from "@/lib/prisma";
-import { unstable_noStore as noStore } from 'next/cache';
+import { connection } from 'next/server';
+import { cache } from 'react';
 
-export async function getViewsCount(): Promise<{ slug: string; count: number }[]> {
-  noStore();
+// Cached query for all views - deduplicates within a single request
+export const getViewsCount = cache(async (): Promise<{ slug: string; count: number }[]> => {
+  await connection();
   try {
     const views = await prisma.view.findMany({
       select: {
@@ -13,18 +15,14 @@ export async function getViewsCount(): Promise<{ slug: string; count: number }[]
 
     return views;
   } catch (error) {
-    // Handle any errors
     console.error('Error fetching views count:', error);
     return [];
   }
-  // finally {
-  //   // Close the Prisma client connection
-  //   await prisma.$disconnect();
-  // }
-}
+});
 
-export async function getViewsCountBySlug(slug: string): Promise<number> {
-  noStore();
+// Cached query for single slug - deduplicates within a single request
+export const getViewsCountBySlug = cache(async (slug: string): Promise<number> => {
+  await connection();
   try {
     const view = await prisma.view.findUnique({
       where: {
@@ -40,5 +38,4 @@ export async function getViewsCountBySlug(slug: string): Promise<number> {
     console.error('Error fetching views count for slug:', error);
     return 0;
   }
-}
-
+});
