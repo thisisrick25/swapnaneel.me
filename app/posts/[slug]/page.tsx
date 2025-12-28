@@ -63,46 +63,48 @@ export default async function Page({ params }: PageProps) {
         Back to posts
       </Link>
 
-      {/* Post header */}
+      {/* Post header - matching PostCard layout */}
       <header className="mb-8">
+        {/* Top metadata: date left, views right (like PostCard) */}
+        <div className="flex justify-between items-center text-sm text-gray-500 dark:text-gray-400 mb-3">
+          <DateDisplay date={blog.data.publishedAt} />
+          <ViewCounter slug={slug} trackView={true} count={viewCount} />
+        </div>
+
+        {/* Title - with view transition name */}
         <h1
-          className={`text-3xl sm:text-4xl font-bold tracking-tight mb-4 ${poppins.className}`}
+          className={`text-2xl sm:text-3xl font-bold tracking-tight mb-3 ${poppins.className}`}
           style={{ viewTransitionName: `post-title-${slug}` }}
         >
           {blog.data.title}
         </h1>
 
+        {/* Description */}
         {blog.data.description && (
-          <p className="text-lg text-gray-600 dark:text-gray-300 mb-4">
+          <p className="text-base text-gray-600 dark:text-gray-300 mb-4">
             {blog.data.description}
           </p>
         )}
 
-        {/* Meta info */}
-        <div className="flex flex-wrap items-center gap-3 text-sm text-gray-500 dark:text-gray-400">
-          <DateDisplay date={blog.data.publishedAt} />
-          <span className="text-gray-300 dark:text-gray-600">·</span>
-          <span className="flex items-center gap-1">
-            <LuClock className="w-3.5 h-3.5" />
-            {readingTime} min read
-          </span>
-          <span className="text-gray-300 dark:text-gray-600">·</span>
-          <ViewCounter slug={slug} trackView={true} count={viewCount} />
-        </div>
-
         {/* Updated date */}
         {blog.data.updatedAt && blog.data.updatedAt !== blog.data.publishedAt && (
-          <p className="text-xs text-gray-400 mt-2">
+          <p className="text-xs text-gray-400 mb-4">
             Updated <DateDisplay date={blog.data.updatedAt} />
           </p>
         )}
 
         {/* Tags */}
         {blog.data.tags && blog.data.tags.length > 0 && (
-          <div className="mt-4">
+          <div className="mb-4">
             <Tag tags={blog.data.tags} />
           </div>
         )}
+
+        {/* Reading time */}
+        <div className="flex items-center gap-1 text-sm text-gray-500 dark:text-gray-400">
+          <LuClock className="w-3.5 h-3.5" />
+          {readingTime} min read
+        </div>
       </header>
 
       {/* Table of contents */}
