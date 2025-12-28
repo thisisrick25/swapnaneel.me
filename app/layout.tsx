@@ -5,6 +5,7 @@ import { ThemeProvider } from './theme-provider'
 import FloatingNav from '@/components/floatingNav'
 import Footer from '@/components/footer'
 import BackToTop from '@/components/backToTop'
+import { ViewTransitions } from 'next-view-transitions'
 import { Analytics } from '@vercel/analytics/react'
 import { siteMetadata } from '@/utils/siteMetadata'
 import { SpeedInsights } from '@vercel/speed-insights/next'
@@ -62,16 +63,18 @@ export default function RootLayout({
         gtag('config', 'G-HVS1V1YG5Z');`}
       </Script>
       <body className={`${inter.className} antialiased`}>
-        <ThemeProvider>
-          <main className="min-h-screen w-full max-w-4xl mx-auto">
-            {children}
-          </main>
-          <Footer />
-          <FloatingNav />
-          <BackToTop />
-          <SpeedInsights />
-          <Analytics />
-        </ThemeProvider>
+        <ViewTransitions>
+          <ThemeProvider>
+            <main className="min-h-screen w-full max-w-4xl mx-auto">
+              {children}
+            </main>
+            <Footer />
+            <FloatingNav />
+            <BackToTop />
+            <SpeedInsights />
+            <Analytics />
+          </ThemeProvider>
+        </ViewTransitions>
       </body>
     </html>
   )
