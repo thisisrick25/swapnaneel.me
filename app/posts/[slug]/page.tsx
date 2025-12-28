@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation';
-import Link from 'next/link';
+import { Link } from 'next-view-transitions';
 import TableOfContents from '@/components/tableOfContents';
 import Tag from '@/components/tag';
 import ViewCounter from '@/components/viewCounter';
@@ -65,7 +65,10 @@ export default async function Page({ params }: PageProps) {
 
       {/* Post header */}
       <header className="mb-8">
-        <h1 className={`text-3xl sm:text-4xl font-bold tracking-tight mb-4 ${poppins.className}`}>
+        <h1
+          className={`text-3xl sm:text-4xl font-bold tracking-tight mb-4 ${poppins.className}`}
+          style={{ viewTransitionName: `post-title-${slug}` }}
+        >
           {blog.data.title}
         </h1>
 
