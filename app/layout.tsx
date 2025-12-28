@@ -7,7 +7,7 @@ import Footer from '@/components/footer'
 import { Analytics } from '@vercel/analytics/react'
 import { siteMetadata } from '@/utils/siteMetadata'
 import { SpeedInsights } from '@vercel/speed-insights/next'
-import { inter, poppins, ibm_plex_mono } from '@/fonts'
+import { inter, poppins, ibm_plex_mono, jetbrains_mono } from '@/fonts'
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteMetadata.siteUrl),
@@ -50,7 +50,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" suppressHydrationWarning className={`${inter.variable} ${poppins.variable} ${ibm_plex_mono.variable}`}>
+    <html lang="en" suppressHydrationWarning className={`${inter.variable} ${poppins.variable} ${ibm_plex_mono.variable} ${jetbrains_mono.variable}`}>
       {/* <!-- Google tag (gtag.js) --> */}
       <Script async src="https://www.googletagmanager.com/gtag/js?id=G-HVS1V1YG5Z"></Script>
       <Script id="google-analytics" strategy="afterInteractive">
