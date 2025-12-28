@@ -3,6 +3,7 @@ import Script from 'next/script'
 import './globals.css'
 import { ThemeProvider } from './theme-provider'
 import FloatingNav from '@/components/floatingNav'
+import Footer from '@/components/footer'
 import { Analytics } from '@vercel/analytics/react'
 import { siteMetadata } from '@/utils/siteMetadata'
 import { SpeedInsights } from '@vercel/speed-insights/next'
@@ -64,6 +65,7 @@ export default function RootLayout({
           <main className="min-h-screen w-full max-w-4xl mx-auto">
             {children}
           </main>
+          <Footer />
           <FloatingNav />
           <SpeedInsights />
           <Analytics />

@@ -150,9 +150,6 @@ export default async function Home() {
 
       {/* Skills */}
       <SkillsSection />
-
-      {/* Footer */}
-      <Footer />
     </div>
   )
 }
