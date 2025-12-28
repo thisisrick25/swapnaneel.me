@@ -62,7 +62,7 @@ export default function ContributionCalendar({ github, gitlab }: Props) {
         <h2 className={poppins.className}>Activity</h2>
         <div className="flex items-center gap-3">
           {/* Toggle Switch */}
-          <div className="bg-gray-100 dark:bg-zinc-800 rounded-lg shadow-md inline-flex items-center gap-0.5 p-0.5">
+          <div className="bg-gray-100 dark:bg-zinc-800 rounded-lg shadow-md dark:shadow-gray-500/5 inline-flex items-center gap-0.5 p-0.5">
             <button
               onClick={() => setSource('github')}
               className={`toggle-btn ${source === 'github' ? 'active' : ''}`}
