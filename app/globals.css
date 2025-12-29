@@ -301,7 +301,7 @@ input[type="email"] {
    ======================================== */
 
 .contribution-calendar-wrapper {
-  @apply overflow-x-auto overflow-y-visible -mx-4 px-4 pb-2 pt-10;
+  @apply overflow-x-auto overflow-y-visible -mx-4 px-4 pb-2;
   scrollbar-width: thin;
 }
 
