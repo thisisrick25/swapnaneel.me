@@ -1,24 +1,12 @@
-"use client"
-
 import Link from "next/link"
 import ContributionCard from "@/components/contributionCard"
 import { poppins } from "@/fonts"
+import { getMergedContributions } from "@/utils/getContributions"
 
-type Contribution = {
-  id: number
-  title: string
-  repo: string
-  html_url: string
-  merged_at?: string | null | undefined
-  relatedIssues?: string[]
-  source: 'github' | 'gitlab'
-}
+export default async function OpenSourceSection() {
+  const allContributions = await getMergedContributions()
+  const contributions = allContributions.slice(0, 4)
 
-type Props = {
-  contributions: Contribution[]
-}
-
-export default function OpenSourceSection({ contributions }: Props) {
   return (
     <section className="mb-16">
       <div className="section-header">

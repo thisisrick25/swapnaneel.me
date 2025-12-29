@@ -1,16 +1,15 @@
-"use client"
-
 import Link from "next/link"
 import PostCard from "@/components/postCard"
 import { poppins } from "@/fonts"
-import { BlogMetadata } from "@/utils/getBlogs"
+import { getBlogs } from "@/utils/getBlogs"
+import { getViewsCount } from "@/db/queries"
 
-type Props = {
-  posts: BlogMetadata[]
-  views: { slug: string; count: number }[]
-}
+export default async function WritingSection() {
+  const blogs = await getBlogs()
+  const allViews = await getViewsCount()
 
-export default function WritingSection({ posts, views }: Props) {
+  const posts = blogs.slice(0, 4)
+
   return (
     <section className="mb-16">
       <div className="section-header">
@@ -26,7 +25,7 @@ export default function WritingSection({ posts, views }: Props) {
       <div className="grid gap-3 sm:grid-cols-2">
         {posts.length > 0 ? (
           posts.map((post) => {
-            const viewCount = views.find((v) => v.slug === post.slug)?.count || 0
+            const viewCount = allViews.find((v) => v.slug === post.slug)?.count || 0
             return (
               <PostCard
                 key={post.slug}

@@ -1,19 +1,10 @@
-"use client"
-
 import { poppins } from "@/fonts"
+import { getNews } from "@/utils/getNews"
 
-export default function NewsSection() {
-  const news = [
-    {
-      date: "Dec 2025",
-      content: "Refactoring homepage for better modularity and academic focus.",
-    },
-    {
-      date: "Nov 2025",
-      content: "Started exploring distributed systems and compiler design.",
-    },
-    // Add more news items here
-  ]
+export default async function NewsSection() {
+  const news = await getNews()
+
+  if (news.length === 0) return null
 
   return (
     <section className="mb-16">
