@@ -1,3 +1,4 @@
+import { Suspense } from 'react'
 import HeroSection from '@/components/heroSection'
 import EducationSection from '@/components/educationSection'
 import PublicationSection from '@/components/publicationSection'
@@ -6,6 +7,7 @@ import WritingSection from '@/components/writingSection'
 import SkillsSection from '@/components/skillSection'
 import NewsSection from '@/components/newsSection'
 import ContributionGraphSection from '@/components/contributionGraphSection'
+import { SectionSkeleton, ContributionSkeleton } from '@/components/skeletons'
 
 export const dynamic = 'force-dynamic'
 
@@ -16,22 +18,32 @@ export default function Home() {
       <HeroSection />
 
       {/* News */}
-      <NewsSection />
+      <Suspense fallback={<SectionSkeleton />}>
+        <NewsSection />
+      </Suspense>
 
       {/* Education */}
       <EducationSection />
 
       {/* Publications */}
-      <PublicationSection />
+      <Suspense fallback={<SectionSkeleton />}>
+        <PublicationSection />
+      </Suspense>
 
       {/* Open Source Section */}
-      <OpenSourceSection />
+      <Suspense fallback={<SectionSkeleton />}>
+        <OpenSourceSection />
+      </Suspense>
 
       {/* Writing Section */}
-      <WritingSection />
+      <Suspense fallback={<SectionSkeleton />}>
+        <WritingSection />
+      </Suspense>
 
       {/* GitHub Activity Calendar */}
-      <ContributionGraphSection />
+      <Suspense fallback={<ContributionSkeleton />}>
+        <ContributionGraphSection />
+      </Suspense>
 
       {/* Skills */}
       <SkillsSection />
