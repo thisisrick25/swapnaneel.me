@@ -24,11 +24,11 @@ export default function Home() {
       {/* Publications */}
       <PublicationSection />
 
-      {/* Writing Section */}
-      <WritingSection />
-
       {/* Open Source Section */}
       <OpenSourceSection />
+
+      {/* Writing Section */}
+      <WritingSection />
 
       {/* GitHub Activity Calendar */}
       <ContributionGraphSection />
