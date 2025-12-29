@@ -13,6 +13,7 @@ import { poppins } from '@/fonts'
 import { SiGithub, SiLinkedin } from 'react-icons/si'
 import { LuFileText } from 'react-icons/lu'
 import PostCard from '@/components/postCard'
+import EducationSection from '@/components/educationSection'
 
 export const dynamic = 'force-dynamic'
 
@@ -85,6 +86,9 @@ export default async function Home() {
           </Link>
         </div>
       </section>
+
+      {/* Education */}
+      <EducationSection />
 
       {/* Writing Section */}
       <section className="mb-16">
