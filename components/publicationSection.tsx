@@ -4,12 +4,12 @@ import { poppins } from "@/fonts"
 import Link from "next/link"
 import { ExternalLink, FileText } from "lucide-react"
 
-type PublicationType = 'conference' | 'journal'
+type PublicationType = 'conference' | 'journal' | 'preprint'
 
 interface Publication {
   title: string
   authors: string
-  venue: string
+  publishedAt: string
   date: string
   type: PublicationType
   links?: { label: string; url: string; icon: any }[]
@@ -20,7 +20,7 @@ export default function PublicationSection() {
     {
       title: "Conference Paper Title",
       authors: "Swapnaneel Patra, Co-author Name",
-      venue: "Conference Name (CONF '25)",
+      publishedAt: "Conference Name (CONF '25)",
       date: "2025",
       type: "conference",
       links: [
@@ -31,9 +31,19 @@ export default function PublicationSection() {
     {
       title: "Journal Article Title",
       authors: "Swapnaneel Patra, Co-author Name",
-      venue: "Journal Name (Vol. 1)",
+      publishedAt: "Journal Name (Vol. 1)",
       date: "2025",
       type: "journal",
+      links: [
+        { label: "PDF", url: "#", icon: FileText },
+      ]
+    },
+    {
+      title: "Preprint Paper Title",
+      authors: "Swapnaneel Patra, Co-author Name",
+      publishedAt: "arXiv",
+      date: "2024",
+      type: "preprint",
       links: [
         { label: "PDF", url: "#", icon: FileText },
       ]
@@ -42,6 +52,7 @@ export default function PublicationSection() {
 
   const conferences = publications.filter(p => p.type === 'conference')
   const journals = publications.filter(p => p.type === 'journal')
+  const preprints = publications.filter(p => p.type === 'preprint')
 
   if (publications.length === 0) return null
 
@@ -57,7 +68,7 @@ export default function PublicationSection() {
           </p>
           <div className="flex items-center gap-3 text-sm mt-1">
             <span className="font-medium text-gray-800 dark:text-gray-200">
-              {pub.venue}
+              {pub.publishedAt}
             </span>
             <span className="text-gray-400 dark:text-gray-500">•</span>
             <span className="text-gray-500 dark:text-gray-400">{pub.date}</span>
@@ -108,6 +119,15 @@ export default function PublicationSection() {
               Journal Articles
             </h3>
             {renderPublicationList(journals)}
+          </div>
+        )}
+
+        {preprints.length > 0 && (
+          <div>
+            <h3 className="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-4">
+              Preprints / Archives
+            </h3>
+            {renderPublicationList(preprints)}
           </div>
         )}
       </div>
