@@ -55,7 +55,7 @@ export default async function PublicationSection() {
               <span className="font-medium text-gray-800 dark:text-gray-200">
                 {pub.publishedAt}
               </span>
-              <span className={`px-2 py-0.5 rounded text-xs font-medium capitalize ${getTypeStyles(pub.type)}`}>
+              <span className={`px-2 py-0.5 rounded text-xs font-medium ${getTypeStyles(pub.type)}`}>
                 {pub.type}
               </span>
               <span className="text-gray-400 dark:text-gray-500">•</span>
