@@ -1,41 +1,37 @@
-import { getBlogs } from '@/utils/getBlogs'
-import { getMergedContributions } from '@/utils/getContributions'
-import { getViewsCount } from '@/db/queries'
-import ContributionCalendar from '@/components/contributionCalendar'
-import { getBothCalendars } from '@/utils/getContributionCalendar'
 import HeroSection from '@/components/heroSection'
 import EducationSection from '@/components/educationSection'
+import PublicationSection from '@/components/publicationSection'
 import OpenSourceSection from '@/components/openSourceSection'
 import WritingSection from '@/components/writingSection'
 import SkillsSection from '@/components/skillSection'
+import NewsSection from '@/components/newsSection'
+import ContributionGraphSection from '@/components/contributionGraphSection'
 
 export const dynamic = 'force-dynamic'
 
-export default async function Home() {
-  const blogs = await getBlogs()
-  const contributions = await getMergedContributions()
-  const allViews = await getViewsCount()
-  const calendars = await getBothCalendars()
-
-  const recentPosts = blogs.slice(0, 4)
-  const recentContributions = contributions.slice(0, 4)
-
+export default function Home() {
   return (
     <div className="py-16 sm:py-24">
       {/* Header / Profile Section */}
       <HeroSection />
 
+      {/* News */}
+      <NewsSection />
+
       {/* Education */}
       <EducationSection />
 
+      {/* Publications */}
+      <PublicationSection />
+
       {/* Writing Section */}
-      <WritingSection posts={recentPosts} views={allViews} />
+      <WritingSection />
 
       {/* Open Source Section */}
-      <OpenSourceSection contributions={recentContributions} />
+      <OpenSourceSection />
 
       {/* GitHub Activity Calendar */}
-      <ContributionCalendar github={calendars.github} gitlab={calendars.gitlab} />
+      <ContributionGraphSection />
 
       {/* Skills */}
       <SkillsSection />
