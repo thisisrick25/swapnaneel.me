@@ -24,7 +24,7 @@ export default async function NewsSection() {
       <div className="space-y-4">
         {displayNews.map((item, index) => (
           <div key={index} className="flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-4 text-sm">
-            <span className="font-mono text-gray-500 dark:text-gray-400 shrink-0 w-20">
+            <span className="font-mono text-gray-500 dark:text-gray-400 shrink-0 w-30">
               {item.date}
             </span>
             <span className="text-gray-700 dark:text-gray-300">

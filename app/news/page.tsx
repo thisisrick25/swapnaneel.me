@@ -30,7 +30,7 @@ export default async function NewsPage() {
         {news.length > 0 ? (
           news.map((item, index) => (
             <div key={index} className="flex flex-col sm:flex-row sm:items-start gap-2 sm:gap-6 pb-6 border-b border-gray-100 dark:border-zinc-800 last:border-0">
-              <span className="font-mono text-gray-500 dark:text-gray-400 shrink-0 w-24 pt-0.5">
+              <span className="font-mono text-gray-500 dark:text-gray-400 shrink-0 w-34 pt-0.5">
                 {item.date}
               </span>
               <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
