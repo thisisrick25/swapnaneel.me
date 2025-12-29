@@ -14,7 +14,7 @@ export default function WritingSection({ posts, views }: Props) {
   return (
     <section className="mb-16">
       <div className="section-header">
-        <h2 className={poppins.className}>Writing</h2>
+        <h2 className={poppins.className}>Articles</h2>
         <Link
           href="/posts"
           className="text-sm text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
