@@ -1,6 +1,9 @@
+"use client"
+
 import { Link } from "next-view-transitions"
 import githubSlugger from "github-slugger"
 import { ibm_plex_mono } from "@/fonts"
+import { useState } from "react"
 
 interface TagProps {
   tags: string[]
@@ -9,6 +12,7 @@ interface TagProps {
 }
 
 export default function Tag({ tags, maxTags = 4, asLinks = true }: TagProps) {
+  const [clickedTag, setClickedTag] = useState<string | null>(null)
   const slugger = new githubSlugger()
   const displayTags = tags.slice(0, maxTags)
   const remainingCount = tags.length - maxTags
@@ -24,7 +28,12 @@ export default function Tag({ tags, maxTags = 4, asLinks = true }: TagProps) {
             key={tag}
             href={`/tags/${tagSlug}`}
             className={tagClassName}
-            style={{ viewTransitionName: `tag-${tagSlug}` }}
+            style={{
+              viewTransitionName: clickedTag === tagSlug ? `tag-${tagSlug}` : "none",
+            }}
+            onClick={() => {
+              setClickedTag(tagSlug)
+            }}
           >
             #{tag}
           </Link>
