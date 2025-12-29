@@ -46,7 +46,7 @@ function getMonthLabels(weeks: { days: { date: string }[] }[]): { month: string;
   });
 }
 
-export default function ContributionCalendar({ github, gitlab }: Props) {
+export default function ContributionGraph({ github, gitlab }: Props) {
   const [source, setSource] = useState<Source>('github');
 
   // Select the current data based on toggle - instant, no loading!
