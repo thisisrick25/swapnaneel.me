@@ -1,18 +1,19 @@
-"use client"
-
 import { poppins } from "@/fonts"
-import ShinyCard from "./shinyCard"
-import { LuGraduationCap, LuCalendar } from "react-icons/lu"
 
 export default function EducationSection() {
   const education = [
     {
-      school: "University Name",
-      degree: "Bachelor of Technology in Computer Science",
-      date: "2021 - 2025",
-      description: "Relevant coursework: Data Structures, Algorithms, Operating Systems, Database Management Systems.",
+      school: "Indian Institute of Technology Patna (IIT Patna)",
+      degree: "M.Tech in Artificial Intelligence",
+      date: "Aug 2025 - Present",
+      description: "Focusing on Advanced Machine Learning, Deep Learning, and AI Ethics.",
     },
-    // Add more education items here
+    {
+      school: "Kalinga Institute of Industrial Technology (KIIT)",
+      degree: "B.Tech in Computer Science & Engineering",
+      date: "2019 - Sep 2023",
+      description: "Relevant coursework: Data Structures, Algorithms, Operating Systems, Database Management Systems.",
+    }
   ]
 
   return (
@@ -21,39 +22,26 @@ export default function EducationSection() {
         <h2 className={poppins.className}>Education</h2>
       </div>
 
-      <div className="grid gap-4">
+      <div className="space-y-8">
         {education.map((edu, index) => (
-          <ShinyCard
-            key={index}
-            containerClassName="rounded-xl border border-gray-200 dark:border-zinc-700 hover:border-gray-300 dark:hover:border-zinc-600 transition-all"
-            className="p-6 bg-gray-50/50 dark:bg-zinc-800/50 rounded-xl"
-          >
-            <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-2 mb-2">
-              <div className="flex items-start gap-3">
-                <div className="p-2 bg-white dark:bg-zinc-900 rounded-lg border border-gray-100 dark:border-zinc-800 shrink-0">
-                  <LuGraduationCap className="w-5 h-5 text-blue-600 dark:text-blue-400" />
-                </div>
-                <div>
-                  <h3 className="font-semibold text-gray-900 dark:text-gray-100 text-lg">
-                    {edu.school}
-                  </h3>
-                  <p className="text-gray-600 dark:text-gray-400 font-medium">
-                    {edu.degree}
-                  </p>
-                </div>
-              </div>
-              <div className="flex items-center gap-1.5 text-sm text-gray-500 dark:text-gray-400 sm:text-right pl-13 sm:pl-0">
-                <LuCalendar className="w-3.5 h-3.5" />
-                <span>{edu.date}</span>
-              </div>
+          <div key={index} className="flex flex-col gap-1">
+            <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+                {edu.school}
+              </h3>
+              <span className="text-sm font-mono text-gray-500 dark:text-gray-400 shrink-0">
+                {edu.date}
+              </span>
             </div>
-
+            <p className="text-gray-700 dark:text-gray-300 font-medium">
+              {edu.degree}
+            </p>
             {edu.description && (
-              <p className="text-sm text-gray-600 dark:text-gray-400 pl-13 mt-2">
+              <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
                 {edu.description}
               </p>
             )}
-          </ShinyCard>
+          </div>
         ))}
       </div>
     </section>
