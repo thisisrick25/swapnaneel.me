@@ -11,7 +11,7 @@ export default async function WritingSection() {
   const posts = blogs.slice(0, 4)
 
   return (
-    <section className="mb-16">
+    <section className="mb-12">
       <div className="section-header">
         <h2 className={poppins.className}>Articles</h2>
         <Link

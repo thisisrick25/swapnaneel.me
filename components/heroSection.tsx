@@ -9,7 +9,7 @@ import { LuFileText } from "react-icons/lu"
 
 export default function HeroSection() {
   return (
-    <section className="mb-16" id="top">
+    <section className="mb-12" id="top">
       <div className="flex items-start gap-5 mb-8">
         <Image
           src="https://github.com/thisisrick25.png"

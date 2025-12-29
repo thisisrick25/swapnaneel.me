@@ -16,7 +16,7 @@ export default function EducationSection() {
   ]
 
   return (
-    <section className="mb-16">
+    <section className="mb-12">
       <div className="section-header mb-6">
         <h2 className={poppins.className}>Education</h2>
       </div>

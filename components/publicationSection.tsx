@@ -87,7 +87,7 @@ export default function PublicationSection() {
   )
 
   return (
-    <section className="mb-16">
+    <section className="mb-12">
       <div className="section-header mb-6">
         <h2 className={poppins.className}>Publications</h2>
       </div>

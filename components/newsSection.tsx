@@ -7,7 +7,7 @@ export default async function NewsSection() {
   if (news.length === 0) return null
 
   return (
-    <section className="mb-16">
+    <section className="mb-12">
       <div className="section-header mb-4">
         <h2 className={poppins.className}>News</h2>
       </div>

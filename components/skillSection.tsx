@@ -79,7 +79,7 @@ export default function SkillsSection() {
     : skills.filter(skill => skill.categories.includes(activeCategory))
 
   return (
-    <section className="mb-16">
+    <section className="mb-12">
       <h2 className={`text-2xl font-bold tracking-tight mb-4 ${poppins.className}`}>Skills</h2>
 
       {/* Category Tabs with MeteorBeam effect on active */}

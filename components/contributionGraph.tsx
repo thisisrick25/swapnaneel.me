@@ -57,7 +57,7 @@ export default function ContributionGraph({ github, gitlab }: Props) {
   if (!github && !gitlab) return null;
 
   return (
-    <section className="mb-16">
+    <section className="mb-12">
       <div className="section-header">
         <h2 className={poppins.className}>Activity</h2>
         <div className="flex items-center gap-3">

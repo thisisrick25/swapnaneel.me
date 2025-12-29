@@ -8,7 +8,7 @@ export default async function OpenSourceSection() {
   const contributions = allContributions.slice(0, 4)
 
   return (
-    <section className="mb-16">
+    <section className="mb-12">
       <div className="section-header">
         <h2 className={poppins.className}>Open Source Contributions</h2>
         <Link
