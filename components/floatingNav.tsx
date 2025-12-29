@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Home, FileText, GitPullRequest, Menu, Sun, Moon } from "lucide-react"
+import { LuHouse, LuFileText, LuGitPullRequest, LuSun, LuMoon } from "react-icons/lu"
 import { useTheme } from "next-themes"
 import { useState, useEffect } from "react"
 
@@ -29,9 +29,9 @@ export default function FloatingNav() {
   }
 
   const links = [
-    { href: "/", label: "Home", icon: Home },
-    { href: "/posts", label: "Posts", icon: FileText },
-    { href: "/contributions", label: "OSS", icon: GitPullRequest },
+    { href: "/", label: "Home", icon: LuHouse },
+    { href: "/posts", label: "Posts", icon: LuFileText },
+    { href: "/contributions", label: "OSS", icon: LuGitPullRequest },
   ]
 
   return (
@@ -58,7 +58,7 @@ export default function FloatingNav() {
           className="nav-item"
           aria-label={`Switch to ${resolvedTheme === "dark" ? "light" : "dark"} mode`}
         >
-          {resolvedTheme === "dark" ? <Sun /> : <Moon />}
+          {resolvedTheme === "dark" ? <LuSun /> : <LuMoon />}
         </button>
       )}
     </nav>

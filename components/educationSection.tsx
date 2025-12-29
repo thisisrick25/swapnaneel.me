@@ -2,7 +2,7 @@
 
 import { poppins } from "@/fonts"
 import ShinyCard from "./shinyCard"
-import { GraduationCap, Calendar } from "lucide-react"
+import { LuGraduationCap, LuCalendar } from "react-icons/lu"
 
 export default function EducationSection() {
   const education = [
@@ -31,7 +31,7 @@ export default function EducationSection() {
             <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-2 mb-2">
               <div className="flex items-start gap-3">
                 <div className="p-2 bg-white dark:bg-zinc-900 rounded-lg border border-gray-100 dark:border-zinc-800 shrink-0">
-                  <GraduationCap className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+                  <LuGraduationCap className="w-5 h-5 text-blue-600 dark:text-blue-400" />
                 </div>
                 <div>
                   <h3 className="font-semibold text-gray-900 dark:text-gray-100 text-lg">
@@ -43,7 +43,7 @@ export default function EducationSection() {
                 </div>
               </div>
               <div className="flex items-center gap-1.5 text-sm text-gray-500 dark:text-gray-400 sm:text-right pl-13 sm:pl-0">
-                <Calendar className="w-3.5 h-3.5" />
+                <LuCalendar className="w-3.5 h-3.5" />
                 <span>{edu.date}</span>
               </div>
             </div>
