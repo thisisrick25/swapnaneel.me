@@ -168,7 +168,7 @@ export default function ContributionGraph({ github, gitlab }: Props) {
             <div className="flex items-center gap-1 text-xs text-gray-500 dark:text-gray-400">
               <span>Less</span>
               <div className={`contribution-calendar ${source}`}>
-                <div className="flex gap-[3px]">
+                <div className="flex gap-0.5">
                   {[0, 1, 2, 3, 4].map((level) => (
                     <div key={level} className={`contribution-square contribution-level-${level}`} />
                   ))}
