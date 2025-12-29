@@ -2,7 +2,7 @@
 
 import { poppins } from "@/fonts"
 import Link from "next/link"
-import { ExternalLink, FileText } from "lucide-react"
+import { LuExternalLink, LuFileText } from "react-icons/lu"
 
 type PublicationType = 'conference' | 'journal' | 'preprint'
 
@@ -24,8 +24,8 @@ export default function PublicationSection() {
       date: "2025",
       type: "conference",
       links: [
-        { label: "PDF", url: "#", icon: FileText },
-        { label: "Code", url: "#", icon: ExternalLink },
+        { label: "PDF", url: "#", icon: LuFileText },
+        { label: "Code", url: "#", icon: LuExternalLink },
       ]
     },
     {
@@ -35,7 +35,7 @@ export default function PublicationSection() {
       date: "2025",
       type: "journal",
       links: [
-        { label: "PDF", url: "#", icon: FileText },
+        { label: "PDF", url: "#", icon: LuFileText },
       ]
     },
     {
@@ -45,10 +45,11 @@ export default function PublicationSection() {
       date: "2024",
       type: "preprint",
       links: [
-        { label: "PDF", url: "#", icon: FileText },
+        { label: "PDF", url: "#", icon: LuFileText },
       ]
     }
   ]
+  // ... (rest of logic)
 
   const conferences = publications.filter(p => p.type === 'conference')
   const journals = publications.filter(p => p.type === 'journal')
