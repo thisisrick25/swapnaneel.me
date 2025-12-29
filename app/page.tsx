@@ -11,7 +11,7 @@ import ContributionCalendar from '@/components/contributionCalendar'
 import { getBothCalendars } from '@/utils/getContributionCalendar'
 import { poppins } from '@/fonts'
 import { SiGithub, SiLinkedin } from 'react-icons/si'
-import { LuMail } from 'react-icons/lu'
+import { LuMail, LuFileText } from 'react-icons/lu'
 import PostCard from '@/components/postCard'
 
 export const dynamic = 'force-dynamic'
@@ -80,6 +80,15 @@ export default async function Home() {
           >
             <LuMail className="w-4 h-4" />
             Email
+          </Link>
+          <Link
+            href={siteMetadata.resume}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn"
+          >
+            <LuFileText className="w-4 h-4" />
+            Resume
           </Link>
         </div>
       </section>
