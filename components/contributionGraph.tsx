@@ -7,6 +7,7 @@ import { poppins } from '@/fonts';
 import { LuExternalLink } from 'react-icons/lu';
 import { SiGithub, SiGitlab } from 'react-icons/si';
 import type { CalendarData } from '@/utils/getContributionCalendar';
+import CalendarToolTip, { useCalendarTooltip } from '@/components/calendarToolTip';
 
 type Source = 'github' | 'gitlab';
 
@@ -48,6 +49,7 @@ function getMonthLabels(weeks: { days: { date: string }[] }[]): { month: string;
 
 export default function ContributionGraph({ github, gitlab }: Props) {
   const [source, setSource] = useState<Source>('github');
+  const { tooltip, onMouseEnter, onMouseLeave } = useCalendarTooltip();
 
   // Select the current data based on toggle - instant, no loading!
   const data = source === 'github' ? github : gitlab;
@@ -57,7 +59,10 @@ export default function ContributionGraph({ github, gitlab }: Props) {
   if (!github && !gitlab) return null;
 
   return (
-    <section className="mb-12">
+    <section className="mb-12 relative">
+      {/* Tooltip Portal - Fixed Position to escape overflow clipping */}
+      {tooltip && <CalendarToolTip x={tooltip.x} y={tooltip.y} content={tooltip.content} />}
+
       <div className="section-header">
         <h2 className={poppins.className}>Activity</h2>
         <div className="flex items-center gap-3">
@@ -140,7 +145,8 @@ export default function ContributionGraph({ github, gitlab }: Props) {
                       <div
                         key={day.date}
                         className={`contribution-square ${getLevelClass(day.level)}`}
-                        data-tooltip={`${day.count} contribution${day.count !== 1 ? 's' : ''} on ${new Date(day.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}`}
+                        onMouseEnter={(e) => onMouseEnter(e, day.count, day.date)}
+                        onMouseLeave={onMouseLeave}
                       />
                     ))}
                   </div>
