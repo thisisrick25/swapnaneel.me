@@ -11,7 +11,7 @@ import ContributionCalendar from '@/components/contributionCalendar'
 import { getBothCalendars } from '@/utils/getContributionCalendar'
 import { poppins } from '@/fonts'
 import { SiGithub, SiLinkedin } from 'react-icons/si'
-import { LuMail, LuFileText } from 'react-icons/lu'
+import { LuFileText } from 'react-icons/lu'
 import PostCard from '@/components/postCard'
 
 export const dynamic = 'force-dynamic'
@@ -73,13 +73,6 @@ export default async function Home() {
           >
             <SiLinkedin className="w-4 h-4" />
             LinkedIn
-          </Link>
-          <Link
-            href={`mailto:${siteMetadata.email || 'hello@swapnaneel.me'}`}
-            className="btn"
-          >
-            <LuMail className="w-4 h-4" />
-            Email
           </Link>
           <Link
             href={siteMetadata.resume}
