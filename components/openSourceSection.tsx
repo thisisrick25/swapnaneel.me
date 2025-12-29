@@ -22,7 +22,7 @@ export default function OpenSourceSection({ contributions }: Props) {
   return (
     <section className="mb-16">
       <div className="section-header">
-        <h2 className={poppins.className}>Open Source</h2>
+        <h2 className={poppins.className}>Open Source Contributions</h2>
         <Link
           href="/contributions"
           className="text-sm text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"

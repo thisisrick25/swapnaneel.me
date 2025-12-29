@@ -35,6 +35,10 @@ export default function HeroSection() {
         Currently learning and contributing to the community.
       </p>
 
+      <p className="text-sm text-gray-500 dark:text-gray-400 mb-6">
+        <span className="font-semibold text-gray-700 dark:text-gray-200">Interests:</span> Distributed Systems, Open Source, Machine Learning
+      </p>
+
       {/* Social Links */}
       <div className="flex flex-wrap gap-3">
         <Link
@@ -62,7 +66,7 @@ export default function HeroSection() {
           className="btn"
         >
           <LuFileText className="w-4 h-4" />
-          Resume
+          CV
         </Link>
       </div>
     </section>
