@@ -1,8 +1,8 @@
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { slug } from "github-slugger"
 import { Metadata } from 'next'
 import { getBlogs } from '@/utils/getBlogs';
-import { poppins } from '@/fonts';
+import { poppins, ibm_plex_mono } from '@/fonts';
 
 export function generateMetadata(): Metadata {
   return {
@@ -12,36 +12,47 @@ export function generateMetadata(): Metadata {
 }
 
 export default async function Page() {
-  const allTags: string[] = [];
+  const tagCounts: Record<string, number> = {};
   const allBlogs = await getBlogs();
+
   allBlogs.forEach((blog) => {
     if (blog.data.isPublished) {
       blog.data.tags?.forEach((tag) => {
-        let slugified = slug(tag);
-        if (!allTags.includes(slugified)) {
-          allTags.push(slugified);
-        }
+        const slugified = slug(tag);
+        tagCounts[slugified] = (tagCounts[slugified] || 0) + 1;
       });
     }
-  })
+  });
+
+  const sortedTags = Object.entries(tagCounts).sort((a, b) => b[1] - a[1]);
 
   return (
-    <div>
-      <h1 className={`text-lg font-bold mb-6 ${poppins.className}`} style={{ fontWeight: '700' }}>
-        Tags
-      </h1>
-      <div>
-        {allTags.map((tag, index) => (
+    <div className="py-16 sm:py-24 px-4">
+      {/* Header */}
+      <section className="mb-12">
+        <h1 className={`text-3xl sm:text-4xl font-bold tracking-tight mb-2 ${poppins.className}`}>Tags</h1>
+        <p className="text-base text-gray-600 dark:text-gray-300">
+          Browse posts by topic.
+        </p>
+      </section>
+
+      {/* Tags Grid */}
+      <div className="flex flex-wrap gap-2">
+        {sortedTags.map(([tag, count]) => (
           <Link
-            key={`${tag}-${index}`}
+            key={tag}
             href={`/tags/${tag}`}
-            className="hover:underline"
+            className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-gray-200 dark:border-zinc-700 bg-gray-50 dark:bg-zinc-800 hover:border-gray-300 dark:hover:border-zinc-600 hover:shadow-sm transition-all ${ibm_plex_mono.className}`}
+            style={{ viewTransitionName: `tag-${tag}` }}
           >
-            {`#${tag}`}
-            {index !== allTags.length - 1 && ", "}
+            <span className="text-sm text-gray-700 dark:text-gray-300">#{tag}</span>
+            <span className="text-xs text-gray-400 dark:text-gray-500">({count})</span>
           </Link>
         ))}
       </div>
+
+      {/* Footer space for floating nav */}
+      <div className="h-24" />
     </div>
   )
 }

@@ -1,4 +1,4 @@
-import Link from "next/link"
+import { Link } from "next-view-transitions"
 import githubSlugger from "github-slugger"
 import { ibm_plex_mono } from "@/fonts"
 
@@ -17,12 +17,14 @@ export default function Tag({ tags, maxTags = 4, asLinks = true }: TagProps) {
 
   return (
     <div className="flex flex-wrap gap-1">
-      {displayTags.map((tag) => (
-        asLinks ? (
+      {displayTags.map((tag) => {
+        const tagSlug = slugger.slug(tag)
+        return asLinks ? (
           <Link
             key={tag}
-            href={`/tags/${slugger.slug(tag)}`}
+            href={`/tags/${tagSlug}`}
             className={tagClassName}
+            style={{ viewTransitionName: `tag-${tagSlug}` }}
           >
             #{tag}
           </Link>
@@ -31,7 +33,7 @@ export default function Tag({ tags, maxTags = 4, asLinks = true }: TagProps) {
             #{tag}
           </span>
         )
-      ))}
+      })}
       {remainingCount > 0 && (
         <span className="text-xs text-gray-400 dark:text-gray-500 self-center">
           +{remainingCount}
