@@ -1,61 +1,24 @@
-"use client"
-
 import { poppins } from "@/fonts"
 import Link from "next/link"
-import { LuExternalLink, LuFileText } from "react-icons/lu"
+import { LuExternalLink, LuFileText, LuGitPullRequest } from "react-icons/lu" // Added LuGitPullRequest
+import { getPublications, Publication } from "@/utils/getPublications"
 
-type PublicationType = 'conference' | 'journal' | 'preprint'
-
-interface Publication {
-  title: string
-  authors: string
-  publishedAt: string
-  date: string
-  type: PublicationType
-  links?: { label: string; url: string; icon: any }[]
-}
-
-export default function PublicationSection() {
-  const publications: Publication[] = [
-    {
-      title: "Conference Paper Title",
-      authors: "Swapnaneel Patra, Co-author Name",
-      publishedAt: "Conference Name (CONF '25)",
-      date: "2025",
-      type: "conference",
-      links: [
-        { label: "PDF", url: "#", icon: LuFileText },
-        { label: "Code", url: "#", icon: LuExternalLink },
-      ]
-    },
-    {
-      title: "Journal Article Title",
-      authors: "Swapnaneel Patra, Co-author Name",
-      publishedAt: "Journal Name (Vol. 1)",
-      date: "2025",
-      type: "journal",
-      links: [
-        { label: "PDF", url: "#", icon: LuFileText },
-      ]
-    },
-    {
-      title: "Preprint Paper Title",
-      authors: "Swapnaneel Patra, Co-author Name",
-      publishedAt: "arXiv",
-      date: "2024",
-      type: "preprint",
-      links: [
-        { label: "PDF", url: "#", icon: LuFileText },
-      ]
-    }
-  ]
-  // ... (rest of logic)
+export default async function PublicationSection() {
+  const publications = await getPublications()
 
   const conferences = publications.filter(p => p.type === 'conference')
   const journals = publications.filter(p => p.type === 'journal')
   const preprints = publications.filter(p => p.type === 'preprint')
 
   if (publications.length === 0) return null
+
+  // Helper to choose icon based on label
+  const getIconForLabel = (label: string) => {
+    const lower = label.toLowerCase()
+    if (lower.includes('pdf')) return LuFileText
+    if (lower.includes('code') || lower.includes('github')) return LuGitPullRequest
+    return LuExternalLink
+  }
 
   const renderPublicationList = (items: Publication[]) => (
     <div className="space-y-6">
@@ -78,17 +41,20 @@ export default function PublicationSection() {
               <>
                 <span className="text-gray-400 dark:text-gray-500">•</span>
                 <div className="flex gap-3">
-                  {pub.links.map((link, i) => (
-                    <Link
-                      key={i}
-                      href={link.url}
-                      target="_blank"
-                      className="flex items-center gap-1 text-gray-500 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-                    >
-                      {link.icon && <link.icon className="w-3.5 h-3.5" />}
-                      {link.label}
-                    </Link>
-                  ))}
+                  {pub.links.map((link, i) => {
+                    const Icon = getIconForLabel(link.label)
+                    return (
+                      <Link
+                        key={i}
+                        href={link.url}
+                        target="_blank"
+                        className="flex items-center gap-1 text-gray-500 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                      >
+                        <Icon className="w-3.5 h-3.5" />
+                        {link.label}
+                      </Link>
+                    )
+                  })}
                 </div>
               </>
             )}
