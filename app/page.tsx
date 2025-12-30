@@ -27,7 +27,7 @@ export default function Home() {
 
       {/* Publications */}
       <Suspense fallback={<SectionSkeleton />}>
-        <PublicationSection />
+        {/* <PublicationSection /> */}
       </Suspense>
 
       {/* Open Source Section */}
@@ -35,14 +35,14 @@ export default function Home() {
         <OpenSourceSection />
       </Suspense>
 
-      {/* Writing Section */}
-      <Suspense fallback={<SectionSkeleton />}>
-        <WritingSection />
-      </Suspense>
-
       {/* GitHub Activity Calendar */}
       <Suspense fallback={<ContributionSkeleton />}>
         <ContributionGraphSection />
+      </Suspense>
+
+      {/* Writing Section */}
+      <Suspense fallback={<SectionSkeleton />}>
+        <WritingSection />
       </Suspense>
 
       {/* Skills */}
