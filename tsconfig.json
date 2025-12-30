@@ -40,6 +40,9 @@
       ],
       "@/db/*": [
         "./db/*"
+      ],
+      "@/data/*": [
+        "./data/*"
       ]
     },
     "moduleResolution": "bundler"
