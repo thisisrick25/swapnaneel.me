@@ -1,4 +1,4 @@
-import { getGitHubFileContent } from '@/lib/github'
+import publicationsData from '@/data/publications.json'
 
 export type PublicationType = 'conference' | 'journal' | 'preprint'
 
@@ -18,11 +18,8 @@ export type Publication = {
 
 export async function getPublications(): Promise<Publication[]> {
   try {
-    const rawContent = await getGitHubFileContent('publications.json')
-    const publications: Publication[] = JSON.parse(rawContent)
-
     // Sort by date descending (assuming format "YYYY")
-    return publications.sort((a, b) => parseInt(b.date) - parseInt(a.date))
+    return (publicationsData as Publication[]).sort((a, b) => parseInt(b.date) - parseInt(a.date))
   } catch (error) {
     console.error('Error fetching publications:', error)
     return []

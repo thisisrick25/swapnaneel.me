@@ -1,4 +1,4 @@
-import { getGitHubFileContent } from '@/lib/github'
+import newsData from '@/data/news.json'
 
 export type NewsItem = {
   date: string
@@ -7,10 +7,7 @@ export type NewsItem = {
 
 export async function getNews(): Promise<NewsItem[]> {
   try {
-    const rawContent = await getGitHubFileContent('news.json')
-    const news: NewsItem[] = JSON.parse(rawContent)
-
-    return news.sort((a, b) => {
+    return (newsData as NewsItem[]).sort((a, b) => {
       const dateA = new Date(a.date).getTime()
       const dateB = new Date(b.date).getTime()
 
