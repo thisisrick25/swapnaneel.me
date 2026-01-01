@@ -6,6 +6,7 @@ import OpenSourceSection from '@/components/openSourceSection'
 import WritingSection from '@/components/writingSection'
 import SkillsSection from '@/components/skillSection'
 import NewsSection from '@/components/newsSection'
+import ProjectShowcaseSection from '@/components/projectShowcaseSection'
 import ContributionGraphSection from '@/components/contributionGraphSection'
 import { SectionSkeleton, ContributionSkeleton } from '@/components/skeletons'
 
@@ -20,6 +21,11 @@ export default function Home() {
       {/* News */}
       <Suspense fallback={<SectionSkeleton />}>
         <NewsSection />
+      </Suspense>
+
+      {/* Projects */}
+      <Suspense fallback={<SectionSkeleton />}>
+        <ProjectShowcaseSection />
       </Suspense>
 
       {/* Education */}
