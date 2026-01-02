@@ -3,7 +3,7 @@ import ContributionCard from "@/components/contributionCard"
 import { poppins } from "@/fonts"
 import { getMergedContributions } from "@/utils/getContributions"
 
-export default async function OpenSourceSection() {
+export default async function ContributionSection() {
   const allContributions = await getMergedContributions()
   const contributions = allContributions.slice(0, 4)
 

@@ -49,7 +49,7 @@ export default function ContributionCard({ title, repo, link, mergedAt, relatedI
             href={repoUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className={`px-1.5 py-0.5 text-xs font-medium border border-gray-200 dark:border-zinc-700 rounded-md bg-white dark:bg-zinc-800 transition-all hover:shadow-[0_0_4px_rgba(59,130,246,0.3)] dark:hover:shadow-[0_0_4px_rgba(147,197,253,0.3)] ${ibm_plex_mono.className}`}
+            className={`px-1.5 py-0.5 text-xs font-light border border-gray-200 dark:border-zinc-700 rounded-md bg-white dark:bg-zinc-800 transition-all hover:shadow-[0_0_4px_rgba(59,130,246,0.3)] dark:hover:shadow-[0_0_4px_rgba(147,197,253,0.3)] ${ibm_plex_mono.className}`}
           >
             {repo}
           </a>
@@ -78,14 +78,14 @@ export default function ContributionCard({ title, repo, link, mergedAt, relatedI
       {showLink ? (
         <Link
           href={`/contributions/${slug}`}
-          className="text-sm font-semibold line-clamp-2 min-h-10 mb-1 hover:text-blue-600 dark:hover:text-blue-400 transition-colors block"
+          className="text-sm font-semibold min-h-10 mb-3 hover:text-blue-600 dark:hover:text-blue-400 transition-colors block"
           style={{ viewTransitionName: `contribution-title-${slug}` }}
         >
           {title}
         </Link>
       ) : (
         <h1
-          className="text-sm font-semibold line-clamp-2 mb-1 block"
+          className="text-sm font-semibold mb-3 block"
           style={{ viewTransitionName: `contribution-title-${slug}` }}
         >
           {title}
