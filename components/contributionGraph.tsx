@@ -130,10 +130,7 @@ export default function ContributionGraph({ github, gitlab }: Props) {
                   <span
                     key={`${month}-${colStart}`}
                     className="contribution-month-label"
-                    style={{
-                      gridColumnStart: colStart + 1,
-                      gridColumnEnd: 'span 3'
-                    }}
+                    style={{ gridColumnStart: colStart }}
                   >
                     {month}
                   </span>
@@ -170,8 +167,8 @@ export default function ContributionGraph({ github, gitlab }: Props) {
             {/* Less to More legend */}
             <div className="flex items-center gap-1 text-xs text-gray-500 dark:text-gray-400">
               <span>Less</span>
-              <div className={`contribution-calendar ${source}`}>
-                <div className="flex gap-0.5">
+              <div className={`${source}`}>
+                <div className="flex gap-1">
                   {[0, 1, 2, 3, 4].map((level) => (
                     <div key={level} className={`contribution-square contribution-level-${level}`} />
                   ))}
