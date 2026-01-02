@@ -22,7 +22,7 @@ export default async function WritingSection() {
         </Link>
       </div>
 
-      <div className="grid gap-3 sm:grid-cols-2">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
         {posts.length > 0 ? (
           posts.map((post) => {
             const viewCount = allViews.find((v) => v.slug === post.slug)?.count || 0
