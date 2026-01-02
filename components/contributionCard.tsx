@@ -23,9 +23,9 @@ export default function ContributionCard({ title, repo, link, mergedAt, relatedI
   const repoUrl = source === 'github' ? `https://github.com/${repo}` : `https://gitlab.com/${repo}`
   const sourceUrl = source === 'github' ? `https://github.com/${GIT_USERNAME}` : `https://gitlab.com/${GIT_USERNAME}`
 
-  const repoSlug = repo?.replace("/", "-") || "unknown";
-  const dateStr = mergedAt ? mergedAt.slice(0, 10).replace(/-/g, "") : "00000000";
-  const slug = `${dateStr}-${repoSlug}-${id}`;
+  // Generate slug matching generate-summaries.js: owner-repo-id (lowercase, no dots/slashes)
+  const safeRepo = repo.replace(/[\/\.]/g, "-").toLowerCase();
+  const slug = `${safeRepo}-${id}`;
 
   const extractIssueNumber = (url: string): string => {
     const parts = url.split('/');
