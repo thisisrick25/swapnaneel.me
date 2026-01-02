@@ -27,9 +27,15 @@ function getMonthLabels(weeks: { days: { date: string }[] }[]): { month: string;
   let lastMonth = '';
 
   weeks.forEach((week, weekIndex) => {
-    const firstDay = week.days[0];
-    if (firstDay) {
-      const date = new Date(firstDay.date);
+    // Check if any day in the week is the 1st of the month to trigger label
+    const firstDayOfMonth = week.days.find(d => {
+      const date = new Date(d.date);
+      return date.getDate() === 1;
+    });
+    const targetDay = firstDayOfMonth || week.days[0];
+
+    if (targetDay) {
+      const date = new Date(targetDay.date);
       const month = date.toLocaleString('en-US', { month: 'short' });
 
       if (month !== lastMonth) {
@@ -130,7 +136,7 @@ export default function ContributionGraph({ github, gitlab }: Props) {
                   <span
                     key={`${month}-${colStart}`}
                     className="contribution-month-label"
-                    style={{ gridColumnStart: colStart }}
+                    style={{ gridColumnStart: colStart + 1 }}
                   >
                     {month}
                   </span>
