@@ -2,7 +2,7 @@ import { Suspense } from 'react'
 import HeroSection from '@/components/heroSection'
 import EducationSection from '@/components/educationSection'
 import PublicationSection from '@/components/publicationSection'
-import OpenSourceSection from '@/components/openSourceSection'
+import ContributionSection from '@/components/contributionSection'
 import WritingSection from '@/components/writingSection'
 import SkillsSection from '@/components/skillSection'
 import NewsSection from '@/components/newsSection'
@@ -38,7 +38,7 @@ export default function Home() {
 
       {/* Open Source Section */}
       <Suspense fallback={<SectionSkeleton />}>
-        <OpenSourceSection />
+        <ContributionSection />
       </Suspense>
 
       {/* GitHub Activity Calendar */}
