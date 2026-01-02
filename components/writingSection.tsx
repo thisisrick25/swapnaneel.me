@@ -1,4 +1,4 @@
-import Link from "next/link"
+import ViewAllLink from "@/components/viewAllLink"
 import PostCard from "@/components/postCard"
 import { poppins } from "@/fonts"
 import { getBlogs } from "@/utils/getBlogs"
@@ -14,12 +14,7 @@ export default async function WritingSection() {
     <section className="mb-12">
       <div className="section-header">
         <h2 className={poppins.className}>Articles</h2>
-        <Link
-          href="/posts"
-          className="text-sm text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
-        >
-          View all →
-        </Link>
+        <ViewAllLink href="/posts" />
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">

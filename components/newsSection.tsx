@@ -1,4 +1,4 @@
-import Link from "next/link"
+import ViewAllLink from '@/components/viewAllLink'
 import { poppins } from "@/fonts"
 import { getNews } from "@/utils/getNews"
 
@@ -13,12 +13,7 @@ export default async function NewsSection() {
     <section className="mb-12">
       <div className="section-header mb-4 flex justify-between items-baseline">
         <h2 className={poppins.className}>News</h2>
-        <Link
-          href="/news"
-          className="text-sm text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
-        >
-          View all →
-        </Link>
+        <ViewAllLink href="/news" />
       </div>
 
       <div className="space-y-4">

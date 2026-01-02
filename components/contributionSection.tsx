@@ -1,4 +1,4 @@
-import Link from "next/link"
+import ViewAllLink from "@/components/viewAllLink"
 import ContributionCard from "@/components/contributionCard"
 import { poppins } from "@/fonts"
 import { getMergedContributions } from "@/utils/getContributions"
@@ -11,12 +11,7 @@ export default async function ContributionSection() {
     <section className="mb-12">
       <div className="section-header">
         <h2 className={poppins.className}>Open Source Contributions</h2>
-        <Link
-          href="/contributions"
-          className="text-sm text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
-        >
-          View all →
-        </Link>
+        <ViewAllLink href="/contributions" />
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">

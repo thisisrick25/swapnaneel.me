@@ -1,7 +1,8 @@
 import { poppins } from "@/fonts"
-import Link from "next/link"
+import { Link } from 'next-view-transitions'
 import { LuExternalLink, LuFileText, LuGitPullRequest } from "react-icons/lu"
 import { getPublications, Publication, PublicationType } from "@/utils/getPublications"
+import ViewAllLink from '@/components/viewAllLink'
 
 export default async function PublicationSection() {
   const publications = await getPublications()
@@ -34,12 +35,7 @@ export default async function PublicationSection() {
     <section className="mb-12">
       <div className="section-header mb-6 flex justify-between items-baseline">
         <h2 className={poppins.className}>Publications</h2>
-        <Link
-          href="/publications"
-          className="text-sm text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
-        >
-          View all →
-        </Link>
+        <ViewAllLink href="/publications" />
       </div>
 
       <div className="space-y-6">
