@@ -19,7 +19,7 @@ export default async function Page() {
   const allViews = await getViewsCount()
 
   return (
-    <div className="py-16 sm:py-24 px-4">
+    <div className="py-16 sm:py-24">
       {/* Header */}
       <section className="mb-12">
         <h1 className={`text-3xl sm:text-4xl font-bold tracking-tight mb-2 ${poppins.className}`}>Posts</h1>

@@ -13,7 +13,7 @@ export default async function ProjectsPage() {
   const projects = await getProjects()
 
   return (
-    <div className="max-w-4xl mx-auto py-12 px-6 lg:px-8">
+    <div className="py-16 sm:py-24">
       {/* Header */}
       <div className="mb-12">
         <Link
@@ -30,7 +30,7 @@ export default async function ProjectsPage() {
       </div>
 
       {/* Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid gap-3 sm:grid-cols-2">
         {projects.map((project, index) => (
           <div key={index} className="h-full">
             <ProjectCard {...project} />
