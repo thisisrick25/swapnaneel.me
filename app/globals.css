@@ -10,7 +10,7 @@
 
 html {
   scroll-behavior: smooth;
-  @apply text-sm;
+  @apply text-[13px] leading-relaxed;
 }
 
 body {
