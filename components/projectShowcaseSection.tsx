@@ -5,7 +5,7 @@ import { Link } from 'next-view-transitions'
 
 export default async function ProjectShowcaseSection() {
   const projects = await getProjects()
-  const featuredProjects = projects.filter(p => p.featured)
+  const featuredProjects = projects.filter(p => p.featured).slice(0, 6)
 
   if (featuredProjects.length === 0) return null
 
