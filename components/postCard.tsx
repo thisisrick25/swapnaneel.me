@@ -29,7 +29,7 @@ export default function PostCard({ slug, title, description, publishedAt, viewCo
       />
 
       {/* Top metadata: date left, views right */}
-      <div className="flex justify-between text-xs text-gray-500 dark:text-gray-400 mb-2 relative z-10 pointer-events-none">
+      <div className="flex justify-between text-xs text-gray-500 dark:text-gray-400 mb-2 relative z-10">
         <DateDisplay date={publishedAt} />
         {viewCount > 0 && (
           <span className={`flex items-center gap-1 ${ibm_plex_mono.className}`}>
