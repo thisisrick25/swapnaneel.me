@@ -18,7 +18,10 @@ export default function ProjectCard({ title, description, link, techStack }: Pro
     >
       {/* Header: Title + Link */}
       <div className="flex items-start justify-between gap-2 mb-2">
-        <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100 line-clamp-1">
+        <h3
+          className="text-sm font-semibold text-gray-900 dark:text-gray-100 line-clamp-1"
+          style={{ viewTransitionName: `project-title-${slug}` }}
+        >
           {title}
         </h3>
         <a
