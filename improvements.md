@@ -78,19 +78,11 @@ This document outlines potential improvements for the Next.js portfolio/blog pro
   });
   ```
 
-- ~~**Enhance Caching with unstable_cache**~~:
+- ~~**Enhance Caching with Cache Components**~~:
 
-  ```typescript
-  import { unstable_cache } from "next/cache";
-
-  export const getBlogs = unstable_cache(
-    async () => {
-      /* your logic */
-    },
-    ["blogs"],
-    { revalidate: 1800 }
-  );
-  ```
+  - Implemented `use cache` directive with `cacheComponents` enabled in `next.config.ts`.
+  - Replaced `unstable_cache` with native `'use cache'` and `cacheLife`.
+  - Configured `getBlogs`, `getContributions`, and `getContributionCalendar` to use optimized caching.
 
 - **Add Loading States**:
   ```tsx
