@@ -1,10 +1,9 @@
-import { Link } from "next-view-transitions";
 import { Metadata } from 'next'
 import PostCard from '@/components/postCard';
 import { getAllTags, getBlogsByTag } from '@/utils/getBlogs'
 import { getViewsCount } from '@/db/queries';
 import { poppins } from "@/fonts";
-import { LuArrowLeft } from 'react-icons/lu';
+import BackLink from '@/components/backLink';
 
 interface PageProps {
   params: Promise<{ slug: string }>
@@ -34,13 +33,7 @@ export default async function Page({ params }: PageProps) {
   return (
     <div className="py-16 sm:py-24 px-4">
       {/* Back link */}
-      <Link
-        href="/tags"
-        className="inline-flex items-center gap-1.5 text-sm text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors mb-8"
-      >
-        <LuArrowLeft className="w-4 h-4" />
-        Back to tags
-      </Link>
+      <BackLink href="/tags" text="Back to tags" className="mb-8" />
 
       {/* Header */}
       <section className="mb-12">
@@ -73,8 +66,6 @@ export default async function Page({ params }: PageProps) {
         })}
       </div>
 
-      {/* Footer space for floating nav */}
-      <div className="h-24" />
     </div>
   );
 }
