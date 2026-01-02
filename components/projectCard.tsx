@@ -33,7 +33,7 @@ export default function ProjectCard({ title, description, link, techStack }: Pro
       </div>
 
       {/* Description */}
-      <p className="text-xs text-gray-600 dark:text-gray-400 line-clamp-3 mb-4 flex-grow">
+      <p className="text-xs text-gray-600 dark:text-gray-400 line-clamp-3 mb-4 grow">
         {description}
       </p>
 

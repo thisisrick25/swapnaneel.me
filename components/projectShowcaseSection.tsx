@@ -2,7 +2,6 @@ import { poppins } from '@/fonts'
 import { getProjects } from '@/utils/getProjects'
 import ProjectCard from '@/components/projectCard'
 import { Link } from 'next-view-transitions'
-import { LuArrowRight } from 'react-icons/lu'
 
 export default async function ProjectShowcaseSection() {
   const projects = await getProjects()
@@ -16,10 +15,9 @@ export default async function ProjectShowcaseSection() {
         <h2 className={poppins.className}>Projects</h2>
         <Link
           href="/projects"
-          className="text-xs text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 transition-colors flex items-center gap-1 group"
+          className="text-sm text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
         >
-          View all
-          <LuArrowRight className="w-3 h-3 transition-transform group-hover:translate-x-0.5" />
+          View all →
         </Link>
       </div>
 
