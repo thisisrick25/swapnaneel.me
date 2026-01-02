@@ -20,8 +20,8 @@ const nextConfig: NextConfig = {
       hmrRefreshes: true,
     },
   },
-
-
-}
+  cacheComponents: true,
+  reactCompiler: true,
+};
 
 export default nextConfig;
