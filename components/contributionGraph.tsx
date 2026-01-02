@@ -130,7 +130,10 @@ export default function ContributionGraph({ github, gitlab }: Props) {
                   <span
                     key={`${month}-${colStart}`}
                     className="contribution-month-label"
-                    style={{ gridColumnStart: colStart + 1 }}
+                    style={{
+                      gridColumnStart: colStart + 1,
+                      gridColumnEnd: 'span 3'
+                    }}
                   >
                     {month}
                   </span>
