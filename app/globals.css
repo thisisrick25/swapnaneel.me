@@ -302,26 +302,27 @@ input[type="email"] {
    ======================================== */
 
 .contribution-calendar-wrapper {
-  @apply overflow-x-auto overflow-y-visible;
-  scrollbar-width: thin;
+  @apply overflow-visible w-full;
 }
 
 .contribution-calendar {
-  @apply inline-flex flex-col gap-1 min-w-max;
+  @apply flex flex-col gap-1 w-full;
 }
 
 .contribution-months {
-  @apply grid gap-[2px] text-xs text-gray-500 dark:text-gray-400 mb-1;
-  grid-template-columns: repeat(53, 13px);
+  @apply grid gap-[2px] text-xs text-gray-500 dark:text-gray-400 mb-1 w-full;
+  grid-template-columns: repeat(53, minmax(0, 1fr));
 }
 
 .contribution-month-label {
   @apply text-[10px] leading-none overflow-hidden whitespace-nowrap;
-  width: 30px;
+  /* Allow label to define its own width or wrap if needed, typically spanning span-X */
+  width: auto;
 }
 
 .contribution-grid {
-  @apply flex gap-[2px];
+  @apply grid gap-[2px] w-full;
+  grid-template-columns: repeat(53, minmax(0, 1fr));
 }
 
 .contribution-week {
@@ -329,7 +330,7 @@ input[type="email"] {
 }
 
 .contribution-square {
-  @apply w-[13px] h-[13px] rounded-xs transition-colors relative;
+  @apply w-full aspect-square rounded-xs transition-colors relative;
 }
 
 /* Custom tooltip */
