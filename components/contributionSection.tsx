@@ -5,7 +5,7 @@ import { getMergedContributions } from "@/utils/getContributions"
 
 export default async function ContributionSection() {
   const allContributions = await getMergedContributions()
-  const contributions = allContributions.slice(0, 4)
+  const contributions = allContributions.slice(0, 6)
 
   return (
     <section className="mb-12">
