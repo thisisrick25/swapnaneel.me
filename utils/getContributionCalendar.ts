@@ -1,4 +1,4 @@
-import { unstable_cache } from 'next/cache';
+import { cacheLife } from 'next/cache';
 import { GIT_USERNAME, REVALIDATE_SECONDS } from '@/lib/constants';
 
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
@@ -78,7 +78,6 @@ async function fetchGitHubCalendar(): Promise<CalendarData | null> {
         query: GITHUB_QUERY,
         variables: { username: GIT_USERNAME },
       }),
-      next: { revalidate: REVALIDATE_SECONDS },
     });
 
     const json = await res.json();
@@ -115,7 +114,6 @@ async function fetchGitLabCalendar(): Promise<CalendarData | null> {
 
     const res = await fetch(`https://gitlab.com/users/${GIT_USERNAME}/calendar.json`, {
       headers,
-      next: { revalidate: REVALIDATE_SECONDS },
     });
 
     if (!res.ok) {
@@ -178,15 +176,15 @@ async function fetchGitLabCalendar(): Promise<CalendarData | null> {
 }
 
 // Fetch both calendars in parallel (cached)
-export const getBothCalendars = unstable_cache(
-  async (): Promise<{ github: CalendarData | null; gitlab: CalendarData | null }> => {
-    const [github, gitlab] = await Promise.all([
-      fetchGitHubCalendar(),
-      fetchGitLabCalendar(),
-    ]);
+// Fetch both calendars in parallel (cached)
+export async function getBothCalendars(): Promise<{ github: CalendarData | null; gitlab: CalendarData | null }> {
+  'use cache'
+  cacheLife('hours')
 
-    return { github, gitlab };
-  },
-  ['calendars'],
-  { revalidate: REVALIDATE_SECONDS }
-);
+  const [github, gitlab] = await Promise.all([
+    fetchGitHubCalendar(),
+    fetchGitLabCalendar(),
+  ]);
+
+  return { github, gitlab };
+}

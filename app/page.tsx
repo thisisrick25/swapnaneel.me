@@ -10,8 +10,6 @@ import ProjectShowcaseSection from '@/components/projectShowcaseSection'
 import ContributionGraphSection from '@/components/contributionGraphSection'
 import { SectionSkeleton, ContributionSkeleton } from '@/components/skeletons'
 
-export const dynamic = 'force-dynamic'
-
 export default function Home() {
   return (
     <div className="py-16 sm:py-24">

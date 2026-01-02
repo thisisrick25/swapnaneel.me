@@ -5,8 +5,6 @@ import { poppins } from '@/fonts'
 import PostCard from '@/components/postCard'
 import BackLink from '@/components/backLink'
 
-export const dynamic = 'force-dynamic'
-
 export function generateMetadata(): Metadata {
   return {
     title: 'Posts',

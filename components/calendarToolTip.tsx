@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useCallback } from 'react'
+import { useState } from 'react'
 
 export type TooltipData = {
   x: number
@@ -13,18 +13,18 @@ export type TooltipState = TooltipData | null
 export function useCalendarTooltip() {
   const [tooltip, setTooltip] = useState<TooltipState>(null)
 
-  const onMouseEnter = useCallback((event: React.MouseEvent<HTMLDivElement>, count: number, date: string) => {
+  const onMouseEnter = (event: React.MouseEvent<HTMLDivElement>, count: number, date: string) => {
     const rect = event.currentTarget.getBoundingClientRect()
     setTooltip({
       x: rect.left + rect.width / 2,
       y: rect.top,
       content: `${count} contribution${count !== 1 ? 's' : ''} on ${new Date(date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}`
     })
-  }, [])
+  }
 
-  const onMouseLeave = useCallback(() => {
+  const onMouseLeave = () => {
     setTooltip(null)
-  }, [])
+  }
 
   return { tooltip, onMouseEnter, onMouseLeave }
 }
