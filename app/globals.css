@@ -311,7 +311,7 @@ input[type="email"] {
 }
 
 .contribution-months {
-  @apply grid gap-0.5 text-xs text-gray-500 dark:text-gray-400 mb-1;
+  @apply grid gap-[2px] text-xs text-gray-500 dark:text-gray-400 mb-1;
   grid-template-columns: repeat(53, 13px);
 }
 
@@ -321,11 +321,11 @@ input[type="email"] {
 }
 
 .contribution-grid {
-  @apply flex gap-0.5;
+  @apply flex gap-[2px];
 }
 
 .contribution-week {
-  @apply flex flex-col gap-[3px];
+  @apply flex flex-col gap-[2px];
 }
 
 .contribution-square {
