@@ -2,6 +2,7 @@ import { Metadata } from 'next'
 import { getMergedContributions } from '@/utils/getContributions'
 import { poppins } from '@/fonts'
 import ContributionCard from '@/components/contributionCard'
+import BackLink from '@/components/backLink'
 
 export const dynamic = 'force-dynamic'
 
@@ -19,6 +20,7 @@ export default async function Page() {
     <div className="py-16 sm:py-24">
       {/* Header */}
       <section className="mb-12">
+        <BackLink />
         <h1 className={`text-3xl sm:text-4xl font-bold tracking-tight mb-2 ${poppins.className}`}>Open Source</h1>
         <p className="text-base text-gray-600 dark:text-gray-300">
           Merged pull requests and contributions to open-source projects.
@@ -46,8 +48,6 @@ export default async function Page() {
         )}
       </div>
 
-      {/* Footer space for floating nav */}
-      <div className="h-24" />
     </div>
   )
 }

@@ -1,7 +1,8 @@
 import { poppins } from "@/fonts"
-import { getPublications, Publication, PublicationType } from "@/utils/getPublications"
-import Link from "next/link"
-import { LuArrowLeft, LuExternalLink, LuFileText, LuGitPullRequest } from "react-icons/lu"
+import { LuExternalLink, LuFileText, LuGitPullRequest } from "react-icons/lu"
+import { getPublications, PublicationType } from "@/utils/getPublications"
+import BackLink from '@/components/backLink'
+import Link from 'next/link'
 import { Metadata } from "next"
 
 export const metadata: Metadata = {
@@ -33,13 +34,7 @@ export default async function PublicationsPage() {
 
   return (
     <div className="py-16 sm:py-24">
-      <Link
-        href="/"
-        className="inline-flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors mb-8"
-      >
-        <LuArrowLeft className="w-4 h-4" />
-        Back to home
-      </Link>
+      <BackLink />
 
       <div className="section-header mb-8">
         <h1 className={`${poppins.className} text-3xl font-bold`}>Publications</h1>

@@ -3,6 +3,7 @@ import { slug } from "github-slugger"
 import { Metadata } from 'next'
 import { getBlogs } from '@/utils/getBlogs';
 import { poppins, ibm_plex_mono } from '@/fonts';
+import BackLink from '@/components/backLink';
 
 export function generateMetadata(): Metadata {
   return {
@@ -30,6 +31,7 @@ export default async function Page() {
     <div className="py-16 sm:py-24 px-4">
       {/* Header */}
       <section className="mb-12">
+        <BackLink />
         <h1 className={`text-3xl sm:text-4xl font-bold tracking-tight mb-2 ${poppins.className}`}>Tags</h1>
         <p className="text-base text-gray-600 dark:text-gray-300">
           Browse posts by topic.
@@ -51,8 +53,6 @@ export default async function Page() {
         ))}
       </div>
 
-      {/* Footer space for floating nav */}
-      <div className="h-24" />
     </div>
   )
 }
