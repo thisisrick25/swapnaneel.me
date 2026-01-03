@@ -22,9 +22,9 @@ const getContributionData = cache(async (slug: string): Promise<ContributionBlog
 export async function generateStaticParams() {
   const contributions = await getMergedContributions();
   return contributions.map((contribution) => {
-    const repoSlug = contribution.repo.replace("/", "-");
-    const dateStr = contribution.merged_at ? contribution.merged_at.slice(0, 10).replace(/-/g, "") : "00000000";
-    const slug = `${dateStr}-${repoSlug}-${contribution.id}`;
+    // Match contributionCard.tsx: owner-repo-id (lowercase, no dots/slashes)
+    const safeRepo = contribution.repo.replace(/[\/\.]/g, "-").toLowerCase();
+    const slug = `${safeRepo}-${contribution.id}`;
     return { slug };
   });
 }
