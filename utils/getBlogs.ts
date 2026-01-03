@@ -178,6 +178,9 @@ export async function getBlogsByTag(tag: string): Promise<BlogMetadata[]> {
 
 // Get a single blog by slug
 export async function getBlogBySlug(slug: string): Promise<Blog | undefined> {
+  'use cache'
+  cacheLife('hours')
+
   const filePath = `${slug}.mdx`; // Construct the file path
 
   try {
