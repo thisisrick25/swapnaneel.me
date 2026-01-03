@@ -32,8 +32,11 @@ export default async function Page({ params }: PageProps) {
 
   return (
     <div className="py-16 sm:py-24 px-4">
-      {/* Back link */}
-      <BackLink href="/tags" text="Back to tags" className="mb-8" />
+      {/* Back links */}
+      <div className="flex flex-col gap-1 mb-8">
+        <BackLink href="/tags" text="Back to tags" className="" />
+        <BackLink href="/" text="Back to home" className="" />
+      </div>
 
       {/* Header */}
       <section className="mb-12">

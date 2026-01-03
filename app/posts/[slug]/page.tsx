@@ -52,8 +52,11 @@ export default async function Page({ params }: PageProps) {
 
   return (
     <article className="py-16 sm:py-24 px-4">
-      {/* Back link */}
-      <BackLink href="/posts" text="Back to posts" className="mb-8" />
+      {/* Back links */}
+      <div className="flex flex-col gap-1 mb-8">
+        <BackLink href="/posts" text="Back to posts" className="" />
+        <BackLink href="/" text="Back to home" className="" />
+      </div>
 
       {/* Post header - matching PostCard layout */}
       <header className="mb-8">
