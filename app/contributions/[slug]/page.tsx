@@ -1,12 +1,12 @@
 import { notFound } from 'next/navigation';
-import { Link } from 'next-view-transitions';
 import { Metadata } from 'next'
 import { cache } from 'react';
 import { poppins, inter, ibm_plex_mono } from '@/fonts';
 import DateDisplay from '@/components/dateDisplay';
+import BackLink from '@/components/backLink';
 import { GIT_USERNAME } from '@/lib/constants';
 import { getContributionBySlug, ContributionBlog, getMergedContributions } from '@/utils/getContributions';
-import { LuArrowLeft, LuExternalLink, LuGitMerge } from 'react-icons/lu';
+import { LuExternalLink, LuGitMerge } from 'react-icons/lu';
 import { SiGithub, SiGitlab } from 'react-icons/si';
 
 interface PageProps {
@@ -65,13 +65,7 @@ export default async function Page({ params }: PageProps) {
   return (
     <article className="py-16 sm:py-24 px-4">
       {/* Back link */}
-      <Link
-        href="/contributions"
-        className="inline-flex items-center gap-1.5 text-sm text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors mb-8"
-      >
-        <LuArrowLeft className="w-4 h-4" />
-        Back to contributions
-      </Link>
+      <BackLink href="/contributions" text="Back to contributions" className="mb-8" />
 
       {/* Header - matching ContributionCard layout */}
       <header className="mb-8">
@@ -157,13 +151,7 @@ export default async function Page({ params }: PageProps) {
 
       {/* Footer */}
       <footer className="mt-16 pt-8 border-t border-gray-200 dark:border-zinc-800">
-        <Link
-          href="/contributions"
-          className="inline-flex items-center gap-1.5 text-sm text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
-        >
-          <LuArrowLeft className="w-4 h-4" />
-          Back to all contributions
-        </Link>
+        <BackLink href="/contributions" text="Back to all contributions" className="" />
       </footer>
     </article>
   );

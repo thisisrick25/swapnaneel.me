@@ -1,9 +1,9 @@
 import { notFound } from 'next/navigation';
-import { Link } from 'next-view-transitions';
 import TableOfContents from '@/components/tableOfContents';
 import Tag from '@/components/tag';
 import ViewCounter from '@/components/viewCounter';
 import DateDisplay from '@/components/dateDisplay';
+import BackLink from '@/components/backLink';
 import { extractHeadings } from '@/utils/extractHeadings';
 import { getBlogs, getBlogBySlug, Blog } from '@/utils/getBlogs';
 import { getReadingTime } from '@/utils/getReadingTime';
@@ -11,7 +11,7 @@ import { Metadata } from 'next'
 import { poppins, inter, ibm_plex_mono } from '@/fonts'
 import { cache } from 'react';
 import { getViewsCountBySlug } from '@/db/queries';
-import { LuArrowLeft, LuClock } from 'react-icons/lu';
+import { LuClock } from 'react-icons/lu';
 
 interface PageProps {
   params: Promise<{ slug: string }>
@@ -53,13 +53,7 @@ export default async function Page({ params }: PageProps) {
   return (
     <article className="py-16 sm:py-24 px-4">
       {/* Back link */}
-      <Link
-        href="/posts"
-        className="inline-flex items-center gap-1.5 text-sm text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors mb-8"
-      >
-        <LuArrowLeft className="w-4 h-4" />
-        Back to posts
-      </Link>
+      <BackLink href="/posts" text="Back to posts" className="mb-8" />
 
       {/* Post header - matching PostCard layout */}
       <header className="mb-8">
@@ -117,13 +111,7 @@ export default async function Page({ params }: PageProps) {
 
       {/* Footer */}
       <footer className="mt-16 pt-8 border-t border-gray-200 dark:border-zinc-800">
-        <Link
-          href="/posts"
-          className="inline-flex items-center gap-1.5 text-sm text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
-        >
-          <LuArrowLeft className="w-4 h-4" />
-          Back to all posts
-        </Link>
+        <BackLink href="/posts" text="Back to all posts" className="" />
       </footer>
     </article>
   )
