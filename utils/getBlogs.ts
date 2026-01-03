@@ -5,7 +5,6 @@ import { compareDesc } from 'date-fns'
 import { slug as slugify } from 'github-slugger'
 import matter from 'gray-matter'
 import { getGitHubDirectoryContents, getGitHubFileContent } from '@/lib/github'
-import { REVALIDATE_SECONDS } from '@/lib/constants'
 import {
   remarkFrontmatter,
   remarkMdxFrontmatter,
