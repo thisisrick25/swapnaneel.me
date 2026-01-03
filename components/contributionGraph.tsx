@@ -27,15 +27,15 @@ function getMonthLabels(weeks: { days: { date: string }[] }[]): { month: string;
   let lastMonth = '';
 
   weeks.forEach((week, weekIndex) => {
-    // Check if any day in the week is the 1st of the month to trigger label
+    // Only show month label when the 1st of the month is present in the week
+    // This makes months DISAPPEAR when their 1st day is no longer in the data
     const firstDayOfMonth = week.days.find(d => {
       const date = new Date(d.date);
       return date.getDate() === 1;
     });
-    const targetDay = firstDayOfMonth || week.days[0];
 
-    if (targetDay) {
-      const date = new Date(targetDay.date);
+    if (firstDayOfMonth) {
+      const date = new Date(firstDayOfMonth.date);
       const month = date.toLocaleString('en-US', { month: 'short' });
 
       if (month !== lastMonth) {
