@@ -13,8 +13,6 @@ import { cache } from 'react';
 import { getViewsCountBySlug } from '@/db/queries';
 import { LuArrowLeft, LuClock } from 'react-icons/lu';
 
-export const dynamic = 'force-static';
-
 interface PageProps {
   params: Promise<{ slug: string }>
 }
