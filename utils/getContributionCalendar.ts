@@ -78,6 +78,7 @@ async function fetchGitHubCalendar(): Promise<CalendarData | null> {
         query: GITHUB_QUERY,
         variables: { username: GIT_USERNAME },
       }),
+      cache: 'force-cache',
     });
 
     const json = await res.json();
@@ -114,6 +115,7 @@ async function fetchGitLabCalendar(): Promise<CalendarData | null> {
 
     const res = await fetch(`https://gitlab.com/users/${GIT_USERNAME}/calendar.json`, {
       headers,
+      cache: 'force-cache',
     });
 
     if (!res.ok) {
