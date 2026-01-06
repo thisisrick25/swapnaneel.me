@@ -20,8 +20,7 @@ const nextConfig: NextConfig = {
       hmrRefreshes: true,
     },
   },
-
-
-}
+  cacheComponents: true,
+};
 
 export default nextConfig;

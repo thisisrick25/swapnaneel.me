@@ -1,8 +1,10 @@
+'use server';
+
 import { prisma } from '@/lib/prisma';
-import { unstable_noStore as noStore } from 'next/cache';
+import { connection } from 'next/server';
 
 export async function increment(slug: string): Promise<number> {
-  noStore();
+  await connection();
   try {
     const existingView = await prisma.view.findUnique({
       where: {

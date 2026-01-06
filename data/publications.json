@@ -1,0 +1,45 @@
+[
+  {
+    "title": "Conference Paper Title",
+    "authors": "Swapnaneel Patra, Co-author Name",
+    "publishedAt": "Conference Name (CONF '25)",
+    "date": "2025",
+    "type": "conference",
+    "links": [
+      {
+        "label": "PDF",
+        "url": "#"
+      },
+      {
+        "label": "Code",
+        "url": "#"
+      }
+    ]
+  },
+  {
+    "title": "Journal Article Title",
+    "authors": "Swapnaneel Patra, Co-author Name",
+    "publishedAt": "Journal Name (Vol. 1)",
+    "date": "2025",
+    "type": "journal",
+    "links": [
+      {
+        "label": "PDF",
+        "url": "#"
+      }
+    ]
+  },
+  {
+    "title": "Preprint Paper Title",
+    "authors": "Swapnaneel Patra, Co-author Name",
+    "publishedAt": "arXiv",
+    "date": "2024",
+    "type": "preprint",
+    "links": [
+      {
+        "label": "PDF",
+        "url": "#"
+      }
+    ]
+  }
+]

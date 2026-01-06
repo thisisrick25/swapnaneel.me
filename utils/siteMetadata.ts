@@ -20,4 +20,5 @@ export const siteMetadata = {
   linkedin: 'https://www.linkedin.com/in/swapnaneelpatra/',
   dribbble: '',
   locale: 'en-US',
+  resume: '/resume.pdf', // Add your resume file in public folder or use external link
 }

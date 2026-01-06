@@ -1,0 +1,36 @@
+[
+  {
+    "title": "swapnaneel.me",
+    "description": "My personal portfolio and digital garden built with Next.js and Tailwind CSS.",
+    "link": "https://github.com/thisisrick25/swapnaneel.me",
+    "techStack": [
+      "Next.js",
+      "React",
+      "Tailwind CSS",
+      "TypeScript"
+    ],
+    "featured": true
+  },
+  {
+    "title": "Brain",
+    "description": "A centralized knowledge repository and data source for my digital garden.",
+    "link": "https://github.com/thisisrick25/brain",
+    "techStack": [
+      "JSON",
+      "Markdown",
+      "Git"
+    ],
+    "featured": true
+  },
+  {
+    "title": "NeuralForecast",
+    "description": "Contributor to the NeuralForecast library for time series forecasting.",
+    "link": "https://github.com/Nixtla/neuralforecast",
+    "techStack": [
+      "Python",
+      "PyTorch",
+      "Deep Learning"
+    ],
+    "featured": true
+  }
+]

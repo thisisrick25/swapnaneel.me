@@ -2,12 +2,14 @@ import { Metadata } from 'next'
 import Script from 'next/script'
 import './globals.css'
 import { ThemeProvider } from './theme-provider'
-import Header from '@/components/header'
+import FloatingNav from '@/components/floatingNav'
 import Footer from '@/components/footer'
-import { Analytics } from '@vercel/analytics/react';
+import BackToTop from '@/components/backToTop'
+import { ViewTransitions } from 'next-view-transitions'
+import { Analytics } from '@vercel/analytics/react'
 import { siteMetadata } from '@/utils/siteMetadata'
-import { SpeedInsights } from '@vercel/speed-insights/next';
-import { inter } from '@/fonts'
+import { SpeedInsights } from '@vercel/speed-insights/next'
+import { inter, poppins, ibm_plex_mono, jetbrains_mono } from '@/fonts'
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteMetadata.siteUrl),
@@ -42,8 +44,7 @@ export const metadata: Metadata = {
     title: siteMetadata.title,
     images: [siteMetadata.socialBanner],
   },
-};
-
+}
 
 export default function RootLayout({
   children,
@@ -51,7 +52,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning className={`${inter.variable} ${poppins.variable} ${ibm_plex_mono.variable} ${jetbrains_mono.variable}`}>
       {/* <!-- Google tag (gtag.js) --> */}
       <Script async src="https://www.googletagmanager.com/gtag/js?id=G-HVS1V1YG5Z"></Script>
       <Script id="google-analytics" strategy="afterInteractive">
@@ -61,18 +62,19 @@ export default function RootLayout({
 
         gtag('config', 'G-HVS1V1YG5Z');`}
       </Script>
-      <body className={`${inter.className} antialiased tracking-tight bg-neutral-200 dark:bg-neutral-950 text-gray-900 dark:text-gray-50 selection:bg-neutral-400 selection:text-black dark:selection:bg-neutral-600 dark:selection:text-white sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl 2xl:max-w-3xl mx-auto px-4 sm:px-6 xl:px-0 gap-10 sm:gap-14`}>
-        <ThemeProvider>
-          <div className="min-h-screen flex flex-col max-w-2xl mx-auto px-4">
-            <Header />
-            <main className='flex-grow px-4 py-8 bg-neutral-100/50 dark:bg-neutral-900/50 rounded-lg border border-neutral-200/50 dark:border-neutral-800/50 shadow-sm'>
+      <body className={`${inter.className} antialiased`}>
+        <ViewTransitions>
+          <ThemeProvider>
+            <main className="min-h-screen w-full max-w-4xl mx-auto">
               {children}
             </main>
             <Footer />
-          </div>
-          <SpeedInsights />
-          <Analytics />
-        </ThemeProvider>
+            <FloatingNav />
+            <BackToTop />
+            <SpeedInsights />
+            <Analytics />
+          </ThemeProvider>
+        </ViewTransitions>
       </body>
     </html>
   )

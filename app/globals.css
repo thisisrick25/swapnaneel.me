@@ -4,7 +4,209 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* Remove Safari input shadow on mobile */
+/* ========================================
+   BASE STYLES
+   ======================================== */
+
+html {
+  scroll-behavior: smooth;
+  @apply text-[13px] leading-relaxed;
+}
+
+body {
+  @apply bg-white dark:bg-zinc-900 text-gray-900 dark:text-gray-100;
+  font-feature-settings: "kern" 1, "liga" 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Smooth theme transitions for all elements */
+*,
+*::before,
+*::after {
+  transition-property: background-color, border-color, color, fill, stroke;
+  transition-duration: 0.15s;
+  transition-timing-function: ease-out;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ========================================
+   LINKS
+   ======================================== */
+
+.link {
+  @apply text-blue-600 dark:text-blue-400 no-underline hover:underline transition-colors;
+}
+
+/* ========================================
+   BUTTONS
+   ======================================== */
+
+.btn {
+  @apply inline-flex items-center gap-2 px-4 py-2 text-sm font-medium;
+  @apply text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-zinc-800;
+  @apply border border-gray-200 dark:border-zinc-700 rounded-lg;
+  @apply hover:bg-gray-200 dark:hover:bg-zinc-700 hover:border-gray-300 dark:hover:border-zinc-600;
+  @apply transition-colors cursor-pointer;
+}
+
+/* ========================================
+   CARDS
+   ======================================== */
+
+.card {
+  @apply p-4 bg-white dark:bg-zinc-900;
+  @apply border border-gray-200 dark:border-zinc-700 rounded-xl;
+  @apply hover:border-gray-300 dark:hover:border-zinc-600 transition-colors;
+}
+
+/* ========================================
+   TAGS / BADGES
+   ======================================== */
+
+.tag {
+  @apply inline-flex items-center px-2.5 py-1 text-xs font-medium;
+  @apply text-gray-600 dark:text-gray-300 bg-gray-100 dark:bg-zinc-800 rounded-full;
+}
+
+/* ========================================
+   SECTION HEADERS
+   ======================================== */
+
+.section-header {
+  @apply flex items-center justify-between mb-6;
+}
+
+.section-header h2 {
+  @apply text-2xl font-bold tracking-tight text-gray-900 dark:text-white;
+}
+
+/* ========================================
+   FLOATING BOTTOM NAV
+   ======================================== */
+
+.floating-nav {
+  @apply fixed bottom-6 left-1/2 -translate-x-1/2 z-100;
+  @apply flex items-center gap-1 p-2;
+  @apply bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl;
+  @apply border border-gray-200/50 dark:border-zinc-700/50 rounded-full;
+  @apply shadow-lg;
+}
+
+.nav-item {
+  @apply flex items-center gap-1.5 px-3.5 py-2 text-sm font-medium;
+  @apply text-gray-500 dark:text-gray-400 rounded-full transition-colors;
+}
+
+.nav-item:hover,
+.nav-item.active {
+  @apply text-gray-900 dark:text-white bg-gray-100 dark:bg-zinc-800;
+}
+
+.nav-item svg {
+  @apply w-4 h-4;
+}
+
+.nav-divider {
+  @apply w-px h-6 bg-gray-200 dark:bg-zinc-700 mx-1;
+}
+
+/* ========================================
+   PROFILE IMAGE
+   ======================================== */
+
+.profile-image {
+  @apply w-18 h-18 sm:w-22 sm:h-22 object-cover rounded-xl;
+}
+
+/* ========================================
+   LIST ITEMS
+   ======================================== */
+
+.list-item {
+  @apply flex items-start justify-between gap-4 p-4 -mx-4 rounded-xl transition-colors;
+}
+
+.list-item:hover {
+  @apply bg-gray-50 dark:bg-zinc-800/50;
+}
+
+/* ========================================
+   WORK/PROJECT CARDS
+   ======================================== */
+
+.work-card {
+  @apply block p-4 bg-white dark:bg-zinc-900;
+  @apply border border-gray-200 dark:border-zinc-700 rounded-xl;
+  @apply hover:border-gray-300 dark:hover:border-zinc-600;
+  @apply hover:bg-gray-50 dark:hover:bg-zinc-800/50 transition-colors;
+}
+
+/* ========================================
+   FOOTER
+   ======================================== */
+
+.footer {
+  @apply py-16 pb-24 text-center;
+}
+
+.footer-text {
+  @apply text-sm text-gray-500 dark:text-gray-400;
+}
+
+/* ========================================
+   SELECTION
+   ======================================== */
+
+::selection {
+  @apply bg-blue-100 dark:bg-blue-900/30 text-gray-900 dark:text-white;
+}
+
+/* ========================================
+   SCROLLBAR
+   ======================================== */
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-100 dark:bg-zinc-800;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-300 dark:bg-zinc-600 rounded;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-400 dark:bg-zinc-500;
+}
+
+/* ========================================
+   SKELETON LOADING
+   ======================================== */
+
+.skeleton {
+  @apply bg-gray-200 dark:bg-zinc-700 rounded animate-pulse;
+}
+
+/* ========================================
+   FORM INPUTS
+   ======================================== */
+
 input[type="text"],
 input[type="email"] {
   -webkit-appearance: none;
@@ -12,137 +214,225 @@ input[type="email"] {
   appearance: none;
 }
 
-html {
-  overflow-y: scroll;
+/* ========================================
+   PROSE OVERRIDES (Blog Content)
+   ======================================== */
+
+.prose {
+  @apply text-gray-600 dark:text-gray-300;
 }
 
-html:not(.dark) {
-  .prose {
-    --tw-prose-bullets: #b5b5b5;
-    --tw-prose-counters: #b5b5b5;
+.prose h1,
+.prose h2,
+.prose h3 {
+  @apply text-gray-900 dark:text-white font-semibold tracking-tight;
+  font-family: var(--font-poppins), system-ui, sans-serif;
+}
 
-    blockquote {
-      --tw-prose-quote-borders: #b5b5b5;
-    }
-  }
+.prose a {
+  @apply text-blue-600 dark:text-blue-400 no-underline hover:underline;
+}
+
+.prose strong {
+  @apply text-gray-900 dark:text-white;
+}
+
+.prose pre {
+  @apply bg-gray-100 dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 rounded-xl overflow-hidden;
+  padding: 0;
+}
+
+.prose pre code {
+  @apply block p-4 overflow-x-auto;
+  font-family: var(--font-jetbrains-mono), monospace;
+}
+
+/* Title div from rehype-pretty-code */
+.prose [data-rehype-pretty-code-title] {
+  @apply px-4 py-2 text-xs font-medium text-gray-500 dark:text-gray-400 bg-gray-50 dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 border-b-0 rounded-t-xl;
+  font-family: var(--font-jetbrains-mono), monospace;
+}
+
+.prose [data-rehype-pretty-code-title] + pre {
+  @apply rounded-t-none border-t-0;
+}
+
+/* Inline code */
+.prose code {
+  @apply bg-gray-100 dark:bg-zinc-800 px-0.5 py-0.5 rounded-xl;
+  font-family: var(--font-jetbrains-mono), monospace;
+}
+
+/* Remove background from code inside pre */
+.prose pre code {
+  @apply bg-transparent p-4;
+}
+
+.prose blockquote {
+  @apply border-l-4 border-gray-200 dark:border-zinc-700 text-gray-600 dark:text-gray-400;
 }
 
 .anchor {
-  @apply absolute invisible no-underline;
-  margin-left: -1em;
-  padding-right: 0.5em;
-  width: 80%;
-  max-width: 700px;
-  cursor: pointer;
+  @apply absolute -ml-8 pr-2 opacity-0 cursor-pointer text-gray-400 dark:text-gray-500 transition-opacity;
+}
 
-  &:before {
-    @apply text-neutral-600 dark:text-neutral-400;
-    content: "#";
-  }
+.anchor::before {
+  content: "#";
 }
 
 *:hover > .anchor {
-  @apply visible;
+  @apply opacity-100;
 }
 
-.prose {
-  @apply text-xs md:text-sm;
+/* ========================================
+   BORDER BEAM ANIMATION
+   ======================================== */
 
-  > :first-child {
-    /* Override removing top margin, causing layout shift */
-    margin-top: 1.25em !important;
+@keyframes border-beam-spin {
+  from {
+    --border-beam-angle: 0deg;
   }
-
-  > :last-child {
-    margin-bottom: 1.25em !important;
+  to {
+    --border-beam-angle: 360deg;
   }
+}
 
-  h1,
-  h2 {
-    font-family: var(--font-poppins), sans-serif;
-    @apply text-sm md:text-base lg:text-lg font-medium;
-  }
+@property --border-beam-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
 
-  h3,
-  h4,
-  h5,
-  h6 {
-    font-family: var(--font-poppins), sans-serif;
-    @apply text-xs md:text-sm lg:text-base font-medium;
-  }
+.animate-border-beam {
+  animation: border-beam-spin 3s linear infinite;
+}
 
-  p {
-    font-family: var(--font-inter), sans-serif;
-    @apply text-xs md:text-sm lg:text-base font-medium;
-  }
+/* ========================================
+   GITHUB CONTRIBUTION CALENDAR
+   ======================================== */
 
-  blockquote {
-    p {
-      @apply text-xs;
-    }
-  }
+.contribution-calendar-wrapper {
+  @apply overflow-x-auto overflow-y-visible;
+  scrollbar-width: thin;
+}
 
-  pre,
-  code {
-    @apply bg-neutral-700! dark:bg-neutral-800!;
-  }
+.contribution-calendar {
+  @apply inline-flex flex-col gap-1 min-w-max;
+}
 
-  code {
-    @apply rounded-lg text-white! px-1 py-0.5;
-    font-family: var(--font-jetbrains-mono), monospace;
-    counter-reset: line;
+.contribution-months {
+  @apply grid gap-[3px] text-xs text-gray-500 dark:text-gray-400 mb-1;
+  grid-template-columns: repeat(53, 10.5px);
+}
 
-    &::before {
-      content: "";
-    }
+.contribution-month-label {
+  @apply text-[10px] leading-none overflow-hidden whitespace-nowrap;
+  width: 20px;
+}
 
-    &::after {
-      content: "";
-    }
+.contribution-grid {
+  @apply flex gap-[3px];
+}
 
-    /* &[data-line-numbers] {
-    counter-reset: line;
-    @apply text-white! px-1 py-0.5;
-    } */
+.contribution-week {
+  @apply flex flex-col gap-[3px];
+}
 
-    > [data-line]::before {
-      counter-increment: line;
-      content: counter(line);
-      display: inline-block;
-      width: 1rem;
-      margin-right: 1rem;
-      text-align: right;
-      color: gray;
-    }
+.contribution-square {
+  @apply w-[10.5px] h-[10.5px] rounded-xs transition-colors relative;
+}
 
-    /* &[data-line-numbers] > [data-line]::before {
-    counter-increment: line;
-    content: counter(line);
-    display: inline-block;
-    width: 1rem;
-    margin-right: 1rem;
-    text-align: right;
-    color: gray;
-    } */
-  }
+/* Custom tooltip */
+.contribution-square[data-tooltip] {
+  cursor: pointer;
+}
 
-  [data-highlighted-line] {
-    @apply bg-[#ffffff1a]! pl-0 pr-1 p-0.5 rounded-xs border-l-2 border-l-[#7B00D3] border-solid;
-  }
+.contribution-square[data-tooltip]::before {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 6px 10px;
+  background-color: #1f2937;
+  color: white;
+  font-size: 12px;
+  white-space: nowrap;
+  border-radius: 6px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.15s, visibility 0.15s;
+  z-index: 50;
+  pointer-events: none;
+}
 
-  [data-highlighted-chars] {
-    @apply bg-[#ffffff1a]! p-0.5 rounded-xs;
-  }
+.contribution-square[data-tooltip]::after {
+  content: "";
+  position: absolute;
+  bottom: calc(100% + 2px);
+  left: 50%;
+  transform: translateX(-50%);
+  border: 4px solid transparent;
+  border-top-color: #1f2937;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.15s, visibility 0.15s;
+  pointer-events: none;
+}
 
-  [data-rehype-pretty-code-title] {
-    @apply px-4 py-3 font-mono text-xs font-medium border border-neutral-800 rounded-t-lg text-neutral-200 bg-[#1c1c1c];
+.contribution-square[data-tooltip]:hover::before,
+.contribution-square[data-tooltip]:hover::after {
+  opacity: 1;
+  visibility: visible;
+}
 
-    & + pre {
-      @apply my-0 rounded-t-none border-t-0;
-    }
-  }
+/* Light mode contribution levels - GitHub (green) */
+.github .contribution-level-0,
+.gitlab .contribution-level-0 {
+  @apply bg-gray-200 dark:bg-zinc-800;
+}
 
-  [data-rehype-pretty-code-caption] {
-    @apply text-xs text-center text-[#747474];
-  }
+.github .contribution-level-1 {
+  background-color: #9be9a8;
+}
+
+.github .contribution-level-2 {
+  background-color: #40c463;
+}
+
+.github .contribution-level-3 {
+  background-color: #30a14e;
+}
+
+.github .contribution-level-4 {
+  background-color: #216e39;
+}
+
+/* Light mode contribution levels - GitLab (orange) */
+.gitlab .contribution-level-1 {
+  background-color: #fcd5b5;
+}
+
+.gitlab .contribution-level-2 {
+  background-color: #fc9a66;
+}
+
+.gitlab .contribution-level-3 {
+  background-color: #e24329;
+}
+
+.gitlab .contribution-level-4 {
+  background-color: #b03a14;
+}
+
+/* ========================================
+   SOURCE TOGGLE SWITCH
+   ======================================== */
+
+.toggle-btn {
+  @apply p-1.5 rounded-md transition-all;
+}
+
+.toggle-btn.active {
+  @apply bg-white dark:bg-zinc-600;
 }

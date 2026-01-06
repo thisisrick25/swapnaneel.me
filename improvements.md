@@ -8,7 +8,7 @@ This document outlines potential improvements for the Next.js portfolio/blog pro
 - **Caching and ISR**: Use `revalidateTag` for on-demand revalidation via webhooks to keep content fresh without full rebuilds.
 - **Bundle Analysis**: Add `@next/bundle-analyzer` to identify large dependencies. Optimize MDX processing and Shiki syntax highlighting.
 - **Lazy Loading**: Implement lazy loading for components like `TableOfContents` or `ViewCounter` on post pages.
-- **Switch to Raw GitHub URLs for Faster Fetches**:
+- ~~**Switch to Raw GitHub URLs for Faster Fetches**~~:
 
   ```typescript
   // lib/github.ts
@@ -54,7 +54,7 @@ This document outlines potential improvements for the Next.js portfolio/blog pro
   }
   ```
 
-- **Optimize Metadata Fetching**:
+- ~~**Optimize Metadata Fetching**~~:
 
   ```typescript
   // utils/getBlogs.ts (partial update)
@@ -78,19 +78,11 @@ This document outlines potential improvements for the Next.js portfolio/blog pro
   });
   ```
 
-- **Enhance Caching with unstable_cache**:
+- ~~**Enhance Caching with Cache Components**~~:
 
-  ```typescript
-  import { unstable_cache } from "next/cache";
-
-  export const getBlogs = unstable_cache(
-    async () => {
-      /* your logic */
-    },
-    ["blogs"],
-    { revalidate: 1800 }
-  );
-  ```
+  - Implemented `use cache` directive with `cacheComponents` enabled in `next.config.ts`.
+  - Replaced `unstable_cache` with native `'use cache'` and `cacheLife`.
+  - Configured `getBlogs`, `getContributions`, and `getContributionCalendar` to use optimized caching.
 
 - **Add Loading States**:
   ```tsx
@@ -130,15 +122,15 @@ This document outlines potential improvements for the Next.js portfolio/blog pro
 - **Newsletter Signup**: Add a form via ConvertKit or Mailchimp to capture emails.
 - **Related Posts**: Suggest related posts based on tags on individual post pages.
 - **Drafts and Scheduling**: Support draft previews and scheduled posts.
-- **Fix Routing Bug**: In `app/tags/[slug]/page.tsx`, change `href={`/blog/${blog.slug}`}` to `/posts/${blog.slug}`.
+- ~~**Fix Routing Bug**: In `app/tags/[slug]/page.tsx`, change `href={`/blog/${blog.slug}`}` to `/posts/${blog.slug}`.~~
 
 ## 4. User Experience and Design
 
 - **Loading States and Error Handling**: Add skeleton loaders for blog lists and error boundaries for failed API calls.
 - **Accessibility**: Ensure alt text for images, ARIA labels for interactive elements, and test with Lighthouse or axe-core.
 - **Mobile Responsiveness**: Refine header navigation and layout for smaller screens.
-- **Animations and Transitions**: Use Framer Motion for subtle animations like fade-ins.
-- **Dark Mode Enhancements**: Ensure components like code blocks respect the theme.
+- ~~**Animations and Transitions**: Use Framer Motion for subtle animations like fade-ins.~~ (Implemented View Transitions)
+- ~~**Dark Mode Enhancements**: Ensure components like code blocks respect the theme.~~ (Implemented Tailwind dark mode)
 
 ## 5. Code Quality and Maintainability
 
@@ -158,3 +150,7 @@ This document outlines potential improvements for the Next.js portfolio/blog pro
 
 - **CI/CD**: Set up GitHub Actions for automated testing and deployment to Vercel.
 - **Analytics Deep Dive**: Add Google Analytics 4 events for interactions like post views and theme switches.
+
+## 8. Automation
+
+- **Automated Publication Fetching**: Create a CLI helper script to fetch paper details from DOI/ArXiv APIs (e.g., CrossRef) and generate the JSON for `PublicationSection`, saving manual entry time while preserving control.

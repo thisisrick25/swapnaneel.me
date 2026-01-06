@@ -1,14 +1,56 @@
-import { poppins, inter } from '@/fonts'
+import { Suspense } from 'react'
+import HeroSection from '@/components/heroSection'
+import EducationSection from '@/components/educationSection'
+// import PublicationSection from '@/components/publicationSection'
+import ContributionSection from '@/components/contributionSection'
+import WritingSection from '@/components/writingSection'
+import SkillsSection from '@/components/skillSection'
+import NewsSection from '@/components/newsSection'
+import ProjectShowcaseSection from '@/components/projectShowcaseSection'
+import ContributionGraphSection from '@/components/contributionGraphSection'
+import { SectionSkeleton, ContributionSkeleton } from '@/components/skeletons'
 
 export default function Home() {
   return (
-    <div>
-      <h1 className={`text-lg font-bold mb-4 ${poppins.className}`}>
-        Swapnaneel
-      </h1>
-      <div className={`${inter.className}`}>
-        engineer, idealist and always learning
-      </div>
+    <div className="py-16 sm:py-24">
+      {/* Header / Profile Section */}
+      <HeroSection />
+
+      {/* News */}
+      <Suspense fallback={<SectionSkeleton />}>
+        <NewsSection />
+      </Suspense>
+
+      {/* Education */}
+      <EducationSection />
+
+      {/* Publications */}
+      <Suspense fallback={<SectionSkeleton />}>
+        {/* <PublicationSection /> */}
+      </Suspense>
+
+      {/* Projects */}
+      <Suspense fallback={<SectionSkeleton />}>
+        <ProjectShowcaseSection />
+      </Suspense>
+
+      {/* Writing Section */}
+      <Suspense fallback={<SectionSkeleton />}>
+        <WritingSection />
+      </Suspense>
+
+      {/* Open Source Section */}
+      <Suspense fallback={<SectionSkeleton />}>
+        <ContributionSection />
+      </Suspense>
+
+      {/* GitHub Activity Calendar */}
+      <Suspense fallback={<ContributionSkeleton />}>
+        <ContributionGraphSection />
+      </Suspense>
+
+      {/* Skills */}
+      <SkillsSection />
     </div>
   )
 }

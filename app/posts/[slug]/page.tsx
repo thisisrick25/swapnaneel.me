@@ -1,15 +1,17 @@
 import { notFound } from 'next/navigation';
 import TableOfContents from '@/components/tableOfContents';
 import Tag from '@/components/tag';
-import PostItem from '@/components/postItem';
+import ViewCounter from '@/components/viewCounter';
+import DateDisplay from '@/components/dateDisplay';
+import BackLink from '@/components/backLink';
 import { extractHeadings } from '@/utils/extractHeadings';
 import { getBlogs, getBlogBySlug, Blog } from '@/utils/getBlogs';
+import { getReadingTime } from '@/utils/getReadingTime';
 import { Metadata } from 'next'
-import { poppins, inter, jetbrains_mono } from '@/fonts'
+import { poppins, inter, ibm_plex_mono } from '@/fonts'
 import { cache } from 'react';
 import { getViewsCountBySlug } from '@/db/queries';
-
-export const dynamic = 'force-static';
+import { LuClock } from 'react-icons/lu';
 
 interface PageProps {
   params: Promise<{ slug: string }>
@@ -44,26 +46,76 @@ export default async function Page({ params }: PageProps) {
   const blog = await getBlogData(slug)
   if (!blog) notFound()
 
-  const headings = extractHeadings(blog.rawContent) // Extract headings from the raw mdx content
+  const headings = extractHeadings(blog.rawContent)
   const viewCount = await getViewsCountBySlug(slug)
+  const readingTime = getReadingTime(blog.rawContent)
 
   return (
-    <div>
-      <PostItem
-        title={blog.data.title}
-        date={blog.data.publishedAt}
-        updatedAt={blog.data.updatedAt}
-        viewCount={viewCount}
-        slug={slug}
-        showLink={false}
-      />
-      <div className="px-3">
-        <Tag tags={blog.data.tags} />
+    <article className="py-16 sm:py-24 px-4">
+      {/* Back links */}
+      <div className="flex flex-col gap-1 mb-8">
+        <BackLink href="/posts" text="Back to posts" className="" />
+        <BackLink href="/" text="Back to home" className="" />
       </div>
-      <TableOfContents headings={headings} />
-      <div className={`${poppins.variable} ${inter.variable} ${jetbrains_mono.variable} max-w-max prose dark:prose-invert`}>
+
+      {/* Post header - matching PostCard layout */}
+      <header className="mb-8">
+        {/* Top metadata: date left, views right (like PostCard) */}
+        <div className="flex justify-between items-center text-sm text-gray-500 dark:text-gray-400 mb-3">
+          <DateDisplay date={blog.data.publishedAt} />
+          <ViewCounter slug={slug} trackView={true} count={viewCount} />
+        </div>
+
+        {/* Title - with view transition name */}
+        <h1
+          className={`text-2xl sm:text-3xl font-bold tracking-tight mb-3 ${poppins.className}`}
+          style={{ viewTransitionName: `post-title-${slug}` }}
+        >
+          {blog.data.title}
+        </h1>
+
+        {/* Description */}
+        {blog.data.description && (
+          <p className="text-base text-gray-600 dark:text-gray-300 mb-4">
+            {blog.data.description}
+          </p>
+        )}
+
+        {/* Updated date */}
+        {blog.data.updatedAt && blog.data.updatedAt !== blog.data.publishedAt && (
+          <p className="text-xs text-gray-400 mb-4">
+            Updated <DateDisplay date={blog.data.updatedAt} />
+          </p>
+        )}
+
+        {/* Tags */}
+        {blog.data.tags && blog.data.tags.length > 0 && (
+          <div className="mb-4">
+            <Tag tags={blog.data.tags} />
+          </div>
+        )}
+
+        {/* Reading time */}
+        <div className="flex items-center gap-1 text-sm text-gray-500 dark:text-gray-400">
+          <LuClock className="w-3.5 h-3.5" />
+          {readingTime} min read
+        </div>
+      </header>
+
+      {/* Table of contents */}
+      {headings.length > 0 && (
+        <TableOfContents headings={headings} />
+      )}
+
+      {/* Post content */}
+      <div className={`${poppins.variable} ${inter.variable} ${ibm_plex_mono.variable} prose dark:prose-invert prose-lg max-w-none`}>
         {blog.content}
       </div>
-    </div>
+
+      {/* Footer */}
+      <footer className="mt-16 pt-8 border-t border-gray-200 dark:border-zinc-800">
+        <BackLink href="/posts" text="Back to all posts" className="" />
+      </footer>
+    </article>
   )
 }
