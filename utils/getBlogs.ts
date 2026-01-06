@@ -100,7 +100,6 @@ async function compileMdxContent(rawContent: string): Promise<{ content: ReactEl
 }
 
 // Function Expression to read and parse all blog files from GitHub
-// Function Expression to read and parse all blog files from GitHub
 export async function getAllBlogsFromGitHub(): Promise<Blog[]> {
   'use cache'
   cacheLife('hours')
@@ -151,7 +150,8 @@ export async function getAllBlogsFromGitHub(): Promise<Blog[]> {
   // Resolve all promises and filter out skipped (null) entries
   const resolved = await Promise.all(blogPromises);
   return resolved.filter((b): b is Blog => b !== null);
-}// Get all blogs metadata (for lists), showing drafts only in development
+}
+
 // Get all blogs metadata (for lists), showing drafts only in development
 export async function getBlogs(): Promise<BlogMetadata[]> {
   'use cache'

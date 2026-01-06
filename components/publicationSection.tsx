@@ -1,7 +1,7 @@
 import { poppins } from "@/fonts"
 import { Link } from 'next-view-transitions'
 import { LuExternalLink, LuFileText, LuGitPullRequest } from "react-icons/lu"
-import { getPublications, Publication, PublicationType } from "@/utils/getPublications"
+import { getPublications, PublicationType } from "@/utils/getPublications"
 import ViewAllLink from '@/components/viewAllLink'
 
 export default async function PublicationSection() {

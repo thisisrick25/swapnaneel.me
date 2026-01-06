@@ -1,10 +1,8 @@
 "use client"
 
-import { Link } from 'next-view-transitions'
 import ShinyCard from '@/components/shinyCard'
 import Tag from '@/components/tag'
 import { LuExternalLink } from 'react-icons/lu'
-import { ibm_plex_mono } from '@/fonts'
 import { Project } from '@/utils/getProjects'
 
 export default function ProjectCard({ title, description, link, techStack }: Project) {

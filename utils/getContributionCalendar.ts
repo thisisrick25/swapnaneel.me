@@ -1,5 +1,5 @@
 import { cacheLife } from 'next/cache';
-import { GIT_USERNAME, REVALIDATE_SECONDS } from '@/lib/constants';
+import { GIT_USERNAME } from '@/lib/constants';
 
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 const GITLAB_TOKEN = process.env.GITLAB_TOKEN;
@@ -177,7 +177,6 @@ async function fetchGitLabCalendar(): Promise<CalendarData | null> {
   }
 }
 
-// Fetch both calendars in parallel (cached)
 // Fetch both calendars in parallel (cached)
 export async function getBothCalendars(): Promise<{ github: CalendarData | null; gitlab: CalendarData | null }> {
   'use cache'

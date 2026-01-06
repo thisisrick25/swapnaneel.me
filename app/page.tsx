@@ -1,7 +1,7 @@
 import { Suspense } from 'react'
 import HeroSection from '@/components/heroSection'
 import EducationSection from '@/components/educationSection'
-import PublicationSection from '@/components/publicationSection'
+// import PublicationSection from '@/components/publicationSection'
 import ContributionSection from '@/components/contributionSection'
 import WritingSection from '@/components/writingSection'
 import SkillsSection from '@/components/skillSection'

@@ -1,6 +1,4 @@
-import { Link } from 'next-view-transitions'
-import { LuArrowLeft } from 'react-icons/lu'
-import { poppins, ibm_plex_mono } from '@/fonts'
+import { poppins } from '@/fonts'
 import { getProjects } from '@/utils/getProjects'
 import ProjectCard from '@/components/projectCard'
 import BackLink from '@/components/backLink'
