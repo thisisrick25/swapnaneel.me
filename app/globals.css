@@ -273,7 +273,7 @@ input[type="email"] {
 }
 
 .anchor {
-  @apply absolute -ml-5 pr-2 opacity-0 cursor-pointer text-gray-400 dark:text-gray-500 transition-opacity;
+  @apply absolute -ml-8 pr-2 opacity-0 cursor-pointer text-gray-400 dark:text-gray-500 transition-opacity;
 }
 
 .anchor::before {
