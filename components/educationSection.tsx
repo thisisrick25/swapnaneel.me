@@ -4,7 +4,7 @@ export default function EducationSection() {
   const education = [
     {
       school: "Indian Institute of Technology Patna (IIT Patna)",
-      degree: "M.Tech in Artificial Intelligence",
+      degree: "M.Tech in Artificial Intelligence and Data Science Engineering",
       date: "Aug 2025 - Present",
       description: "Focusing on Advanced Machine Learning, Deep Learning, and AI Ethics.",
     },
