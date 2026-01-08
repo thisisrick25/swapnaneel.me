@@ -1,20 +1,7 @@
 import { poppins } from "@/fonts"
+import education from "@/data/education.json"
 
 export default function EducationSection() {
-  const education = [
-    {
-      school: "Indian Institute of Technology Patna (IIT Patna)",
-      degree: "M.Tech in Artificial Intelligence and Data Science Engineering",
-      date: "Aug 2025 - Present",
-      description: "Focusing on Advanced Machine Learning, Deep Learning, and AI Ethics.",
-    },
-    {
-      school: "Kalinga Institute of Industrial Technology (KIIT)",
-      degree: "B.Tech in Computer Science & Engineering",
-      date: "2019 - Sep 2023",
-      description: "Relevant coursework: Data Structures, Algorithms, Operating Systems, Database Management Systems.",
-    }
-  ]
 
   return (
     <section className="mb-12">
