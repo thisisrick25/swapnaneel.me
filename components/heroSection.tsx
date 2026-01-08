@@ -24,19 +24,13 @@ export default function HeroSection() {
             Swapnaneel Patra
           </h1>
           <p className="text-base text-gray-600 dark:text-gray-300">
-            Software Engineer
+            M.Tech at IIT Patna · AI & Data Science
           </p>
         </div>
       </div>
 
       <p className="text-base text-gray-600 dark:text-gray-300 max-w-2xl mb-6">
-        Building software and exploring machine learning.
-        Interested in distributed systems, developer tools, and open source.
-        Currently learning and contributing to the community.
-      </p>
-
-      <p className="text-sm text-gray-500 dark:text-gray-400 mb-6">
-        <span className="font-semibold text-gray-700 dark:text-gray-200">Interests:</span> Distributed Systems, Open Source, Machine Learning
+        AI/ML grad student at IIT Patna. Open source contributor.
       </p>
 
       {/* Social Links */}
