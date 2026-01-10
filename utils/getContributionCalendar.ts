@@ -78,7 +78,7 @@ async function fetchGitHubCalendar(): Promise<CalendarData | null> {
         query: GITHUB_QUERY,
         variables: { username: GIT_USERNAME },
       }),
-      cache: 'force-cache',
+      cache: process.env.NODE_ENV === 'development' ? 'no-store' : 'force-cache',
     });
 
     const json = await res.json();
@@ -115,7 +115,7 @@ async function fetchGitLabCalendar(): Promise<CalendarData | null> {
 
     const res = await fetch(`https://gitlab.com/users/${GIT_USERNAME}/calendar.json`, {
       headers,
-      cache: 'force-cache',
+      cache: process.env.NODE_ENV === 'development' ? 'no-store' : 'force-cache',
     });
 
     if (!res.ok) {
