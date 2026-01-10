@@ -6,7 +6,7 @@ import ContributionSection from '@/components/contributionSection'
 import WritingSection from '@/components/writingSection'
 import SkillsSection from '@/components/skillSection'
 import NewsSection from '@/components/newsSection'
-import ProjectShowcaseSection from '@/components/projectShowcaseSection'
+import ProjectSection from '@/components/projectSection'
 import ContributionGraphSection from '@/components/contributionGraphSection'
 import { SectionSkeleton, ContributionSkeleton } from '@/components/skeletons'
 import FadeIn from '@/components/fadeIn'
@@ -39,7 +39,7 @@ export default function Home() {
       {/* Projects */}
       <FadeIn>
         <Suspense fallback={<SectionSkeleton />}>
-          <ProjectShowcaseSection />
+          <ProjectSection />
         </Suspense>
       </FadeIn>
 
