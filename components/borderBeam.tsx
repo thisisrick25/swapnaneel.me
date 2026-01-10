@@ -34,13 +34,13 @@ export default function BorderBeam({
     return <div className={className}>{children}</div>
   }
 
-  const gradient = 'conic-gradient(from var(--border-beam-angle), transparent 0%, transparent 30%, #3b82f6 50%, #8b5cf6 65%, #ec4899 80%, #ffffff 95%)'
+  const gradient = 'conic-gradient(from var(--border-beam-angle), transparent 5%, transparent 20%, transparent 50%, #3b82f6 60%, #8b5cf6 75%, #ec4899 90%, #ffffff 100%)'
 
   return (
     <div className={`relative rounded-full ${className}`}>
       {/* Rotating glow that follows the beam head */}
       <motion.span
-        className="absolute -inset-3 rounded-full opacity-75 blur-lg"
+        className="absolute -inset-3 rounded-full opacity-100 blur-lg"
         initial={{ "--border-beam-angle": "0deg" } as any}
         animate={{ "--border-beam-angle": "360deg" } as any}
         transition={{
