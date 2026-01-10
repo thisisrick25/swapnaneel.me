@@ -4,6 +4,7 @@ import { getViewsCount } from '@/db/queries'
 import { poppins } from '@/fonts'
 import PostCard from '@/components/postCard'
 import BackLink from '@/components/backLink'
+import { StaggerContainer, StaggerItem } from '@/components/stagger'
 
 export function generateMetadata(): Metadata {
   return {
@@ -28,26 +29,27 @@ export default async function Page() {
       </section>
 
       {/* Posts Grid */}
-      <div className="grid gap-3 sm:grid-cols-2">
+      <StaggerContainer className="grid gap-3 sm:grid-cols-2">
         {blogs.length > 0 ? (
           blogs.map((blog) => {
             const viewCount = allViews.find((v) => v.slug === blog.slug)?.count || 0
             return (
-              <PostCard
-                key={blog.slug}
-                slug={blog.slug}
-                title={blog.data.title}
-                description={blog.data.description}
-                publishedAt={blog.data.publishedAt}
-                viewCount={viewCount}
-                tags={blog.data.tags}
-              />
+              <StaggerItem key={blog.slug}>
+                <PostCard
+                  slug={blog.slug}
+                  title={blog.data.title}
+                  description={blog.data.description}
+                  publishedAt={blog.data.publishedAt}
+                  viewCount={viewCount}
+                  tags={blog.data.tags}
+                />
+              </StaggerItem>
             )
           })
         ) : (
           <p className="text-sm">No posts yet.</p>
         )}
-      </div>
+      </StaggerContainer>
 
     </div>
   )

@@ -3,6 +3,7 @@ import { getMergedContributions } from '@/utils/getContributions'
 import { poppins } from '@/fonts'
 import ContributionCard from '@/components/contributionCard'
 import BackLink from '@/components/backLink'
+import { StaggerContainer, StaggerItem } from '@/components/stagger'
 
 export function generateMetadata(): Metadata {
   return {
@@ -26,25 +27,26 @@ export default async function Page() {
       </section>
 
       {/* Contributions Grid */}
-      <div className="grid gap-3 sm:grid-cols-2">
+      <StaggerContainer className="grid gap-3 sm:grid-cols-2">
         {contributions.length > 0 ? (
           contributions.map((contribution) => (
-            <ContributionCard
-              key={`${contribution.source}-${contribution.id}`}
-              id={contribution.id}
-              title={contribution.title}
-              repo={contribution.repo}
-              link={contribution.html_url}
-              mergedAt={contribution.merged_at}
-              relatedIssues={contribution.relatedIssues}
-              source={contribution.source}
-              showLink={true}
-            />
+            <StaggerItem key={`${contribution.source}-${contribution.id}`}>
+              <ContributionCard
+                id={contribution.id}
+                title={contribution.title}
+                repo={contribution.repo}
+                link={contribution.html_url}
+                mergedAt={contribution.merged_at}
+                relatedIssues={contribution.relatedIssues}
+                source={contribution.source}
+                showLink={true}
+              />
+            </StaggerItem>
           ))
         ) : (
           <p className="text-sm">No contributions yet.</p>
         )}
-      </div>
+      </StaggerContainer>
 
     </div>
   )

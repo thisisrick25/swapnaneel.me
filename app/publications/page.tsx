@@ -4,6 +4,7 @@ import { getPublications, PublicationType } from "@/utils/getPublications"
 import BackLink from '@/components/backLink'
 import Link from 'next/link'
 import { Metadata } from "next"
+import { StaggerContainer, StaggerItem } from '@/components/stagger'
 
 export const metadata: Metadata = {
   title: 'Publications',
@@ -40,10 +41,10 @@ export default async function PublicationsPage() {
         <h1 className={`${poppins.className} text-3xl font-bold`}>Publications</h1>
       </div>
 
-      <div className="space-y-6">
+      <StaggerContainer className="space-y-6">
         {publications.length > 0 ? (
           publications.map((pub, index) => (
-            <div key={index} className="flex flex-col gap-1 pb-6 border-b border-gray-100 dark:border-zinc-800 last:border-0">
+            <StaggerItem key={index} className="flex flex-col gap-1 pb-6 border-b border-gray-100 dark:border-zinc-800 last:border-0">
               <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
                 {pub.title}
               </h3>
@@ -82,12 +83,12 @@ export default async function PublicationsPage() {
                   </>
                 )}
               </div>
-            </div>
+            </StaggerItem>
           ))
         ) : (
           <p className="text-gray-500">No publications yet.</p>
         )}
-      </div>
+      </StaggerContainer>
     </div>
   )
 }
