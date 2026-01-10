@@ -128,7 +128,7 @@ body {
    ======================================== */
 
 .profile-image {
-  @apply w-18 h-18 sm:w-22 sm:h-22 object-cover rounded-xl;
+  @apply w-18 h-18 sm:w-22 sm:h-22 object-cover rounded-xl dark:bg-white;
 }
 
 /* ========================================
