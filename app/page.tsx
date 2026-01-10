@@ -9,20 +9,27 @@ import NewsSection from '@/components/newsSection'
 import ProjectShowcaseSection from '@/components/projectShowcaseSection'
 import ContributionGraphSection from '@/components/contributionGraphSection'
 import { SectionSkeleton, ContributionSkeleton } from '@/components/skeletons'
+import FadeIn from '@/components/fadeIn'
 
 export default function Home() {
   return (
     <div className="py-16 sm:py-24">
       {/* Header / Profile Section */}
-      <HeroSection />
+      <FadeIn delay={0}>
+        <HeroSection />
+      </FadeIn>
 
       {/* News */}
-      <Suspense fallback={<SectionSkeleton />}>
-        <NewsSection />
-      </Suspense>
+      <FadeIn delay={100}>
+        <Suspense fallback={<SectionSkeleton />}>
+          <NewsSection />
+        </Suspense>
+      </FadeIn>
 
       {/* Education */}
-      <EducationSection />
+      <FadeIn delay={200}>
+        <EducationSection />
+      </FadeIn>
 
       {/* Publications */}
       <Suspense fallback={<SectionSkeleton />}>
@@ -30,27 +37,37 @@ export default function Home() {
       </Suspense>
 
       {/* Projects */}
-      <Suspense fallback={<SectionSkeleton />}>
-        <ProjectShowcaseSection />
-      </Suspense>
+      <FadeIn>
+        <Suspense fallback={<SectionSkeleton />}>
+          <ProjectShowcaseSection />
+        </Suspense>
+      </FadeIn>
 
       {/* Writing Section */}
-      <Suspense fallback={<SectionSkeleton />}>
-        <WritingSection />
-      </Suspense>
+      <FadeIn>
+        <Suspense fallback={<SectionSkeleton />}>
+          <WritingSection />
+        </Suspense>
+      </FadeIn>
 
       {/* Open Source Section */}
-      <Suspense fallback={<SectionSkeleton />}>
-        <ContributionSection />
-      </Suspense>
+      <FadeIn>
+        <Suspense fallback={<SectionSkeleton />}>
+          <ContributionSection />
+        </Suspense>
+      </FadeIn>
 
       {/* GitHub Activity Calendar */}
-      <Suspense fallback={<ContributionSkeleton />}>
-        <ContributionGraphSection />
-      </Suspense>
+      <FadeIn>
+        <Suspense fallback={<ContributionSkeleton />}>
+          <ContributionGraphSection />
+        </Suspense>
+      </FadeIn>
 
       {/* Skills */}
-      <SkillsSection />
+      <FadeIn>
+        <SkillsSection />
+      </FadeIn>
     </div>
   )
 }
