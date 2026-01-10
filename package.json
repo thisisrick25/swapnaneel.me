@@ -60,6 +60,6 @@
     "babel-plugin-react-compiler": "^1.0.0",
     "concurrently": "^9.2.1",
     "dotenv-cli": "^11.0.0",
-    "prisma": "^6.19.0"
+    "prisma": "^7.2.0"
   }
 }
