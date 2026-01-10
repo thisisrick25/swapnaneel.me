@@ -34,11 +34,13 @@ export default function BorderBeam({
     return <div className={className}>{children}</div>
   }
 
+  const gradient = 'conic-gradient(from var(--border-beam-angle), transparent 0%, transparent 30%, #3b82f6 50%, #8b5cf6 65%, #ec4899 80%, #ffffff 95%)'
+
   return (
     <div className={`relative rounded-full ${className}`}>
       {/* Rotating glow that follows the beam head */}
       <motion.span
-        className="absolute -inset-3 rounded-full opacity-50 blur-lg"
+        className="absolute -inset-3 rounded-full opacity-75 blur-lg"
         initial={{ "--border-beam-angle": "0deg" } as any}
         animate={{ "--border-beam-angle": "360deg" } as any}
         transition={{
@@ -46,9 +48,7 @@ export default function BorderBeam({
           ease: "linear",
           repeat: Infinity,
         }}
-        style={{
-          background: 'conic-gradient(from var(--border-beam-angle), transparent 0%, transparent 5%, #3b82f6 25%, #8b5cf6 50%, #e879f9 75%, #f472b6 93%, transparent 100%)',
-        }}
+        style={{ background: gradient }}
       />
       {/* Animated gradient border with bright meteor head */}
       <motion.span
@@ -60,9 +60,7 @@ export default function BorderBeam({
           ease: "linear",
           repeat: Infinity,
         }}
-        style={{
-          background: 'conic-gradient(from var(--border-beam-angle), transparent 0%, transparent 5%, #3b82f6 20%, #60a5fa 35%, #a78bfa 50%, #c084fc 65%, #e879f9 78%, #f472b6 88%, #ec4899 96%, transparent 100%)',
-        }}
+        style={{ background: gradient }}
       />
       {/* Inner background */}
       <span className="absolute inset-0.5 rounded-full bg-gray-900 dark:bg-white" />
