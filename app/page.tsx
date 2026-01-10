@@ -15,19 +15,19 @@ export default function Home() {
   return (
     <div className="py-16 sm:py-24">
       {/* Header / Profile Section */}
-      <FadeIn delay={0}>
+      <FadeIn>
         <HeroSection />
       </FadeIn>
 
       {/* News */}
-      <FadeIn delay={100}>
+      <FadeIn delay={0.1}>
         <Suspense fallback={<SectionSkeleton />}>
           <NewsSection />
         </Suspense>
       </FadeIn>
 
       {/* Education */}
-      <FadeIn delay={200}>
+      <FadeIn delay={0.2}>
         <EducationSection />
       </FadeIn>
 
