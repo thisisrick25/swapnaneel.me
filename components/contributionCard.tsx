@@ -92,15 +92,23 @@ export default function ContributionCard({ title, repo, link, mergedAt, relatedI
         </h1>
       )}
 
-      {/* Merged status + Fixes on same line */}
+      {/* Merged status + PR number + Fixes on same line */}
       <div className="flex items-center gap-1.5 text-[10px]">
         <span className="inline-flex items-center gap-1 text-green-600 dark:text-green-400">
           <LuGitMerge className="w-2.5 h-2.5" />
-          Merged
+          Merged:
         </span>
+        <a
+          href={link}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-blue-600 dark:text-blue-400 hover:underline"
+        >
+          #{id}
+        </a>
+        <span className="text-gray-500 dark:text-gray-400">·</span>
         {relatedIssues && relatedIssues.length > 0 && (
           <>
-            <span className="text-gray-500 dark:text-gray-400">·</span>
             <span className="text-gray-500 dark:text-gray-400">
               Fixes: {relatedIssues.filter(Boolean).map((issueUrl, idx) => (
                 <span key={issueUrl}>
