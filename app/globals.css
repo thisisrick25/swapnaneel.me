@@ -21,15 +21,6 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Smooth theme transitions for all elements */
-*,
-*::before,
-*::after {
-  transition-property: background-color, border-color, color, fill, stroke;
-  transition-duration: 0.15s;
-  transition-timing-function: ease-out;
-}
-
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *,
