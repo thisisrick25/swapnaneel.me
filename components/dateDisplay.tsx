@@ -1,30 +1,23 @@
 'use client';
 
 import { useState } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
 import { formatDistanceToNowStrict, format } from 'date-fns';
 
 interface DateDisplayProps {
   date: string | Date;
-  /** Minimum width for the date display */
-  width?: string;
 }
 
-export default function DateDisplay({
-  date,
-  width = '100px',
-}: DateDisplayProps) {
+export default function DateDisplay({ date }: DateDisplayProps) {
   const [showFullDate, setShowFullDate] = useState(false);
 
   const targetDate = typeof date === 'string' ? new Date(date) : date;
 
-  // Handle invalid dates
   if (isNaN(targetDate.getTime())) {
     return <span className="text-gray-400 dark:text-gray-500">—</span>;
   }
 
-  // Use date-fns for accurate relative time
   const relativeDate = formatDistanceToNowStrict(targetDate, { addSuffix: true });
-
   const fullDate = format(targetDate, 'MMMM d, yyyy');
 
   return (
@@ -34,26 +27,32 @@ export default function DateDisplay({
       onMouseEnter={() => setShowFullDate(true)}
       onMouseLeave={() => setShowFullDate(false)}
       title={fullDate}
-      style={{ fontWeight: '300', minWidth: width, willChange: 'transform, opacity' }}
     >
-      <span
-        className={`absolute left-0 transition-all duration-300 ease-in-out motion-reduce:transition-none ${showFullDate
-          ? '-translate-y-full opacity-0 blur-[2px] scale-95'
-          : 'translate-y-0 opacity-100 blur-0 scale-100'
-          }`}
-      >
-        {relativeDate}
-      </span>
-      <span
-        className={`absolute left-0 transition-all duration-300 ease-in-out motion-reduce:transition-none ${showFullDate
-          ? 'translate-y-0 opacity-100 blur-0 scale-100'
-          : 'translate-y-full opacity-0 blur-[2px] scale-95'
-          }`}
-      >
-        {fullDate}
-      </span>
-      {/* Invisible placeholder to maintain width */}
-      <span className="invisible">{fullDate}</span>
+      <AnimatePresence mode="wait" initial={false}>
+        {showFullDate ? (
+          <motion.span
+            key="full"
+            initial={{ y: '100%', opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: '100%', opacity: 0 }}
+            transition={{ type: 'spring', stiffness: 900, damping: 50 }}
+            className="block"
+          >
+            {fullDate}
+          </motion.span>
+        ) : (
+          <motion.span
+            key="relative"
+            initial={{ y: '-100%', opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: '-100%', opacity: 0 }}
+            transition={{ type: 'spring', stiffness: 900, damping: 50 }}
+            className="block"
+          >
+            {relativeDate}
+          </motion.span>
+        )}
+      </AnimatePresence>
     </time>
   );
 }
