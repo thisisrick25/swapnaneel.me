@@ -3,6 +3,7 @@ import PostCard from "@/components/postCard"
 import { poppins } from "@/fonts"
 import { getBlogs } from "@/utils/getBlogs"
 import { getViewsCount } from "@/db/queries"
+import { StaggerContainer, StaggerItem } from "@/components/stagger"
 
 export default async function WritingSection() {
   const blogs = await getBlogs()
@@ -17,26 +18,27 @@ export default async function WritingSection() {
         <ViewAllLink href="/posts" />
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+      <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
         {posts.length > 0 ? (
           posts.map((post) => {
             const viewCount = allViews.find((v) => v.slug === post.slug)?.count || 0
             return (
-              <PostCard
-                key={post.slug}
-                slug={post.slug}
-                title={post.data.title}
-                description={post.data.description}
-                publishedAt={post.data.publishedAt}
-                viewCount={viewCount}
-                tags={post.data.tags}
-              />
+              <StaggerItem key={post.slug}>
+                <PostCard
+                  slug={post.slug}
+                  title={post.data.title}
+                  description={post.data.description}
+                  publishedAt={post.data.publishedAt}
+                  viewCount={viewCount}
+                  tags={post.data.tags}
+                />
+              </StaggerItem>
             )
           })
         ) : (
           <p className="text-sm">No posts yet.</p>
         )}
-      </div>
+      </StaggerContainer>
     </section>
   )
 }

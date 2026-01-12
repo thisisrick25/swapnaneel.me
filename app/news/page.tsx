@@ -2,6 +2,7 @@ import { poppins } from "@/fonts"
 import { getNews } from "@/utils/getNews"
 import BackLink from '@/components/backLink'
 import { Metadata } from "next"
+import { StaggerContainer, StaggerItem } from '@/components/stagger'
 
 export const metadata: Metadata = {
   title: 'News',
@@ -19,22 +20,22 @@ export default async function NewsPage() {
         <h1 className={`${poppins.className} text-3xl font-bold`}>News</h1>
       </div>
 
-      <div className="space-y-6">
+      <StaggerContainer className="space-y-6">
         {news.length > 0 ? (
           news.map((item, index) => (
-            <div key={index} className="flex flex-col sm:flex-row sm:items-start gap-2 sm:gap-6 pb-6 border-b border-gray-100 dark:border-zinc-800 last:border-0">
+            <StaggerItem key={index} className="flex flex-col sm:flex-row sm:items-start gap-2 sm:gap-6 pb-6 border-b border-gray-100 dark:border-zinc-800 last:border-0">
               <span className="font-mono text-gray-500 dark:text-gray-400 shrink-0 w-34 pt-0.5">
                 {item.date}
               </span>
               <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
                 {item.content}
               </p>
-            </div>
+            </StaggerItem>
           ))
         ) : (
           <p className="text-gray-500">No news updates yet.</p>
         )}
-      </div>
+      </StaggerContainer>
     </div>
   )
 }

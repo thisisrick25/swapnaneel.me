@@ -2,8 +2,9 @@ import { poppins } from '@/fonts'
 import { getProjects } from '@/utils/getProjects'
 import ProjectCard from '@/components/projectCard'
 import ViewAllLink from '@/components/viewAllLink'
+import { StaggerContainer, StaggerItem } from '@/components/stagger'
 
-export default async function ProjectShowcaseSection() {
+export default async function ProjectSection() {
   const projects = await getProjects()
   const featuredProjects = projects.filter(p => p.featured).slice(0, 6)
 
@@ -16,13 +17,13 @@ export default async function ProjectShowcaseSection() {
         <ViewAllLink href="/projects" />
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+      <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
         {featuredProjects.map((project, index) => (
-          <div key={index} className="h-full">
+          <StaggerItem key={index} className="h-full">
             <ProjectCard {...project} />
-          </div>
+          </StaggerItem>
         ))}
-      </div>
+      </StaggerContainer>
     </section>
   )
 }

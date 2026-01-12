@@ -4,6 +4,7 @@ import { Metadata } from 'next'
 import { getBlogs } from '@/utils/getBlogs';
 import { poppins, ibm_plex_mono } from '@/fonts';
 import BackLink from '@/components/backLink';
+import { StaggerContainer, StaggerItem } from '@/components/stagger';
 
 export function generateMetadata(): Metadata {
   return {
@@ -39,19 +40,20 @@ export default async function Page() {
       </section>
 
       {/* Tags Grid */}
-      <div className="flex flex-wrap gap-2">
+      <StaggerContainer className="flex flex-wrap gap-2">
         {sortedTags.map(([tag, count]) => (
-          <Link
-            key={tag}
-            href={`/tags/${tag}`}
-            className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-gray-200 dark:border-zinc-700 bg-gray-50 dark:bg-zinc-800 hover:border-gray-300 dark:hover:border-zinc-600 hover:shadow-sm transition-all ${ibm_plex_mono.className}`}
-            style={{ viewTransitionName: `tag-${tag}` }}
-          >
-            <span className="text-sm text-gray-700 dark:text-gray-300">#{tag}</span>
-            <span className="text-xs text-gray-400 dark:text-gray-500">({count})</span>
-          </Link>
+          <StaggerItem key={tag}>
+            <Link
+              href={`/tags/${tag}`}
+              className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-gray-200 dark:border-zinc-700 bg-gray-50 dark:bg-zinc-800 hover:border-gray-300 dark:hover:border-zinc-600 hover:shadow-sm transition-all ${ibm_plex_mono.className}`}
+              style={{ viewTransitionName: `tag-${tag}` }}
+            >
+              <span className="text-sm text-gray-700 dark:text-gray-300">#{tag}</span>
+              <span className="text-xs text-gray-400 dark:text-gray-500">({count})</span>
+            </Link>
+          </StaggerItem>
         ))}
-      </div>
+      </StaggerContainer>
 
     </div>
   )

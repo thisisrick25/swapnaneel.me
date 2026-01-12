@@ -21,15 +21,6 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Smooth theme transitions for all elements */
-*,
-*::before,
-*::after {
-  transition-property: background-color, border-color, color, fill, stroke;
-  transition-duration: 0.15s;
-  transition-timing-function: ease-out;
-}
-
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -128,7 +119,7 @@ body {
    ======================================== */
 
 .profile-image {
-  @apply w-18 h-18 sm:w-22 sm:h-22 object-cover rounded-xl;
+  @apply w-18 h-18 sm:w-22 sm:h-22 object-cover rounded-xl dark:bg-white;
 }
 
 /* ========================================
@@ -282,29 +273,6 @@ input[type="email"] {
 
 *:hover > .anchor {
   @apply opacity-100;
-}
-
-/* ========================================
-   BORDER BEAM ANIMATION
-   ======================================== */
-
-@keyframes border-beam-spin {
-  from {
-    --border-beam-angle: 0deg;
-  }
-  to {
-    --border-beam-angle: 360deg;
-  }
-}
-
-@property --border-beam-angle {
-  syntax: "<angle>";
-  initial-value: 0deg;
-  inherits: false;
-}
-
-.animate-border-beam {
-  animation: border-beam-spin 3s linear infinite;
 }
 
 /* ========================================

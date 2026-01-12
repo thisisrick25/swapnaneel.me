@@ -2,6 +2,7 @@ import { poppins } from '@/fonts'
 import { getProjects } from '@/utils/getProjects'
 import ProjectCard from '@/components/projectCard'
 import BackLink from '@/components/backLink'
+import { StaggerContainer, StaggerItem } from '@/components/stagger'
 
 export const metadata = {
   title: 'Projects | Swapnaneel Patra',
@@ -23,13 +24,13 @@ export default async function ProjectsPage() {
       </div>
 
       {/* Grid */}
-      <div className="grid gap-3 sm:grid-cols-2">
+      <StaggerContainer className="grid gap-3 sm:grid-cols-2">
         {projects.map((project, index) => (
-          <div key={index} className="h-full">
+          <StaggerItem key={index} className="h-full">
             <ProjectCard {...project} />
-          </div>
+          </StaggerItem>
         ))}
-      </div>
+      </StaggerContainer>
     </div>
   )
 }

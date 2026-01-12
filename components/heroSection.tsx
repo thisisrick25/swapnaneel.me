@@ -1,22 +1,15 @@
-import Image from "next/image"
 import Link from "next/link"
 import { siteMetadata } from "@/utils/siteMetadata"
 import { poppins } from "@/fonts"
 import { SiGithub, SiLinkedin } from "react-icons/si"
 import { LuFileText } from "react-icons/lu"
+import AnimatedAvatar from "@/components/animatedAvatar"
 
 export default function HeroSection() {
   return (
     <section className="mb-12" id="top">
       <div className="flex items-start gap-5 mb-8">
-        <Image
-          src="https://github.com/thisisrick25.png"
-          alt="Swapnaneel Patra"
-          width={88}
-          height={88}
-          className="profile-image"
-          priority
-        />
+        <AnimatedAvatar />
         <div>
           <h1 className={`text-3xl sm:text-4xl font-bold tracking-tight mb-1 ${poppins.className}`}>
             Swapnaneel Patra

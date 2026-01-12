@@ -18,6 +18,11 @@ export const metadata: Metadata = {
     default: siteMetadata.title,
   },
   description: siteMetadata.description,
+  alternates: {
+    types: {
+      'text/plain': '/llms.txt',
+    },
+  },
   openGraph: {
     title: siteMetadata.title,
     description: siteMetadata.description,
