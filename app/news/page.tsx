@@ -27,9 +27,10 @@ export default async function NewsPage() {
               <span className="font-mono text-gray-500 dark:text-gray-400 shrink-0 w-34 pt-0.5">
                 {item.date}
               </span>
-              <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-                {item.content}
-              </p>
+              <p
+                className="text-gray-700 dark:text-gray-300 leading-relaxed [&_a]:text-blue-600 dark:[&_a]:text-blue-400 [&_a]:hover:underline"
+                dangerouslySetInnerHTML={{ __html: item.content }}
+              />
             </StaggerItem>
           ))
         ) : (
