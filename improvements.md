@@ -8,109 +8,14 @@ This document outlines potential improvements for the Next.js portfolio/blog pro
 - **Caching and ISR**: Use `revalidateTag` for on-demand revalidation via webhooks to keep content fresh without full rebuilds.
 - **Bundle Analysis**: Add `@next/bundle-analyzer` to identify large dependencies. Optimize MDX processing and Shiki syntax highlighting.
 - **Lazy Loading**: Implement lazy loading for components like `TableOfContents` or `ViewCounter` on post pages.
-- ~~**Switch to Raw GitHub URLs for Faster Fetches**~~:
-
-  ```typescript
-  // lib/github.ts
-  import {
-    GITHUB_REPO_OWNER,
-    GITHUB_REPO_NAME,
-    GITHUB_CONTENT_PATH,
-    GITHUB_BRANCH,
-  } from "@/lib/constants";
-
-  const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
-
-  // Helper to fetch directory contents from GitHub API (keep as-is, since raw URLs don't support directory listing)
-  export async function getGitHubDirectoryContents() {
-    const branch = GITHUB_BRANCH || "main"; // Ensure a default branch
-    const res = await fetch(
-      `https://api.github.com/repos/${GITHUB_REPO_OWNER}/${GITHUB_REPO_NAME}/contents/${GITHUB_CONTENT_PATH}?ref=${branch}`,
-      {
-        headers: {
-          Accept: "application/vnd.github.v3+json",
-          ...(GITHUB_TOKEN && { Authorization: `Bearer ${GITHUB_TOKEN}` }),
-        },
-        cache: "force-cache",
-        next: { revalidate: 3600 },
-      }
-    );
-    if (!res.ok) throw new Error("Failed to fetch directory contents");
-    return res.json();
-  }
-
-  // Updated: Use raw.githubusercontent.com for faster, direct content fetching (no base64 decoding needed)
-  export async function getGitHubFileContent(filePath: string) {
-    const branch = GITHUB_BRANCH || "main"; // Ensure a default branch
-    const res = await fetch(
-      `https://raw.githubusercontent.com/${GITHUB_REPO_OWNER}/${GITHUB_REPO_NAME}/${branch}/${filePath}`,
-      {
-        cache: "force-cache",
-        next: { revalidate: 3600 },
-      }
-    );
-    if (!res.ok) throw new Error("Failed to fetch file content");
-    return res.text(); // Direct text, no decoding
-  }
-  ```
-
-- ~~**Optimize Metadata Fetching**~~:
-
-  ```typescript
-  // utils/getBlogs.ts (partial update)
-  const getAllBlogMetadata = cache(async (): Promise<BlogMetadata[]> => {
-    const contents = await getGitHubDirectoryContents();
-    const mdxFiles = contents.filter(
-      (item: any) => item.type === "file" && item.name.endsWith(".mdx")
-    );
-
-    // Fetch all metadata in parallel for speed
-    const metadataPromises = mdxFiles.map(async (file: any) => {
-      const rawContent = await getGitHubFileContent(file.path); // Now faster with raw URLs
-      const metadata = parseBlogMetadata(rawContent);
-      return {
-        data: metadata,
-        slug: slugify(metadata.title),
-      } as BlogMetadata;
-    });
-
-    return Promise.all(metadataPromises); // Parallel execution
-  });
-  ```
-
-- ~~**Enhance Caching with Cache Components**~~:
-
-  - Implemented `use cache` directive with `cacheComponents` enabled in `next.config.ts`.
-  - Replaced `unstable_cache` with native `'use cache'` and `cacheLife`.
-  - Configured `getBlogs`, `getContributions`, and `getContributionCalendar` to use optimized caching.
-
-- **Add Loading States**:
-  ```tsx
-  // app/posts/loading.tsx
-  export default function Loading() {
-    return <div>Loading posts...</div>; // Or a skeleton component
-  }
-  ```
+- ~~**Switch to Raw GitHub URLs for Faster Fetches**~~: (Implemented)
+- ~~**Optimize Metadata Fetching**~~: (Implemented)
+- ~~**Enhance Caching with Cache Components**~~: (Implemented)
+- **Add Loading States**: Add skeleton loaders in `app/posts/loading.tsx`.
 
 ## 2. SEO and Discoverability
 
 - **Sitemap and Robots.txt**: Generate a dynamic sitemap for posts and tags. Create `app/sitemap.ts` and `app/robots.txt` to help search engines index content.
-
-  ```typescript
-  // app/sitemap.ts
-  import { getBlogs } from "@/utils/getBlogs";
-  import { siteMetadata } from "@/utils/siteMetadata";
-
-  export default async function sitemap() {
-    const blogs = await getBlogs();
-    const posts = blogs.map((blog) => ({
-      url: `${siteMetadata.siteUrl}/posts/${blog.slug}`,
-      lastModified: new Date(blog.data.publishedAt),
-    }));
-    return [{ url: siteMetadata.siteUrl, lastModified: new Date() }, ...posts];
-  }
-  ```
-
 - **Structured Data**: Add JSON-LD for blog posts (e.g., Article schema) to improve rich snippets in search results.
 - **Open Graph and Twitter Cards**: Enhance per-post metadata with dynamic images and descriptions.
 - **RSS Feed**: Implement an RSS feed for posts to attract subscribers.
@@ -122,7 +27,7 @@ This document outlines potential improvements for the Next.js portfolio/blog pro
 - **Newsletter Signup**: Add a form via ConvertKit or Mailchimp to capture emails.
 - **Related Posts**: Suggest related posts based on tags on individual post pages.
 - **Drafts and Scheduling**: Support draft previews and scheduled posts.
-- ~~**Fix Routing Bug**: In `app/tags/[slug]/page.tsx`, change `href={`/blog/${blog.slug}`}` to `/posts/${blog.slug}`.~~
+- ~~**Fix Routing Bug**: In `app/tags/[slug]/page.tsx`, change `href={`/blog/${blog.slug}`}` to `/posts/${blog.slug}`.~~ (Implemented)
 
 ## 4. User Experience and Design
 
@@ -132,9 +37,16 @@ This document outlines potential improvements for the Next.js portfolio/blog pro
 - ~~**Animations and Transitions**: Use Framer Motion for subtle animations like fade-ins.~~ (Implemented View Transitions)
 - ~~**Dark Mode Enhancements**: Ensure components like code blocks respect the theme.~~ (Implemented Tailwind dark mode)
 
+### Premium UI/UX Enhancements (New Proposals)
+- **Developer-Focused Command Menu (Cmd + K)**: Implement a fast, keyboard-accessible command palette using `cmdk` to navigate pages, search posts, or toggle themes.
+- **Magnetic / 3D Tilt Hover Effects**: Use `framer-motion` to add a subtle 3D tilt or "magnetic" pull effect on project and post cards for a tactile, interactive feel.
+- **Reading Progress Indicator**: Add a sleek, fixed progress bar at the top of the screen that fills as the user scrolls down a blog post.
+- **Dynamic Text Animations in Hero Section**: Replace the static sub-headline with a sleek rotating text animation (e.g., flipping between "AI/ML Researcher", "Open Source Contributor", "Full Stack Developer").
+- **Enhanced Glassmorphic Floating Navigation**: Upgrade the floating nav with a moving gradient border and a sliding background pill animation for active states (similar to Vercel's tabs).
+
 ## 5. Code Quality and Maintainability
 
-- **TypeScript Strictness**: Enable `strict: true` in `tsconfig.json` to catch more errors.
+- **TypeScript Strictness**: Enable `strict: true` in `tsconfig.json` to catch more errors. (Already implemented in current config).
 - **Testing**: Add unit tests for utilities like `getBlogs` and components using Jest or Vitest.
 - **Linting and Formatting**: Add Prettier and Husky for consistent code style and pre-commit hooks.
 - **Environment Variables**: Secure and validate sensitive vars like `GITHUB_TOKEN`.
