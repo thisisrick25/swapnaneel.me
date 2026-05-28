@@ -1,3 +1,5 @@
+import GithubSlugger from 'github-slugger';
+
 type Heading = {
   text: string;
   level: number;
@@ -5,7 +7,7 @@ type Heading = {
 };
 
 export function extractHeadings(markdown: string): Heading[] {
-  // Match all headings (## or ### format)
+  const slugger = new GithubSlugger();
   const headingRegex = /^(#{2,3})\s+(.+)$/gm;
   const headings: Heading[] = [];
   
@@ -13,10 +15,7 @@ export function extractHeadings(markdown: string): Heading[] {
   while ((match = headingRegex.exec(markdown)) !== null) {
     const level = match[1].length;  // number of # symbols
     const text = match[2].trim();
-    const slug = text
-      .toLowerCase()
-      .replace(/[^a-z0-9]+/g, '-')
-      .replace(/(^-|-$)/g, '');
+    const slug = slugger.slug(text);
 
     headings.push({ text, level, slug });
   }
