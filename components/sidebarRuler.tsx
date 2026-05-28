@@ -64,10 +64,8 @@ export default function SidebarRuler({ headings }: { headings: Heading[] }) {
       setActiveId(targetHeading.slug); // Optimistic UI update
       const element = document.getElementById(targetHeading.slug);
       if (element) {
-        // Jump without smooth scrolling for a responsive "scrollbar" feel
-        const yOffset = -80; // approximate offset for sticky headers if any
-        const yPos = element.getBoundingClientRect().top + window.scrollY + yOffset;
-        window.scrollTo({ top: yPos, behavior: 'auto' });
+        // Use scrollIntoView to respect the CSS scroll-margin-top we added in globals.css
+        element.scrollIntoView({ behavior: 'auto', block: 'start' });
       }
     }
   }, [headings]);
