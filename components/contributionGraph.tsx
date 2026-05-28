@@ -54,7 +54,7 @@ function getMonthLabels(weeks: { days: { date: string }[] }[]): { month: string;
 }
 
 export default function ContributionGraph({ github, gitlab }: Props) {
-  const [source, setSource] = useState<Source>('github');
+  const [source, setSource] = useState<Source>(github ? 'github' : (gitlab ? 'gitlab' : 'github'));
   const { tooltip, onMouseEnter, onMouseLeave } = useCalendarTooltip();
 
   // Select the current data based on toggle - instant, no loading!
