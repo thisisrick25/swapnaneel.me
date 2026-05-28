@@ -142,8 +142,14 @@ export default function SidebarRuler({ headings }: { headings: Heading[] }) {
         ref={containerRef}
         className={`relative flex flex-col select-none touch-none ${isDragging ? 'cursor-grabbing' : 'cursor-grab'}`}
         onPointerDown={handlePointerDown}
-        title="Drag to scroll"
       >
+        {/* Vertical hint text on the right side */}
+        <div className="absolute left-full top-1/2 -translate-y-1/2 ml-4 flex items-center justify-center pointer-events-none opacity-50">
+          <span className="text-[10px] font-medium uppercase tracking-[0.2em] text-gray-400 dark:text-gray-600 [writing-mode:vertical-rl] rotate-180">
+            Drag to scroll
+          </span>
+        </div>
+
         {/* Add an invisible wider hit area for easier dragging */}
         <div className="absolute inset-y-0 right-0 w-12 bg-transparent z-10" />
 
