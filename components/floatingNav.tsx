@@ -16,13 +16,9 @@ export default function FloatingNav() {
     setMounted(true)
   }, [])
 
-  const normalize = (path: string) => path.replace(/\/+$/, "")
-  const currentPath = normalize(pathname)
-
   const isActive = (href: string) => {
-    const normalizedHref = normalize(href)
-    if (normalizedHref === "") return currentPath === ""
-    return currentPath === normalizedHref || currentPath.startsWith(normalizedHref + "/")
+    if (href === '/') return pathname === '/'
+    return pathname === href || pathname.startsWith(href + '/')
   }
 
   const toggleTheme = () => {
@@ -63,7 +59,7 @@ export default function FloatingNav() {
 
       <button
         onClick={mounted ? toggleTheme : undefined}
-        className="nav-item hover:text-gray-700 dark:hover:text-gray-300"
+        className="nav-item cursor-pointer hover:text-gray-700 dark:hover:text-gray-300"
         aria-label={mounted ? `Switch to ${resolvedTheme === "dark" ? "light" : "dark"} mode` : "Toggle theme"}
       >
         {mounted ? (
