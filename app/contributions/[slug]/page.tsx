@@ -6,6 +6,8 @@ import DateDisplay from '@/components/dateDisplay';
 import BackLink from '@/components/backLink';
 import { GIT_USERNAME } from '@/lib/constants';
 import { getContributionBySlug, ContributionBlog, getMergedContributions } from '@/utils/getContributions';
+import { extractHeadings } from '@/utils/extractHeadings';
+import SidebarRuler from '@/components/sidebarRuler';
 import { LuExternalLink, LuGitMerge } from 'react-icons/lu';
 import { SiGithub, SiGitlab } from 'react-icons/si';
 
@@ -45,6 +47,7 @@ export default async function Page({ params }: PageProps) {
   const contribution = await getContributionData(slug);
   if (!contribution) notFound();
 
+  const headings = extractHeadings(contribution.rawContent);
   const source = contribution.data.url?.includes('github.com') ? 'github' : 'gitlab';
   const repoUrl = source === 'github'
     ? `https://github.com/${contribution.data.repo}`
@@ -145,6 +148,11 @@ export default async function Page({ params }: PageProps) {
           <DateDisplay date={contribution.data.mergedAt || ''} />
         </div>
       </header>
+
+      {/* Sidebar Ruler */}
+      {headings.length > 0 && (
+        <SidebarRuler headings={headings} />
+      )}
 
       {/* Content */}
       <div className={`${poppins.variable} ${inter.variable} ${ibm_plex_mono.variable} prose dark:prose-invert prose-lg max-w-none`}>
