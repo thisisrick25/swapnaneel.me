@@ -215,8 +215,11 @@ input[type="email"] {
 
 .prose h1,
 .prose h2,
-.prose h3 {
-  @apply text-gray-900 dark:text-white font-semibold tracking-tight;
+.prose h3,
+.prose h4,
+.prose h5,
+.prose h6 {
+  @apply text-gray-900 dark:text-white font-semibold tracking-tight scroll-mt-20;
   font-family: var(--font-poppins), system-ui, sans-serif;
 }
 
