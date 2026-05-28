@@ -1,4 +1,4 @@
-import { poppins } from '@/fonts'
+import { space_grotesk } from '@/fonts'
 import { getProjects } from '@/utils/getProjects'
 import ProjectCard from '@/components/projectCard'
 import ViewAllLink from '@/components/viewAllLink'
@@ -13,7 +13,7 @@ export default async function ProjectSection() {
   return (
     <section className="mb-12">
       <div className="section-header mb-4 flex items-baseline justify-between">
-        <h2 className={poppins.className}>Projects</h2>
+        <h2 className={space_grotesk.className}>Projects</h2>
         <ViewAllLink href="/projects" />
       </div>
 

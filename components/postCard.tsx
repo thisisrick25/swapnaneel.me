@@ -4,7 +4,7 @@ import { Link } from 'next-view-transitions'
 import DateDisplay from '@/components/dateDisplay'
 import ShinyCard from '@/components/shinyCard'
 import Tag from '@/components/tag'
-import { ibm_plex_mono } from '@/fonts'
+import { fira_code } from '@/fonts'
 
 type Props = {
   slug: string
@@ -32,7 +32,7 @@ export default function PostCard({ slug, title, description, publishedAt, viewCo
       <div className="flex justify-between text-xs text-gray-500 dark:text-gray-400 mb-2 relative z-10">
         <DateDisplay date={publishedAt} />
         {viewCount > 0 && (
-          <span className={`flex items-center gap-1 ${ibm_plex_mono.className}`}>
+          <span className={`flex items-center gap-1 ${fira_code.className}`}>
             <span>{viewCount}</span>
             <span>views</span>
           </span>

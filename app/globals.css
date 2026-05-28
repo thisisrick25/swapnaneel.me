@@ -220,7 +220,7 @@ input[type="email"] {
 .prose h5,
 .prose h6 {
   @apply text-gray-900 dark:text-white font-semibold tracking-tight scroll-mt-20;
-  font-family: var(--font-poppins), system-ui, sans-serif;
+  font-family: var(--font-space-grotesk), system-ui, sans-serif;
 }
 
 .prose a {

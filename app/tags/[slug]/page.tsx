@@ -2,7 +2,7 @@ import { Metadata } from 'next'
 import PostCard from '@/components/postCard';
 import { getAllTags, getBlogsByTag } from '@/utils/getBlogs'
 import { getViewsCount } from '@/db/queries';
-import { poppins } from "@/fonts";
+import { space_grotesk } from "@/fonts";
 import BackLink from '@/components/backLink';
 import { StaggerContainer, StaggerItem } from '@/components/stagger';
 
@@ -42,7 +42,7 @@ export default async function Page({ params }: PageProps) {
       {/* Header */}
       <section className="mb-12">
         <h1
-          className={`text-3xl sm:text-4xl font-bold tracking-tight mb-2 ${poppins.className}`}
+          className={`text-3xl sm:text-4xl font-bold tracking-tight mb-2 ${space_grotesk.className}`}
           style={{ viewTransitionName: `tag-${tagSlug}` }}
         >
           #{tagSlug}

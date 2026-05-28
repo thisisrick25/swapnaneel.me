@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 import { getMergedContributions } from '@/utils/getContributions'
-import { poppins } from '@/fonts'
+import { space_grotesk } from '@/fonts'
 import ContributionCard from '@/components/contributionCard'
 import BackLink from '@/components/backLink'
 import { StaggerContainer, StaggerItem } from '@/components/stagger'
@@ -20,7 +20,7 @@ export default async function Page() {
       {/* Header */}
       <section className="mb-12">
         <BackLink />
-        <h1 className={`text-3xl sm:text-4xl font-bold tracking-tight mb-2 ${poppins.className}`}>Open Source</h1>
+        <h1 className={`text-3xl sm:text-4xl font-bold tracking-tight mb-2 ${space_grotesk.className}`}>Open Source</h1>
         <p className="text-base text-gray-600 dark:text-gray-300">
           Merged pull requests and contributions to open-source projects.
         </p>

@@ -1,19 +1,19 @@
-import { Inter, Poppins, JetBrains_Mono, IBM_Plex_Mono } from 'next/font/google'
+import { Space_Grotesk, DM_Sans, JetBrains_Mono, Fira_Code } from 'next/font/google'
 
 // Headline font
-const poppins = Poppins({
+const space_grotesk = Space_Grotesk({
   weight: ['300', '400', '500', '600', '700'],
   subsets: ['latin'],
   style: ['normal'],
-  variable: '--font-poppins',
+  variable: '--font-space-grotesk',
 })
 
 // Body font
-const inter = Inter({
+const dm_sans = DM_Sans({
   weight: ['300', '400', '500', '600', '700'],
   subsets: ['latin'],
   style: ['italic', 'normal'],
-  variable: '--font-inter',
+  variable: '--font-dm-sans',
 })
 
 // Code font (heavier)
@@ -25,16 +25,16 @@ const jetbrains_mono = JetBrains_Mono({
 })
 
 // Tag font (lighter mono)
-const ibm_plex_mono = IBM_Plex_Mono({
-  weight: ['300', '400', '500'],
+const fira_code = Fira_Code({
+  weight: ['300', '400', '500', '600', '700'],
   subsets: ['latin'],
   style: ['normal'],
-  variable: '--font-ibm-plex-mono',
+  variable: '--font-fira-code',
 })
 
 export {
-  poppins,
-  inter,
+  space_grotesk,
+  dm_sans,
   jetbrains_mono,
-  ibm_plex_mono,
+  fira_code,
 }

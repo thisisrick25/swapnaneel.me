@@ -1,4 +1,4 @@
-import { poppins } from "@/fonts"
+import { space_grotesk } from "@/fonts"
 import education from "@/data/education.json"
 
 export default function EducationSection() {
@@ -6,7 +6,7 @@ export default function EducationSection() {
   return (
     <section className="mb-12">
       <div className="section-header mb-6">
-        <h2 className={poppins.className}>Education</h2>
+        <h2 className={space_grotesk.className}>Education</h2>
       </div>
 
       <div className="space-y-8">

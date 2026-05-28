@@ -1,4 +1,4 @@
-import { poppins } from '@/fonts'
+import { space_grotesk } from '@/fonts'
 import { getProjects } from '@/utils/getProjects'
 import ProjectCard from '@/components/projectCard'
 import BackLink from '@/components/backLink'
@@ -17,7 +17,7 @@ export default async function ProjectsPage() {
       {/* Header */}
       <div className="mb-12">
         <BackLink />
-        <h1 className={`text-3xl font-bold mb-4 ${poppins.className}`}>Projects</h1>
+        <h1 className={`text-3xl font-bold mb-4 ${space_grotesk.className}`}>Projects</h1>
         <p className="text-gray-600 dark:text-gray-400">
           A collection of projects, tools, and experiments I&apos;ve built.
         </p>

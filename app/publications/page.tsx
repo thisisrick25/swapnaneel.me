@@ -1,4 +1,4 @@
-import { poppins } from "@/fonts"
+import { space_grotesk } from "@/fonts"
 import { LuExternalLink, LuFileText, LuGitPullRequest } from "react-icons/lu"
 import { getPublications, PublicationType } from "@/utils/getPublications"
 import BackLink from '@/components/backLink'
@@ -38,7 +38,7 @@ export default async function PublicationsPage() {
       <BackLink />
 
       <div className="section-header mb-8">
-        <h1 className={`${poppins.className} text-3xl font-bold`}>Publications</h1>
+        <h1 className={`${space_grotesk.className} text-3xl font-bold`}>Publications</h1>
       </div>
 
       <StaggerContainer className="space-y-6">
