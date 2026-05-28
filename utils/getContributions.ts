@@ -235,7 +235,7 @@ export async function getMergedContributions(): Promise<Contribution[]> {
     if (error instanceof Error && /GITHUB_TOKEN/.test(error.message)) {
       console.warn('Skipping GitHub contributions: GITHUB_TOKEN not provided');
     } else {
-      console.error('Failed to fetch GitLab contributions', error);
+      console.error('Failed to fetch GitHub contributions', error);
     }
   }
 
