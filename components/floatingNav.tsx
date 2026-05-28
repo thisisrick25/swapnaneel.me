@@ -52,15 +52,17 @@ export default function FloatingNav() {
 
       <div className="nav-divider" />
 
-      {mounted && (
-        <button
-          onClick={toggleTheme}
-          className="nav-item"
-          aria-label={`Switch to ${resolvedTheme === "dark" ? "light" : "dark"} mode`}
-        >
-          {resolvedTheme === "dark" ? <LuSun /> : <LuMoon />}
-        </button>
-      )}
+      <button
+        onClick={mounted ? toggleTheme : undefined}
+        className="nav-item"
+        aria-label={mounted ? `Switch to ${resolvedTheme === "dark" ? "light" : "dark"} mode` : "Toggle theme"}
+      >
+        {mounted ? (
+          resolvedTheme === "dark" ? <LuSun /> : <LuMoon />
+        ) : (
+          <div className="w-4 h-4" />
+        )}
+      </button>
     </nav>
   )
 }
