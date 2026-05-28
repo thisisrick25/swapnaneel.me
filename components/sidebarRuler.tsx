@@ -142,7 +142,7 @@ export default function SidebarRuler({ headings }: { headings: Heading[] }) {
               </div>
 
               <div
-                className={`transition-all duration-300 ease-in-out h-px rounded-full pointer-events-none
+                className={`transition-all duration-150 ease-out h-px rounded-full pointer-events-none
                   ${isActive
                     ? 'bg-blue-500 dark:bg-blue-400 opacity-100'
                     : 'bg-gray-400 dark:bg-gray-600 opacity-50 group-hover:opacity-100 group-hover:bg-gray-600 dark:group-hover:bg-gray-400'
