@@ -7,6 +7,7 @@ import BackLink from '@/components/backLink';
 import { extractHeadings } from '@/utils/extractHeadings';
 import { getBlogs, getBlogBySlug, Blog } from '@/utils/getBlogs';
 import { getReadingTime } from '@/utils/getReadingTime';
+import SidebarRuler from '@/components/sidebarRuler';
 import { Metadata } from 'next'
 import { poppins, inter, ibm_plex_mono } from '@/fonts'
 import { cache } from 'react';
@@ -104,7 +105,10 @@ export default async function Page({ params }: PageProps) {
 
       {/* Table of contents */}
       {headings.length > 0 && (
-        <TableOfContents headings={headings} />
+        <>
+          <TableOfContents headings={headings} />
+          <SidebarRuler headings={headings} />
+        </>
       )}
 
       {/* Post content */}
