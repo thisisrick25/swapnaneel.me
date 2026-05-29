@@ -30,7 +30,7 @@ export default async function Page() {
       <StaggerContainer className="grid gap-3 sm:grid-cols-2">
         {contributions.length > 0 ? (
           contributions.map((contribution) => (
-            <StaggerItem key={`${contribution.source}-${contribution.id}`}>
+            <StaggerItem key={`${contribution.source}-${contribution.id}`} className="h-full">
               <ContributionCard
                 id={contribution.id}
                 title={contribution.title}

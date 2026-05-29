@@ -57,7 +57,7 @@ export default async function Page({ params }: PageProps) {
         {blogs.map((blog) => {
           const viewCount = allViews.find((v) => v.slug === blog.slug)?.count || 0;
           return (
-            <StaggerItem key={blog.slug}>
+            <StaggerItem key={blog.slug} className="h-full">
               <PostCard
                 slug={blog.slug}
                 title={blog.data.title}

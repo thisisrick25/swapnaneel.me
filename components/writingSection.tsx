@@ -23,7 +23,7 @@ export default async function WritingSection() {
           posts.map((post) => {
             const viewCount = allViews.find((v) => v.slug === post.slug)?.count || 0
             return (
-              <StaggerItem key={post.slug}>
+              <StaggerItem key={post.slug} className="h-full">
                 <PostCard
                   slug={post.slug}
                   title={post.data.title}

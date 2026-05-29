@@ -1,15 +1,22 @@
 import Link from "next/link"
+import Image from "next/image"
 import { siteMetadata } from "@/utils/siteMetadata"
 import { space_grotesk } from "@/fonts"
 import { SiGithub, SiLinkedin } from "react-icons/si"
 import { LuFileText } from "react-icons/lu"
-import AnimatedAvatar from "@/components/animatedAvatar"
 
 export default function HeroSection() {
   return (
     <section className="mb-12" id="top">
       <div className="flex items-start gap-5 mb-8">
-        <AnimatedAvatar />
+        <Image
+          src="/avatar.svg"
+          alt="Avatar"
+          width={88}
+          height={88}
+          className="profile-image"
+          priority
+        />
         <div>
           <h1 className={`text-3xl sm:text-4xl font-bold tracking-tight mb-1 ${space_grotesk.className}`}>
             Swapnaneel Patra

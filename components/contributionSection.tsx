@@ -18,7 +18,7 @@ export default async function ContributionSection() {
       <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
         {contributions.length > 0 ? (
           contributions.map((contribution) => (
-            <StaggerItem key={`${contribution.source}-${contribution.id}`}>
+            <StaggerItem key={`${contribution.source}-${contribution.id}`} className="h-full">
               <ContributionCard
                 id={contribution.id}
                 title={contribution.title}

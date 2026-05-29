@@ -15,10 +15,14 @@ html {
 
 body {
   @apply bg-white dark:bg-zinc-900 text-gray-900 dark:text-gray-100;
-  font-feature-settings: "kern" 1, "liga" 1;
+  font-feature-settings:
+    "kern" 1,
+    "liga" 1;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
 }
 
 /* Reduced motion */
@@ -119,7 +123,7 @@ body {
    ======================================== */
 
 .profile-image {
-  @apply w-18 h-18 sm:w-22 sm:h-22 object-cover rounded-xl dark:bg-white;
+  @apply w-16 h-16 sm:w-20 sm:h-20 object-cover rounded-xl dark:bg-white;
 }
 
 /* ========================================
@@ -333,7 +337,9 @@ input[type="email"] {
   border-radius: 6px;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.15s, visibility 0.15s;
+  transition:
+    opacity 0.15s,
+    visibility 0.15s;
   z-index: 50;
   pointer-events: none;
 }
@@ -348,7 +354,9 @@ input[type="email"] {
   border-top-color: #1f2937;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.15s, visibility 0.15s;
+  transition:
+    opacity 0.15s,
+    visibility 0.15s;
   pointer-events: none;
 }
 
