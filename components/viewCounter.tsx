@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState, useRef } from 'react';
-import { ibm_plex_mono } from '@/fonts';
+import { fira_code } from '@/fonts';
 import { increment } from '@/db/actions';
 
 interface ViewCounterProps {
@@ -55,7 +55,7 @@ export default function ViewCounter({ slug, trackView = true, count = 0 }: ViewC
   }, [slug, trackView, count]);
 
   return (
-    <span className={ibm_plex_mono.className} style={{ fontWeight: '300' }}>
+    <span className={fira_code.className} style={{ fontWeight: '300' }}>
       {views} views
     </span>
   );

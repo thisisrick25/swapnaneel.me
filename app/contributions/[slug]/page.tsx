@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next'
 import { cache } from 'react';
-import { poppins, inter, ibm_plex_mono } from '@/fonts';
+import { space_grotesk, dm_sans, fira_code } from '@/fonts';
 import DateDisplay from '@/components/dateDisplay';
 import BackLink from '@/components/backLink';
 import { GIT_USERNAME } from '@/lib/constants';
@@ -82,7 +82,7 @@ export default async function Page({ params }: PageProps) {
               href={repoUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className={`px-1.5 py-1 text-xs font-medium border border-gray-200 dark:border-zinc-700 rounded-md bg-white dark:bg-zinc-800 transition-all hover:shadow-[0_0_4px_rgba(59,130,246,0.3)] dark:hover:shadow-[0_0_4px_rgba(147,197,253,0.3)] ${ibm_plex_mono.className}`}
+              className={`px-1.5 py-1 text-xs font-medium border border-gray-200 dark:border-zinc-700 rounded-md bg-white dark:bg-zinc-800 transition-all hover:shadow-[0_0_4px_rgba(59,130,246,0.3)] dark:hover:shadow-[0_0_4px_rgba(147,197,253,0.3)] ${fira_code.className}`}
             >
               {contribution.data.repo}
             </a>
@@ -109,7 +109,7 @@ export default async function Page({ params }: PageProps) {
 
         {/* Title - with view transition name */}
         <h1
-          className={`text-2xl sm:text-3xl font-bold tracking-tight mb-3 ${poppins.className}`}
+          className={`text-2xl sm:text-3xl font-bold tracking-tight mb-3 ${space_grotesk.className}`}
           style={{ viewTransitionName: `contribution-title-${slug}` }}
         >
           {contribution.data.title}
@@ -155,7 +155,7 @@ export default async function Page({ params }: PageProps) {
       )}
 
       {/* Content */}
-      <div className={`${poppins.variable} ${inter.variable} ${ibm_plex_mono.variable} prose dark:prose-invert prose-lg max-w-none`}>
+      <div className={`${space_grotesk.variable} ${dm_sans.variable} ${fira_code.variable} prose dark:prose-invert prose-lg max-w-none`}>
         {contribution.summaryContent}
         {contribution.content}
       </div>

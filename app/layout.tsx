@@ -9,7 +9,7 @@ import { ViewTransitions } from 'next-view-transitions'
 import { Analytics } from '@vercel/analytics/react'
 import { siteMetadata } from '@/utils/siteMetadata'
 import { SpeedInsights } from '@vercel/speed-insights/next'
-import { inter, poppins, ibm_plex_mono, jetbrains_mono } from '@/fonts'
+import { dm_sans, space_grotesk, fira_code, jetbrains_mono, inter_blog } from '@/fonts'
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteMetadata.siteUrl),
@@ -57,7 +57,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" suppressHydrationWarning className={`${inter.variable} ${poppins.variable} ${ibm_plex_mono.variable} ${jetbrains_mono.variable}`}>
+    <html lang="en" suppressHydrationWarning className={`${dm_sans.variable} ${space_grotesk.variable} ${fira_code.variable} ${jetbrains_mono.variable} ${inter_blog.variable}`}>
       {/* <!-- Google tag (gtag.js) --> */}
       <Script async src="https://www.googletagmanager.com/gtag/js?id=G-HVS1V1YG5Z"></Script>
       <Script id="google-analytics" strategy="afterInteractive">
@@ -67,7 +67,7 @@ export default function RootLayout({
 
         gtag('config', 'G-HVS1V1YG5Z');`}
       </Script>
-      <body className={`${inter.className} antialiased`}>
+      <body className={`${dm_sans.className} antialiased`}>
         <ViewTransitions>
           <ThemeProvider>
             <main className="min-h-screen w-full max-w-4xl mx-auto">

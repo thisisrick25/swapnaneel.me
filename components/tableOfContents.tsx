@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from 'react';
-import { poppins } from '@/fonts';
+import { space_grotesk } from '@/fonts';
 import { LuList, LuChevronDown } from 'react-icons/lu';
 
 type Heading = {
@@ -31,7 +31,7 @@ export default function TableOfContents({ headings }: { headings: Heading[] }) {
     <div className="mb-8 border border-gray-200 dark:border-zinc-700 rounded-xl overflow-hidden">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className={`${poppins.className} w-full flex items-center justify-between gap-2 p-4 bg-gray-50 dark:bg-zinc-800/50 text-left hover:bg-gray-100 dark:hover:bg-zinc-800 transition-colors`}
+        className={`${space_grotesk.className} w-full flex items-center justify-between gap-2 p-4 bg-gray-50 dark:bg-zinc-800/50 text-left hover:bg-gray-100 dark:hover:bg-zinc-800 transition-colors`}
       >
         <span className="flex items-center gap-2 text-sm font-medium text-gray-900 dark:text-gray-100">
           <LuList className="w-4 h-4 text-gray-500" />

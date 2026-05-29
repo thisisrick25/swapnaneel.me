@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { GIT_USERNAME } from '@/lib/constants';
-import { poppins } from '@/fonts';
+import { space_grotesk } from '@/fonts';
 import { LuExternalLink } from 'react-icons/lu';
 import { SiGithub, SiGitlab } from 'react-icons/si';
 import type { CalendarData } from '@/utils/getContributionCalendar';
@@ -70,7 +70,7 @@ export default function ContributionGraph({ github, gitlab }: Props) {
       {tooltip && <CalendarToolTip x={tooltip.x} y={tooltip.y} content={tooltip.content} />}
 
       <div className="section-header">
-        <h2 className={poppins.className}>Activity</h2>
+        <h2 className={space_grotesk.className}>Activity</h2>
         <div className="flex items-center gap-3">
           {/* Toggle Switch */}
           <div className="bg-gray-100 dark:bg-zinc-800 rounded-lg shadow-md dark:shadow-gray-500/5 inline-flex items-center gap-0.5 p-0.5">

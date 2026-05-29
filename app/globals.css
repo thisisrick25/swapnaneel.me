@@ -211,6 +211,7 @@ input[type="email"] {
 
 .prose {
   @apply text-gray-600 dark:text-gray-300;
+  font-family: var(--font-inter-blog), sans-serif;
 }
 
 .prose h1,
@@ -220,7 +221,7 @@ input[type="email"] {
 .prose h5,
 .prose h6 {
   @apply text-gray-900 dark:text-white font-semibold tracking-tight scroll-mt-20;
-  font-family: var(--font-poppins), system-ui, sans-serif;
+  font-family: var(--font-inter-blog), system-ui, sans-serif;
 }
 
 .prose a {

@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { siteMetadata } from "@/utils/siteMetadata"
-import { poppins } from "@/fonts"
+import { space_grotesk } from "@/fonts"
 import { SiGithub, SiLinkedin } from "react-icons/si"
 import { LuFileText } from "react-icons/lu"
 import AnimatedAvatar from "@/components/animatedAvatar"
@@ -11,7 +11,7 @@ export default function HeroSection() {
       <div className="flex items-start gap-5 mb-8">
         <AnimatedAvatar />
         <div>
-          <h1 className={`text-3xl sm:text-4xl font-bold tracking-tight mb-1 ${poppins.className}`}>
+          <h1 className={`text-3xl sm:text-4xl font-bold tracking-tight mb-1 ${space_grotesk.className}`}>
             Swapnaneel Patra
           </h1>
           <p className="text-base text-gray-600 dark:text-gray-300">
