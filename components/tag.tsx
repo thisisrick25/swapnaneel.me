@@ -20,7 +20,7 @@ export default function Tag({ tags, maxTags = 4, asLinks = true }: TagProps) {
   const tagClassName = `px-1.5 py-0.5 text-[8px] font-medium border border-gray-200 dark:border-zinc-700 rounded-md bg-white dark:bg-zinc-800 transition-all hover:shadow-[0_0_4px_rgba(59,130,246,0.3)] dark:hover:shadow-[0_0_4px_rgba(147,197,253,0.3)] ${fira_code.className}`
 
   return (
-    <div className="flex flex-wrap gap-1">
+    <div className="flex flex-wrap items-start content-start gap-1">
       {displayTags.map((tag) => {
         const tagSlug = slugger.slug(tag)
         return asLinks ? (
