@@ -1,4 +1,4 @@
-import { poppins } from "@/fonts"
+import { space_grotesk } from "@/fonts"
 import { Link } from 'next-view-transitions'
 import { LuExternalLink, LuFileText, LuGitPullRequest } from "react-icons/lu"
 import { getPublications, PublicationType } from "@/utils/getPublications"
@@ -34,7 +34,7 @@ export default async function PublicationSection() {
   return (
     <section className="mb-12">
       <div className="section-header mb-6 flex justify-between items-baseline">
-        <h2 className={poppins.className}>Publications</h2>
+        <h2 className={space_grotesk.className}>Publications</h2>
         <ViewAllLink href="/publications" />
       </div>
 

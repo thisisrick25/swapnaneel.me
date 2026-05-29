@@ -1,5 +1,5 @@
 import ViewAllLink from '@/components/viewAllLink'
-import { poppins } from "@/fonts"
+import { space_grotesk } from "@/fonts"
 import { getNews } from "@/utils/getNews"
 
 export default async function NewsSection() {
@@ -12,7 +12,7 @@ export default async function NewsSection() {
   return (
     <section className="mb-12">
       <div className="section-header mb-4 flex justify-between items-baseline">
-        <h2 className={poppins.className}>News</h2>
+        <h2 className={space_grotesk.className}>News</h2>
         <ViewAllLink href="/news" />
       </div>
 

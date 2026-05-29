@@ -1,4 +1,4 @@
-import { poppins } from "@/fonts"
+import { space_grotesk } from "@/fonts"
 import { getNews } from "@/utils/getNews"
 import BackLink from '@/components/backLink'
 import { Metadata } from "next"
@@ -17,7 +17,7 @@ export default async function NewsPage() {
       <BackLink />
 
       <div className="section-header mb-8">
-        <h1 className={`${poppins.className} text-3xl font-bold`}>News</h1>
+        <h1 className={`${space_grotesk.className} text-3xl font-bold`}>News</h1>
       </div>
 
       <StaggerContainer className="space-y-6">

@@ -97,17 +97,17 @@ body {
 }
 
 .nav-item {
-  @apply flex items-center gap-1.5 px-3.5 py-2 text-sm font-medium;
-  @apply text-gray-500 dark:text-gray-400 rounded-full transition-colors;
+  @apply relative flex items-center gap-1.5 px-3.5 py-2 text-sm font-medium;
+  @apply text-gray-500 dark:text-gray-400 rounded-full transition-colors z-10;
 }
 
 .nav-item:hover,
 .nav-item.active {
-  @apply text-gray-900 dark:text-white bg-gray-100 dark:bg-zinc-800;
+  @apply text-gray-900 dark:text-white;
 }
 
 .nav-item svg {
-  @apply w-4 h-4;
+  @apply relative z-10 w-4 h-4;
 }
 
 .nav-divider {
@@ -211,13 +211,17 @@ input[type="email"] {
 
 .prose {
   @apply text-gray-600 dark:text-gray-300;
+  font-family: var(--font-inter-blog), sans-serif;
 }
 
 .prose h1,
 .prose h2,
-.prose h3 {
-  @apply text-gray-900 dark:text-white font-semibold tracking-tight;
-  font-family: var(--font-poppins), system-ui, sans-serif;
+.prose h3,
+.prose h4,
+.prose h5,
+.prose h6 {
+  @apply text-gray-900 dark:text-white font-semibold tracking-tight scroll-mt-20;
+  font-family: var(--font-inter-blog), system-ui, sans-serif;
 }
 
 .prose a {

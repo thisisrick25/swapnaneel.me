@@ -1,6 +1,6 @@
 import ViewAllLink from "@/components/viewAllLink"
 import PostCard from "@/components/postCard"
-import { poppins } from "@/fonts"
+import { space_grotesk } from "@/fonts"
 import { getBlogs } from "@/utils/getBlogs"
 import { getViewsCount } from "@/db/queries"
 import { StaggerContainer, StaggerItem } from "@/components/stagger"
@@ -14,7 +14,7 @@ export default async function WritingSection() {
   return (
     <section className="mb-12">
       <div className="section-header">
-        <h2 className={poppins.className}>Articles</h2>
+        <h2 className={space_grotesk.className}>Articles</h2>
         <ViewAllLink href="/posts" />
       </div>
 

@@ -7,8 +7,9 @@ import BackLink from '@/components/backLink';
 import { extractHeadings } from '@/utils/extractHeadings';
 import { getBlogs, getBlogBySlug, Blog } from '@/utils/getBlogs';
 import { getReadingTime } from '@/utils/getReadingTime';
+import SidebarRuler from '@/components/sidebarRuler';
 import { Metadata } from 'next'
-import { poppins, inter, ibm_plex_mono } from '@/fonts'
+import { space_grotesk, dm_sans, fira_code } from '@/fonts'
 import { cache } from 'react';
 import { getViewsCountBySlug } from '@/db/queries';
 import { LuClock } from 'react-icons/lu';
@@ -68,7 +69,7 @@ export default async function Page({ params }: PageProps) {
 
         {/* Title - with view transition name */}
         <h1
-          className={`text-2xl sm:text-3xl font-bold tracking-tight mb-3 ${poppins.className}`}
+          className={`text-2xl sm:text-3xl font-bold tracking-tight mb-3 ${space_grotesk.className}`}
           style={{ viewTransitionName: `post-title-${slug}` }}
         >
           {blog.data.title}
@@ -104,11 +105,14 @@ export default async function Page({ params }: PageProps) {
 
       {/* Table of contents */}
       {headings.length > 0 && (
-        <TableOfContents headings={headings} />
+        <>
+          <TableOfContents headings={headings} />
+          <SidebarRuler headings={headings} />
+        </>
       )}
 
       {/* Post content */}
-      <div className={`${poppins.variable} ${inter.variable} ${ibm_plex_mono.variable} prose dark:prose-invert prose-lg max-w-none`}>
+      <div className={`${space_grotesk.variable} ${dm_sans.variable} ${fira_code.variable} prose dark:prose-invert prose-lg max-w-none`}>
         {blog.content}
       </div>
 

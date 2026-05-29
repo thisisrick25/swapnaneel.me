@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, ReactNode } from 'react'
-import { poppins, ibm_plex_mono } from '@/fonts'
+import { space_grotesk, fira_code } from '@/fonts'
 import BorderBeam from './borderBeam'
 import {
   LuSparkles, LuBrain, LuPackage, LuGlobe, LuCloud,
@@ -80,7 +80,7 @@ export default function SkillsSection() {
 
   return (
     <section className="mb-12">
-      <h2 className={`text-2xl font-bold tracking-tight mb-4 ${poppins.className}`}>Skills</h2>
+      <h2 className={`text-2xl font-bold tracking-tight mb-4 ${space_grotesk.className}`}>Skills</h2>
 
       {/* Category Tabs with MeteorBeam effect on active */}
       <div className="flex flex-wrap gap-2 mb-4">
@@ -120,7 +120,7 @@ export default function SkillsSection() {
           {filteredSkills.map((skill) => (
             <span
               key={skill.name}
-              className={`inline-flex items-center gap-1.5 px-1.5 py-1 text-xs font-medium border border-gray-200 dark:border-zinc-700 rounded-md hover:bg-gray-50 dark:hover:bg-zinc-800/50 transition-colors ${ibm_plex_mono.className}`}
+              className={`inline-flex items-center gap-1.5 px-1.5 py-1 text-xs font-medium border border-gray-200 dark:border-zinc-700 rounded-md hover:bg-gray-50 dark:hover:bg-zinc-800/50 transition-colors ${fira_code.className}`}
             >
               {skill.icon}
               {skill.name}
