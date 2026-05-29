@@ -1,6 +1,7 @@
 "use client"
 
 import { useRef, useState, ReactNode, MouseEvent } from 'react'
+import { motion, useMotionValue, useSpring, useTransform } from 'motion/react'
 
 interface ShinyCardProps {
   children: ReactNode
@@ -23,24 +24,60 @@ export default function ShinyCard({
   const [position, setPosition] = useState({ x: 0, y: 0 })
   const [opacity, setOpacity] = useState(0)
 
+  // 3D Tilt values
+  const x = useMotionValue(0)
+  const y = useMotionValue(0)
+
+  // Smooth springs for rotation
+  const mouseXSpring = useSpring(x, { stiffness: 150, damping: 20 })
+  const mouseYSpring = useSpring(y, { stiffness: 150, damping: 20 })
+
+  // Map position to rotation limits (-7 to 7 degrees)
+  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["7deg", "-7deg"])
+  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-7deg", "7deg"])
+
   const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
     if (!cardRef.current) return
     const rect = cardRef.current.getBoundingClientRect()
+    
+    const mouseX = e.clientX - rect.left
+    const mouseY = e.clientY - rect.top
+    
     setPosition({
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top,
+      x: mouseX,
+      y: mouseY,
     })
+    
+    // Tilt calculations
+    const width = rect.width
+    const height = rect.height
+    
+    const xPct = mouseX / width - 0.5
+    const yPct = mouseY / height - 0.5
+    
+    x.set(xPct)
+    y.set(yPct)
   }
 
   const handleMouseEnter = () => setOpacity(1)
-  const handleMouseLeave = () => setOpacity(0)
+  
+  const handleMouseLeave = () => {
+    setOpacity(0)
+    x.set(0)
+    y.set(0)
+  }
 
   return (
-    <div
+    <motion.div
       ref={cardRef}
       onMouseMove={handleMouseMove}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      style={{
+        rotateX,
+        rotateY,
+        transformStyle: "preserve-3d",
+      }}
       className={`relative overflow-hidden ${containerClassName}`}
     >
       {/* Blue spotlight gradient effect */}
@@ -53,9 +90,9 @@ export default function ShinyCard({
       />
 
       {/* Content */}
-      <div className={`relative ${className}`}>
+      <div className={`relative ${className}`} style={{ transform: "translateZ(30px)" }}>
         {children}
       </div>
-    </div>
+    </motion.div>
   )
 }

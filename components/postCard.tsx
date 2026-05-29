@@ -18,7 +18,7 @@ type Props = {
 export default function PostCard({ slug, title, description, publishedAt, viewCount = 0, tags }: Props) {
   return (
     <ShinyCard
-      containerClassName="group relative h-full rounded-xl border border-gray-200 dark:border-zinc-700 hover:border-gray-300 dark:hover:border-zinc-600 hover:shadow-lg dark:hover:shadow-gray-500/10 transition-all"
+      containerClassName="group relative h-full rounded-xl border border-gray-200 dark:border-zinc-700 hover:border-gray-300 dark:hover:border-zinc-600 hover:shadow-lg dark:hover:shadow-gray-500/10 transition-colors transition-shadow"
       className="h-full flex flex-col p-3 bg-gray-50/50 dark:bg-zinc-800/50 rounded-xl"
     >
       {/* Overlay link for the entire card */}
