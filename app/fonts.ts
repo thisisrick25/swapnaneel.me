@@ -1,4 +1,4 @@
-import { Space_Grotesk, DM_Sans, JetBrains_Mono, Fira_Code } from 'next/font/google'
+import { Space_Grotesk, DM_Sans, JetBrains_Mono, Fira_Code, Inter } from 'next/font/google'
 
 // Headline font
 const space_grotesk = Space_Grotesk({
@@ -32,9 +32,18 @@ const fira_code = Fira_Code({
   variable: '--font-fira-code',
 })
 
+// Blog typography (Clean Tech Look)
+const inter_blog = Inter({
+  weight: ['300', '400', '500', '600', '700'],
+  subsets: ['latin'],
+  style: ['italic', 'normal'],
+  variable: '--font-inter-blog',
+})
+
 export {
   space_grotesk,
   dm_sans,
   jetbrains_mono,
   fira_code,
+  inter_blog,
 }
