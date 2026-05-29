@@ -26,7 +26,7 @@ export default function ProjectCard({ title, description, link, techStack }: Pro
       </div>
 
       {/* SECTION 2: METADATA */}
-      <div className="mt-auto pt-4">
+      <div className="pt-4 flex flex-col justify-start">
         <Tag tags={techStack} asLinks={false} />
       </div>
     </div>
