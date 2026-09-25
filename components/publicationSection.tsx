@@ -47,15 +47,18 @@ export default async function PublicationSection() {
             <p className="text-gray-600 dark:text-gray-400 text-sm">
               {pub.authors}
             </p>
-            <div className="flex items-center flex-wrap gap-2 text-sm mt-1">
-              <span className="font-medium text-gray-800 dark:text-gray-200">
-                {pub.publishedAt}
-              </span>
+            <div className="font-medium italic text-gray-800 dark:text-gray-200 text-sm mt-1">
+              {pub.publishedAt}
+            </div>
+            <div className="flex items-center flex-wrap gap-2 text-sm">
               <span className={`px-2 py-0.5 rounded text-xs font-medium ${getTypeStyles(pub.type)}`}>
                 {pub.type}
               </span>
               <span className="text-gray-400 dark:text-gray-500">•</span>
               <span className="text-gray-500 dark:text-gray-400">{pub.date}</span>
+              {pub.note && (
+                <span className="text-amber-700 dark:text-amber-300">({pub.note})</span>
+              )}
 
               {pub.links && pub.links.length > 0 && (
                 <>
