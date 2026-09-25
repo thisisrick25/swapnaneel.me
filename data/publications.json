@@ -1,45 +1,20 @@
 [
   {
-    "title": "Conference Paper Title",
-    "authors": "Swapnaneel Patra, Co-author Name",
-    "publishedAt": "Conference Name (CONF '25)",
-    "date": "2025",
+    "title": "A Novel Ensembled Approach for Divorce Prediction for Independent Employed Women",
+    "authors": "Swapnaneel Patra",
+    "publishedAt": "2nd International Conference on Intelligent Computing and Emerging Communication Technologies (ICEC 2026)",
+    "date": "2026",
     "type": "conference",
-    "links": [
-      {
-        "label": "PDF",
-        "url": "#"
-      },
-      {
-        "label": "Code",
-        "url": "#"
-      }
-    ]
+    "note": "To be published",
+    "links": []
   },
   {
-    "title": "Journal Article Title",
-    "authors": "Swapnaneel Patra, Co-author Name",
-    "publishedAt": "Journal Name (Vol. 1)",
-    "date": "2025",
-    "type": "journal",
-    "links": [
-      {
-        "label": "PDF",
-        "url": "#"
-      }
-    ]
-  },
-  {
-    "title": "Preprint Paper Title",
-    "authors": "Swapnaneel Patra, Co-author Name",
-    "publishedAt": "arXiv",
-    "date": "2024",
-    "type": "preprint",
-    "links": [
-      {
-        "label": "PDF",
-        "url": "#"
-      }
-    ]
+    "title": "Regime Alpha: A Novel Universal Benchmarking Framework for Regime-Conditional Strategy Evaluation",
+    "authors": "Swapnaneel Patra",
+    "publishedAt": "2nd International Conference on Intelligent Computing and Emerging Communication Technologies (ICEC 2026)",
+    "date": "2026",
+    "type": "conference",
+    "note": "To be published",
+    "links": []
   }
 ]
