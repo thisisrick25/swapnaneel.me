@@ -13,6 +13,7 @@ export type Publication = {
   publishedAt: string
   date: string
   type: PublicationType
+  note?: string
   links?: PublicationLink[]
 }
 
