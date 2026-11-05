@@ -1,6 +1,7 @@
 import { space_grotesk } from "@/fonts"
+import { Fragment } from "react"
 import { LuExternalLink, LuFileText, LuGitPullRequest } from "react-icons/lu"
-import { getPublications, PublicationType } from "@/utils/getPublications"
+import { getPublications, PublicationAuthor, PublicationType } from "@/utils/getPublications"
 import BackLink from '@/components/backLink'
 import Link from 'next/link'
 import { Metadata } from "next"
@@ -33,6 +34,15 @@ export default async function PublicationsPage() {
     }
   }
 
+  const renderAuthors = (authors: PublicationAuthor[]) => {
+    return authors.map((author, index) => (
+      <Fragment key={author.name}>
+        <span className={author.isMe ? "font-semibold" : undefined}>{author.name}</span>
+        {index < authors.length - 1 && ", "}
+      </Fragment>
+    ))
+  }
+
   return (
     <div className="py-16 sm:py-24">
       <BackLink />
@@ -45,23 +55,20 @@ export default async function PublicationsPage() {
         {publications.length > 0 ? (
           publications.map((pub, index) => (
             <StaggerItem key={index} className="flex flex-col gap-1 pb-6 border-b border-gray-100 dark:border-zinc-800 last:border-0">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
-                {pub.title}
-              </h3>
-              <p className="text-gray-600 dark:text-gray-400 text-sm">
-                {pub.authors}
+              <p className="text-gray-900 dark:text-gray-100 text-sm leading-6">
+                {renderAuthors(pub.authors)} ({pub.year}), “{pub.title}”, <em>{pub.venue}</em>
               </p>
-              <div className="font-medium italic text-gray-800 dark:text-gray-200 text-sm mt-1">
-                {pub.publishedAt}
-              </div>
-              <div className="flex items-center flex-wrap gap-2 text-sm">
+              <div className="flex items-center flex-wrap gap-2 text-sm mt-1">
                 <span className={`px-2 py-0.5 rounded text-xs font-medium capitalize ${getTypeStyles(pub.type)}`}>
                   {pub.type}
                 </span>
                 <span className="text-gray-400 dark:text-gray-500">•</span>
-                <span className="text-gray-500 dark:text-gray-400">{pub.date}</span>
-                {pub.note && (
-                  <span className="text-amber-700 dark:text-amber-300">({pub.note})</span>
+                <span className="text-gray-500 dark:text-gray-400">{pub.year}</span>
+                {pub.status && (
+                  <span className="text-amber-700 dark:text-amber-300">({pub.status})</span>
+                )}
+                {pub.paperId && (
+                  <span className="text-gray-500 dark:text-gray-400">Paper ID: {pub.paperId}</span>
                 )}
 
                 {pub.links && pub.links.length > 0 && (

@@ -29,7 +29,7 @@ export default async function Page() {
       </section>
 
       {/* Posts Grid */}
-      <StaggerContainer className="grid gap-3 sm:grid-cols-2">
+      <StaggerContainer className="flex flex-col">
         {blogs.length > 0 ? (
           blogs.map((blog) => {
             const viewCount = allViews.find((v) => v.slug === blog.slug)?.count || 0

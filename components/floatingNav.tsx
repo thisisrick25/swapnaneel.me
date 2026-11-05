@@ -32,7 +32,7 @@ export default function FloatingNav() {
   ]
 
   return (
-    <nav className="floating-nav">
+    <nav className="floating-nav" aria-label="Primary navigation">
       {links.map((link) => {
         const Icon = link.icon
         const active = isActive(link.href)
@@ -41,6 +41,8 @@ export default function FloatingNav() {
             key={link.href}
             href={link.href}
             className={`nav-item ${active ? 'active' : 'hover:text-gray-700 dark:hover:text-gray-300'}`}
+            aria-current={active ? 'page' : undefined}
+            aria-label={link.label}
           >
             {active && (
               <motion.div

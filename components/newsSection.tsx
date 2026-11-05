@@ -12,7 +12,10 @@ export default async function NewsSection() {
   return (
     <section className="mb-12">
       <div className="section-header mb-4 flex justify-between items-baseline">
-        <h2 className={space_grotesk.className}>News</h2>
+        <div>
+          <h2 className={space_grotesk.className}>News</h2>
+          <p className="section-description">Recent updates, milestones, and announcements.</p>
+        </div>
         <ViewAllLink href="/news" />
       </div>
 

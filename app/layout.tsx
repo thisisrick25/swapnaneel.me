@@ -70,7 +70,7 @@ export default function RootLayout({
       <body className={`${dm_sans.className} antialiased`}>
         <ViewTransitions>
           <ThemeProvider>
-            <main className="min-h-screen w-full max-w-4xl mx-auto">
+            <main className="min-h-screen w-full max-w-4xl mx-auto px-4 sm:px-6">
               {children}
             </main>
             <Footer />

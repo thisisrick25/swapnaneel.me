@@ -14,6 +14,7 @@ export const siteMetadata = {
   socialBanner: '', // add social banner in the public folder
   email: '',
   github: 'https://github.com/thisisrick25',
+  gitlab: 'https://gitlab.com/thisisrick25',
   twitter: '',
   facebook: '',
   youtube: '',

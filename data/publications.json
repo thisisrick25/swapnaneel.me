@@ -1,20 +1,28 @@
 [
   {
     "title": "A Novel Ensembled Approach for Divorce Prediction for Independent Employed Women",
-    "authors": "Swapnaneel Patra",
-    "publishedAt": "2nd International Conference on Intelligent Computing and Emerging Communication Technologies (ICEC 2026)",
-    "date": "2026",
+    "authors": [
+      {
+        "name": "Swapnaneel Patra",
+        "isMe": true
+      }
+    ],
+    "venue": "2nd International Conference on Intelligent Computing and Emerging Communication Technologies (ICEC 2026)",
+    "year": "2026",
     "type": "conference",
-    "note": "Accepted for presentation",
-    "links": []
+    "status": "To be presented"
   },
   {
     "title": "Regime Alpha: A Novel Universal Benchmarking Framework for Regime-Conditional Strategy Evaluation",
-    "authors": "Swapnaneel Patra",
-    "publishedAt": "2nd International Conference on Intelligent Computing and Emerging Communication Technologies (ICEC 2026)",
-    "date": "2026",
+    "authors": [
+      {
+        "name": "Swapnaneel Patra",
+        "isMe": true
+      }
+    ],
+    "venue": "2nd International Conference on Intelligent Computing and Emerging Communication Technologies (ICEC 2026)",
+    "year": "2026",
     "type": "conference",
-    "note": "Accepted for presentation",
-    "links": []
+    "status": "To be presented"
   }
 ]

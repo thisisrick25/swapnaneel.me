@@ -27,7 +27,7 @@ export default async function Page() {
       </section>
 
       {/* Contributions Grid */}
-      <StaggerContainer className="grid gap-3 sm:grid-cols-2">
+      <StaggerContainer className="flex flex-col">
         {contributions.length > 0 ? (
           contributions.map((contribution) => (
             <StaggerItem key={`${contribution.source}-${contribution.id}`} className="h-full">

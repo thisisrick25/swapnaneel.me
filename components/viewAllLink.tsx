@@ -13,7 +13,7 @@ export default function ViewAllLink({ href, text = 'View all' }: ViewAllLinkProp
   return (
     <Link
       href={href}
-      className={`text-xs text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors group flex items-center gap-1 ${fira_code.className}`}
+      className={`py-2 text-xs text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors group flex items-center gap-1 ${fira_code.className}`}
     >
       {text}
       <LuArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />

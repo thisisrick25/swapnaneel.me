@@ -12,9 +12,9 @@
     "featured": true
   },
   {
-    "title": "Brain",
+    "title": "Writings",
     "description": "A centralized knowledge repository and data source for my digital garden.",
-    "link": "https://github.com/thisisrick25/brain",
+    "link": "https://github.com/thisisrick25/writings",
     "techStack": [
       "JSON",
       "Markdown",

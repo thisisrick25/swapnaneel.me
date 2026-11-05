@@ -65,7 +65,7 @@ export default function ContributionGraph({ github, gitlab }: Props) {
   if (!github && !gitlab) return null;
 
   return (
-    <section className="mb-12 relative">
+    <section className="mb-12 relative" id="activity">
       {/* Tooltip Portal - Fixed Position to escape overflow clipping */}
       {tooltip && <CalendarToolTip x={tooltip.x} y={tooltip.y} content={tooltip.content} />}
 
@@ -129,7 +129,10 @@ export default function ContributionGraph({ github, gitlab }: Props) {
       {data && (
         <>
           <div className="contribution-calendar-wrapper">
-            <div className={`contribution-calendar ${source}`}>
+            <div
+              className={`contribution-calendar ${source}`}
+              aria-hidden="true"
+            >
               {/* Month labels row */}
               <div className="contribution-months">
                 {monthLabels.map(({ month, colStart }) => (

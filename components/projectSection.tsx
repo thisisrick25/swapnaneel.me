@@ -11,13 +11,16 @@ export default async function ProjectSection() {
   if (featuredProjects.length === 0) return null
 
   return (
-    <section className="mb-12">
+    <section className="mb-12" id="projects">
       <div className="section-header mb-4 flex items-baseline justify-between">
-        <h2 className={space_grotesk.className}>Projects</h2>
+        <div>
+          <h2 className={space_grotesk.className}>Featured projects</h2>
+          <p className="section-description">Selected tools and experiments built with data and machine learning.</p>
+        </div>
         <ViewAllLink href="/projects" />
       </div>
 
-      <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+      <StaggerContainer className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {featuredProjects.map((project, index) => (
           <StaggerItem key={index} className="h-full">
             <ProjectCard {...project} />

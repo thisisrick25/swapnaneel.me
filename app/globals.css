@@ -10,11 +10,11 @@
 
 html {
   scroll-behavior: smooth;
-  @apply text-[13px] leading-relaxed;
+  @apply text-[14px] leading-relaxed;
 }
 
 body {
-  @apply bg-white dark:bg-zinc-900 text-gray-900 dark:text-gray-100;
+  @apply bg-[#ffffff] dark:bg-[#18181b] text-gray-900 dark:text-gray-100;
   font-feature-settings:
     "kern" 1,
     "liga" 1;
@@ -23,6 +23,10 @@ body {
   transition:
     background-color 0.3s ease,
     color 0.3s ease;
+}
+
+*:focus-visible {
+  @apply outline-2 outline-offset-2 outline-teal-600 dark:outline-teal-300;
 }
 
 /* Reduced motion */
@@ -42,7 +46,7 @@ body {
    ======================================== */
 
 .link {
-  @apply text-blue-600 dark:text-blue-400 no-underline hover:underline transition-colors;
+  @apply text-teal-700 dark:text-teal-300 no-underline hover:underline transition-colors;
 }
 
 /* ========================================
@@ -55,6 +59,12 @@ body {
   @apply border border-gray-200 dark:border-zinc-700 rounded-lg;
   @apply hover:bg-gray-200 dark:hover:bg-zinc-700 hover:border-gray-300 dark:hover:border-zinc-600;
   @apply transition-colors cursor-pointer;
+}
+
+.btn-primary {
+  @apply text-white bg-teal-700 border-teal-700;
+  @apply hover:bg-teal-800 hover:border-teal-800 dark:text-white dark:bg-teal-600 dark:border-teal-600;
+  @apply dark:hover:bg-teal-500 dark:hover:border-teal-500;
 }
 
 /* ========================================
@@ -88,20 +98,25 @@ body {
   @apply text-2xl font-bold tracking-tight text-gray-900 dark:text-white;
 }
 
+.section-description {
+  @apply mt-1 text-sm text-gray-500 dark:text-gray-400;
+}
+
 /* ========================================
    FLOATING BOTTOM NAV
    ======================================== */
 
 .floating-nav {
-  @apply fixed bottom-6 left-1/2 -translate-x-1/2 z-100;
+  @apply fixed left-1/2 -translate-x-1/2 z-100;
   @apply flex items-center gap-1 p-2;
   @apply bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl;
   @apply border border-gray-200/50 dark:border-zinc-700/50 rounded-full;
   @apply shadow-lg;
+  bottom: calc(1.5rem + env(safe-area-inset-bottom));
 }
 
 .nav-item {
-  @apply relative flex items-center gap-1.5 px-3.5 py-2 text-sm font-medium;
+  @apply relative flex min-h-11 items-center gap-1.5 px-3.5 py-2 text-sm font-medium;
   @apply text-gray-500 dark:text-gray-400 rounded-full transition-colors z-10;
 }
 
@@ -154,7 +169,8 @@ body {
    ======================================== */
 
 .footer {
-  @apply py-16 pb-24 text-center;
+  @apply py-16 text-center;
+  padding-bottom: calc(6rem + env(safe-area-inset-bottom));
 }
 
 .footer-text {
@@ -302,7 +318,7 @@ input[type="email"] {
 }
 
 .contribution-month-label {
-  @apply text-[10px] leading-none overflow-hidden whitespace-nowrap;
+  @apply text-[11px] leading-none overflow-hidden whitespace-nowrap;
   width: 20px;
 }
 
@@ -332,7 +348,7 @@ input[type="email"] {
   padding: 6px 10px;
   background-color: #1f2937;
   color: white;
-  font-size: 12px;
+  font-size: 13px;
   white-space: nowrap;
   border-radius: 6px;
   opacity: 0;

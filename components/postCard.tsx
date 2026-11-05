@@ -2,8 +2,6 @@
 
 import { Link } from 'next-view-transitions'
 import DateDisplay from '@/components/dateDisplay'
-import Tag from '@/components/tag'
-import { fira_code } from '@/fonts'
 
 type Props = {
   slug: string
@@ -14,42 +12,31 @@ type Props = {
   tags?: string[]
 }
 
-export default function PostCard({ slug, title, description, publishedAt, viewCount = 0, tags }: Props) {
+export default function PostCard({ slug, title, publishedAt, viewCount = 0 }: Props) {
   return (
-    <div className="group relative overflow-hidden h-full flex flex-col p-4 rounded-xl border border-gray-200 dark:border-zinc-700 bg-gray-50/50 dark:bg-zinc-800/50 hover:border-gray-300 dark:hover:border-zinc-600 hover:shadow-lg dark:hover:shadow-gray-500/10 transition-colors transition-shadow">
-      {/* SECTION 1: CONTENT */}
-      <div>
-        <Link
-          href={`/posts/${slug}`}
-          className="text-sm font-semibold mb-1.5 text-gray-900 dark:text-gray-100 hover:text-gray-600 dark:hover:text-gray-300 transition-colors line-clamp-2 block"
+    <Link 
+      href={`/posts/${slug}`} 
+      className="group flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-6 py-5 sm:py-6 border-b border-gray-100 dark:border-zinc-800/50 last:border-0 transition-all"
+      aria-label={`Read ${title}`}
+    >
+      <span className="text-sm text-gray-400 font-mono w-28 shrink-0">
+        <DateDisplay date={publishedAt} />
+      </span>
+      
+      <div className="flex-grow flex items-center justify-between w-full">
+        <h3 
+          className="text-base sm:text-lg font-medium text-gray-900 dark:text-gray-100 group-hover:text-teal-600 dark:group-hover:text-teal-400 group-hover:translate-x-2 transition-transform duration-300"
           style={{ viewTransitionName: `post-title-${slug}` }}
         >
           {title}
-        </Link>
-        {description && (
-          <p className="text-xs text-gray-500 dark:text-gray-400 line-clamp-2">
-            {description}
-          </p>
+        </h3>
+        
+        {viewCount > 0 && (
+          <span className="text-xs text-gray-400 dark:text-gray-500 font-mono shrink-0 ml-4 hidden sm:block opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            {viewCount} views
+          </span>
         )}
       </div>
-
-      {/* SECTION 2: METADATA */}
-      <div className="mt-auto pt-4">
-        {/* Tags */}
-        {tags && tags.length > 0 && (
-          <div className="flex flex-col justify-start">
-            <Tag tags={tags} asLinks={true} />
-          </div>
-        )}
-
-        {/* Date & Views Row */}
-        <div className="mt-auto pt-2 flex justify-between items-center text-xs text-gray-500 dark:text-gray-400">
-          <DateDisplay date={publishedAt} />
-          {viewCount > 0 && (
-            <span>{viewCount} views</span>
-          )}
-        </div>
-      </div>
-    </div>
+    </Link>
   )
 }

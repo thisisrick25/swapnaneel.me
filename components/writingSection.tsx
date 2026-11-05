@@ -12,13 +12,16 @@ export default async function WritingSection() {
   const posts = blogs.slice(0, 6)
 
   return (
-    <section className="mb-12">
+    <section className="mb-12" id="writing">
       <div className="section-header">
-        <h2 className={space_grotesk.className}>Articles</h2>
+        <div>
+          <h2 className={space_grotesk.className}>Articles</h2>
+          <p className="section-description">Notes on technology, research, and the things I am learning.</p>
+        </div>
         <ViewAllLink href="/posts" />
       </div>
 
-      <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+      <StaggerContainer className="flex flex-col">
         {posts.length > 0 ? (
           posts.map((post) => {
             const viewCount = allViews.find((v) => v.slug === post.slug)?.count || 0

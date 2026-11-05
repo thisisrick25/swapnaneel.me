@@ -1,11 +1,21 @@
 [
   {
     "title": "Conference Paper Title",
-    "authors": "Swapnaneel Patra, Co-author Name",
-    "publishedAt": "Conference Name (CONF '25)",
-    "date": "2025",
+    "authors": [
+      {
+        "name": "Swapnaneel Patra",
+        "isMe": true
+      },
+      {
+        "name": "Co-author Name",
+        "isMe": false
+      }
+    ],
+    "venue": "Conference Name (CONF '25)",
+    "year": "2025",
     "type": "conference",
-    "note": "",
+    "status": "",
+    "paperId": "",
     "links": [
       {
         "label": "PDF",
@@ -19,11 +29,21 @@
   },
   {
     "title": "Journal Article Title",
-    "authors": "Swapnaneel Patra, Co-author Name",
-    "publishedAt": "Journal Name (Vol. 1)",
-    "date": "2025",
+    "authors": [
+      {
+        "name": "Swapnaneel Patra",
+        "isMe": true
+      },
+      {
+        "name": "Co-author Name",
+        "isMe": false
+      }
+    ],
+    "venue": "Journal Name (Vol. 1)",
+    "year": "2025",
     "type": "journal",
-    "note": "",
+    "status": "",
+    "paperId": "",
     "links": [
       {
         "label": "PDF",
@@ -33,11 +53,21 @@
   },
   {
     "title": "Preprint Paper Title",
-    "authors": "Swapnaneel Patra, Co-author Name",
-    "publishedAt": "arXiv",
-    "date": "2024",
+    "authors": [
+      {
+        "name": "Swapnaneel Patra",
+        "isMe": true
+      },
+      {
+        "name": "Co-author Name",
+        "isMe": false
+      }
+    ],
+    "venue": "arXiv",
+    "year": "2024",
     "type": "preprint",
-    "note": "",
+    "status": "",
+    "paperId": "",
     "links": [
       {
         "label": "PDF",

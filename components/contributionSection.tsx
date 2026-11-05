@@ -11,11 +11,14 @@ export default async function ContributionSection() {
   return (
     <section className="mb-12">
       <div className="section-header">
-        <h2 className={space_grotesk.className}>Open Source Contributions</h2>
+        <div>
+          <h2 className={space_grotesk.className}>Open Source Contributions</h2>
+          <p className="section-description">Pull requests and community work across GitHub and GitLab.</p>
+        </div>
         <ViewAllLink href="/contributions" />
       </div>
 
-      <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+      <StaggerContainer className="flex flex-col">
         {contributions.length > 0 ? (
           contributions.map((contribution) => (
             <StaggerItem key={`${contribution.source}-${contribution.id}`} className="h-full">

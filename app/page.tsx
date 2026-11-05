@@ -21,17 +21,17 @@ export default function Home() {
         <NewsSection />
       </Suspense>
 
+      {/* Featured work */}
+      <Suspense fallback={<SectionSkeleton />}>
+        <ProjectSection />
+      </Suspense>
+
       {/* Education */}
       <EducationSection />
 
       {/* Publications */}
       <Suspense fallback={<SectionSkeleton />}>
         <PublicationSection />
-      </Suspense>
-
-      {/* Projects */}
-      <Suspense fallback={<SectionSkeleton />}>
-        <ProjectSection />
       </Suspense>
 
       {/* Writing Section */}

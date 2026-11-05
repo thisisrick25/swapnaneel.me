@@ -2,8 +2,14 @@ import Link from "next/link"
 import Image from "next/image"
 import { siteMetadata } from "@/utils/siteMetadata"
 import { space_grotesk } from "@/fonts"
-import { SiGithub, SiLinkedin } from "react-icons/si"
-import { LuFileText } from "react-icons/lu"
+import { LuArrowUpRight } from "react-icons/lu"
+
+const HERO_LINKS = [
+  { href: siteMetadata.github, label: "GitHub" },
+  { href: siteMetadata.gitlab, label: "GitLab" },
+  { href: siteMetadata.linkedin, label: "LinkedIn" },
+  { href: siteMetadata.resume, label: "Resume" },
+] as const
 
 export default function HeroSection() {
   return (
@@ -11,7 +17,7 @@ export default function HeroSection() {
       <div className="flex items-start gap-5 mb-8">
         <Image
           src="/avatar.svg"
-          alt="Avatar"
+          alt="Me"
           width={88}
           height={88}
           className="profile-image"
@@ -27,39 +33,24 @@ export default function HeroSection() {
         </div>
       </div>
 
-      <p className="text-base text-gray-600 dark:text-gray-300 max-w-2xl mb-6">
-        AI/ML grad student at IIT Patna. Open source contributor.
+      <p className="text-base text-gray-600 dark:text-gray-300 mb-6">
+        AI/ML grad student at IIT Patna building practical tools with data, machine learning, and open source.
       </p>
 
-      {/* Social Links */}
-      <div className="flex flex-wrap gap-3">
-        <Link
-          href={siteMetadata.github}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="btn"
-        >
-          <SiGithub className="w-4 h-4" />
-          GitHub
-        </Link>
-        <Link
-          href={siteMetadata.linkedin}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="btn"
-        >
-          <SiLinkedin className="w-4 h-4" />
-          LinkedIn
-        </Link>
-        <Link
-          href={siteMetadata.resume}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="btn"
-        >
-          <LuFileText className="w-4 h-4" />
-          CV
-        </Link>
+      {/* External profiles */}
+      <div className="flex flex-wrap gap-5 mt-4">
+        {HERO_LINKS.map(({ href, label }) => (
+          <Link
+            key={label}
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group flex items-center gap-1 text-sm font-medium text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100 transition-colors"
+          >
+            {label}
+            <LuArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+          </Link>
+        ))}
       </div>
     </section>
   )

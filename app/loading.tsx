@@ -1,7 +1,7 @@
 export default function Loading() {
   return (
-    <div className="py-16 sm:py-24">
-      <div className="container animate-pulse">
+    <div className="py-16 sm:py-24" aria-busy="true" aria-label="Loading page">
+      <div className="animate-pulse">
         {/* Profile skeleton */}
         <section className="mb-16">
           <div className="flex items-start gap-5 mb-8">
@@ -14,13 +14,13 @@ export default function Loading() {
           <div className="skeleton h-5 w-full max-w-2xl mb-2" />
           <div className="skeleton h-5 w-3/4 max-w-2xl mb-6" />
           <div className="flex gap-3">
-            <div className="skeleton h-9 w-24 rounded-lg" />
-            <div className="skeleton h-9 w-24 rounded-lg" />
-            <div className="skeleton h-9 w-20 rounded-lg" />
+            <div className="skeleton h-10 w-24 rounded-lg" />
+            <div className="skeleton h-10 w-24 rounded-lg" />
+            <div className="skeleton h-10 w-20 rounded-lg" />
           </div>
         </section>
 
-        {/* Writing skeleton */}
+        {/* Content skeleton */}
         <section className="mb-16">
           <div className="skeleton h-8 w-24 mb-6" />
           {Array.from({ length: 3 }).map((_, i) => (

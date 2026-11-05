@@ -7,20 +7,25 @@ export type PublicationLink = {
   url: string
 }
 
+export type PublicationAuthor = {
+  name: string
+  isMe?: boolean
+}
+
 export type Publication = {
   title: string
-  authors: string
-  publishedAt: string
-  date: string
+  authors: PublicationAuthor[]
+  venue: string
+  year: string
   type: PublicationType
-  note?: string
+  status?: string
+  paperId?: string
   links?: PublicationLink[]
 }
 
 export async function getPublications(): Promise<Publication[]> {
   try {
-    // Sort by date descending (assuming format "YYYY")
-    return (publicationsData as Publication[]).sort((a, b) => parseInt(b.date) - parseInt(a.date))
+    return (publicationsData as Publication[]).sort((a, b) => parseInt(b.year) - parseInt(a.year))
   } catch (error) {
     console.error('Error fetching publications:', error)
     return []
