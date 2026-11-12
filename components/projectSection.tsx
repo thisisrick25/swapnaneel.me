@@ -20,9 +20,9 @@ export default async function ProjectSection() {
         <ViewAllLink href="/projects" />
       </div>
 
-      <StaggerContainer className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+      <StaggerContainer className="grid gap-0 sm:grid-cols-2 lg:grid-cols-3" hoverDim>
         {featuredProjects.map((project, index) => (
-          <StaggerItem key={index} className="h-full">
+          <StaggerItem key={index} className="h-full" hoverDim>
             <ProjectCard {...project} />
           </StaggerItem>
         ))}
