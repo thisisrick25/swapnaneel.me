@@ -142,8 +142,8 @@ body {
 }
 
 /* ========================================
-   LIST ITEMS
-   ======================================== */
+    LIST ITEMS
+    ======================================== */
 
 .list-item {
   @apply flex items-start justify-between gap-4 p-4 -mx-4 rounded-xl transition-colors;
@@ -151,6 +151,42 @@ body {
 
 .list-item:hover {
   @apply bg-gray-50 dark:bg-zinc-800/50;
+}
+
+/* ========================================
+    HOVER DIM EFFECT
+    ======================================== */
+
+.hover-dim:has(.hover-dim-item:hover) .hover-dim-item:not(:hover) {
+  opacity: 0.35;
+  transition: opacity 0.2s ease 0.05s, color 0.2s ease 0.05s;
+}
+
+.hover-dim:has(.hover-dim-item:hover) .hover-dim-item:hover {
+  opacity: 1;
+  transition: opacity 0.2s ease, color 0.2s ease;
+}
+
+/* Ensure hovered item text is full contrast black/white */
+.hover-dim:has(.hover-dim-item:hover) .hover-dim-item:hover .hover-dim-title {
+  color: #000;
+  transition: color 0.2s ease;
+}
+
+/* Dark mode: hovered item text is white */
+.dark .hover-dim:has(.hover-dim-item:hover) .hover-dim-item:hover .hover-dim-title {
+  color: #fff;
+}
+
+/* Dim non-hovered item text explicitly */
+.hover-dim:has(.hover-dim-item:hover) .hover-dim-item:not(:hover) .hover-dim-title {
+  color: #000;
+  transition: color 0.2s ease;
+}
+
+/* Dark mode: dim non-hovered item text */
+.dark .hover-dim:has(.hover-dim-item:hover) .hover-dim-item:not(:hover) .hover-dim-title {
+  color: #fff;
 }
 
 /* ========================================
