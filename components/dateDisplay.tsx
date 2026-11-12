@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { formatDistanceToNowStrict, format } from 'date-fns';
 
@@ -10,14 +10,22 @@ interface DateDisplayProps {
 
 export default function DateDisplay({ date }: DateDisplayProps) {
   const [showFullDate, setShowFullDate] = useState(false);
+  const [relativeDate, setRelativeDate] = useState<string>();
 
   const targetDate = typeof date === 'string' ? new Date(date) : date;
+
+  useEffect(() => {
+    const currentTargetDate = typeof date === 'string' ? new Date(date) : date;
+
+    if (!isNaN(currentTargetDate.getTime())) {
+      setRelativeDate(formatDistanceToNowStrict(currentTargetDate, { addSuffix: true }));
+    }
+  }, [date]);
 
   if (isNaN(targetDate.getTime())) {
     return <span className="text-gray-400 dark:text-gray-500">—</span>;
   }
 
-  const relativeDate = formatDistanceToNowStrict(targetDate, { addSuffix: true });
   const fullDate = format(targetDate, 'MMMM d, yyyy');
 
   return (
@@ -49,7 +57,7 @@ export default function DateDisplay({ date }: DateDisplayProps) {
             transition={{ type: 'spring', stiffness: 900, damping: 50 }}
             className="block"
           >
-            {relativeDate}
+            {relativeDate ?? fullDate}
           </motion.span>
         )}
       </AnimatePresence>
