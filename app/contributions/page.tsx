@@ -27,10 +27,10 @@ export default async function Page() {
       </section>
 
       {/* Contributions Grid */}
-      <StaggerContainer className="flex flex-col">
+      <StaggerContainer className="flex flex-col" hoverDim>
         {contributions.length > 0 ? (
           contributions.map((contribution) => (
-            <StaggerItem key={`${contribution.source}-${contribution.id}`} className="h-full">
+            <StaggerItem key={`${contribution.source}-${contribution.id}`} className="h-full" hoverDim>
               <ContributionCard
                 id={contribution.id}
                 title={contribution.title}

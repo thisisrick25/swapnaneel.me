@@ -29,12 +29,12 @@ export default async function Page() {
       </section>
 
       {/* Posts Grid */}
-      <StaggerContainer className="flex flex-col">
+      <StaggerContainer className="flex flex-col" hoverDim>
         {blogs.length > 0 ? (
           blogs.map((blog) => {
             const viewCount = allViews.find((v) => v.slug === blog.slug)?.count || 0
             return (
-              <StaggerItem key={blog.slug} className="h-full">
+              <StaggerItem key={blog.slug} className="h-full" hoverDim>
                 <PostCard
                   slug={blog.slug}
                   title={blog.data.title}
