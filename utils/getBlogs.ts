@@ -6,6 +6,11 @@ import { slug as slugify } from 'github-slugger'
 import matter from 'gray-matter'
 import { getGitHubDirectoryContents, getGitHubFileContent } from '@/lib/github'
 import {
+  GITHUB_REPO_OWNER,
+  GITHUB_REPO_NAME,
+  GITHUB_BRANCH,
+} from '@/lib/constants'
+import {
   remarkFrontmatter,
   remarkMdxFrontmatter,
   rehypeSlug,
@@ -53,12 +58,25 @@ function isPublishedOrDev(rawContent: string): boolean {
   return Boolean(metadata.isPublished) || process.env.NODE_ENV === 'development';
 }
 
+// Rewrite relative image URLs in MDX content to absolute GitHub raw URLs so
+// images resolve when rendered on swapnaneel.me (content lives in the writings repo).
+function rewriteRelativeImageUrls(rawContent: string): string {
+  const base = `https://raw.githubusercontent.com/${GITHUB_REPO_OWNER}/${GITHUB_REPO_NAME}/${GITHUB_BRANCH}`;
+  return rawContent.replace(
+    /!\[([^\]]*)\]\(([^)]+)\)/g,
+    (_match, alt, url) => {
+      if (/^(https?:)?\/\//.test(url) || /^data:/.test(url)) {
+        return _match; // already absolute or data URI
+      }
+      const normalized = url.replace(/\/+/g, '/');
+      return `![${alt}](${base}/${normalized})`;
+    }
+  );
+}
+
 // Function to fetch and parse metadata for all blog files from GitHub
 // Function to fetch and parse metadata for all blog files from GitHub
 async function getAllBlogMetadata(): Promise<BlogMetadata[]> {
-  'use cache'
-  cacheLife('hours')
-
   const contents = await getGitHubDirectoryContents();
 
   const mdxFiles = contents.filter((item: any) =>
@@ -73,7 +91,7 @@ async function getAllBlogMetadata(): Promise<BlogMetadata[]> {
 
     return {
       data: metadata,
-      slug: slugify(metadata.title), // Derive slug from title
+      slug: file.name.replace(/\.mdx$/, ''), // Derive slug from filename
     } as BlogMetadata;
   });
 
@@ -101,9 +119,6 @@ async function compileMdxContent(rawContent: string): Promise<{ content: ReactEl
 
 // Function Expression to read and parse all blog files from GitHub
 export async function getAllBlogsFromGitHub(): Promise<Blog[]> {
-  'use cache'
-  cacheLife('hours')
-
   // Get the list of files in the content directory
   const contents = await getGitHubDirectoryContents();
 
@@ -115,7 +130,10 @@ export async function getAllBlogsFromGitHub(): Promise<Blog[]> {
   // Fetch content for each file concurrently. Parse frontmatter first and skip drafts in production.
   const blogPromises = mdxFiles.map(async (file: any) => {
     // file.path is the full path from the root of the repo (e.g., 'content/posts/my-post.mdx')
-    const rawContent = await getGitHubFileContent(file.path);
+    let rawContent = await getGitHubFileContent(file.path);
+
+    // Rewrite relative image URLs to absolute GitHub raw URLs before compiling MDX
+    rawContent = rewriteRelativeImageUrls(rawContent);
 
     // Quickly parse frontmatter to decide whether to compile the MDX
     if (!isPublishedOrDev(rawContent)) {
@@ -141,7 +159,7 @@ export async function getAllBlogsFromGitHub(): Promise<Blog[]> {
 
     return {
       data: frontmatter,
-      slug: slugify(frontmatter.title),
+      slug: file.name.replace(/\.mdx$/, ''),
       content: content,
       rawContent: rawContent,
     } as Blog;
@@ -154,9 +172,6 @@ export async function getAllBlogsFromGitHub(): Promise<Blog[]> {
 
 // Get all blogs metadata (for lists), showing drafts only in development
 export async function getBlogs(): Promise<BlogMetadata[]> {
-  'use cache'
-  cacheLife('hours')
-
   const allBlogs = await getAllBlogMetadata();
   const blogs = allBlogs.sort((a, b) =>
     compareDesc(new Date(a.data.publishedAt), new Date(b.data.publishedAt))
@@ -177,14 +192,14 @@ export async function getBlogsByTag(tag: string): Promise<BlogMetadata[]> {
 
 // Get a single blog by slug
 export async function getBlogBySlug(slug: string): Promise<Blog | undefined> {
-  'use cache'
-  cacheLife('hours')
-
   const filePath = `${slug}.mdx`; // Construct the file path
 
   try {
     // Fetch ONLY the content for the specific file
-    const rawContent = await getGitHubFileContent(filePath);
+    let rawContent = await getGitHubFileContent(filePath);
+
+    // Rewrite relative image URLs to absolute GitHub raw URLs before compiling MDX
+    rawContent = rewriteRelativeImageUrls(rawContent);
 
     // Parse frontmatter metadata quickly and skip compiling if unpublished in production
     if (!isPublishedOrDev(rawContent)) {
@@ -197,9 +212,9 @@ export async function getBlogBySlug(slug: string): Promise<Blog | undefined> {
 
     return {
       data: frontmatter,
-      slug: slugify(frontmatter.title), // Use frontmatter for slug
+      slug, // Derived from filename (URL slug matches file name)
       content: content,
-      rawContent: rawContent, // Include raw content for headings etc.
+      rawContent: rawContent,
     } as Blog;
 
   } catch (error) {
