@@ -11,18 +11,18 @@ interface DateDisplayProps {
 export default function DateDisplay({ date }: DateDisplayProps) {
   const [showFullDate, setShowFullDate] = useState(false);
   const [relativeDate, setRelativeDate] = useState<string>();
-
-  const targetDate = typeof date === 'string' ? new Date(date) : date;
+  const [targetDate, setTargetDate] = useState<Date | null>(null);
 
   useEffect(() => {
     const currentTargetDate = typeof date === 'string' ? new Date(date) : date;
+    setTargetDate(currentTargetDate);
 
     if (!isNaN(currentTargetDate.getTime())) {
       setRelativeDate(formatDistanceToNowStrict(currentTargetDate, { addSuffix: true }));
     }
   }, [date]);
 
-  if (isNaN(targetDate.getTime())) {
+  if (targetDate === null || isNaN(targetDate.getTime())) {
     return <span className="text-gray-400 dark:text-gray-500">—</span>;
   }
 

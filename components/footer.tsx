@@ -7,7 +7,7 @@ export default async function Footer() {
   return (
     <footer className="py-16 pb-24 text-center">
       <p className="text-xs text-gray-500 dark:text-gray-400">
-        © {new Date().getFullYear()} Swapnaneel Patra
+        © {2026} Swapnaneel Patra
       </p>
       <details className="mt-3 text-xs text-gray-500 dark:text-gray-400">
         <summary className="cursor-pointer hover:text-gray-900 dark:hover:text-white">Site resources</summary>

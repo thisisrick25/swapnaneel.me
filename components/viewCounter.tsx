@@ -21,37 +21,28 @@ export default function ViewCounter({ slug, trackView = true, count = 0 }: ViewC
 
     const viewedKey = `viewed_${slug}`;
     const stored = localStorage.getItem(viewedKey);
-    const now = Date.now();
-    const ONE_HOUR = 60 * 60 * 1000;
 
-    let shouldIncrement = true;
+    if (stored === '1') {
+      return; // Already viewed, don't increment
+    }
 
-    if (stored) {
-      const viewedTime = parseInt(stored);
-      if (now - viewedTime < ONE_HOUR) {
-        shouldIncrement = false; // Still within 1 hour, don't increment
+    hasIncrementedRef.current = true;
+
+    // Optimistic update
+    setViews((prev) => prev + 1);
+
+    // Increment using Server Action
+    increment(slug).then((newCount) => {
+      if (newCount > 0) {
+        setViews(newCount);
       }
-    }
+    }).catch((error) => {
+      console.error('Error incrementing views:', error);
+      // Revert optimistic update on error
+      setViews(count);
+    });
 
-    if (shouldIncrement) {
-      hasIncrementedRef.current = true;
-
-      // Optimistic update
-      setViews((prev) => prev + 1);
-
-      // Increment using Server Action
-      increment(slug).then((newCount) => {
-        if (newCount > 0) {
-          setViews(newCount);
-        }
-      }).catch((error) => {
-        console.error('Error incrementing views:', error);
-        // Revert optimistic update on error
-        setViews(count);
-      });
-
-      localStorage.setItem(viewedKey, now.toString());
-    }
+    localStorage.setItem(viewedKey, '1');
   }, [slug, trackView, count]);
 
   return (

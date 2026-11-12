@@ -1,7 +1,6 @@
 import { ReactElement, JSXElementConstructor } from 'react'
 import { cacheLife } from 'next/cache'
 import { compileMDX } from "next-mdx-remote/rsc";
-import { compareDesc } from 'date-fns'
 import { slug as slugify } from 'github-slugger'
 import matter from 'gray-matter'
 import { getGitHubDirectoryContents, getGitHubFileContent } from '@/lib/github'
@@ -15,7 +14,6 @@ import {
   remarkMdxFrontmatter,
   rehypeSlug,
   rehypeAutolinkHeadings, rehypeAutolinkHeadingsOptions,
-  rehypePrettyCode, rehypePrettyCodeOptions,
   remarkGfm,
 } from '@/lib/mdx';
 
@@ -106,10 +104,9 @@ async function compileMdxContent(rawContent: string): Promise<{ content: ReactEl
       mdxOptions: {
         remarkPlugins: [remarkGfm, remarkFrontmatter, remarkMdxFrontmatter],
         rehypePlugins: [
-          rehypeSlug,
-          [rehypeAutolinkHeadings, rehypeAutolinkHeadingsOptions],
-          [rehypePrettyCode, rehypePrettyCodeOptions],
-        ],
+            rehypeSlug,
+            [rehypeAutolinkHeadings, rehypeAutolinkHeadingsOptions],
+          ],
       },
       parseFrontmatter: true,
     },
@@ -150,7 +147,6 @@ export async function getAllBlogsFromGitHub(): Promise<Blog[]> {
           rehypePlugins: [
             rehypeSlug,
             [rehypeAutolinkHeadings, rehypeAutolinkHeadingsOptions],
-            [rehypePrettyCode, rehypePrettyCodeOptions],
           ],
         },
         parseFrontmatter: true,
@@ -173,9 +169,13 @@ export async function getAllBlogsFromGitHub(): Promise<Blog[]> {
 // Get all blogs metadata (for lists), showing drafts only in development
 export async function getBlogs(): Promise<BlogMetadata[]> {
   const allBlogs = await getAllBlogMetadata();
-  const blogs = allBlogs.sort((a, b) =>
-    compareDesc(new Date(a.data.publishedAt), new Date(b.data.publishedAt))
-  );
+  const blogs = allBlogs.sort((a, b) => {
+    const aVal: any = a.data.publishedAt;
+    const bVal: any = b.data.publishedAt;
+    const aStr = typeof aVal === 'string' ? aVal : aVal?.toISOString?.() || '';
+    const bStr = typeof bVal === 'string' ? bVal : bVal?.toISOString?.() || '';
+    return bStr.localeCompare(aStr);
+  });
   if (process.env.NODE_ENV === "development") {
     return blogs; // Show all blogs, including drafts
   }
