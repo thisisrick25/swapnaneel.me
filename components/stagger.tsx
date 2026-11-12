@@ -5,11 +5,12 @@ import { ReactNode } from 'react'
 interface StaggerContainerProps {
   children: ReactNode
   className?: string
+  hoverDim?: boolean
 }
 
-export function StaggerContainer({ children, className = '' }: StaggerContainerProps) {
+export function StaggerContainer({ children, className = '', hoverDim = false }: StaggerContainerProps) {
   return (
-    <div className={className}>
+    <div className={`${className} ${hoverDim ? 'hover-dim' : ''}`}>
       {children}
     </div>
   )
@@ -18,11 +19,12 @@ export function StaggerContainer({ children, className = '' }: StaggerContainerP
 interface StaggerItemProps {
   children: ReactNode
   className?: string
+  hoverDim?: boolean
 }
 
-export function StaggerItem({ children, className = '' }: StaggerItemProps) {
+export function StaggerItem({ children, className = '', hoverDim = false }: StaggerItemProps) {
   return (
-    <div className={className}>
+    <div className={`${className} ${hoverDim ? 'hover-dim-item' : ''}`}>
       {children}
     </div>
   )

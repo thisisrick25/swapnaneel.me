@@ -21,12 +21,12 @@ export default async function WritingSection() {
         <ViewAllLink href="/posts" />
       </div>
 
-      <StaggerContainer className="flex flex-col">
+      <StaggerContainer className="flex flex-col" hoverDim>
         {posts.length > 0 ? (
           posts.map((post) => {
             const viewCount = allViews.find((v) => v.slug === post.slug)?.count || 0
             return (
-              <StaggerItem key={post.slug} className="h-full">
+              <StaggerItem key={post.slug} className="h-full" hoverDim>
                 <PostCard
                   slug={post.slug}
                   title={post.data.title}

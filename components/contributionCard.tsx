@@ -25,7 +25,7 @@ export default function ContributionCard({ title, repo, mergedAt, id, showLink =
       </span>
       <div className="flex-grow flex items-center justify-between w-full">
         <h3
-          className="text-base sm:text-lg font-medium text-gray-900 dark:text-gray-100 group-hover:text-teal-600 dark:group-hover:text-teal-400 group-hover:translate-x-2 transition-transform duration-300 line-clamp-2 sm:line-clamp-1"
+          className="text-base sm:text-lg font-medium text-gray-900 dark:text-gray-100 line-clamp-2 sm:line-clamp-1 hover-dim-title"
           style={{ viewTransitionName: `contribution-title-${slug}` }}
         >
           {title}
