@@ -16,7 +16,7 @@ export default function PostCard({ slug, title, publishedAt, viewCount = 0 }: Pr
   return (
     <Link 
       href={`/posts/${slug}`} 
-      className="group flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-6 py-3 sm:py-4 border-b border-gray-100 dark:border-zinc-800/50 last:border-0 transition-all"
+      className="group flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-6 py-2 sm:py-3 border-b border-gray-100 dark:border-zinc-800/50 last:border-0 transition-all"
       aria-label={`Read ${title}`}
     >
       <span className="text-sm text-gray-400 font-mono w-28 shrink-0">

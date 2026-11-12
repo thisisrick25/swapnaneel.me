@@ -6,7 +6,7 @@ import { StaggerContainer, StaggerItem } from "@/components/stagger"
 
 export default async function ContributionSection() {
   const allContributions = await getMergedContributions()
-  const contributions = allContributions.slice(0, 6)
+  const contributions = allContributions.slice(0, 5)
 
   return (
     <section className="mb-12">

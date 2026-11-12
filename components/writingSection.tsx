@@ -9,7 +9,7 @@ export default async function WritingSection() {
   const blogs = await getBlogs()
   const allViews = await getViewsCount()
 
-  const posts = blogs.slice(0, 6)
+  const posts = blogs.slice(0, 5)
 
   return (
     <section className="mb-12" id="writing">

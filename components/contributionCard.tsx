@@ -37,7 +37,7 @@ export default function ContributionCard({ title, repo, mergedAt, id, showLink =
     </>
   )
 
-  const classes = "group flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-6 py-5 sm:py-6 border-b border-gray-100 dark:border-zinc-800/50 last:border-0 transition-all"
+  const classes = "group flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-6 py-2 sm:py-3 border-b border-gray-100 dark:border-zinc-800/50 last:border-0 transition-all"
 
   if (showLink) {
     return (
