@@ -2,7 +2,7 @@ import { Metadata } from 'next'
 import { getBlogs } from '@/utils/getBlogs'
 import { getViewsCount } from '@/db/queries'
 import { space_grotesk } from '@/fonts'
-import PostCard from '@/components/postCard'
+import BlogItem from '@/components/blogItem'
 import BackLink from '@/components/backLink'
 import { StaggerContainer, StaggerItem } from '@/components/stagger'
 
@@ -35,7 +35,7 @@ export default async function Page() {
             const viewCount = allViews.find((v) => v.slug === blog.slug)?.count || 0
             return (
               <StaggerItem key={blog.slug} className="h-full" hoverDim>
-                <PostCard
+                <BlogItem
                   slug={blog.slug}
                   title={blog.data.title}
                   description={blog.data.description}

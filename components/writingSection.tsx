@@ -1,5 +1,5 @@
 import ViewAllLink from "@/components/viewAllLink"
-import PostCard from "@/components/postCard"
+import BlogItem from "@/components/blogItem"
 import { space_grotesk } from "@/fonts"
 import { getBlogs } from "@/utils/getBlogs"
 import { getViewsCount } from "@/db/queries"
@@ -27,7 +27,7 @@ export default async function WritingSection() {
             const viewCount = allViews.find((v) => v.slug === post.slug)?.count || 0
             return (
               <StaggerItem key={post.slug} className="h-full" hoverDim>
-                <PostCard
+                <BlogItem
                   slug={post.slug}
                   title={post.data.title}
                   description={post.data.description}

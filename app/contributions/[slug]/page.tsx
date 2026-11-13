@@ -24,7 +24,7 @@ const getContributionData = cache(async (slug: string): Promise<ContributionBlog
 export async function generateStaticParams() {
   const contributions = await getMergedContributions();
   return contributions.map((contribution) => {
-    // Match contributionCard.tsx: owner-repo-id (lowercase, no dots/slashes)
+    // Match contributionItem.tsx: owner-repo-id (lowercase, no dots/slashes)
     const safeRepo = contribution.repo.replace(/[\/\.]/g, "-").toLowerCase();
     const slug = `${safeRepo}-${contribution.id}`;
     return { slug };
@@ -73,7 +73,7 @@ export default async function Page({ params }: PageProps) {
         <BackLink href="/" text="Back to home" className="" />
       </div>
 
-      {/* Header - matching ContributionCard layout */}
+      {/* Header - matching ContributionItem layout */}
       <header className="mb-8">
         {/* Top metadata: repo + source icon + external link */}
         <div className="flex items-center justify-between mb-3">

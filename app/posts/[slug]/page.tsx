@@ -59,9 +59,9 @@ export default async function Page({ params }: PageProps) {
         <BackLink href="/" text="Back to home" className="" />
       </div>
 
-      {/* Post header - matching PostCard layout */}
+      {/* Blog header - matching BlogItem layout */}
       <header className="mb-8">
-        {/* Top metadata: date left, views right (like PostCard) */}
+        {/* Top metadata: date left, views right (like BlogItem) */}
         <div className="flex justify-between items-center text-sm text-gray-500 dark:text-gray-400 mb-3">
           <DateDisplay date={blog.data.publishedAt} />
           <ViewCounter slug={slug} trackView={true} count={viewCount} />

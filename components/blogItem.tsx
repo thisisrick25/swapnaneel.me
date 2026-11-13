@@ -12,7 +12,7 @@ type Props = {
   tags?: string[]
 }
 
-export default function PostCard({ slug, title, publishedAt, viewCount = 0 }: Props) {
+export default function BlogItem({ slug, title, publishedAt, viewCount = 0 }: Props) {
   return (
     <Link 
       href={`/posts/${slug}`} 
@@ -26,7 +26,7 @@ export default function PostCard({ slug, title, publishedAt, viewCount = 0 }: Pr
       <div className="flex-grow flex items-center justify-between w-full">
         <h3 
           className="text-base sm:text-lg font-medium text-gray-900 dark:text-gray-100 hover-dim-title"
-          style={{ viewTransitionName: `post-title-${slug}` }}
+          style={{ viewTransitionName: `blog-title-${slug}` }}
         >
           {title}
         </h3>

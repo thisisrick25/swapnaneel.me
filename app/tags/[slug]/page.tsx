@@ -1,5 +1,5 @@
 import { Metadata } from 'next'
-import PostCard from '@/components/postCard';
+import BlogItem from '@/components/blogItem';
 import { getAllTags, getBlogsByTag } from '@/utils/getBlogs'
 import { getViewsCount } from '@/db/queries';
 import { space_grotesk } from "@/fonts";
@@ -58,7 +58,7 @@ export default async function Page({ params }: PageProps) {
           const viewCount = allViews.find((v) => v.slug === blog.slug)?.count || 0;
           return (
             <StaggerItem key={blog.slug} className="h-full">
-              <PostCard
+              <BlogItem
                 slug={blog.slug}
                 title={blog.data.title}
                 description={blog.data.description}

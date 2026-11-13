@@ -1,7 +1,7 @@
 import { space_grotesk } from "@/fonts"
 import { getPublications } from "@/utils/getPublications"
 import ViewAllLink from '@/components/viewAllLink'
-import PublicationCard from '@/components/publicationCard'
+import PublicationItem from '@/components/publicationItem'
 import { StaggerContainer, StaggerItem } from '@/components/stagger'
 
 export default async function PublicationSection() {
@@ -23,7 +23,7 @@ export default async function PublicationSection() {
       <StaggerContainer className="space-y-0">
         {displayPublications.map((pub, index) => (
           <StaggerItem key={index} className="h-full">
-            <PublicationCard
+            <PublicationItem
               title={pub.title}
               authors={pub.authors}
               venue={pub.venue}

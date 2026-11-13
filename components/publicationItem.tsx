@@ -4,14 +4,14 @@ import { Link } from 'next-view-transitions'
 import { Fragment } from "react"
 import { PublicationAuthor, PublicationMetaItem } from "@/utils/getPublications"
 
-interface PublicationCardProps {
+interface PublicationItemProps {
   title: string
   authors: PublicationAuthor[]
   venue: string
   meta: PublicationMetaItem[]
 }
 
-export default function PublicationCard({ title, authors, venue, meta }: PublicationCardProps) {
+export default function PublicationItem({ title, authors, venue, meta }: PublicationItemProps) {
 
   return (
     <article className="py-4">

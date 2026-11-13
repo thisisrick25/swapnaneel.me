@@ -4,7 +4,7 @@ import { Project } from '@/utils/getProjects'
 import { LuArrowUpRight } from "react-icons/lu"
 import { fira_code } from '@/fonts'
 
-export default function ProjectCard({ title, description, link, techStack }: Project) {
+export default function ProjectItem({ title, description, link, techStack }: Project) {
   const slug = title.toLowerCase().replace(/\s+/g, '-')
 
   return (

@@ -1,6 +1,6 @@
 import { space_grotesk } from '@/fonts'
 import { getProjects } from '@/utils/getProjects'
-import ProjectCard from '@/components/projectCard'
+import ProjectItem from '@/components/projectItem'
 import ViewAllLink from '@/components/viewAllLink'
 import { StaggerContainer, StaggerItem } from '@/components/stagger'
 
@@ -23,7 +23,7 @@ export default async function ProjectSection() {
       <StaggerContainer className="grid gap-0 sm:grid-cols-2 lg:grid-cols-3" hoverDim>
         {featuredProjects.map((project, index) => (
           <StaggerItem key={index} className="h-full" hoverDim>
-            <ProjectCard {...project} />
+            <ProjectItem {...project} />
           </StaggerItem>
         ))}
       </StaggerContainer>

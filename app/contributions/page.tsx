@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 import { getMergedContributions } from '@/utils/getContributions'
 import { space_grotesk } from '@/fonts'
-import ContributionCard from '@/components/contributionCard'
+import ContributionItem from '@/components/contributionItem'
 import BackLink from '@/components/backLink'
 import { StaggerContainer, StaggerItem } from '@/components/stagger'
 
@@ -31,7 +31,7 @@ export default async function Page() {
         {contributions.length > 0 ? (
           contributions.map((contribution) => (
             <StaggerItem key={`${contribution.source}-${contribution.id}`} className="h-full" hoverDim>
-              <ContributionCard
+              <ContributionItem
                 id={contribution.id}
                 title={contribution.title}
                 repo={contribution.repo}

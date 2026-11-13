@@ -1,5 +1,5 @@
 import ViewAllLink from "@/components/viewAllLink"
-import ContributionCard from "@/components/contributionCard"
+import ContributionItem from "@/components/contributionItem"
 import { space_grotesk } from "@/fonts"
 import { getMergedContributions } from "@/utils/getContributions"
 import { StaggerContainer, StaggerItem } from "@/components/stagger"
@@ -22,7 +22,7 @@ export default async function ContributionSection() {
         {contributions.length > 0 ? (
           contributions.map((contribution) => (
             <StaggerItem key={`${contribution.source}-${contribution.id}`} className="h-full" hoverDim>
-              <ContributionCard
+              <ContributionItem
                 id={contribution.id}
                 title={contribution.title}
                 repo={contribution.repo}

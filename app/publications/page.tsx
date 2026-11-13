@@ -3,7 +3,7 @@ import { Metadata } from "next"
 import { getPublications } from "@/utils/getPublications"
 import BackLink from '@/components/backLink'
 import { StaggerContainer, StaggerItem } from '@/components/stagger'
-import PublicationCard from '@/components/publicationCard'
+import PublicationItem from '@/components/publicationItem'
 
 export const metadata: Metadata = {
   title: 'Publications',
@@ -25,7 +25,7 @@ export default async function PublicationsPage() {
         {publications.length > 0 ? (
           publications.map((pub, index) => (
             <StaggerItem key={index} className="h-full">
-              <PublicationCard
+              <PublicationItem
                 title={pub.title}
                 authors={pub.authors}
                 venue={pub.venue}

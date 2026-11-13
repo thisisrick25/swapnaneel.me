@@ -14,7 +14,7 @@ type Props = {
   showLink?: boolean
 }
 
-export default function ContributionCard({ title, repo, mergedAt, id, showLink = true }: Props) {
+export default function ContributionItem({ title, repo, mergedAt, id, showLink = true }: Props) {
   const safeRepo = repo.replace(/[\/\.]/g, "-").toLowerCase();
   const slug = `${safeRepo}-${id}`;
 
