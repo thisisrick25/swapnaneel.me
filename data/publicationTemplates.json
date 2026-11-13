@@ -14,8 +14,6 @@
     "venue": "Conference Name (CONF '25)",
     "year": "2025",
     "type": "conference",
-    "status": "",
-    "paperId": "",
     "links": [
       {
         "label": "PDF",
@@ -23,6 +21,10 @@
       },
       {
         "label": "Code",
+        "url": "#"
+      },
+      {
+        "label": "Website",
         "url": "#"
       }
     ]
@@ -42,11 +44,17 @@
     "venue": "Journal Name (Vol. 1)",
     "year": "2025",
     "type": "journal",
-    "status": "",
-    "paperId": "",
     "links": [
       {
         "label": "PDF",
+        "url": "#"
+      },
+      {
+        "label": "Code",
+        "url": "#"
+      },
+      {
+        "label": "Website",
         "url": "#"
       }
     ]
@@ -66,11 +74,17 @@
     "venue": "arXiv",
     "year": "2024",
     "type": "preprint",
-    "status": "",
-    "paperId": "",
     "links": [
       {
         "label": "PDF",
+        "url": "#"
+      },
+      {
+        "label": "Code",
+        "url": "#"
+      },
+      {
+        "label": "Website",
         "url": "#"
       }
     ]

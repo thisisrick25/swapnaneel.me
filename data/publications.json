@@ -10,7 +10,9 @@
     "venue": "2nd International Conference on Intelligent Computing and Emerging Communication Technologies (ICEC 2026)",
     "year": "2026",
     "type": "conference",
-    "status": "To be presented"
+    "links": [
+      { "label": "Link", "url": "#" }
+    ]
   },
   {
     "title": "Regime Alpha: A Novel Universal Benchmarking Framework for Regime-Conditional Strategy Evaluation",
@@ -23,6 +25,8 @@
     "venue": "2nd International Conference on Intelligent Computing and Emerging Communication Technologies (ICEC 2026)",
     "year": "2026",
     "type": "conference",
-    "status": "To be presented"
+    "links": [
+      { "label": "Link", "url": "#" }
+    ]
   }
 ]
