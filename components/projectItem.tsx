@@ -4,7 +4,7 @@ import { Project } from '@/utils/getProjects'
 import { LuArrowUpRight } from "react-icons/lu"
 import { fira_code } from '@/fonts'
 
-export default function ProjectItem({ title, description, link, techStack }: Project) {
+export default function ProjectItem({ title, description, link, tags }: Project) {
   const slug = title.toLowerCase().replace(/\s+/g, '-')
 
   return (
@@ -29,9 +29,9 @@ export default function ProjectItem({ title, description, link, techStack }: Pro
         {description}
       </p>
 
-      {techStack && techStack.length > 0 && (
+      {tags && tags.length > 0 && (
         <div className={`mt-auto text-xs text-gray-400 dark:text-gray-500 line-clamp-2 ${fira_code.className}`}>
-          {techStack.join(' · ')}
+          {tags.join(' · ')}
         </div>
       )}
     </a>

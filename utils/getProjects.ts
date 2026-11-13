@@ -4,7 +4,7 @@ export type Project = {
   title: string
   description: string
   link: string
-  techStack: string[]
+  tags: string[]
   featured: boolean
 }
 
@@ -27,7 +27,7 @@ async function fetchFromGitHub(link: string): Promise<Project | null> {
       title: data.name || owner + '/' + repo,
       description: data.description || '',
       link,
-      techStack: topics,
+      tags: topics,
       featured: false,
     }
   } catch {
