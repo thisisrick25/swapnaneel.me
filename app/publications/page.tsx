@@ -29,10 +29,7 @@ export default async function PublicationsPage() {
                 title={pub.title}
                 authors={pub.authors}
                 venue={pub.venue}
-                year={pub.year}
-                type={pub.type}
-                status={pub.status ?? undefined}
-                links={pub.links}
+                meta={pub.meta}
               />
             </StaggerItem>
           ))

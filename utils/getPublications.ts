@@ -2,9 +2,10 @@ import publicationsData from '@/data/publications.json'
 
 export type PublicationType = 'conference' | 'journal' | 'preprint'
 
-export type PublicationLink = {
+export type PublicationMetaItem = {
+  kind: 'year' | 'type' | 'link'
   label: string
-  url: string
+  url?: string
 }
 
 export type PublicationAuthor = {
@@ -16,16 +17,16 @@ export type Publication = {
   title: string
   authors: PublicationAuthor[]
   venue: string
-  year: string
-  type: PublicationType
-  status?: string
-  paperId?: string
-  links?: PublicationLink[]
+  meta: PublicationMetaItem[]
 }
 
 export async function getPublications(): Promise<Publication[]> {
   try {
-    return (publicationsData as Publication[]).sort((a, b) => parseInt(b.year) - parseInt(a.year))
+    return (publicationsData as Publication[]).sort((a, b) => {
+      const yearA = parseInt(a.meta.find((m) => m.kind === 'year')?.label || '0')
+      const yearB = parseInt(b.meta.find((m) => m.kind === 'year')?.label || '0')
+      return yearB - yearA
+    })
   } catch (error) {
     console.error('Error fetching publications:', error)
     return []

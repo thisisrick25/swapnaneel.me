@@ -2,19 +2,16 @@
 
 import { Link } from 'next-view-transitions'
 import { Fragment } from "react"
-import { PublicationAuthor } from "@/utils/getPublications"
+import { PublicationAuthor, PublicationMetaItem } from "@/utils/getPublications"
 
 interface PublicationCardProps {
   title: string
   authors: PublicationAuthor[]
   venue: string
-  year: string
-  type: string
-  status?: string | null
-  links?: { label: string; url: string }[]
+  meta: PublicationMetaItem[]
 }
 
-export default function PublicationCard({ title, authors, venue, year, type, status, links }: PublicationCardProps) {
+export default function PublicationCard({ title, authors, venue, meta }: PublicationCardProps) {
 
   return (
     <article className="py-4">
@@ -36,22 +33,26 @@ export default function PublicationCard({ title, authors, venue, year, type, sta
       </p>
 
       <div className="flex flex-wrap items-center gap-2 text-sm text-gray-400 dark:text-gray-500">
-        <span>[<span className="text-gray-700 dark:text-gray-200">{year}</span>]</span>
-        <span>[<span className="text-blue-700 dark:text-blue-300 capitalize">{type}</span>]</span>
-        {links?.map((link, i) => {
-          const isPlaceholder = link.url === '#'
-          return (
-            <Link
-              key={i}
-              href={link.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`transition-colors cursor-pointer ${isPlaceholder ? 'text-gray-500 dark:text-gray-400' : 'text-gray-500 dark:text-gray-400 hover:underline'}`}
-            >
-              [{link.label}]
-            </Link>
-          )
-        })}
+        {meta.map((item, i) => (
+          <Fragment key={i}>
+            <span className="text-gray-700 dark:text-gray-200">[</span>
+            {item.kind === 'link' && item.url ? (
+              <Link
+                href={item.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`transition-colors cursor-pointer ${item.url === '#' ? 'text-gray-500 dark:text-gray-400 cursor-default' : 'text-gray-500 dark:text-gray-400 hover:underline'}`}
+              >
+                {item.label}
+              </Link>
+            ) : (
+              <span className={`text-gray-700 dark:text-gray-200 ${item.kind === 'type' ? 'capitalize' : ''}`}>
+                {item.label}
+              </span>
+            )}
+            <span className="text-gray-700 dark:text-gray-200">]</span>
+          </Fragment>
+        ))}
       </div>
     </article>
   )
