@@ -8,10 +8,10 @@
       }
     ],
     "venue": "2nd International Conference on Intelligent Computing and Emerging Communication Technologies (ICEC 2026)",
-    "year": "2026",
-    "type": "conference",
-    "links": [
-      { "label": "Link", "url": "#" }
+    "meta": [
+      { "kind": "year", "label": "2026" },
+      { "kind": "type", "label": "conference" },
+      { "kind": "link", "label": "Link", "url": "#" }
     ]
   },
   {
@@ -23,10 +23,10 @@
       }
     ],
     "venue": "2nd International Conference on Intelligent Computing and Emerging Communication Technologies (ICEC 2026)",
-    "year": "2026",
-    "type": "conference",
-    "links": [
-      { "label": "Link", "url": "#" }
+    "meta": [
+      { "kind": "year", "label": "2026" },
+      { "kind": "type", "label": "conference" },
+      { "kind": "link", "label": "Link", "url": "#" }
     ]
   }
 ]

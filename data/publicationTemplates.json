@@ -12,21 +12,12 @@
       }
     ],
     "venue": "Conference Name (CONF '25)",
-    "year": "2025",
-    "type": "conference",
-    "links": [
-      {
-        "label": "PDF",
-        "url": "#"
-      },
-      {
-        "label": "Code",
-        "url": "#"
-      },
-      {
-        "label": "Website",
-        "url": "#"
-      }
+    "meta": [
+      { "kind": "year", "label": "2025" },
+      { "kind": "type", "label": "conference" },
+      { "kind": "link", "label": "PDF", "url": "#" },
+      { "kind": "link", "label": "Code", "url": "#" },
+      { "kind": "link", "label": "Website", "url": "#" }
     ]
   },
   {
@@ -42,21 +33,12 @@
       }
     ],
     "venue": "Journal Name (Vol. 1)",
-    "year": "2025",
-    "type": "journal",
-    "links": [
-      {
-        "label": "PDF",
-        "url": "#"
-      },
-      {
-        "label": "Code",
-        "url": "#"
-      },
-      {
-        "label": "Website",
-        "url": "#"
-      }
+    "meta": [
+      { "kind": "year", "label": "2025" },
+      { "kind": "type", "label": "journal" },
+      { "kind": "link", "label": "PDF", "url": "#" },
+      { "kind": "link", "label": "Code", "url": "#" },
+      { "kind": "link", "label": "Website", "url": "#" }
     ]
   },
   {
@@ -72,21 +54,12 @@
       }
     ],
     "venue": "arXiv",
-    "year": "2024",
-    "type": "preprint",
-    "links": [
-      {
-        "label": "PDF",
-        "url": "#"
-      },
-      {
-        "label": "Code",
-        "url": "#"
-      },
-      {
-        "label": "Website",
-        "url": "#"
-      }
+    "meta": [
+      { "kind": "year", "label": "2024" },
+      { "kind": "type", "label": "preprint" },
+      { "kind": "link", "label": "PDF", "url": "#" },
+      { "kind": "link", "label": "Code", "url": "#" },
+      { "kind": "link", "label": "Website", "url": "#" }
     ]
   }
 ]
