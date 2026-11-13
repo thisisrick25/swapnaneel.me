@@ -9,25 +9,15 @@ export default function EducationSection() {
         <h2 className={space_grotesk.className}>Education</h2>
       </div>
 
-      <div className="space-y-8">
+      <div className="space-y-3">
         {education.map((edu, index) => (
-          <div key={index} className="flex flex-col gap-1">
-            <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
-                {edu.school}
-              </h3>
-              <span className="text-sm font-mono text-gray-500 dark:text-gray-400 shrink-0">
-                {edu.date}
-              </span>
-            </div>
-            <p className="text-gray-700 dark:text-gray-300 font-medium">
+          <div key={index}>
+            <span className="font-semibold text-gray-900 dark:text-gray-100 block">
+              {edu.school}
+            </span>
+            <span className="text-gray-500 dark:text-gray-400 text-sm block mt-0.5">
               {edu.degree}
-            </p>
-            {edu.description && (
-              <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
-                {edu.description}
-              </p>
-            )}
+            </span>
           </div>
         ))}
       </div>
