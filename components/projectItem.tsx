@@ -25,12 +25,12 @@ export default function ProjectItem({ title, description, link, techStack }: Pro
         <LuArrowUpRight className="w-5 h-5 text-gray-400 opacity-0 -translate-y-1 translate-x-1 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all shrink-0" />
       </div>
       
-      <p className="text-sm text-gray-500 dark:text-gray-400 line-clamp-3 mb-3 flex-grow">
+      <p className="text-sm text-gray-500 dark:text-gray-400 line-clamp-4 mb-3 flex-grow">
         {description}
       </p>
 
       {techStack && techStack.length > 0 && (
-        <div className={`mt-auto text-xs text-gray-400 dark:text-gray-500 ${fira_code.className}`}>
+        <div className={`mt-auto text-xs text-gray-400 dark:text-gray-500 line-clamp-2 ${fira_code.className}`}>
           {techStack.join(' · ')}
         </div>
       )}
