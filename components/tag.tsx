@@ -13,8 +13,9 @@ interface TagProps {
 
 export default function Tag({ tags, maxTags = 4, asLinks = true }: TagProps) {
   const [clickedTag, setClickedTag] = useState<string | null>(null)
+  const [expanded, setExpanded] = useState<boolean>(false)
   const slugger = new githubSlugger()
-  const displayTags = tags.slice(0, maxTags)
+  const displayTags = expanded ? tags : tags.slice(0, maxTags)
   const remainingCount = tags.length - maxTags
 
   const tagClassName = `px-1.5 py-0.5 text-[9px] font-medium border border-gray-200 dark:border-zinc-700 rounded-md bg-white dark:bg-zinc-800 transition-all hover:shadow-[0_0_4px_rgba(59,130,246,0.3)] dark:hover:shadow-[0_0_4px_rgba(147,197,253,0.3)] ${fira_code.className}`
@@ -43,8 +44,11 @@ export default function Tag({ tags, maxTags = 4, asLinks = true }: TagProps) {
           </span>
         )
       })}
-      {remainingCount > 0 && (
-        <span className="text-xs text-gray-400 dark:text-gray-500 self-center">
+      {remainingCount > 0 && !expanded && (
+        <span
+          onClick={() => setExpanded(true)}
+          className="text-xs text-gray-400 dark:text-gray-500 self-center cursor-pointer hover:text-blue-600 dark:hover:text-blue-400"
+        >
           +{remainingCount}
         </span>
       )}
