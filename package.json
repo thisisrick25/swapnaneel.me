@@ -2,10 +2,8 @@
   "name": "protfolio",
   "version": "0.1.0",
   "private": true,
-  "scripts": {
+"scripts": {
     "dev": "next dev",
-    "ngrok": "npx dotenv -e .env.local -- node ngrok.js",
-    "dev:ngrok": "concurrently \"next dev\" \"npm run ngrok",
     "build": "npx prisma generate && next build",
     "start": "next start",
     "lint": "next lint",
@@ -56,7 +54,6 @@
     "typescript": "5.8.3"
   },
   "devDependencies": {
-    "@ngrok/ngrok": "^1.5.2",
     "@tailwindcss/typography": "^0.5.19",
     "babel-plugin-react-compiler": "^1.0.0",
     "concurrently": "^9.2.4",
